@@ -1,0 +1,114 @@
+{
+  "name": "Product",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "difficulty",
+      "fieldType": "DifficultType",
+      "fieldValues": "VERYEASY,EASY,NORMAL,HARD,VERYHARD"
+    },
+    {
+      "fieldName": "thumbnail",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "owner",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "regdate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "priceRegular",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "isUseDiscount",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "discountUnit",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "discountValue",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "discountStartdate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "discountInterval",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "video",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "startdate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "prepareResource",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "introduceResource",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "shippingResource",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "refundResource",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "changeResource",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "code",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "installmentMonth",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "ProductType",
+      "fieldValues": "CLASS,CLASS_VIDEO,DIYKIT,TOOL"
+    },
+    {
+      "fieldName": "number",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "popularCount",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "reviewCount",
+      "fieldType": "Integer"
+    }
+  ],
+  "relationships": [],
+  "entityTableName": "product",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210530065727"
+}
