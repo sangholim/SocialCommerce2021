@@ -42,6 +42,7 @@
     "clientPackageManager": "npm",
     "clientThemeVariant": "",
     "languages": ["ko", "en"],
-    "entities": ["Product"]
+    "entities": ["Product", "PCategory"],
+    "lastLiquibaseTimestamp": 1622382218000
   }
 }

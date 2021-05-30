@@ -1,6 +1,16 @@
 ## 2021-05-30
-## jhipster entity client쪽 소스 반영하지 않기
+## product.json 파일 생성
+ProjectDir> jhipster jdl product.jh  --json-only
+## product 'entity, dto, service, resource, filter 반영' (.json)
+   jhipster entity client쪽 소스 반영하지 않기
 ProjectDir> jhipster entity product --skip-client
-## jhipster product jdl 파일 생성
-ProjectDir> jhipster jdl product.jh
+
+## pCategory.json 파일 생성
+ProjectDir> jhipster jdl pCategory.jh --json-only
+## pCategory 'entity, dto, service, resource, filter 반영' (.json)
+   jhipster entity client쪽 소스 반영하지 않기
+ProjectDir> jhipster entity pCategory --skip-client
+
+
+
 

@@ -1,0 +1,53 @@
+{
+  "name": "PCategory",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "ProductCategoryType",
+      "fieldValues": "PRODUCT,SERVICE"
+    },
+    {
+      "fieldName": "categoryMain",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "categorySub",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "isUse",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "sortOrder",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "regdate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "isUseDiscount",
+      "fieldType": "Integer"
+    }
+  ],
+  "relationships": [],
+  "entityTableName": "p_category",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210530134338"
+}

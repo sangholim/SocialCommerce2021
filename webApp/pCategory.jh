@@ -1,0 +1,20 @@
+enum ProductCategoryType {
+    PRODUCT,SERVICE
+}
+
+entity PCategory {
+    name String,
+    type ProductCategoryType,
+    categoryMain String,
+    categorySub String,
+    description String,
+    isUse Integer,
+    sortOrder Integer,
+    regdate Instant,
+    isUseDiscount Integer
+}
+
+dto PCategory with mapstruct
+service PCategory with serviceClass
+paginate PCategory with pagination
+filter PCategory
