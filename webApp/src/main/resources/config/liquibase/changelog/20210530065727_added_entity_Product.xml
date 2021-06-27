@@ -17,80 +17,131 @@
             <column name="name" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="difficulty" type="varchar(255)">
+            <column name="code" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="thumbnail" type="varchar(255)">
+            <column name="calculation" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="owner" type="varchar(255)">
+            <column name="calculation_date_from" type="${datetimeType}">
                 <constraints nullable="true" />
             </column>
-            <column name="regdate" type="${datetimeType}">
+            <column name="calculation_date_to" type="${datetimeType}">
                 <constraints nullable="true" />
             </column>
-            <column name="price_regular" type="integer">
+            <column name="price" type="integer">
                 <constraints nullable="true" />
             </column>
-            <column name="is_use_discount" type="integer">
+            <column name="all_price_unit" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="discount" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="discount_price" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="discount_unit" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="discount_value" type="integer">
+            <column name="discount_date_from" type="${datetimeType}">
                 <constraints nullable="true" />
             </column>
-            <column name="discount_startdate" type="${datetimeType}">
+            <column name="discount_date_to" type="${datetimeType}">
                 <constraints nullable="true" />
             </column>
-            <column name="discount_interval" type="integer">
-                <constraints nullable="true" />
-            </column>
-            <column name="video" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            <column name="startdate" type="${datetimeType}">
-                <constraints nullable="true" />
-            </column>
-            <column name="prepare_resource" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            <column name="introduce_resource" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            <column name="shipping_resource" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            <column name="refund_resource" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            <column name="change_resource" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            <column name="code" type="varchar(255)">
+            <column name="is_installment" type="boolean">
                 <constraints nullable="true" />
             </column>
             <column name="installment_month" type="integer">
                 <constraints nullable="true" />
             </column>
-            <column name="type" type="varchar(255)">
+            <column name="is_sell" type="boolean">
                 <constraints nullable="true" />
             </column>
-            <column name="number" type="varchar(255)">
+            <column name="sell_date_from" type="${datetimeType}">
                 <constraints nullable="true" />
             </column>
-            <column name="popular_count" type="integer">
+            <column name="sell_date_to" type="${datetimeType}">
                 <constraints nullable="true" />
             </column>
-            <column name="review_count" type="integer">
+            <column name="min_purchase_amount" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="man_purchase_amount" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="main_image_file_url" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="add_image_file_url" type="${clobType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="main_video_file_url" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="description_file_url" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="shipping_type" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="separate_shipping_price_type" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="default_shipping_price" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="free_shipping_price" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="jeju_shipping_price" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="difficult_shipping_price" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="refund_shipping_price" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="exchange_shipping_price" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="exchange_shipping_file_url" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="is_view" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="view_reservation_date" type="${datetimeType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="activated" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="created_by" type="varchar(50)">
+                <constraints nullable="true" />
+            </column>
+            <column name="created_date" type="${datetimeType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="last_modified_by" type="varchar(50)">
+                <constraints nullable="true" />
+            </column>
+            <column name="last_modified_date" type="${datetimeType}">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
-        <dropDefaultValue tableName="product" columnName="regdate" columnDataType="${datetimeType}"/>
-        <dropDefaultValue tableName="product" columnName="discount_startdate" columnDataType="${datetimeType}"/>
-        <dropDefaultValue tableName="product" columnName="startdate" columnDataType="${datetimeType}"/>
+        <dropDefaultValue tableName="product" columnName="calculation_date_from" columnDataType="${datetimeType}"/>
+        <dropDefaultValue tableName="product" columnName="calculation_date_to" columnDataType="${datetimeType}"/>
+        <dropDefaultValue tableName="product" columnName="discount_date_from" columnDataType="${datetimeType}"/>
+        <dropDefaultValue tableName="product" columnName="discount_date_to" columnDataType="${datetimeType}"/>
+        <dropDefaultValue tableName="product" columnName="sell_date_from" columnDataType="${datetimeType}"/>
+        <dropDefaultValue tableName="product" columnName="sell_date_to" columnDataType="${datetimeType}"/>
+        <dropDefaultValue tableName="product" columnName="view_reservation_date" columnDataType="${datetimeType}"/>
+        <dropDefaultValue tableName="product" columnName="created_date" columnDataType="${datetimeType}"/>
+        <dropDefaultValue tableName="product" columnName="last_modified_date" columnDataType="${datetimeType}"/>
     </changeSet>
 
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
@@ -110,29 +161,44 @@
                   tableName="product">
             <column name="id" type="numeric"/>
             <column name="name" type="string"/>
-            <column name="difficulty" type="string"/>
-            <column name="thumbnail" type="string"/>
-            <column name="owner" type="string"/>
-            <column name="regdate" type="${datetimeType}"/>
-            <column name="price_regular" type="numeric"/>
-            <column name="is_use_discount" type="numeric"/>
-            <column name="discount_unit" type="string"/>
-            <column name="discount_value" type="numeric"/>
-            <column name="discount_startdate" type="${datetimeType}"/>
-            <column name="discount_interval" type="numeric"/>
-            <column name="video" type="string"/>
-            <column name="startdate" type="${datetimeType}"/>
-            <column name="prepare_resource" type="string"/>
-            <column name="introduce_resource" type="string"/>
-            <column name="shipping_resource" type="string"/>
-            <column name="refund_resource" type="string"/>
-            <column name="change_resource" type="string"/>
             <column name="code" type="string"/>
+            <column name="calculation" type="string"/>
+            <column name="calculation_date_from" type="${datetimeType}"/>
+            <column name="calculation_date_to" type="${datetimeType}"/>
+            <column name="price" type="numeric"/>
+            <column name="all_price_unit" type="string"/>
+            <column name="discount" type="string"/>
+            <column name="discount_price" type="string"/>
+            <column name="discount_unit" type="string"/>
+            <column name="discount_date_from" type="${datetimeType}"/>
+            <column name="discount_date_to" type="${datetimeType}"/>
+            <column name="is_installment" type="boolean"/>
             <column name="installment_month" type="numeric"/>
-            <column name="type" type="string"/>
-            <column name="number" type="string"/>
-            <column name="popular_count" type="numeric"/>
-            <column name="review_count" type="numeric"/>
+            <column name="is_sell" type="boolean"/>
+            <column name="sell_date_from" type="${datetimeType}"/>
+            <column name="sell_date_to" type="${datetimeType}"/>
+            <column name="min_purchase_amount" type="numeric"/>
+            <column name="man_purchase_amount" type="numeric"/>
+            <column name="main_image_file_url" type="string"/>
+            <column name="add_image_file_url" type="clob"/>
+            <column name="main_video_file_url" type="string"/>
+            <column name="description_file_url" type="string"/>
+            <column name="shipping_type" type="string"/>
+            <column name="separate_shipping_price_type" type="string"/>
+            <column name="default_shipping_price" type="numeric"/>
+            <column name="free_shipping_price" type="numeric"/>
+            <column name="jeju_shipping_price" type="numeric"/>
+            <column name="difficult_shipping_price" type="numeric"/>
+            <column name="refund_shipping_price" type="numeric"/>
+            <column name="exchange_shipping_price" type="numeric"/>
+            <column name="exchange_shipping_file_url" type="string"/>
+            <column name="is_view" type="boolean"/>
+            <column name="view_reservation_date" type="${datetimeType}"/>
+            <column name="activated" type="boolean"/>
+            <column name="created_by" type="string"/>
+            <column name="created_date" type="${datetimeType}"/>
+            <column name="last_modified_by" type="string"/>
+            <column name="last_modified_date" type="${datetimeType}"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

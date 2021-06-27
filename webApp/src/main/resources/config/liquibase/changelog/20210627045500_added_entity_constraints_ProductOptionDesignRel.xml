@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity ProductOptionDesignRel.
+    -->
+    <changeSet id="20210627045500-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="product_option_id"
+                                 baseTableName="product_option_design_rel"
+                                 constraintName="fk_product_option_design_rel__product_option_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="product_option"/>
+
+        <addForeignKeyConstraint baseColumnNames="option_design_id"
+                                 baseTableName="product_option_design_rel"
+                                 constraintName="fk_product_option_design_rel__option_design_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="option_design"/>
+    </changeSet>
+</databaseChangeLog>

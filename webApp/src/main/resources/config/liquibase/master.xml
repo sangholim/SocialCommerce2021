@@ -16,7 +16,46 @@
 
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20210530065727_added_entity_Product.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210626074156_added_entity_ProductCategory.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210626074157_added_entity_ProductCategoryRel.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210626074158_added_entity_ProductLabel.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210626074159_added_entity_ProductLabelRel.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210626074200_added_entity_ProductMapping.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210626074201_added_entity_ProductMappingRel.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210626074202_added_entity_ProductNotice.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210626074203_added_entity_ProductNoticeRel.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210626074204_added_entity_ProductShipping.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210626074205_added_entity_ProductShippingRel.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210626074206_added_entity_ProductTemplate.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210626074207_added_entity_ProductTemplateRel.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210626074208_added_entity_ProductView.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210626074209_added_entity_ProductViewRel.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210627045453_added_entity_Clazz.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210627045454_added_entity_OptionColor.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210627045455_added_entity_OptionDesign.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210627045456_added_entity_OptionPackage.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210627045457_added_entity_ProductClazzRel.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210627045458_added_entity_ProductOption.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210627045459_added_entity_ProductOptionColorRel.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210627045500_added_entity_ProductOptionDesignRel.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210627045501_added_entity_ProductOptionPackageRel.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210627045502_added_entity_ProductOptionRel.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210627045503_added_entity_ProductStoreRel.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210627045504_added_entity_Store.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20210626074157_added_entity_constraints_ProductCategoryRel.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210626074159_added_entity_constraints_ProductLabelRel.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210626074201_added_entity_constraints_ProductMappingRel.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210626074203_added_entity_constraints_ProductNoticeRel.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210626074205_added_entity_constraints_ProductShippingRel.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210626074207_added_entity_constraints_ProductTemplateRel.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210626074209_added_entity_constraints_ProductViewRel.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210627045457_added_entity_constraints_ProductClazzRel.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210627045459_added_entity_constraints_ProductOptionColorRel.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210627045500_added_entity_constraints_ProductOptionDesignRel.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210627045501_added_entity_constraints_ProductOptionPackageRel.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210627045502_added_entity_constraints_ProductOptionRel.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210627045503_added_entity_constraints_ProductStoreRel.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
 </databaseChangeLog>

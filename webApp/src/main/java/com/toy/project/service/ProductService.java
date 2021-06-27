@@ -4,6 +4,7 @@ import com.toy.project.domain.Product;
 import com.toy.project.repository.ProductRepository;
 import com.toy.project.service.dto.ProductDTO;
 import com.toy.project.service.mapper.ProductMapper;
+import com.toy.project.web.rest.vm.ProductVM;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -83,9 +84,9 @@ public class ProductService {
      * @return the entity.
      */
     @Transactional(readOnly = true)
-    public Optional<ProductDTO> findOne(Long id) {
+    public Optional<ProductVM> findOne(Long id) {
         log.debug("Request to get Product : {}", id);
-        return productRepository.findById(id).map(productMapper::toDto);
+        return productRepository.findById(id).map(ProductVM::new);
     }
 
     /**

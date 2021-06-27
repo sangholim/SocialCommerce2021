@@ -6,11 +6,14 @@ import com.toy.project.service.ProductService;
 import com.toy.project.service.criteria.ProductCriteria;
 import com.toy.project.service.dto.ProductDTO;
 import com.toy.project.web.rest.errors.BadRequestAlertException;
+import com.toy.project.web.rest.vm.ProductVM;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -59,7 +62,7 @@ public class ProductResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/products")
-    public ResponseEntity<ProductDTO> createProduct(@RequestBody ProductDTO productDTO) throws URISyntaxException {
+    public ResponseEntity<ProductDTO> createProduct(@Valid @RequestBody ProductDTO productDTO) throws URISyntaxException {
         log.debug("REST request to save Product : {}", productDTO);
         if (productDTO.getId() != null) {
             throw new BadRequestAlertException("A new product cannot already have an ID", ENTITY_NAME, "idexists");
@@ -84,7 +87,7 @@ public class ProductResource {
     @PutMapping("/products/{id}")
     public ResponseEntity<ProductDTO> updateProduct(
         @PathVariable(value = "id", required = false) final Long id,
-        @RequestBody ProductDTO productDTO
+        @Valid @RequestBody ProductDTO productDTO
     ) throws URISyntaxException {
         log.debug("REST request to update Product : {}, {}", id, productDTO);
         if (productDTO.getId() == null) {
@@ -119,7 +122,7 @@ public class ProductResource {
     @PatchMapping(value = "/products/{id}", consumes = "application/merge-patch+json")
     public ResponseEntity<ProductDTO> partialUpdateProduct(
         @PathVariable(value = "id", required = false) final Long id,
-        @RequestBody ProductDTO productDTO
+        @NotNull @RequestBody ProductDTO productDTO
     ) throws URISyntaxException {
         log.debug("REST request to partial update Product partially : {}, {}", id, productDTO);
         if (productDTO.getId() == null) {
@@ -175,10 +178,9 @@ public class ProductResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the productDTO, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/products/{id}")
-    public ResponseEntity<ProductDTO> getProduct(@PathVariable Long id) {
+    public ResponseEntity<ProductVM> getProduct(@PathVariable Long id) {
         log.debug("REST request to get Product : {}", id);
-        Optional<ProductDTO> productDTO = productService.findOne(id);
-        return ResponseUtil.wrapOrNotFound(productDTO);
+        return ResponseUtil.wrapOrNotFound(productService.findOne(id));
     }
 
     /**

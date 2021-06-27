@@ -1,0 +1,67 @@
+## 2021-06-27
+## 관리자 UI 보고 상품 설계
+## 상품 옵션, 옵션 디자인 데이터 모델링
+## data-modeling file: 2021-06-26-product.jdl
+## dir> jhipster jdl 2021-06-26-product.jdl --json-only
+## dir> jhipster entity Product --skip-client
+## 기본 데이터 셋 맞추기
+
+
+## 2021-06-26
+## 관리자 UI 보고 상품 설계
+## TODO 상품 옵션, 상품 재고, ...
+## data-modeling file: 2021-06-26-product.jdl
+## dir> jhipster jdl 2021-06-26-product.jdl --json-only
+## dir> jhipster entity Product --skip-client
+
+
+## 2021-06-20
+## 공유 스키마 자료, web app entity 동기화
+## 상품 부분 독립 엔티티 CRUD API 작업 (category, provider, p_stock, bundle_video)
+## 상품 스키마 정의서 변경 - jdl 참조
+## 20210530065727_added_entity_Product.xml -> 일부 컬럼 longtext로 변경
+## entity class 내에 set 필드 변수 -> add remove 메서드 제거
+## unmapped property 에러가 나는 경우 @mapper 에 'unmappedTargetPolicy = ReportingPolicy.IGNORE' 옵션 추가,
+   No property named exists in source parameter 인경우, source= 'getter, setter 변수명으로 확인'
+
+## 2021-06-06
+## M:N 데이터 불러오거나 할떄 성능 이슈 고려해서 변경할 필요 있음 (fetch 전략)
+## 기존 데이터 제거후, fake-data로 변경
+## API 기능 정의서 만든담에 API를 만들면서, JPA customizing 수행
+
+## 기획서, 디자인 반영하여 db 스키마 변경, jdl 적용 파일명: prodct-2021-06-06.jdl
+## table에서 mapping된 외래키가 존재하는 테이블을 entity mapping 하는 경우, 컬럼 정의를 굳이 명시할 필요 없음
+## jpa entity 설정 json 생성
+ProjectDir> jhipster jdl product-2021-06-06.jdl --json-only
+
+ProjectDir> jhipster entity BundleVideo --skip-client
+ProjectDir> jhipster entity PCategory --skip-client
+ProjectDir> jhipster entity POptionStock --skip-client
+ProjectDir> jhipster entity Product --skip-client
+ProjectDir> jhipster entity ProductCategory --skip-client
+ProjectDir> jhipster entity ProductRecommend --skip-client
+ProjectDir> jhipster entity ProductVideo --skip-client
+ProjectDir> jhipster entity Provider --skip-client
+ProjectDir> jhipster entity ProviderVideo --skip-client
+ProjectDir> jhipster entity PStock --skip-client
+ProjectDir> jhipster entity PVideo --skip-client
+
+## jhipster entity xxx 라고 실행하면, 테이블 이름에 매핑되는줄 알았는데..
+## .jhipster 에 정의된 .json 파일들을 통하여 JPA entity 생성
+
+## 2021-05-30
+## product.json 파일 생성
+ProjectDir> jhipster jdl product.jh  --json-only
+## product 'entity, dto, service, resource, filter 반영' (.json)
+   jhipster entity client쪽 소스 반영하지 않기
+ProjectDir> jhipster entity product --skip-client
+
+## pCategory.json 파일 생성
+ProjectDir> jhipster jdl pCategory.jh --json-only
+## pCategory 'entity, dto, service, resource, filter 반영' (.json)
+   jhipster entity client쪽 소스 반영하지 않기
+ProjectDir> jhipster entity PCategory --skip-client
+
+
+
+

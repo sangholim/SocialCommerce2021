@@ -1,0 +1,403 @@
+entity Product {
+  name String,
+  code String,
+  calculation String,
+  calculationDateFrom Instant,
+  calculationDateTo Instant,
+  price Integer,
+  allPriceUnit String,
+  discount String,
+  discountPrice Integer,
+  discountUnit String,
+  discountDateFrom Instant,
+  discountDateTo Instant,
+  discountPrice String,
+  isInstallment Boolean,
+  installmentMonth Integer,
+  isSell Boolean,
+  sellDateFrom Instant,
+  sellDateTo Instant,
+  minPurchaseAmount Integer,
+  manPurchaseAmount Integer,
+  mainImageFileUrl String,
+  addImageFileUrl TextBlob,
+  mainVideoFileUrl String,
+  descriptionFileUrl String,
+  shippingType String,
+  separateShippingPriceType String,
+  defaultShippingPrice Integer,
+  freeShippingPrice Integer,
+  jejuShippingPrice Integer,
+  difficultShippingPrice Integer,
+  refundShippingPrice Integer,
+  exchangeShippingPrice Integer,
+  exchangeShippingFileUrl String,
+  isView Boolean,
+  viewReservationDate Instant,
+  activated Boolean,
+  createdBy	String maxlength(50),
+  createdDate	Instant,
+  lastModifiedBy	String maxlength(50),
+  lastModifiedDate	Instant
+}
+
+entity ProductOption {
+  priceSign String,
+  price Integer,
+  stock Integer,
+  status String,
+  code String,
+  activated Boolean,
+  createdBy	String maxlength(50),
+  createdDate	Instant,
+  lastModifiedBy	String maxlength(50),
+  lastModifiedDate	Instant
+}
+
+entity ProductOptionRel {
+  // productId Long,
+  // ProductOptionId Long,
+  activated Boolean,
+  createdBy	String maxlength(50),
+  createdDate	Instant,
+  lastModifiedBy	String maxlength(50),
+  lastModifiedDate	Instant
+}
+
+entity OptionColor {
+  code String,
+  value String,
+  activated Boolean,
+  createdBy	String maxlength(50),
+  createdDate	Instant,
+  lastModifiedBy	String maxlength(50),
+  lastModifiedDate	Instant
+}
+
+entity ProductOptionColorRel {
+  // ProductOptionId Long,
+  // OptionColorId Long,
+  name String,
+  type String,
+  activated Boolean,
+  createdBy	String maxlength(50),
+  createdDate	Instant,
+  lastModifiedBy	String maxlength(50),
+  lastModifiedDate	Instant
+}
+
+entity OptionDesign {
+  value String,
+  activated Boolean,
+  createdBy	String maxlength(50),
+  createdDate	Instant,
+  lastModifiedBy	String maxlength(50),
+  lastModifiedDate	Instant
+}
+
+entity ProductOptionDesignRel {
+  // ProductOptionId Long,
+  // OptionDesignId Long,
+  name String,
+  type String,
+  activated Boolean,
+  createdBy	String maxlength(50),
+  createdDate	Instant,
+  lastModifiedBy	String maxlength(50),
+  lastModifiedDate	Instant
+}
+
+entity OptionPackage {
+  type String,
+  value String,
+  descriptionUsage Boolean,
+  recommendShow Boolean,
+  description TextBlob,
+  thumbnailFileUrl String,
+  activated Boolean,
+  createdBy	String maxlength(50),
+  createdDate	Instant,
+  lastModifiedBy	String maxlength(50),
+  lastModifiedDate	Instant
+}
+
+entity ProductOptionPackageRel {
+  // ProductOptionId Long,
+  // OptionPackageId Long,
+  name String,
+  type String,
+  activated Boolean,
+  createdBy	String maxlength(50),
+  createdDate	Instant,
+  lastModifiedBy	String maxlength(50),
+  lastModifiedDate	Instant
+}
+
+entity Store {
+  name String,
+  type String,
+  calculation Integer,
+  activated Boolean,
+  createdBy	String maxlength(50),
+  createdDate	Instant,
+  lastModifiedBy	String maxlength(50),
+  lastModifiedDate	Instant
+}
+
+entity ProductStoreRel {
+  // ProductId Long,
+  // StoreId Long,
+  useCalculation Boolean,
+  calculation Integer,
+  calculationDateFrom	Instant,
+  calculationDateTo	Instant,
+  activated Boolean,
+  createdBy	String maxlength(50),
+  createdDate	Instant,
+  lastModifiedBy	String maxlength(50),
+  lastModifiedDate	Instant
+}
+
+entity Clazz {
+  name String,
+  type String,
+  level String,
+  enableLecture Boolean,
+  lecturer String,
+  calculation Integer,
+  activated Boolean,
+  createdBy	String maxlength(50),
+  createdDate	Instant,
+  lastModifiedBy	String maxlength(50),
+  lastModifiedDate	Instant
+}
+
+entity ProductClazzRel {
+  // ProductId Long,
+  // ClazzId Long,
+  useCalculation Boolean,
+  calculation Integer,
+  calculationDateFrom	Instant,
+  calculationDateTo	Instant,
+  activated Boolean,
+  createdBy	String maxlength(50),
+  createdDate	Instant,
+  lastModifiedBy	String maxlength(50),
+  lastModifiedDate	Instant
+}
+
+
+entity ProductMapping {
+  name String,
+  type String,
+  content TextBlob,
+  activated Boolean,
+  createdBy	String maxlength(50),
+  createdDate	Instant,
+  lastModifiedBy	String maxlength(50),
+  lastModifiedDate	Instant
+}
+
+entity ProductMappingRel {
+  // productId Long,
+  // ProductMappingId Long,
+  activated Boolean,
+  createdBy	String maxlength(50),
+  createdDate	Instant,
+  lastModifiedBy	String maxlength(50),
+  lastModifiedDate	Instant
+}
+
+entity ProductLabel {
+  name String,
+  color String,
+  content TextBlob,
+  type String,
+  activated Boolean,
+  createdBy	String maxlength(50),
+  createdDate	Instant,
+  lastModifiedBy	String maxlength(50),
+  lastModifiedDate	Instant
+}
+
+entity ProductLabelRel {
+  // productId Long,
+  // ProductLabelId Long,
+  isDisplayDate Boolean,
+  displayDateFrom	Instant,
+  displayDateTo	Instant,
+  activated Boolean,
+  createdBy	String maxlength(50),
+  createdDate	Instant,
+  lastModifiedBy	String maxlength(50),
+  lastModifiedDate	Instant
+}
+
+entity ProductView {
+  name String,
+  type String,
+  content TextBlob,
+  isDetail Boolean,
+  activated Boolean,
+  createdBy	String maxlength(50),
+  createdDate	Instant,
+  lastModifiedBy	String maxlength(50),
+  lastModifiedDate	Instant
+}
+
+entity ProductViewRel {
+  // productId Long,
+  // ProductViewId Long,
+  activated Boolean,
+  createdBy	String maxlength(50),
+  createdDate	Instant,
+  lastModifiedBy	String maxlength(50),
+  lastModifiedDate	Instant
+}
+
+entity ProductShipping {
+  name String,
+  isGroup Boolean,
+  defaultShippingPrice Integer,
+  freeShippingPrice Integer,
+  jejuShippingPrice Integer,
+  difficultShippingPrice Integer,
+  refundShippingPrice Integer,
+  exchangeShippingPrice Integer,
+  activated Boolean,
+  createdBy	String maxlength(50),
+  createdDate	Instant,
+  lastModifiedBy	String maxlength(50),
+  lastModifiedDate	Instant
+}
+
+entity ProductShippingRel {
+  // productId Long,
+  // ProductShippingId Long,
+  activated Boolean,
+  createdBy	String maxlength(50),
+  createdDate	Instant,
+  lastModifiedBy	String maxlength(50),
+  lastModifiedDate	Instant
+}
+
+entity ProductTemplate {
+  name String,
+  type String,
+  content  TextBlob,
+  activated Boolean,
+  createdBy	String maxlength(50),
+  createdDate	Instant,
+  lastModifiedBy	String maxlength(50),
+  lastModifiedDate	Instant
+}
+
+entity ProductTemplateRel {
+  // productId Long,
+  // ProductTemplateId Long,
+  activated Boolean,
+  createdBy	String maxlength(50),
+  createdDate	Instant,
+  lastModifiedBy	String maxlength(50),
+  lastModifiedDate	Instant
+}
+
+entity ProductNotice {
+  name String,
+  type String,
+  content  TextBlob,
+  activated Boolean,
+  createdBy	String maxlength(50),
+  createdDate	Instant,
+  lastModifiedBy	String maxlength(50),
+  lastModifiedDate	Instant
+}
+
+entity ProductNoticeRel {
+  // productId Long,
+  // ProductNoticeId Long,
+  activated Boolean,
+  createdBy	String maxlength(50),
+  createdDate	Instant,
+  lastModifiedBy	String maxlength(50),
+  lastModifiedDate	Instant
+}
+
+entity ProductCategory {
+  name String,
+  main String,
+  sub String,
+  description  TextBlob,
+  sortOrder Integer,
+  activated Boolean,
+  createdBy	String maxlength(50),
+  createdDate	Instant,
+  lastModifiedBy	String maxlength(50),
+  lastModifiedDate	Instant
+}
+
+entity ProductCategoryRel {
+  // productId Long,
+  // ProductCategoryId Long,
+  activated Boolean,
+  createdBy	String maxlength(50),
+  createdDate	Instant,
+  lastModifiedBy	String maxlength(50),
+  lastModifiedDate	Instant
+}
+
+
+
+
+
+// defining multiple OneToMany relationships with comments
+relationship OneToMany {
+    // 상품 - 카테고리
+    Product{productCategoryRel} to ProductCategoryRel
+    ProductCategory{productCategoryRel} to ProductCategoryRel
+    // 상품 - 라벨
+    Product{productLabelRel} to ProductLabelRel
+    ProductLabel{productLabelRel} to ProductLabelRel
+    // 상품 - 연관 상품
+    Product{productMappingRel} to ProductMappingRel
+    ProductMapping{productMappingRel} to ProductMappingRel
+    // 상품 - 상품 고시
+    Product{productViewRel} to ProductViewRel
+    ProductView{productViewRel} to ProductViewRel
+    // 상품 - 상품 공지 사항
+    Product{productNoticeRel} to ProductNoticeRel
+    ProductNotice{productNoticeRel} to ProductNoticeRel
+    // 상품 - 배송
+    Product{productShippingRel} to ProductShippingRel
+    ProductShipping{productShippingRel} to ProductShippingRel
+    // 상품 - 템플릿
+    Product{productTemplateRel} to ProductTemplateRel
+    ProductTemplate{productTemplateRel} to ProductTemplateRel
+    // 상품 - 상품 옵션
+    Product{productOptionRel} to ProductOptionRel
+    ProductOption{productOptionRel} to ProductOptionRel
+    // 상품 - 클래스
+    Product{productClazzRel} to ProductClazzRel
+    Clazz{productClazzRel} to ProductClazzRel
+    // 상품 - 스토어
+    Product{productStoreRel} to ProductStoreRel
+    Store{productStoreRel} to ProductStoreRel
+    // 상품 옵션 - 옵션 패키지
+    ProductOption{productOptionPackageRel} to ProductOptionPackageRel
+    OptionPackage{productOptionPackageRel} to ProductOptionPackageRel
+    // 상품 옵션 - 옵션 컬러
+    ProductOption{productOptionColorRel} to ProductOptionColorRel
+    OptionColor{productOptionColorRel} to ProductOptionColorRel
+    // 상품 옵션 - 옵션 디자인
+    ProductOption{productOptionDesignRel} to ProductOptionDesignRel
+    OptionDesign{productOptionDesignRel} to ProductOptionDesignRel
+
+}
+
+paginate * with pagination
+
+dto * with mapstruct
+
+service * with serviceClass
+
+filter *

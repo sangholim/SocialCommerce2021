@@ -89,74 +89,213 @@ public class ProductQueryService extends QueryService<Product> {
             if (criteria.getName() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getName(), Product_.name));
             }
-            if (criteria.getDifficulty() != null) {
-                specification = specification.and(buildSpecification(criteria.getDifficulty(), Product_.difficulty));
+            if (criteria.getCode() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getCode(), Product_.code));
             }
-            if (criteria.getThumbnail() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getThumbnail(), Product_.thumbnail));
+            if (criteria.getCalculation() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getCalculation(), Product_.calculation));
             }
-            if (criteria.getOwner() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getOwner(), Product_.owner));
+            if (criteria.getCalculationDateFrom() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getCalculationDateFrom(), Product_.calculationDateFrom));
             }
-            if (criteria.getRegdate() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getRegdate(), Product_.regdate));
+            if (criteria.getCalculationDateTo() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getCalculationDateTo(), Product_.calculationDateTo));
             }
-            if (criteria.getPriceRegular() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getPriceRegular(), Product_.priceRegular));
+            if (criteria.getPrice() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getPrice(), Product_.price));
             }
-            if (criteria.getIsUseDiscount() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getIsUseDiscount(), Product_.isUseDiscount));
+            if (criteria.getAllPriceUnit() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getAllPriceUnit(), Product_.allPriceUnit));
+            }
+            if (criteria.getDiscount() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getDiscount(), Product_.discount));
+            }
+            if (criteria.getDiscountPrice() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getDiscountPrice(), Product_.discountPrice));
             }
             if (criteria.getDiscountUnit() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getDiscountUnit(), Product_.discountUnit));
             }
-            if (criteria.getDiscountValue() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getDiscountValue(), Product_.discountValue));
+            if (criteria.getDiscountDateFrom() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getDiscountDateFrom(), Product_.discountDateFrom));
             }
-            if (criteria.getDiscountStartdate() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getDiscountStartdate(), Product_.discountStartdate));
+            if (criteria.getDiscountDateTo() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getDiscountDateTo(), Product_.discountDateTo));
             }
-            if (criteria.getDiscountInterval() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getDiscountInterval(), Product_.discountInterval));
-            }
-            if (criteria.getVideo() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getVideo(), Product_.video));
-            }
-            if (criteria.getStartdate() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getStartdate(), Product_.startdate));
-            }
-            if (criteria.getPrepareResource() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getPrepareResource(), Product_.prepareResource));
-            }
-            if (criteria.getIntroduceResource() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getIntroduceResource(), Product_.introduceResource));
-            }
-            if (criteria.getShippingResource() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getShippingResource(), Product_.shippingResource));
-            }
-            if (criteria.getRefundResource() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getRefundResource(), Product_.refundResource));
-            }
-            if (criteria.getChangeResource() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getChangeResource(), Product_.changeResource));
-            }
-            if (criteria.getCode() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getCode(), Product_.code));
+            if (criteria.getIsInstallment() != null) {
+                specification = specification.and(buildSpecification(criteria.getIsInstallment(), Product_.isInstallment));
             }
             if (criteria.getInstallmentMonth() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getInstallmentMonth(), Product_.installmentMonth));
             }
-            if (criteria.getType() != null) {
-                specification = specification.and(buildSpecification(criteria.getType(), Product_.type));
+            if (criteria.getIsSell() != null) {
+                specification = specification.and(buildSpecification(criteria.getIsSell(), Product_.isSell));
             }
-            if (criteria.getNumber() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getNumber(), Product_.number));
+            if (criteria.getSellDateFrom() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getSellDateFrom(), Product_.sellDateFrom));
             }
-            if (criteria.getPopularCount() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getPopularCount(), Product_.popularCount));
+            if (criteria.getSellDateTo() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getSellDateTo(), Product_.sellDateTo));
             }
-            if (criteria.getReviewCount() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getReviewCount(), Product_.reviewCount));
+            if (criteria.getMinPurchaseAmount() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getMinPurchaseAmount(), Product_.minPurchaseAmount));
+            }
+            if (criteria.getManPurchaseAmount() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getManPurchaseAmount(), Product_.manPurchaseAmount));
+            }
+            if (criteria.getMainImageFileUrl() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getMainImageFileUrl(), Product_.mainImageFileUrl));
+            }
+            if (criteria.getMainVideoFileUrl() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getMainVideoFileUrl(), Product_.mainVideoFileUrl));
+            }
+            if (criteria.getDescriptionFileUrl() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getDescriptionFileUrl(), Product_.descriptionFileUrl));
+            }
+            if (criteria.getShippingType() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getShippingType(), Product_.shippingType));
+            }
+            if (criteria.getSeparateShippingPriceType() != null) {
+                specification =
+                    specification.and(
+                        buildStringSpecification(criteria.getSeparateShippingPriceType(), Product_.separateShippingPriceType)
+                    );
+            }
+            if (criteria.getDefaultShippingPrice() != null) {
+                specification =
+                    specification.and(buildRangeSpecification(criteria.getDefaultShippingPrice(), Product_.defaultShippingPrice));
+            }
+            if (criteria.getFreeShippingPrice() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getFreeShippingPrice(), Product_.freeShippingPrice));
+            }
+            if (criteria.getJejuShippingPrice() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getJejuShippingPrice(), Product_.jejuShippingPrice));
+            }
+            if (criteria.getDifficultShippingPrice() != null) {
+                specification =
+                    specification.and(buildRangeSpecification(criteria.getDifficultShippingPrice(), Product_.difficultShippingPrice));
+            }
+            if (criteria.getRefundShippingPrice() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getRefundShippingPrice(), Product_.refundShippingPrice));
+            }
+            if (criteria.getExchangeShippingPrice() != null) {
+                specification =
+                    specification.and(buildRangeSpecification(criteria.getExchangeShippingPrice(), Product_.exchangeShippingPrice));
+            }
+            if (criteria.getExchangeShippingFileUrl() != null) {
+                specification =
+                    specification.and(buildStringSpecification(criteria.getExchangeShippingFileUrl(), Product_.exchangeShippingFileUrl));
+            }
+            if (criteria.getIsView() != null) {
+                specification = specification.and(buildSpecification(criteria.getIsView(), Product_.isView));
+            }
+            if (criteria.getViewReservationDate() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getViewReservationDate(), Product_.viewReservationDate));
+            }
+            if (criteria.getActivated() != null) {
+                specification = specification.and(buildSpecification(criteria.getActivated(), Product_.activated));
+            }
+            if (criteria.getCreatedBy() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getCreatedBy(), Product_.createdBy));
+            }
+            if (criteria.getCreatedDate() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getCreatedDate(), Product_.createdDate));
+            }
+            if (criteria.getLastModifiedBy() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getLastModifiedBy(), Product_.lastModifiedBy));
+            }
+            if (criteria.getLastModifiedDate() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getLastModifiedDate(), Product_.lastModifiedDate));
+            }
+            if (criteria.getProductCategoryRelId() != null) {
+                specification =
+                    specification.and(
+                        buildSpecification(
+                            criteria.getProductCategoryRelId(),
+                            root -> root.join(Product_.productCategoryRels, JoinType.LEFT).get(ProductCategoryRel_.id)
+                        )
+                    );
+            }
+            if (criteria.getProductLabelRelId() != null) {
+                specification =
+                    specification.and(
+                        buildSpecification(
+                            criteria.getProductLabelRelId(),
+                            root -> root.join(Product_.productLabelRels, JoinType.LEFT).get(ProductLabelRel_.id)
+                        )
+                    );
+            }
+            if (criteria.getProductMappingRelId() != null) {
+                specification =
+                    specification.and(
+                        buildSpecification(
+                            criteria.getProductMappingRelId(),
+                            root -> root.join(Product_.productMappingRels, JoinType.LEFT).get(ProductMappingRel_.id)
+                        )
+                    );
+            }
+            if (criteria.getProductViewRelId() != null) {
+                specification =
+                    specification.and(
+                        buildSpecification(
+                            criteria.getProductViewRelId(),
+                            root -> root.join(Product_.productViewRels, JoinType.LEFT).get(ProductViewRel_.id)
+                        )
+                    );
+            }
+            if (criteria.getProductNoticeRelId() != null) {
+                specification =
+                    specification.and(
+                        buildSpecification(
+                            criteria.getProductNoticeRelId(),
+                            root -> root.join(Product_.productNoticeRels, JoinType.LEFT).get(ProductNoticeRel_.id)
+                        )
+                    );
+            }
+            if (criteria.getProductShippingRelId() != null) {
+                specification =
+                    specification.and(
+                        buildSpecification(
+                            criteria.getProductShippingRelId(),
+                            root -> root.join(Product_.productShippingRels, JoinType.LEFT).get(ProductShippingRel_.id)
+                        )
+                    );
+            }
+            if (criteria.getProductTemplateRelId() != null) {
+                specification =
+                    specification.and(
+                        buildSpecification(
+                            criteria.getProductTemplateRelId(),
+                            root -> root.join(Product_.productTemplateRels, JoinType.LEFT).get(ProductTemplateRel_.id)
+                        )
+                    );
+            }
+            if (criteria.getProductOptionRelId() != null) {
+                specification =
+                    specification.and(
+                        buildSpecification(
+                            criteria.getProductOptionRelId(),
+                            root -> root.join(Product_.productOptionRels, JoinType.LEFT).get(ProductOptionRel_.id)
+                        )
+                    );
+            }
+            if (criteria.getProductClazzRelId() != null) {
+                specification =
+                    specification.and(
+                        buildSpecification(
+                            criteria.getProductClazzRelId(),
+                            root -> root.join(Product_.productClazzRels, JoinType.LEFT).get(ProductClazzRel_.id)
+                        )
+                    );
+            }
+            if (criteria.getProductStoreRelId() != null) {
+                specification =
+                    specification.and(
+                        buildSpecification(
+                            criteria.getProductStoreRelId(),
+                            root -> root.join(Product_.productStoreRels, JoinType.LEFT).get(ProductStoreRel_.id)
+                        )
+                    );
             }
         }
         return specification;
