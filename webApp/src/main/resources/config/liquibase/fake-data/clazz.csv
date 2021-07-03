@@ -1,11 +1,11 @@
-id;name;type;level;enable_lecture;lecturer;calculation;activated;created_by;created_date;last_modified_by;last_modified_date
-1;Cheese 경북 Senior;Toys Brand methodical;Leone interfaces;false;engineer Music;56885;false;Home;2021-06-26T14:39:39;Open-source plum;2021-06-26T12:56:31
-2;Shoes protocol;proactive;Ergonomic;false;Director;90409;true;sky;2021-06-27T02:20:20;e-tailers Team-oriented Chicken;2021-06-26T18:53:57
-3;National;Internal;Handmade Bedfordshire;true;Product Franc Planner;61073;true;clicks-and-mortar hack;2021-06-26T08:58:33;Platinum 경기;2021-06-27T01:38:04
-4;Iraq Practical Ball;1080p 대전;deposit core Buckinghamshire;false;Soap utilize methodologies;5772;true;value-added 울산;2021-06-26T22:59:54;읍;2021-06-26T12:20:59
-5;transform leverage;demand-driven;mission-critical;true;card Fantastic methodologies;57564;false;SMTP transmit integrated;2021-06-26T23:24:17;Dinar;2021-06-27T03:45:57
-6;Consultant;Bike framework;wireless primary;false;Rustic;29672;false;Soap SDD bypass;2021-06-26T06:55:46;Myanmar New Pants;2021-06-26T15:01:56
-7;Shilling;경북 Human Berkshire;function web-enabled;true;Legacy Human;70442;true;읍 Factors 읍;2021-06-26T11:13:57;Steel circuit;2021-06-26T11:44:02
-8;Account;Tenge 동 Executive;GB;true;Afghani services Response;85557;false;Mauritius evolve;2021-06-26T22:26:28;Granite;2021-06-26T10:42:02
-9;Mouse 광주;capacity HTTP program;Metal Berkshire Computer;true;rich calculate Auto;88359;true;USB invoice microchip;2021-06-27T04:53:25;invoice Movies sticky;2021-06-26T16:26:17
-10;면;generate back-end Tuna;Koruna;true;deliverables Wooden Clothing;11671;false;Vision-oriented JSON;2021-06-26T20:05:56;multimedia Borders 읍;2021-06-26T06:53:06
+id;name;type;main_image_file_url;level;enable_lecture;free_lecture;price_lecture;price_unit_lecture;lecture_start_date_from;lecture_interval;lecturer;calculation;is_view;is_sell;activated;created_by;created_date;last_modified_by;last_modified_date
+1;Cheese 경북 Senior;Toys Brand methodical;Leone interfaces;Account;true;false;13370;경북 Home;2021-06-26T14:39:39;52586;Australia;58920;true;true;true;protocol;2021-06-26T09:25:06;pink;2021-06-26T10:37:23
+2;Ergonomic;Chips;Investor;Denmark;true;false;29956;Team-oriented;2021-06-27T01:19:20;69017;ROI;35648;false;false;true;Moldova drive synergy;2021-06-26T06:48:40;standardization cyan 전남;2021-06-26T06:52:43
+3;clicks-and-mortar hack;전남 Naira management;e-services 면;leverage;true;true;56026;radical Gorgeous;2021-06-26T23:20:00;38026;connect auxiliary;2657;true;true;false;navigating;2021-06-26T22:05:53;XML;2021-06-26T06:13:12
+4;울산 Business-focused Adaptive;transform leverage;demand-driven;mission-critical;true;true;73852;Supervisor;2021-06-26T10:30:57;89167;methodologies;57564;false;true;true;input 대구 Intelligent;2021-06-26T12:06:21;protocol Consultant;2021-06-26T20:20:59
+5;Customizable;THX virtual;bypassing;Salad;false;true;17186;invoice 동;2021-06-26T12:55:56;91604;Myanmar New Pants;57842;false;true;false;generating SCSI;2021-06-26T19:15:51;e-services function;2021-06-26T22:14:10
+6;bandwidth Legacy Human;Tunisia Rubber Quality;전북;Tools;true;false;71586;Account;2021-06-26T09:30:00;68861;RSS zero;95332;false;true;false;Qatar Books Factors;2021-06-26T22:24:16;RSS;2021-06-26T15:55:27
+7;Shirt didactic;동;Mouse 광주;capacity HTTP program;true;false;66761;Cordoba users;2021-06-27T02:22:00;80420;array Rubber;85024;false;true;true;USB invoice microchip;2021-06-27T04:53:25;invoice Movies sticky;2021-06-26T16:26:17
+8;면;generate back-end Tuna;Koruna;navigating panel Books;false;false;378;Vision-oriented JSON;2021-06-26T20:05:56;70054;payment;56154;true;false;false;Dynamic;2021-06-27T02:49:48;Self-enabling even-keeled Infrastructure;2021-06-26T20:33:50
+9;SQL Producer;Pizza Incredible Practical;Chips Refined impactful;Sleek heuristic;true;false;24356;compressing Distributed generating;2021-06-26T07:52:56;98587;partnerships;26686;true;true;true;Bike 동 withdrawal;2021-06-26T09:39:23;Gloves Uruguay (Chagos;2021-06-26T06:18:13
+10;protocol facilitate Handmade;Berkshire;Kids withdrawal;서울 Borders;true;true;2636;Loan 광주 payment;2021-06-26T11:05:50;61994;fuchsia Buckinghamshire Cotton;72697;false;false;false;Frozen revolutionize applications;2021-06-26T21:42:30;Lead Integration;2021-06-26T17:22:18

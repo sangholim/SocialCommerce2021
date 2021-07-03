@@ -16,13 +16,29 @@ public class ClazzDTO implements Serializable {
 
     private String type;
 
+    private String mainImageFileUrl;
+
     private String level;
 
     private Boolean enableLecture;
 
+    private Boolean freeLecture;
+
+    private Long priceLecture;
+
+    private String priceUnitLecture;
+
+    private Instant lectureStartDateFrom;
+
+    private Integer lectureInterval;
+
     private String lecturer;
 
     private Integer calculation;
+
+    private Boolean isView;
+
+    private Boolean isSell;
 
     private Boolean activated;
 
@@ -60,6 +76,14 @@ public class ClazzDTO implements Serializable {
         this.type = type;
     }
 
+    public String getMainImageFileUrl() {
+        return mainImageFileUrl;
+    }
+
+    public void setMainImageFileUrl(String mainImageFileUrl) {
+        this.mainImageFileUrl = mainImageFileUrl;
+    }
+
     public String getLevel() {
         return level;
     }
@@ -76,6 +100,46 @@ public class ClazzDTO implements Serializable {
         this.enableLecture = enableLecture;
     }
 
+    public Boolean getFreeLecture() {
+        return freeLecture;
+    }
+
+    public void setFreeLecture(Boolean freeLecture) {
+        this.freeLecture = freeLecture;
+    }
+
+    public Long getPriceLecture() {
+        return priceLecture;
+    }
+
+    public void setPriceLecture(Long priceLecture) {
+        this.priceLecture = priceLecture;
+    }
+
+    public String getPriceUnitLecture() {
+        return priceUnitLecture;
+    }
+
+    public void setPriceUnitLecture(String priceUnitLecture) {
+        this.priceUnitLecture = priceUnitLecture;
+    }
+
+    public Instant getLectureStartDateFrom() {
+        return lectureStartDateFrom;
+    }
+
+    public void setLectureStartDateFrom(Instant lectureStartDateFrom) {
+        this.lectureStartDateFrom = lectureStartDateFrom;
+    }
+
+    public Integer getLectureInterval() {
+        return lectureInterval;
+    }
+
+    public void setLectureInterval(Integer lectureInterval) {
+        this.lectureInterval = lectureInterval;
+    }
+
     public String getLecturer() {
         return lecturer;
     }
@@ -90,6 +154,22 @@ public class ClazzDTO implements Serializable {
 
     public void setCalculation(Integer calculation) {
         this.calculation = calculation;
+    }
+
+    public Boolean getIsView() {
+        return isView;
+    }
+
+    public void setIsView(Boolean isView) {
+        this.isView = isView;
+    }
+
+    public Boolean getIsSell() {
+        return isSell;
+    }
+
+    public void setIsSell(Boolean isSell) {
+        this.isSell = isSell;
     }
 
     public Boolean getActivated() {
@@ -160,10 +240,18 @@ public class ClazzDTO implements Serializable {
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", type='" + getType() + "'" +
+            ", mainImageFileUrl='" + getMainImageFileUrl() + "'" +
             ", level='" + getLevel() + "'" +
             ", enableLecture='" + getEnableLecture() + "'" +
+            ", freeLecture='" + getFreeLecture() + "'" +
+            ", priceLecture=" + getPriceLecture() +
+            ", priceUnitLecture='" + getPriceUnitLecture() + "'" +
+            ", lectureStartDateFrom='" + getLectureStartDateFrom() + "'" +
+            ", lectureInterval=" + getLectureInterval() +
             ", lecturer='" + getLecturer() + "'" +
             ", calculation=" + getCalculation() +
+            ", isView='" + getIsView() + "'" +
+            ", isSell='" + getIsSell() + "'" +
             ", activated='" + getActivated() + "'" +
             ", createdBy='" + getCreatedBy() + "'" +
             ", createdDate='" + getCreatedDate() + "'" +

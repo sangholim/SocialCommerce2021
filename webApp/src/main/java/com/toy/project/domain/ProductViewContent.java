@@ -7,11 +7,11 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 /**
- * A ProductOptionColorRel.
+ * A ProductViewContent.
  */
 @Entity
-@Table(name = "product_option_color_rel")
-public class ProductOptionColorRel extends AbstractAuditingEntity implements Serializable {
+@Table(name = "product_view_content")
+public class ProductViewContent extends AbstractAuditingEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -22,22 +22,19 @@ public class ProductOptionColorRel extends AbstractAuditingEntity implements Ser
     @Column(name = "name")
     private String name;
 
-    @Column(name = "type")
-    private String type;
+    @Lob
+    @Column(name = "content")
+    private String content;
+
+    @Column(name = "is_detail")
+    private Boolean isDetail;
 
     @Column(name = "activated")
     private Boolean activated;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(
-        value = { "productOptionRels", "productOptionPackageRels", "productOptionColorRels", "productOptionDesignRels" },
-        allowSetters = true
-    )
-    private ProductOption productOption;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "productOptionColorRels" }, allowSetters = true)
-    private OptionColor optionColor;
+    @ManyToOne
+    @JsonIgnoreProperties(value = { "productViewRels", "productViewContents" }, allowSetters = true)
+    private ProductView productView;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -48,7 +45,7 @@ public class ProductOptionColorRel extends AbstractAuditingEntity implements Ser
         this.id = id;
     }
 
-    public ProductOptionColorRel id(Long id) {
+    public ProductViewContent id(Long id) {
         this.id = id;
         return this;
     }
@@ -57,7 +54,7 @@ public class ProductOptionColorRel extends AbstractAuditingEntity implements Ser
         return this.name;
     }
 
-    public ProductOptionColorRel name(String name) {
+    public ProductViewContent name(String name) {
         this.name = name;
         return this;
     }
@@ -66,24 +63,37 @@ public class ProductOptionColorRel extends AbstractAuditingEntity implements Ser
         this.name = name;
     }
 
-    public String getType() {
-        return this.type;
+    public String getContent() {
+        return this.content;
     }
 
-    public ProductOptionColorRel type(String type) {
-        this.type = type;
+    public ProductViewContent content(String content) {
+        this.content = content;
         return this;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public Boolean getIsDetail() {
+        return this.isDetail;
+    }
+
+    public ProductViewContent isDetail(Boolean isDetail) {
+        this.isDetail = isDetail;
+        return this;
+    }
+
+    public void setIsDetail(Boolean isDetail) {
+        this.isDetail = isDetail;
     }
 
     public Boolean getActivated() {
         return this.activated;
     }
 
-    public ProductOptionColorRel activated(Boolean activated) {
+    public ProductViewContent activated(Boolean activated) {
         this.activated = activated;
         return this;
     }
@@ -92,50 +102,37 @@ public class ProductOptionColorRel extends AbstractAuditingEntity implements Ser
         this.activated = activated;
     }
 
-    public ProductOptionColorRel createdBy(String createdBy) {
+    public ProductViewContent createdBy(String createdBy) {
         setCreatedBy(createdBy);
         return this;
     }
 
-    public ProductOptionColorRel createdDate(Instant createdDate) {
+    public ProductViewContent createdDate(Instant createdDate) {
         setCreatedDate(createdDate);
         return this;
     }
 
-    public ProductOptionColorRel lastModifiedBy(String lastModifiedBy) {
+    public ProductViewContent lastModifiedBy(String lastModifiedBy) {
         setLastModifiedBy(lastModifiedBy);
         return this;
     }
 
-    public ProductOptionColorRel lastModifiedDate(Instant lastModifiedDate) {
+    public ProductViewContent lastModifiedDate(Instant lastModifiedDate) {
         setLastModifiedDate(lastModifiedDate);
         return this;
     }
 
-    public ProductOption getProductOption() {
-        return this.productOption;
+    public ProductView getProductView() {
+        return this.productView;
     }
 
-    public ProductOptionColorRel productOption(ProductOption productOption) {
-        this.setProductOption(productOption);
+    public ProductViewContent productView(ProductView productView) {
+        this.setProductView(productView);
         return this;
     }
 
-    public void setProductOption(ProductOption productOption) {
-        this.productOption = productOption;
-    }
-
-    public OptionColor getOptionColor() {
-        return this.optionColor;
-    }
-
-    public ProductOptionColorRel optionColor(OptionColor optionColor) {
-        this.setOptionColor(optionColor);
-        return this;
-    }
-
-    public void setOptionColor(OptionColor optionColor) {
-        this.optionColor = optionColor;
+    public void setProductView(ProductView productView) {
+        this.productView = productView;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
@@ -145,10 +142,10 @@ public class ProductOptionColorRel extends AbstractAuditingEntity implements Ser
         if (this == o) {
             return true;
         }
-        if (!(o instanceof ProductOptionColorRel)) {
+        if (!(o instanceof ProductViewContent)) {
             return false;
         }
-        return id != null && id.equals(((ProductOptionColorRel) o).id);
+        return id != null && id.equals(((ProductViewContent) o).id);
     }
 
     @Override
@@ -160,10 +157,11 @@ public class ProductOptionColorRel extends AbstractAuditingEntity implements Ser
     // prettier-ignore
     @Override
     public String toString() {
-        return "ProductOptionColorRel{" +
+        return "ProductViewContent{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
-            ", type='" + getType() + "'" +
+            ", content='" + getContent() + "'" +
+            ", isDetail='" + getIsDetail() + "'" +
             ", activated='" + getActivated() + "'" +
             ", createdBy='" + getCreatedBy() + "'" +
             ", createdDate='" + getCreatedDate() + "'" +

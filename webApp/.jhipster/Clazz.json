@@ -10,6 +10,10 @@
       "fieldType": "String"
     },
     {
+      "fieldName": "mainImageFileUrl",
+      "fieldType": "String"
+    },
+    {
       "fieldName": "level",
       "fieldType": "String"
     },
@@ -18,12 +22,40 @@
       "fieldType": "Boolean"
     },
     {
+      "fieldName": "freeLecture",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "priceLecture",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "priceUnitLecture",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lectureStartDateFrom",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lectureInterval",
+      "fieldType": "Integer"
+    },
+    {
       "fieldName": "lecturer",
       "fieldType": "String"
     },
     {
       "fieldName": "calculation",
       "fieldType": "Integer"
+    },
+    {
+      "fieldName": "isView",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "isSell",
+      "fieldType": "Boolean"
     },
     {
       "fieldName": "activated",

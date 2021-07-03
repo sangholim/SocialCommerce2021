@@ -7,6 +7,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.toy.project.IntegrationTest;
 import com.toy.project.domain.ProductView;
+import com.toy.project.domain.ProductViewContent;
 import com.toy.project.domain.ProductViewRel;
 import com.toy.project.repository.ProductViewRepository;
 import com.toy.project.service.criteria.ProductViewCriteria;
@@ -29,7 +30,6 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Base64Utils;
 
 /**
  * Integration tests for the {@link ProductViewResource} REST controller.
@@ -42,15 +42,6 @@ class ProductViewResourceIT {
 
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
-
-    private static final String DEFAULT_TYPE = "AAAAAAAAAA";
-    private static final String UPDATED_TYPE = "BBBBBBBBBB";
-
-    private static final String DEFAULT_CONTENT = "AAAAAAAAAA";
-    private static final String UPDATED_CONTENT = "BBBBBBBBBB";
-
-    private static final Boolean DEFAULT_IS_DETAIL = false;
-    private static final Boolean UPDATED_IS_DETAIL = true;
 
     private static final Boolean DEFAULT_ACTIVATED = false;
     private static final Boolean UPDATED_ACTIVATED = true;
@@ -96,9 +87,6 @@ class ProductViewResourceIT {
     public static ProductView createEntity(EntityManager em) {
         ProductView productView = new ProductView()
             .name(DEFAULT_NAME)
-            .type(DEFAULT_TYPE)
-            .content(DEFAULT_CONTENT)
-            .isDetail(DEFAULT_IS_DETAIL)
             .activated(DEFAULT_ACTIVATED)
             .createdBy(DEFAULT_CREATED_BY)
             .createdDate(DEFAULT_CREATED_DATE)
@@ -116,9 +104,6 @@ class ProductViewResourceIT {
     public static ProductView createUpdatedEntity(EntityManager em) {
         ProductView productView = new ProductView()
             .name(UPDATED_NAME)
-            .type(UPDATED_TYPE)
-            .content(UPDATED_CONTENT)
-            .isDetail(UPDATED_IS_DETAIL)
             .activated(UPDATED_ACTIVATED)
             .createdBy(UPDATED_CREATED_BY)
             .createdDate(UPDATED_CREATED_DATE)
@@ -149,9 +134,6 @@ class ProductViewResourceIT {
         assertThat(productViewList).hasSize(databaseSizeBeforeCreate + 1);
         ProductView testProductView = productViewList.get(productViewList.size() - 1);
         assertThat(testProductView.getName()).isEqualTo(DEFAULT_NAME);
-        assertThat(testProductView.getType()).isEqualTo(DEFAULT_TYPE);
-        assertThat(testProductView.getContent()).isEqualTo(DEFAULT_CONTENT);
-        assertThat(testProductView.getIsDetail()).isEqualTo(DEFAULT_IS_DETAIL);
         assertThat(testProductView.getActivated()).isEqualTo(DEFAULT_ACTIVATED);
         assertThat(testProductView.getCreatedBy()).isEqualTo(DEFAULT_CREATED_BY);
         assertThat(testProductView.getCreatedDate()).isEqualTo(DEFAULT_CREATED_DATE);
@@ -193,9 +175,6 @@ class ProductViewResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(productView.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
-            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE)))
-            .andExpect(jsonPath("$.[*].content").value(hasItem(DEFAULT_CONTENT.toString())))
-            .andExpect(jsonPath("$.[*].isDetail").value(hasItem(DEFAULT_IS_DETAIL.booleanValue())))
             .andExpect(jsonPath("$.[*].activated").value(hasItem(DEFAULT_ACTIVATED.booleanValue())))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
             .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
@@ -216,9 +195,6 @@ class ProductViewResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(productView.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
-            .andExpect(jsonPath("$.type").value(DEFAULT_TYPE))
-            .andExpect(jsonPath("$.content").value(DEFAULT_CONTENT.toString()))
-            .andExpect(jsonPath("$.isDetail").value(DEFAULT_IS_DETAIL.booleanValue()))
             .andExpect(jsonPath("$.activated").value(DEFAULT_ACTIVATED.booleanValue()))
             .andExpect(jsonPath("$.createdBy").value(DEFAULT_CREATED_BY))
             .andExpect(jsonPath("$.createdDate").value(DEFAULT_CREATED_DATE.toString()))
@@ -320,136 +296,6 @@ class ProductViewResourceIT {
 
         // Get all the productViewList where name does not contain UPDATED_NAME
         defaultProductViewShouldBeFound("name.doesNotContain=" + UPDATED_NAME);
-    }
-
-    @Test
-    @Transactional
-    void getAllProductViewsByTypeIsEqualToSomething() throws Exception {
-        // Initialize the database
-        productViewRepository.saveAndFlush(productView);
-
-        // Get all the productViewList where type equals to DEFAULT_TYPE
-        defaultProductViewShouldBeFound("type.equals=" + DEFAULT_TYPE);
-
-        // Get all the productViewList where type equals to UPDATED_TYPE
-        defaultProductViewShouldNotBeFound("type.equals=" + UPDATED_TYPE);
-    }
-
-    @Test
-    @Transactional
-    void getAllProductViewsByTypeIsNotEqualToSomething() throws Exception {
-        // Initialize the database
-        productViewRepository.saveAndFlush(productView);
-
-        // Get all the productViewList where type not equals to DEFAULT_TYPE
-        defaultProductViewShouldNotBeFound("type.notEquals=" + DEFAULT_TYPE);
-
-        // Get all the productViewList where type not equals to UPDATED_TYPE
-        defaultProductViewShouldBeFound("type.notEquals=" + UPDATED_TYPE);
-    }
-
-    @Test
-    @Transactional
-    void getAllProductViewsByTypeIsInShouldWork() throws Exception {
-        // Initialize the database
-        productViewRepository.saveAndFlush(productView);
-
-        // Get all the productViewList where type in DEFAULT_TYPE or UPDATED_TYPE
-        defaultProductViewShouldBeFound("type.in=" + DEFAULT_TYPE + "," + UPDATED_TYPE);
-
-        // Get all the productViewList where type equals to UPDATED_TYPE
-        defaultProductViewShouldNotBeFound("type.in=" + UPDATED_TYPE);
-    }
-
-    @Test
-    @Transactional
-    void getAllProductViewsByTypeIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        productViewRepository.saveAndFlush(productView);
-
-        // Get all the productViewList where type is not null
-        defaultProductViewShouldBeFound("type.specified=true");
-
-        // Get all the productViewList where type is null
-        defaultProductViewShouldNotBeFound("type.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllProductViewsByTypeContainsSomething() throws Exception {
-        // Initialize the database
-        productViewRepository.saveAndFlush(productView);
-
-        // Get all the productViewList where type contains DEFAULT_TYPE
-        defaultProductViewShouldBeFound("type.contains=" + DEFAULT_TYPE);
-
-        // Get all the productViewList where type contains UPDATED_TYPE
-        defaultProductViewShouldNotBeFound("type.contains=" + UPDATED_TYPE);
-    }
-
-    @Test
-    @Transactional
-    void getAllProductViewsByTypeNotContainsSomething() throws Exception {
-        // Initialize the database
-        productViewRepository.saveAndFlush(productView);
-
-        // Get all the productViewList where type does not contain DEFAULT_TYPE
-        defaultProductViewShouldNotBeFound("type.doesNotContain=" + DEFAULT_TYPE);
-
-        // Get all the productViewList where type does not contain UPDATED_TYPE
-        defaultProductViewShouldBeFound("type.doesNotContain=" + UPDATED_TYPE);
-    }
-
-    @Test
-    @Transactional
-    void getAllProductViewsByIsDetailIsEqualToSomething() throws Exception {
-        // Initialize the database
-        productViewRepository.saveAndFlush(productView);
-
-        // Get all the productViewList where isDetail equals to DEFAULT_IS_DETAIL
-        defaultProductViewShouldBeFound("isDetail.equals=" + DEFAULT_IS_DETAIL);
-
-        // Get all the productViewList where isDetail equals to UPDATED_IS_DETAIL
-        defaultProductViewShouldNotBeFound("isDetail.equals=" + UPDATED_IS_DETAIL);
-    }
-
-    @Test
-    @Transactional
-    void getAllProductViewsByIsDetailIsNotEqualToSomething() throws Exception {
-        // Initialize the database
-        productViewRepository.saveAndFlush(productView);
-
-        // Get all the productViewList where isDetail not equals to DEFAULT_IS_DETAIL
-        defaultProductViewShouldNotBeFound("isDetail.notEquals=" + DEFAULT_IS_DETAIL);
-
-        // Get all the productViewList where isDetail not equals to UPDATED_IS_DETAIL
-        defaultProductViewShouldBeFound("isDetail.notEquals=" + UPDATED_IS_DETAIL);
-    }
-
-    @Test
-    @Transactional
-    void getAllProductViewsByIsDetailIsInShouldWork() throws Exception {
-        // Initialize the database
-        productViewRepository.saveAndFlush(productView);
-
-        // Get all the productViewList where isDetail in DEFAULT_IS_DETAIL or UPDATED_IS_DETAIL
-        defaultProductViewShouldBeFound("isDetail.in=" + DEFAULT_IS_DETAIL + "," + UPDATED_IS_DETAIL);
-
-        // Get all the productViewList where isDetail equals to UPDATED_IS_DETAIL
-        defaultProductViewShouldNotBeFound("isDetail.in=" + UPDATED_IS_DETAIL);
-    }
-
-    @Test
-    @Transactional
-    void getAllProductViewsByIsDetailIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        productViewRepository.saveAndFlush(productView);
-
-        // Get all the productViewList where isDetail is not null
-        defaultProductViewShouldBeFound("isDetail.specified=true");
-
-        // Get all the productViewList where isDetail is null
-        defaultProductViewShouldNotBeFound("isDetail.specified=false");
     }
 
     @Test
@@ -783,6 +629,25 @@ class ProductViewResourceIT {
         defaultProductViewShouldNotBeFound("productViewRelId.equals=" + (productViewRelId + 1));
     }
 
+    @Test
+    @Transactional
+    void getAllProductViewsByProductViewContentIsEqualToSomething() throws Exception {
+        // Initialize the database
+        productViewRepository.saveAndFlush(productView);
+        ProductViewContent productViewContent = ProductViewContentResourceIT.createEntity(em);
+        em.persist(productViewContent);
+        em.flush();
+        productView.addProductViewContent(productViewContent);
+        productViewRepository.saveAndFlush(productView);
+        Long productViewContentId = productViewContent.getId();
+
+        // Get all the productViewList where productViewContent equals to productViewContentId
+        defaultProductViewShouldBeFound("productViewContentId.equals=" + productViewContentId);
+
+        // Get all the productViewList where productViewContent equals to (productViewContentId + 1)
+        defaultProductViewShouldNotBeFound("productViewContentId.equals=" + (productViewContentId + 1));
+    }
+
     /**
      * Executes the search, and checks that the default entity is returned.
      */
@@ -793,9 +658,6 @@ class ProductViewResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(productView.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
-            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE)))
-            .andExpect(jsonPath("$.[*].content").value(hasItem(DEFAULT_CONTENT.toString())))
-            .andExpect(jsonPath("$.[*].isDetail").value(hasItem(DEFAULT_IS_DETAIL.booleanValue())))
             .andExpect(jsonPath("$.[*].activated").value(hasItem(DEFAULT_ACTIVATED.booleanValue())))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
             .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
@@ -850,9 +712,6 @@ class ProductViewResourceIT {
         em.detach(updatedProductView);
         updatedProductView
             .name(UPDATED_NAME)
-            .type(UPDATED_TYPE)
-            .content(UPDATED_CONTENT)
-            .isDetail(UPDATED_IS_DETAIL)
             .activated(UPDATED_ACTIVATED)
             .createdBy(UPDATED_CREATED_BY)
             .createdDate(UPDATED_CREATED_DATE)
@@ -873,9 +732,6 @@ class ProductViewResourceIT {
         assertThat(productViewList).hasSize(databaseSizeBeforeUpdate);
         ProductView testProductView = productViewList.get(productViewList.size() - 1);
         assertThat(testProductView.getName()).isEqualTo(UPDATED_NAME);
-        assertThat(testProductView.getType()).isEqualTo(UPDATED_TYPE);
-        assertThat(testProductView.getContent()).isEqualTo(UPDATED_CONTENT);
-        assertThat(testProductView.getIsDetail()).isEqualTo(UPDATED_IS_DETAIL);
         assertThat(testProductView.getActivated()).isEqualTo(UPDATED_ACTIVATED);
         assertThat(testProductView.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
         assertThat(testProductView.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);
@@ -960,12 +816,7 @@ class ProductViewResourceIT {
         ProductView partialUpdatedProductView = new ProductView();
         partialUpdatedProductView.setId(productView.getId());
 
-        partialUpdatedProductView
-            .type(UPDATED_TYPE)
-            .content(UPDATED_CONTENT)
-            .isDetail(UPDATED_IS_DETAIL)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE);
+        partialUpdatedProductView.activated(UPDATED_ACTIVATED).createdBy(UPDATED_CREATED_BY).createdDate(UPDATED_CREATED_DATE);
 
         restProductViewMockMvc
             .perform(
@@ -980,14 +831,11 @@ class ProductViewResourceIT {
         assertThat(productViewList).hasSize(databaseSizeBeforeUpdate);
         ProductView testProductView = productViewList.get(productViewList.size() - 1);
         assertThat(testProductView.getName()).isEqualTo(DEFAULT_NAME);
-        assertThat(testProductView.getType()).isEqualTo(UPDATED_TYPE);
-        assertThat(testProductView.getContent()).isEqualTo(UPDATED_CONTENT);
-        assertThat(testProductView.getIsDetail()).isEqualTo(UPDATED_IS_DETAIL);
-        assertThat(testProductView.getActivated()).isEqualTo(DEFAULT_ACTIVATED);
-        assertThat(testProductView.getCreatedBy()).isEqualTo(DEFAULT_CREATED_BY);
-        assertThat(testProductView.getCreatedDate()).isEqualTo(DEFAULT_CREATED_DATE);
-        assertThat(testProductView.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
-        assertThat(testProductView.getLastModifiedDate()).isEqualTo(UPDATED_LAST_MODIFIED_DATE);
+        assertThat(testProductView.getActivated()).isEqualTo(UPDATED_ACTIVATED);
+        assertThat(testProductView.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
+        assertThat(testProductView.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);
+        assertThat(testProductView.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
+        assertThat(testProductView.getLastModifiedDate()).isEqualTo(DEFAULT_LAST_MODIFIED_DATE);
     }
 
     @Test
@@ -1004,9 +852,6 @@ class ProductViewResourceIT {
 
         partialUpdatedProductView
             .name(UPDATED_NAME)
-            .type(UPDATED_TYPE)
-            .content(UPDATED_CONTENT)
-            .isDetail(UPDATED_IS_DETAIL)
             .activated(UPDATED_ACTIVATED)
             .createdBy(UPDATED_CREATED_BY)
             .createdDate(UPDATED_CREATED_DATE)
@@ -1026,9 +871,6 @@ class ProductViewResourceIT {
         assertThat(productViewList).hasSize(databaseSizeBeforeUpdate);
         ProductView testProductView = productViewList.get(productViewList.size() - 1);
         assertThat(testProductView.getName()).isEqualTo(UPDATED_NAME);
-        assertThat(testProductView.getType()).isEqualTo(UPDATED_TYPE);
-        assertThat(testProductView.getContent()).isEqualTo(UPDATED_CONTENT);
-        assertThat(testProductView.getIsDetail()).isEqualTo(UPDATED_IS_DETAIL);
         assertThat(testProductView.getActivated()).isEqualTo(UPDATED_ACTIVATED);
         assertThat(testProductView.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
         assertThat(testProductView.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);

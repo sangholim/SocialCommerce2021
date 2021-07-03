@@ -22,7 +22,7 @@ public class ProductMappingRel extends AbstractAuditingEntity implements Seriali
     @Column(name = "activated")
     private Boolean activated;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
         value = {
             "productCategoryRels",
@@ -40,7 +40,7 @@ public class ProductMappingRel extends AbstractAuditingEntity implements Seriali
     )
     private Product product;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value = { "productMappingRels" }, allowSetters = true)
     private ProductMapping productMapping;
 

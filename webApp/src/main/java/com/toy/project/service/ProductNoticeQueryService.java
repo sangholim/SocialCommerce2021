@@ -92,6 +92,27 @@ public class ProductNoticeQueryService extends QueryService<ProductNotice> {
             if (criteria.getType() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getType(), ProductNotice_.type));
             }
+            if (criteria.getContentFileUrl() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getContentFileUrl(), ProductNotice_.contentFileUrl));
+            }
+            if (criteria.getPriorityDisplay() != null) {
+                specification = specification.and(buildSpecification(criteria.getPriorityDisplay(), ProductNotice_.priorityDisplay));
+            }
+            if (criteria.getAllProductDisplay() != null) {
+                specification = specification.and(buildSpecification(criteria.getAllProductDisplay(), ProductNotice_.allProductDisplay));
+            }
+            if (criteria.getTarget() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getTarget(), ProductNotice_.target));
+            }
+            if (criteria.getEnableDisplayDate() != null) {
+                specification = specification.and(buildSpecification(criteria.getEnableDisplayDate(), ProductNotice_.enableDisplayDate));
+            }
+            if (criteria.getDisplayDateFrom() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getDisplayDateFrom(), ProductNotice_.displayDateFrom));
+            }
+            if (criteria.getDisplayDateTo() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getDisplayDateTo(), ProductNotice_.displayDateTo));
+            }
             if (criteria.getActivated() != null) {
                 specification = specification.and(buildSpecification(criteria.getActivated(), ProductNotice_.activated));
             }

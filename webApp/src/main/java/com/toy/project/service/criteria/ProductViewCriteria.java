@@ -29,10 +29,6 @@ public class ProductViewCriteria implements Serializable, Criteria {
 
     private StringFilter name;
 
-    private StringFilter type;
-
-    private BooleanFilter isDetail;
-
     private BooleanFilter activated;
 
     private StringFilter createdBy;
@@ -45,19 +41,20 @@ public class ProductViewCriteria implements Serializable, Criteria {
 
     private LongFilter productViewRelId;
 
+    private LongFilter productViewContentId;
+
     public ProductViewCriteria() {}
 
     public ProductViewCriteria(ProductViewCriteria other) {
         this.id = other.id == null ? null : other.id.copy();
         this.name = other.name == null ? null : other.name.copy();
-        this.type = other.type == null ? null : other.type.copy();
-        this.isDetail = other.isDetail == null ? null : other.isDetail.copy();
         this.activated = other.activated == null ? null : other.activated.copy();
         this.createdBy = other.createdBy == null ? null : other.createdBy.copy();
         this.createdDate = other.createdDate == null ? null : other.createdDate.copy();
         this.lastModifiedBy = other.lastModifiedBy == null ? null : other.lastModifiedBy.copy();
         this.lastModifiedDate = other.lastModifiedDate == null ? null : other.lastModifiedDate.copy();
         this.productViewRelId = other.productViewRelId == null ? null : other.productViewRelId.copy();
+        this.productViewContentId = other.productViewContentId == null ? null : other.productViewContentId.copy();
     }
 
     @Override
@@ -93,36 +90,6 @@ public class ProductViewCriteria implements Serializable, Criteria {
 
     public void setName(StringFilter name) {
         this.name = name;
-    }
-
-    public StringFilter getType() {
-        return type;
-    }
-
-    public StringFilter type() {
-        if (type == null) {
-            type = new StringFilter();
-        }
-        return type;
-    }
-
-    public void setType(StringFilter type) {
-        this.type = type;
-    }
-
-    public BooleanFilter getIsDetail() {
-        return isDetail;
-    }
-
-    public BooleanFilter isDetail() {
-        if (isDetail == null) {
-            isDetail = new BooleanFilter();
-        }
-        return isDetail;
-    }
-
-    public void setIsDetail(BooleanFilter isDetail) {
-        this.isDetail = isDetail;
     }
 
     public BooleanFilter getActivated() {
@@ -215,6 +182,21 @@ public class ProductViewCriteria implements Serializable, Criteria {
         this.productViewRelId = productViewRelId;
     }
 
+    public LongFilter getProductViewContentId() {
+        return productViewContentId;
+    }
+
+    public LongFilter productViewContentId() {
+        if (productViewContentId == null) {
+            productViewContentId = new LongFilter();
+        }
+        return productViewContentId;
+    }
+
+    public void setProductViewContentId(LongFilter productViewContentId) {
+        this.productViewContentId = productViewContentId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -227,14 +209,13 @@ public class ProductViewCriteria implements Serializable, Criteria {
         return (
             Objects.equals(id, that.id) &&
             Objects.equals(name, that.name) &&
-            Objects.equals(type, that.type) &&
-            Objects.equals(isDetail, that.isDetail) &&
             Objects.equals(activated, that.activated) &&
             Objects.equals(createdBy, that.createdBy) &&
             Objects.equals(createdDate, that.createdDate) &&
             Objects.equals(lastModifiedBy, that.lastModifiedBy) &&
             Objects.equals(lastModifiedDate, that.lastModifiedDate) &&
-            Objects.equals(productViewRelId, that.productViewRelId)
+            Objects.equals(productViewRelId, that.productViewRelId) &&
+            Objects.equals(productViewContentId, that.productViewContentId)
         );
     }
 
@@ -243,14 +224,13 @@ public class ProductViewCriteria implements Serializable, Criteria {
         return Objects.hash(
             id,
             name,
-            type,
-            isDetail,
             activated,
             createdBy,
             createdDate,
             lastModifiedBy,
             lastModifiedDate,
-            productViewRelId
+            productViewRelId,
+            productViewContentId
         );
     }
 
@@ -260,14 +240,13 @@ public class ProductViewCriteria implements Serializable, Criteria {
         return "ProductViewCriteria{" +
             (id != null ? "id=" + id + ", " : "") +
             (name != null ? "name=" + name + ", " : "") +
-            (type != null ? "type=" + type + ", " : "") +
-            (isDetail != null ? "isDetail=" + isDetail + ", " : "") +
             (activated != null ? "activated=" + activated + ", " : "") +
             (createdBy != null ? "createdBy=" + createdBy + ", " : "") +
             (createdDate != null ? "createdDate=" + createdDate + ", " : "") +
             (lastModifiedBy != null ? "lastModifiedBy=" + lastModifiedBy + ", " : "") +
             (lastModifiedDate != null ? "lastModifiedDate=" + lastModifiedDate + ", " : "") +
             (productViewRelId != null ? "productViewRelId=" + productViewRelId + ", " : "") +
+            (productViewContentId != null ? "productViewContentId=" + productViewContentId + ", " : "") +
             "}";
     }
 }

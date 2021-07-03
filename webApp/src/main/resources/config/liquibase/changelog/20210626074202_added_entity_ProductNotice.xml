@@ -20,7 +20,25 @@
             <column name="type" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="content" type="${clobType}">
+            <column name="content_file_url" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="priority_display" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="all_product_display" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="target" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="enable_display_date" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="display_date_from" type="${datetimeType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="display_date_to" type="${datetimeType}">
                 <constraints nullable="true" />
             </column>
             <column name="activated" type="boolean">
@@ -40,6 +58,8 @@
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
+        <dropDefaultValue tableName="product_notice" columnName="display_date_from" columnDataType="${datetimeType}"/>
+        <dropDefaultValue tableName="product_notice" columnName="display_date_to" columnDataType="${datetimeType}"/>
         <dropDefaultValue tableName="product_notice" columnName="created_date" columnDataType="${datetimeType}"/>
         <dropDefaultValue tableName="product_notice" columnName="last_modified_date" columnDataType="${datetimeType}"/>
     </changeSet>
@@ -62,7 +82,13 @@
             <column name="id" type="numeric"/>
             <column name="name" type="string"/>
             <column name="type" type="string"/>
-            <column name="content" type="clob"/>
+            <column name="content_file_url" type="string"/>
+            <column name="priority_display" type="boolean"/>
+            <column name="all_product_display" type="boolean"/>
+            <column name="target" type="string"/>
+            <column name="enable_display_date" type="boolean"/>
+            <column name="display_date_from" type="${datetimeType}"/>
+            <column name="display_date_to" type="${datetimeType}"/>
             <column name="activated" type="boolean"/>
             <column name="created_by" type="string"/>
             <column name="created_date" type="${datetimeType}"/>

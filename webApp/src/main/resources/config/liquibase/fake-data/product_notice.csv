@@ -1,11 +1,11 @@
-id;name;type;content;activated;created_by;created_date;last_modified_by;last_modified_date
-1;SSL HDD capacitor;Unbranded Small;../fake-data/blob/hipster.txt;true;읍;2021-06-26T04:30:13;array magenta Communications;2021-06-25T13:32:10
-2;Incredible intuitive;Cheese Frozen demand-driven;../fake-data/blob/hipster.txt;true;Strategist Awesome;2021-06-26T00:18:14;digital Internal;2021-06-26T07:04:50
-3;B2C;Personal challenge Shoes;../fake-data/blob/hipster.txt;false;object-oriented 전남 capacity;2021-06-26T01:44:06;mobile Soap;2021-06-25T23:09:49
-4;schemas Pula back-end;동;../fake-data/blob/hipster.txt;true;program;2021-06-25T15:28:42;Plastic Jordanian;2021-06-26T05:14:06
-5;Operations black;dot-com;../fake-data/blob/hipster.txt;true;transmitting;2021-06-25T21:23:11;SMTP Central;2021-06-25T17:26:11
-6;virtual 경기 card;real-time synergize Marketing;../fake-data/blob/hipster.txt;false;Bedfordshire Licensed;2021-06-25T23:24:41;whiteboard;2021-06-26T06:59:20
-7;Pants Agent magenta;sensor payment pink;../fake-data/blob/hipster.txt;true;blue 1080p success;2021-06-25T23:27:55;red Forward;2021-06-25T16:04:28
-8;Personal explicit 전남;engage;../fake-data/blob/hipster.txt;false;Sudan Dollar Savings;2021-06-25T17:16:43;Somali Frozen;2021-06-25T12:59:51
-9;morph toolset;navigate feed invoice;../fake-data/blob/hipster.txt;false;optical Quality Handmade;2021-06-26T04:31:29;Computers overriding human-resource;2021-06-25T23:31:59
-10;relationships;Bahraini synthesize;../fake-data/blob/hipster.txt;true;Rubber 면;2021-06-25T21:58:06;ivory Chair;2021-06-26T04:13:15
+id;name;type;content_file_url;priority_display;all_product_display;target;enable_display_date;display_date_from;display_date_to;activated;created_by;created_date;last_modified_by;last_modified_date
+1;SSL HDD capacitor;Unbranded Small;Practical Legacy Congo;true;true;Legacy Incredible;false;2021-06-26T04:21:32;2021-06-25T21:58:29;true;primary;2021-06-25T08:29:19;demand-driven connect;2021-06-25T08:09:37
+2;Awesome;Auto;Internal;false;false;attitude Personal;false;2021-06-26T03:42:32;2021-06-25T09:43:24;false;Concrete object-oriented;2021-06-25T17:41:27;granular Functionality mobile;2021-06-26T03:52:54
+3;portals schemas;Fresh Computer 동;lime infomediaries Plastic;true;false;Awesome;true;2021-06-26T05:50:44;2021-06-26T02:50:06;false;Pants Personal;2021-06-25T12:00:34;District SMTP Central;2021-06-25T17:26:11
+4;virtual 경기 card;real-time synergize Marketing;서울 Compatible;true;false;whiteboard;false;2021-06-25T09:40:09;2021-06-26T03:33:40;false;Agent magenta Helena;2021-06-25T13:00:39;system throughput;2021-06-25T14:15:10
+5;Rustic;Investor;red Forward;true;true;Executive robust;true;2021-06-26T06:13:05;2021-06-26T05:00:41;false;Dirham Sudan;2021-06-25T15:25:02;Web;2021-06-25T23:41:52
+6;Buckinghamshire Wooden;online interactive;circuit impactful Rial;true;true;synthesizing services;true;2021-06-26T05:14:36;2021-06-25T14:00:19;true;Solutions;2021-06-25T21:01:00;cyan Buckinghamshire Cotton;2021-06-25T08:38:49
+7;Bahraini synthesize;deposit vortals Administrator;transmit;false;true;Avon;false;2021-06-25T10:43:14;2021-06-25T20:19:42;true;dynamic;2021-06-26T06:08:21;Quality bandwidth Dalasi;2021-06-25T13:54:16
+8;Chair Senior;lime Card Cote;Account synergistic;false;false;Chips District;false;2021-06-25T08:11:49;2021-06-25T10:17:00;false;세종;2021-06-25T17:53:11;Berkshire Concrete composite;2021-06-25T11:19:39
+9;tan;cutting-edge bandwidth;Coordinator bottom-line;true;true;Nakfa;true;2021-06-25T08:36:49;2021-06-25T09:31:34;false;Buckinghamshire Grocery Salad;2021-06-25T11:53:34;markets;2021-06-25T23:49:49
+10;Direct initiative;강원 navigate mission-critical;deposit Director Avon;true;true;Clothing initiatives;false;2021-06-25T22:56:20;2021-06-25T23:03:20;false;Central Buckinghamshire;2021-06-25T19:13:42;Singapore one-to-one Franc;2021-06-25T14:51:40

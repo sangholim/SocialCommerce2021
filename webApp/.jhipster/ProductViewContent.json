@@ -1,9 +1,18 @@
 {
-  "name": "ProductView",
+  "name": "ProductViewContent",
   "fields": [
     {
       "fieldName": "name",
       "fieldType": "String"
+    },
+    {
+      "fieldName": "content",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    },
+    {
+      "fieldName": "isDetail",
+      "fieldType": "Boolean"
     },
     {
       "fieldName": "activated",
@@ -32,19 +41,13 @@
   ],
   "relationships": [
     {
-      "relationshipType": "one-to-many",
-      "otherEntityName": "productViewRel",
-      "otherEntityRelationshipName": "productView",
-      "relationshipName": "productViewRel"
-    },
-    {
-      "relationshipType": "one-to-many",
-      "otherEntityName": "productViewContent",
-      "otherEntityRelationshipName": "productView",
-      "relationshipName": "productViewContent"
+      "relationshipType": "many-to-one",
+      "otherEntityName": "productView",
+      "otherEntityRelationshipName": "productViewContent",
+      "relationshipName": "productView"
     }
   ],
-  "entityTableName": "product_view",
+  "entityTableName": "product_view_content",
   "dto": "mapstruct",
   "pagination": "pagination",
   "service": "serviceClass",
@@ -53,5 +56,5 @@
   "readOnly": false,
   "embedded": false,
   "applications": "*",
-  "changelogDate": "20210626074208"
+  "changelogDate": "20210703062422"
 }

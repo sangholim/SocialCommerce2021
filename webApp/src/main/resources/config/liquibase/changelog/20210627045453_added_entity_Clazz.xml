@@ -20,16 +20,40 @@
             <column name="type" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+            <column name="main_image_file_url" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
             <column name="level" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="enable_lecture" type="boolean">
                 <constraints nullable="true" />
             </column>
+            <column name="free_lecture" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="price_lecture" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="price_unit_lecture" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="lecture_start_date_from" type="${datetimeType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="lecture_interval" type="integer">
+                <constraints nullable="true" />
+            </column>
             <column name="lecturer" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="calculation" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="is_view" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="is_sell" type="boolean">
                 <constraints nullable="true" />
             </column>
             <column name="activated" type="boolean">
@@ -49,6 +73,7 @@
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
+        <dropDefaultValue tableName="clazz" columnName="lecture_start_date_from" columnDataType="${datetimeType}"/>
         <dropDefaultValue tableName="clazz" columnName="created_date" columnDataType="${datetimeType}"/>
         <dropDefaultValue tableName="clazz" columnName="last_modified_date" columnDataType="${datetimeType}"/>
     </changeSet>
@@ -71,10 +96,18 @@
             <column name="id" type="numeric"/>
             <column name="name" type="string"/>
             <column name="type" type="string"/>
+            <column name="main_image_file_url" type="string"/>
             <column name="level" type="string"/>
             <column name="enable_lecture" type="boolean"/>
+            <column name="free_lecture" type="boolean"/>
+            <column name="price_lecture" type="numeric"/>
+            <column name="price_unit_lecture" type="string"/>
+            <column name="lecture_start_date_from" type="${datetimeType}"/>
+            <column name="lecture_interval" type="numeric"/>
             <column name="lecturer" type="string"/>
             <column name="calculation" type="numeric"/>
+            <column name="is_view" type="boolean"/>
+            <column name="is_sell" type="boolean"/>
             <column name="activated" type="boolean"/>
             <column name="created_by" type="string"/>
             <column name="created_date" type="${datetimeType}"/>

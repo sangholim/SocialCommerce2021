@@ -10,9 +10,32 @@
       "fieldType": "String"
     },
     {
-      "fieldName": "content",
-      "fieldType": "byte[]",
-      "fieldTypeBlobContent": "text"
+      "fieldName": "contentFileUrl",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "priorityDisplay",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "allProductDisplay",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "target",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "enableDisplayDate",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "displayDateFrom",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "displayDateTo",
+      "fieldType": "Instant"
     },
     {
       "fieldName": "activated",

@@ -29,7 +29,6 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Base64Utils;
 
 /**
  * Integration tests for the {@link ProductNoticeResource} REST controller.
@@ -46,8 +45,26 @@ class ProductNoticeResourceIT {
     private static final String DEFAULT_TYPE = "AAAAAAAAAA";
     private static final String UPDATED_TYPE = "BBBBBBBBBB";
 
-    private static final String DEFAULT_CONTENT = "AAAAAAAAAA";
-    private static final String UPDATED_CONTENT = "BBBBBBBBBB";
+    private static final String DEFAULT_CONTENT_FILE_URL = "AAAAAAAAAA";
+    private static final String UPDATED_CONTENT_FILE_URL = "BBBBBBBBBB";
+
+    private static final Boolean DEFAULT_PRIORITY_DISPLAY = false;
+    private static final Boolean UPDATED_PRIORITY_DISPLAY = true;
+
+    private static final Boolean DEFAULT_ALL_PRODUCT_DISPLAY = false;
+    private static final Boolean UPDATED_ALL_PRODUCT_DISPLAY = true;
+
+    private static final String DEFAULT_TARGET = "AAAAAAAAAA";
+    private static final String UPDATED_TARGET = "BBBBBBBBBB";
+
+    private static final Boolean DEFAULT_ENABLE_DISPLAY_DATE = false;
+    private static final Boolean UPDATED_ENABLE_DISPLAY_DATE = true;
+
+    private static final Instant DEFAULT_DISPLAY_DATE_FROM = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_DISPLAY_DATE_FROM = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+
+    private static final Instant DEFAULT_DISPLAY_DATE_TO = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_DISPLAY_DATE_TO = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
     private static final Boolean DEFAULT_ACTIVATED = false;
     private static final Boolean UPDATED_ACTIVATED = true;
@@ -94,7 +111,13 @@ class ProductNoticeResourceIT {
         ProductNotice productNotice = new ProductNotice()
             .name(DEFAULT_NAME)
             .type(DEFAULT_TYPE)
-            .content(DEFAULT_CONTENT)
+            .contentFileUrl(DEFAULT_CONTENT_FILE_URL)
+            .priorityDisplay(DEFAULT_PRIORITY_DISPLAY)
+            .allProductDisplay(DEFAULT_ALL_PRODUCT_DISPLAY)
+            .target(DEFAULT_TARGET)
+            .enableDisplayDate(DEFAULT_ENABLE_DISPLAY_DATE)
+            .displayDateFrom(DEFAULT_DISPLAY_DATE_FROM)
+            .displayDateTo(DEFAULT_DISPLAY_DATE_TO)
             .activated(DEFAULT_ACTIVATED)
             .createdBy(DEFAULT_CREATED_BY)
             .createdDate(DEFAULT_CREATED_DATE)
@@ -113,7 +136,13 @@ class ProductNoticeResourceIT {
         ProductNotice productNotice = new ProductNotice()
             .name(UPDATED_NAME)
             .type(UPDATED_TYPE)
-            .content(UPDATED_CONTENT)
+            .contentFileUrl(UPDATED_CONTENT_FILE_URL)
+            .priorityDisplay(UPDATED_PRIORITY_DISPLAY)
+            .allProductDisplay(UPDATED_ALL_PRODUCT_DISPLAY)
+            .target(UPDATED_TARGET)
+            .enableDisplayDate(UPDATED_ENABLE_DISPLAY_DATE)
+            .displayDateFrom(UPDATED_DISPLAY_DATE_FROM)
+            .displayDateTo(UPDATED_DISPLAY_DATE_TO)
             .activated(UPDATED_ACTIVATED)
             .createdBy(UPDATED_CREATED_BY)
             .createdDate(UPDATED_CREATED_DATE)
@@ -145,7 +174,13 @@ class ProductNoticeResourceIT {
         ProductNotice testProductNotice = productNoticeList.get(productNoticeList.size() - 1);
         assertThat(testProductNotice.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testProductNotice.getType()).isEqualTo(DEFAULT_TYPE);
-        assertThat(testProductNotice.getContent()).isEqualTo(DEFAULT_CONTENT);
+        assertThat(testProductNotice.getContentFileUrl()).isEqualTo(DEFAULT_CONTENT_FILE_URL);
+        assertThat(testProductNotice.getPriorityDisplay()).isEqualTo(DEFAULT_PRIORITY_DISPLAY);
+        assertThat(testProductNotice.getAllProductDisplay()).isEqualTo(DEFAULT_ALL_PRODUCT_DISPLAY);
+        assertThat(testProductNotice.getTarget()).isEqualTo(DEFAULT_TARGET);
+        assertThat(testProductNotice.getEnableDisplayDate()).isEqualTo(DEFAULT_ENABLE_DISPLAY_DATE);
+        assertThat(testProductNotice.getDisplayDateFrom()).isEqualTo(DEFAULT_DISPLAY_DATE_FROM);
+        assertThat(testProductNotice.getDisplayDateTo()).isEqualTo(DEFAULT_DISPLAY_DATE_TO);
         assertThat(testProductNotice.getActivated()).isEqualTo(DEFAULT_ACTIVATED);
         assertThat(testProductNotice.getCreatedBy()).isEqualTo(DEFAULT_CREATED_BY);
         assertThat(testProductNotice.getCreatedDate()).isEqualTo(DEFAULT_CREATED_DATE);
@@ -188,7 +223,13 @@ class ProductNoticeResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(productNotice.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE)))
-            .andExpect(jsonPath("$.[*].content").value(hasItem(DEFAULT_CONTENT.toString())))
+            .andExpect(jsonPath("$.[*].contentFileUrl").value(hasItem(DEFAULT_CONTENT_FILE_URL)))
+            .andExpect(jsonPath("$.[*].priorityDisplay").value(hasItem(DEFAULT_PRIORITY_DISPLAY.booleanValue())))
+            .andExpect(jsonPath("$.[*].allProductDisplay").value(hasItem(DEFAULT_ALL_PRODUCT_DISPLAY.booleanValue())))
+            .andExpect(jsonPath("$.[*].target").value(hasItem(DEFAULT_TARGET)))
+            .andExpect(jsonPath("$.[*].enableDisplayDate").value(hasItem(DEFAULT_ENABLE_DISPLAY_DATE.booleanValue())))
+            .andExpect(jsonPath("$.[*].displayDateFrom").value(hasItem(DEFAULT_DISPLAY_DATE_FROM.toString())))
+            .andExpect(jsonPath("$.[*].displayDateTo").value(hasItem(DEFAULT_DISPLAY_DATE_TO.toString())))
             .andExpect(jsonPath("$.[*].activated").value(hasItem(DEFAULT_ACTIVATED.booleanValue())))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
             .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
@@ -210,7 +251,13 @@ class ProductNoticeResourceIT {
             .andExpect(jsonPath("$.id").value(productNotice.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.type").value(DEFAULT_TYPE))
-            .andExpect(jsonPath("$.content").value(DEFAULT_CONTENT.toString()))
+            .andExpect(jsonPath("$.contentFileUrl").value(DEFAULT_CONTENT_FILE_URL))
+            .andExpect(jsonPath("$.priorityDisplay").value(DEFAULT_PRIORITY_DISPLAY.booleanValue()))
+            .andExpect(jsonPath("$.allProductDisplay").value(DEFAULT_ALL_PRODUCT_DISPLAY.booleanValue()))
+            .andExpect(jsonPath("$.target").value(DEFAULT_TARGET))
+            .andExpect(jsonPath("$.enableDisplayDate").value(DEFAULT_ENABLE_DISPLAY_DATE.booleanValue()))
+            .andExpect(jsonPath("$.displayDateFrom").value(DEFAULT_DISPLAY_DATE_FROM.toString()))
+            .andExpect(jsonPath("$.displayDateTo").value(DEFAULT_DISPLAY_DATE_TO.toString()))
             .andExpect(jsonPath("$.activated").value(DEFAULT_ACTIVATED.booleanValue()))
             .andExpect(jsonPath("$.createdBy").value(DEFAULT_CREATED_BY))
             .andExpect(jsonPath("$.createdDate").value(DEFAULT_CREATED_DATE.toString()))
@@ -390,6 +437,422 @@ class ProductNoticeResourceIT {
 
         // Get all the productNoticeList where type does not contain UPDATED_TYPE
         defaultProductNoticeShouldBeFound("type.doesNotContain=" + UPDATED_TYPE);
+    }
+
+    @Test
+    @Transactional
+    void getAllProductNoticesByContentFileUrlIsEqualToSomething() throws Exception {
+        // Initialize the database
+        productNoticeRepository.saveAndFlush(productNotice);
+
+        // Get all the productNoticeList where contentFileUrl equals to DEFAULT_CONTENT_FILE_URL
+        defaultProductNoticeShouldBeFound("contentFileUrl.equals=" + DEFAULT_CONTENT_FILE_URL);
+
+        // Get all the productNoticeList where contentFileUrl equals to UPDATED_CONTENT_FILE_URL
+        defaultProductNoticeShouldNotBeFound("contentFileUrl.equals=" + UPDATED_CONTENT_FILE_URL);
+    }
+
+    @Test
+    @Transactional
+    void getAllProductNoticesByContentFileUrlIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        productNoticeRepository.saveAndFlush(productNotice);
+
+        // Get all the productNoticeList where contentFileUrl not equals to DEFAULT_CONTENT_FILE_URL
+        defaultProductNoticeShouldNotBeFound("contentFileUrl.notEquals=" + DEFAULT_CONTENT_FILE_URL);
+
+        // Get all the productNoticeList where contentFileUrl not equals to UPDATED_CONTENT_FILE_URL
+        defaultProductNoticeShouldBeFound("contentFileUrl.notEquals=" + UPDATED_CONTENT_FILE_URL);
+    }
+
+    @Test
+    @Transactional
+    void getAllProductNoticesByContentFileUrlIsInShouldWork() throws Exception {
+        // Initialize the database
+        productNoticeRepository.saveAndFlush(productNotice);
+
+        // Get all the productNoticeList where contentFileUrl in DEFAULT_CONTENT_FILE_URL or UPDATED_CONTENT_FILE_URL
+        defaultProductNoticeShouldBeFound("contentFileUrl.in=" + DEFAULT_CONTENT_FILE_URL + "," + UPDATED_CONTENT_FILE_URL);
+
+        // Get all the productNoticeList where contentFileUrl equals to UPDATED_CONTENT_FILE_URL
+        defaultProductNoticeShouldNotBeFound("contentFileUrl.in=" + UPDATED_CONTENT_FILE_URL);
+    }
+
+    @Test
+    @Transactional
+    void getAllProductNoticesByContentFileUrlIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        productNoticeRepository.saveAndFlush(productNotice);
+
+        // Get all the productNoticeList where contentFileUrl is not null
+        defaultProductNoticeShouldBeFound("contentFileUrl.specified=true");
+
+        // Get all the productNoticeList where contentFileUrl is null
+        defaultProductNoticeShouldNotBeFound("contentFileUrl.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllProductNoticesByContentFileUrlContainsSomething() throws Exception {
+        // Initialize the database
+        productNoticeRepository.saveAndFlush(productNotice);
+
+        // Get all the productNoticeList where contentFileUrl contains DEFAULT_CONTENT_FILE_URL
+        defaultProductNoticeShouldBeFound("contentFileUrl.contains=" + DEFAULT_CONTENT_FILE_URL);
+
+        // Get all the productNoticeList where contentFileUrl contains UPDATED_CONTENT_FILE_URL
+        defaultProductNoticeShouldNotBeFound("contentFileUrl.contains=" + UPDATED_CONTENT_FILE_URL);
+    }
+
+    @Test
+    @Transactional
+    void getAllProductNoticesByContentFileUrlNotContainsSomething() throws Exception {
+        // Initialize the database
+        productNoticeRepository.saveAndFlush(productNotice);
+
+        // Get all the productNoticeList where contentFileUrl does not contain DEFAULT_CONTENT_FILE_URL
+        defaultProductNoticeShouldNotBeFound("contentFileUrl.doesNotContain=" + DEFAULT_CONTENT_FILE_URL);
+
+        // Get all the productNoticeList where contentFileUrl does not contain UPDATED_CONTENT_FILE_URL
+        defaultProductNoticeShouldBeFound("contentFileUrl.doesNotContain=" + UPDATED_CONTENT_FILE_URL);
+    }
+
+    @Test
+    @Transactional
+    void getAllProductNoticesByPriorityDisplayIsEqualToSomething() throws Exception {
+        // Initialize the database
+        productNoticeRepository.saveAndFlush(productNotice);
+
+        // Get all the productNoticeList where priorityDisplay equals to DEFAULT_PRIORITY_DISPLAY
+        defaultProductNoticeShouldBeFound("priorityDisplay.equals=" + DEFAULT_PRIORITY_DISPLAY);
+
+        // Get all the productNoticeList where priorityDisplay equals to UPDATED_PRIORITY_DISPLAY
+        defaultProductNoticeShouldNotBeFound("priorityDisplay.equals=" + UPDATED_PRIORITY_DISPLAY);
+    }
+
+    @Test
+    @Transactional
+    void getAllProductNoticesByPriorityDisplayIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        productNoticeRepository.saveAndFlush(productNotice);
+
+        // Get all the productNoticeList where priorityDisplay not equals to DEFAULT_PRIORITY_DISPLAY
+        defaultProductNoticeShouldNotBeFound("priorityDisplay.notEquals=" + DEFAULT_PRIORITY_DISPLAY);
+
+        // Get all the productNoticeList where priorityDisplay not equals to UPDATED_PRIORITY_DISPLAY
+        defaultProductNoticeShouldBeFound("priorityDisplay.notEquals=" + UPDATED_PRIORITY_DISPLAY);
+    }
+
+    @Test
+    @Transactional
+    void getAllProductNoticesByPriorityDisplayIsInShouldWork() throws Exception {
+        // Initialize the database
+        productNoticeRepository.saveAndFlush(productNotice);
+
+        // Get all the productNoticeList where priorityDisplay in DEFAULT_PRIORITY_DISPLAY or UPDATED_PRIORITY_DISPLAY
+        defaultProductNoticeShouldBeFound("priorityDisplay.in=" + DEFAULT_PRIORITY_DISPLAY + "," + UPDATED_PRIORITY_DISPLAY);
+
+        // Get all the productNoticeList where priorityDisplay equals to UPDATED_PRIORITY_DISPLAY
+        defaultProductNoticeShouldNotBeFound("priorityDisplay.in=" + UPDATED_PRIORITY_DISPLAY);
+    }
+
+    @Test
+    @Transactional
+    void getAllProductNoticesByPriorityDisplayIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        productNoticeRepository.saveAndFlush(productNotice);
+
+        // Get all the productNoticeList where priorityDisplay is not null
+        defaultProductNoticeShouldBeFound("priorityDisplay.specified=true");
+
+        // Get all the productNoticeList where priorityDisplay is null
+        defaultProductNoticeShouldNotBeFound("priorityDisplay.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllProductNoticesByAllProductDisplayIsEqualToSomething() throws Exception {
+        // Initialize the database
+        productNoticeRepository.saveAndFlush(productNotice);
+
+        // Get all the productNoticeList where allProductDisplay equals to DEFAULT_ALL_PRODUCT_DISPLAY
+        defaultProductNoticeShouldBeFound("allProductDisplay.equals=" + DEFAULT_ALL_PRODUCT_DISPLAY);
+
+        // Get all the productNoticeList where allProductDisplay equals to UPDATED_ALL_PRODUCT_DISPLAY
+        defaultProductNoticeShouldNotBeFound("allProductDisplay.equals=" + UPDATED_ALL_PRODUCT_DISPLAY);
+    }
+
+    @Test
+    @Transactional
+    void getAllProductNoticesByAllProductDisplayIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        productNoticeRepository.saveAndFlush(productNotice);
+
+        // Get all the productNoticeList where allProductDisplay not equals to DEFAULT_ALL_PRODUCT_DISPLAY
+        defaultProductNoticeShouldNotBeFound("allProductDisplay.notEquals=" + DEFAULT_ALL_PRODUCT_DISPLAY);
+
+        // Get all the productNoticeList where allProductDisplay not equals to UPDATED_ALL_PRODUCT_DISPLAY
+        defaultProductNoticeShouldBeFound("allProductDisplay.notEquals=" + UPDATED_ALL_PRODUCT_DISPLAY);
+    }
+
+    @Test
+    @Transactional
+    void getAllProductNoticesByAllProductDisplayIsInShouldWork() throws Exception {
+        // Initialize the database
+        productNoticeRepository.saveAndFlush(productNotice);
+
+        // Get all the productNoticeList where allProductDisplay in DEFAULT_ALL_PRODUCT_DISPLAY or UPDATED_ALL_PRODUCT_DISPLAY
+        defaultProductNoticeShouldBeFound("allProductDisplay.in=" + DEFAULT_ALL_PRODUCT_DISPLAY + "," + UPDATED_ALL_PRODUCT_DISPLAY);
+
+        // Get all the productNoticeList where allProductDisplay equals to UPDATED_ALL_PRODUCT_DISPLAY
+        defaultProductNoticeShouldNotBeFound("allProductDisplay.in=" + UPDATED_ALL_PRODUCT_DISPLAY);
+    }
+
+    @Test
+    @Transactional
+    void getAllProductNoticesByAllProductDisplayIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        productNoticeRepository.saveAndFlush(productNotice);
+
+        // Get all the productNoticeList where allProductDisplay is not null
+        defaultProductNoticeShouldBeFound("allProductDisplay.specified=true");
+
+        // Get all the productNoticeList where allProductDisplay is null
+        defaultProductNoticeShouldNotBeFound("allProductDisplay.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllProductNoticesByTargetIsEqualToSomething() throws Exception {
+        // Initialize the database
+        productNoticeRepository.saveAndFlush(productNotice);
+
+        // Get all the productNoticeList where target equals to DEFAULT_TARGET
+        defaultProductNoticeShouldBeFound("target.equals=" + DEFAULT_TARGET);
+
+        // Get all the productNoticeList where target equals to UPDATED_TARGET
+        defaultProductNoticeShouldNotBeFound("target.equals=" + UPDATED_TARGET);
+    }
+
+    @Test
+    @Transactional
+    void getAllProductNoticesByTargetIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        productNoticeRepository.saveAndFlush(productNotice);
+
+        // Get all the productNoticeList where target not equals to DEFAULT_TARGET
+        defaultProductNoticeShouldNotBeFound("target.notEquals=" + DEFAULT_TARGET);
+
+        // Get all the productNoticeList where target not equals to UPDATED_TARGET
+        defaultProductNoticeShouldBeFound("target.notEquals=" + UPDATED_TARGET);
+    }
+
+    @Test
+    @Transactional
+    void getAllProductNoticesByTargetIsInShouldWork() throws Exception {
+        // Initialize the database
+        productNoticeRepository.saveAndFlush(productNotice);
+
+        // Get all the productNoticeList where target in DEFAULT_TARGET or UPDATED_TARGET
+        defaultProductNoticeShouldBeFound("target.in=" + DEFAULT_TARGET + "," + UPDATED_TARGET);
+
+        // Get all the productNoticeList where target equals to UPDATED_TARGET
+        defaultProductNoticeShouldNotBeFound("target.in=" + UPDATED_TARGET);
+    }
+
+    @Test
+    @Transactional
+    void getAllProductNoticesByTargetIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        productNoticeRepository.saveAndFlush(productNotice);
+
+        // Get all the productNoticeList where target is not null
+        defaultProductNoticeShouldBeFound("target.specified=true");
+
+        // Get all the productNoticeList where target is null
+        defaultProductNoticeShouldNotBeFound("target.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllProductNoticesByTargetContainsSomething() throws Exception {
+        // Initialize the database
+        productNoticeRepository.saveAndFlush(productNotice);
+
+        // Get all the productNoticeList where target contains DEFAULT_TARGET
+        defaultProductNoticeShouldBeFound("target.contains=" + DEFAULT_TARGET);
+
+        // Get all the productNoticeList where target contains UPDATED_TARGET
+        defaultProductNoticeShouldNotBeFound("target.contains=" + UPDATED_TARGET);
+    }
+
+    @Test
+    @Transactional
+    void getAllProductNoticesByTargetNotContainsSomething() throws Exception {
+        // Initialize the database
+        productNoticeRepository.saveAndFlush(productNotice);
+
+        // Get all the productNoticeList where target does not contain DEFAULT_TARGET
+        defaultProductNoticeShouldNotBeFound("target.doesNotContain=" + DEFAULT_TARGET);
+
+        // Get all the productNoticeList where target does not contain UPDATED_TARGET
+        defaultProductNoticeShouldBeFound("target.doesNotContain=" + UPDATED_TARGET);
+    }
+
+    @Test
+    @Transactional
+    void getAllProductNoticesByEnableDisplayDateIsEqualToSomething() throws Exception {
+        // Initialize the database
+        productNoticeRepository.saveAndFlush(productNotice);
+
+        // Get all the productNoticeList where enableDisplayDate equals to DEFAULT_ENABLE_DISPLAY_DATE
+        defaultProductNoticeShouldBeFound("enableDisplayDate.equals=" + DEFAULT_ENABLE_DISPLAY_DATE);
+
+        // Get all the productNoticeList where enableDisplayDate equals to UPDATED_ENABLE_DISPLAY_DATE
+        defaultProductNoticeShouldNotBeFound("enableDisplayDate.equals=" + UPDATED_ENABLE_DISPLAY_DATE);
+    }
+
+    @Test
+    @Transactional
+    void getAllProductNoticesByEnableDisplayDateIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        productNoticeRepository.saveAndFlush(productNotice);
+
+        // Get all the productNoticeList where enableDisplayDate not equals to DEFAULT_ENABLE_DISPLAY_DATE
+        defaultProductNoticeShouldNotBeFound("enableDisplayDate.notEquals=" + DEFAULT_ENABLE_DISPLAY_DATE);
+
+        // Get all the productNoticeList where enableDisplayDate not equals to UPDATED_ENABLE_DISPLAY_DATE
+        defaultProductNoticeShouldBeFound("enableDisplayDate.notEquals=" + UPDATED_ENABLE_DISPLAY_DATE);
+    }
+
+    @Test
+    @Transactional
+    void getAllProductNoticesByEnableDisplayDateIsInShouldWork() throws Exception {
+        // Initialize the database
+        productNoticeRepository.saveAndFlush(productNotice);
+
+        // Get all the productNoticeList where enableDisplayDate in DEFAULT_ENABLE_DISPLAY_DATE or UPDATED_ENABLE_DISPLAY_DATE
+        defaultProductNoticeShouldBeFound("enableDisplayDate.in=" + DEFAULT_ENABLE_DISPLAY_DATE + "," + UPDATED_ENABLE_DISPLAY_DATE);
+
+        // Get all the productNoticeList where enableDisplayDate equals to UPDATED_ENABLE_DISPLAY_DATE
+        defaultProductNoticeShouldNotBeFound("enableDisplayDate.in=" + UPDATED_ENABLE_DISPLAY_DATE);
+    }
+
+    @Test
+    @Transactional
+    void getAllProductNoticesByEnableDisplayDateIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        productNoticeRepository.saveAndFlush(productNotice);
+
+        // Get all the productNoticeList where enableDisplayDate is not null
+        defaultProductNoticeShouldBeFound("enableDisplayDate.specified=true");
+
+        // Get all the productNoticeList where enableDisplayDate is null
+        defaultProductNoticeShouldNotBeFound("enableDisplayDate.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllProductNoticesByDisplayDateFromIsEqualToSomething() throws Exception {
+        // Initialize the database
+        productNoticeRepository.saveAndFlush(productNotice);
+
+        // Get all the productNoticeList where displayDateFrom equals to DEFAULT_DISPLAY_DATE_FROM
+        defaultProductNoticeShouldBeFound("displayDateFrom.equals=" + DEFAULT_DISPLAY_DATE_FROM);
+
+        // Get all the productNoticeList where displayDateFrom equals to UPDATED_DISPLAY_DATE_FROM
+        defaultProductNoticeShouldNotBeFound("displayDateFrom.equals=" + UPDATED_DISPLAY_DATE_FROM);
+    }
+
+    @Test
+    @Transactional
+    void getAllProductNoticesByDisplayDateFromIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        productNoticeRepository.saveAndFlush(productNotice);
+
+        // Get all the productNoticeList where displayDateFrom not equals to DEFAULT_DISPLAY_DATE_FROM
+        defaultProductNoticeShouldNotBeFound("displayDateFrom.notEquals=" + DEFAULT_DISPLAY_DATE_FROM);
+
+        // Get all the productNoticeList where displayDateFrom not equals to UPDATED_DISPLAY_DATE_FROM
+        defaultProductNoticeShouldBeFound("displayDateFrom.notEquals=" + UPDATED_DISPLAY_DATE_FROM);
+    }
+
+    @Test
+    @Transactional
+    void getAllProductNoticesByDisplayDateFromIsInShouldWork() throws Exception {
+        // Initialize the database
+        productNoticeRepository.saveAndFlush(productNotice);
+
+        // Get all the productNoticeList where displayDateFrom in DEFAULT_DISPLAY_DATE_FROM or UPDATED_DISPLAY_DATE_FROM
+        defaultProductNoticeShouldBeFound("displayDateFrom.in=" + DEFAULT_DISPLAY_DATE_FROM + "," + UPDATED_DISPLAY_DATE_FROM);
+
+        // Get all the productNoticeList where displayDateFrom equals to UPDATED_DISPLAY_DATE_FROM
+        defaultProductNoticeShouldNotBeFound("displayDateFrom.in=" + UPDATED_DISPLAY_DATE_FROM);
+    }
+
+    @Test
+    @Transactional
+    void getAllProductNoticesByDisplayDateFromIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        productNoticeRepository.saveAndFlush(productNotice);
+
+        // Get all the productNoticeList where displayDateFrom is not null
+        defaultProductNoticeShouldBeFound("displayDateFrom.specified=true");
+
+        // Get all the productNoticeList where displayDateFrom is null
+        defaultProductNoticeShouldNotBeFound("displayDateFrom.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllProductNoticesByDisplayDateToIsEqualToSomething() throws Exception {
+        // Initialize the database
+        productNoticeRepository.saveAndFlush(productNotice);
+
+        // Get all the productNoticeList where displayDateTo equals to DEFAULT_DISPLAY_DATE_TO
+        defaultProductNoticeShouldBeFound("displayDateTo.equals=" + DEFAULT_DISPLAY_DATE_TO);
+
+        // Get all the productNoticeList where displayDateTo equals to UPDATED_DISPLAY_DATE_TO
+        defaultProductNoticeShouldNotBeFound("displayDateTo.equals=" + UPDATED_DISPLAY_DATE_TO);
+    }
+
+    @Test
+    @Transactional
+    void getAllProductNoticesByDisplayDateToIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        productNoticeRepository.saveAndFlush(productNotice);
+
+        // Get all the productNoticeList where displayDateTo not equals to DEFAULT_DISPLAY_DATE_TO
+        defaultProductNoticeShouldNotBeFound("displayDateTo.notEquals=" + DEFAULT_DISPLAY_DATE_TO);
+
+        // Get all the productNoticeList where displayDateTo not equals to UPDATED_DISPLAY_DATE_TO
+        defaultProductNoticeShouldBeFound("displayDateTo.notEquals=" + UPDATED_DISPLAY_DATE_TO);
+    }
+
+    @Test
+    @Transactional
+    void getAllProductNoticesByDisplayDateToIsInShouldWork() throws Exception {
+        // Initialize the database
+        productNoticeRepository.saveAndFlush(productNotice);
+
+        // Get all the productNoticeList where displayDateTo in DEFAULT_DISPLAY_DATE_TO or UPDATED_DISPLAY_DATE_TO
+        defaultProductNoticeShouldBeFound("displayDateTo.in=" + DEFAULT_DISPLAY_DATE_TO + "," + UPDATED_DISPLAY_DATE_TO);
+
+        // Get all the productNoticeList where displayDateTo equals to UPDATED_DISPLAY_DATE_TO
+        defaultProductNoticeShouldNotBeFound("displayDateTo.in=" + UPDATED_DISPLAY_DATE_TO);
+    }
+
+    @Test
+    @Transactional
+    void getAllProductNoticesByDisplayDateToIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        productNoticeRepository.saveAndFlush(productNotice);
+
+        // Get all the productNoticeList where displayDateTo is not null
+        defaultProductNoticeShouldBeFound("displayDateTo.specified=true");
+
+        // Get all the productNoticeList where displayDateTo is null
+        defaultProductNoticeShouldNotBeFound("displayDateTo.specified=false");
     }
 
     @Test
@@ -734,7 +1197,13 @@ class ProductNoticeResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(productNotice.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE)))
-            .andExpect(jsonPath("$.[*].content").value(hasItem(DEFAULT_CONTENT.toString())))
+            .andExpect(jsonPath("$.[*].contentFileUrl").value(hasItem(DEFAULT_CONTENT_FILE_URL)))
+            .andExpect(jsonPath("$.[*].priorityDisplay").value(hasItem(DEFAULT_PRIORITY_DISPLAY.booleanValue())))
+            .andExpect(jsonPath("$.[*].allProductDisplay").value(hasItem(DEFAULT_ALL_PRODUCT_DISPLAY.booleanValue())))
+            .andExpect(jsonPath("$.[*].target").value(hasItem(DEFAULT_TARGET)))
+            .andExpect(jsonPath("$.[*].enableDisplayDate").value(hasItem(DEFAULT_ENABLE_DISPLAY_DATE.booleanValue())))
+            .andExpect(jsonPath("$.[*].displayDateFrom").value(hasItem(DEFAULT_DISPLAY_DATE_FROM.toString())))
+            .andExpect(jsonPath("$.[*].displayDateTo").value(hasItem(DEFAULT_DISPLAY_DATE_TO.toString())))
             .andExpect(jsonPath("$.[*].activated").value(hasItem(DEFAULT_ACTIVATED.booleanValue())))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
             .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
@@ -790,7 +1259,13 @@ class ProductNoticeResourceIT {
         updatedProductNotice
             .name(UPDATED_NAME)
             .type(UPDATED_TYPE)
-            .content(UPDATED_CONTENT)
+            .contentFileUrl(UPDATED_CONTENT_FILE_URL)
+            .priorityDisplay(UPDATED_PRIORITY_DISPLAY)
+            .allProductDisplay(UPDATED_ALL_PRODUCT_DISPLAY)
+            .target(UPDATED_TARGET)
+            .enableDisplayDate(UPDATED_ENABLE_DISPLAY_DATE)
+            .displayDateFrom(UPDATED_DISPLAY_DATE_FROM)
+            .displayDateTo(UPDATED_DISPLAY_DATE_TO)
             .activated(UPDATED_ACTIVATED)
             .createdBy(UPDATED_CREATED_BY)
             .createdDate(UPDATED_CREATED_DATE)
@@ -812,7 +1287,13 @@ class ProductNoticeResourceIT {
         ProductNotice testProductNotice = productNoticeList.get(productNoticeList.size() - 1);
         assertThat(testProductNotice.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testProductNotice.getType()).isEqualTo(UPDATED_TYPE);
-        assertThat(testProductNotice.getContent()).isEqualTo(UPDATED_CONTENT);
+        assertThat(testProductNotice.getContentFileUrl()).isEqualTo(UPDATED_CONTENT_FILE_URL);
+        assertThat(testProductNotice.getPriorityDisplay()).isEqualTo(UPDATED_PRIORITY_DISPLAY);
+        assertThat(testProductNotice.getAllProductDisplay()).isEqualTo(UPDATED_ALL_PRODUCT_DISPLAY);
+        assertThat(testProductNotice.getTarget()).isEqualTo(UPDATED_TARGET);
+        assertThat(testProductNotice.getEnableDisplayDate()).isEqualTo(UPDATED_ENABLE_DISPLAY_DATE);
+        assertThat(testProductNotice.getDisplayDateFrom()).isEqualTo(UPDATED_DISPLAY_DATE_FROM);
+        assertThat(testProductNotice.getDisplayDateTo()).isEqualTo(UPDATED_DISPLAY_DATE_TO);
         assertThat(testProductNotice.getActivated()).isEqualTo(UPDATED_ACTIVATED);
         assertThat(testProductNotice.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
         assertThat(testProductNotice.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);
@@ -902,8 +1383,12 @@ class ProductNoticeResourceIT {
         partialUpdatedProductNotice
             .name(UPDATED_NAME)
             .type(UPDATED_TYPE)
-            .createdBy(UPDATED_CREATED_BY)
-            .createdDate(UPDATED_CREATED_DATE)
+            .allProductDisplay(UPDATED_ALL_PRODUCT_DISPLAY)
+            .target(UPDATED_TARGET)
+            .enableDisplayDate(UPDATED_ENABLE_DISPLAY_DATE)
+            .displayDateFrom(UPDATED_DISPLAY_DATE_FROM)
+            .displayDateTo(UPDATED_DISPLAY_DATE_TO)
+            .activated(UPDATED_ACTIVATED)
             .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
             .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE);
 
@@ -921,10 +1406,16 @@ class ProductNoticeResourceIT {
         ProductNotice testProductNotice = productNoticeList.get(productNoticeList.size() - 1);
         assertThat(testProductNotice.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testProductNotice.getType()).isEqualTo(UPDATED_TYPE);
-        assertThat(testProductNotice.getContent()).isEqualTo(DEFAULT_CONTENT);
-        assertThat(testProductNotice.getActivated()).isEqualTo(DEFAULT_ACTIVATED);
-        assertThat(testProductNotice.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
-        assertThat(testProductNotice.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);
+        assertThat(testProductNotice.getContentFileUrl()).isEqualTo(DEFAULT_CONTENT_FILE_URL);
+        assertThat(testProductNotice.getPriorityDisplay()).isEqualTo(DEFAULT_PRIORITY_DISPLAY);
+        assertThat(testProductNotice.getAllProductDisplay()).isEqualTo(UPDATED_ALL_PRODUCT_DISPLAY);
+        assertThat(testProductNotice.getTarget()).isEqualTo(UPDATED_TARGET);
+        assertThat(testProductNotice.getEnableDisplayDate()).isEqualTo(UPDATED_ENABLE_DISPLAY_DATE);
+        assertThat(testProductNotice.getDisplayDateFrom()).isEqualTo(UPDATED_DISPLAY_DATE_FROM);
+        assertThat(testProductNotice.getDisplayDateTo()).isEqualTo(UPDATED_DISPLAY_DATE_TO);
+        assertThat(testProductNotice.getActivated()).isEqualTo(UPDATED_ACTIVATED);
+        assertThat(testProductNotice.getCreatedBy()).isEqualTo(DEFAULT_CREATED_BY);
+        assertThat(testProductNotice.getCreatedDate()).isEqualTo(DEFAULT_CREATED_DATE);
         assertThat(testProductNotice.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
         assertThat(testProductNotice.getLastModifiedDate()).isEqualTo(UPDATED_LAST_MODIFIED_DATE);
     }
@@ -944,7 +1435,13 @@ class ProductNoticeResourceIT {
         partialUpdatedProductNotice
             .name(UPDATED_NAME)
             .type(UPDATED_TYPE)
-            .content(UPDATED_CONTENT)
+            .contentFileUrl(UPDATED_CONTENT_FILE_URL)
+            .priorityDisplay(UPDATED_PRIORITY_DISPLAY)
+            .allProductDisplay(UPDATED_ALL_PRODUCT_DISPLAY)
+            .target(UPDATED_TARGET)
+            .enableDisplayDate(UPDATED_ENABLE_DISPLAY_DATE)
+            .displayDateFrom(UPDATED_DISPLAY_DATE_FROM)
+            .displayDateTo(UPDATED_DISPLAY_DATE_TO)
             .activated(UPDATED_ACTIVATED)
             .createdBy(UPDATED_CREATED_BY)
             .createdDate(UPDATED_CREATED_DATE)
@@ -965,7 +1462,13 @@ class ProductNoticeResourceIT {
         ProductNotice testProductNotice = productNoticeList.get(productNoticeList.size() - 1);
         assertThat(testProductNotice.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testProductNotice.getType()).isEqualTo(UPDATED_TYPE);
-        assertThat(testProductNotice.getContent()).isEqualTo(UPDATED_CONTENT);
+        assertThat(testProductNotice.getContentFileUrl()).isEqualTo(UPDATED_CONTENT_FILE_URL);
+        assertThat(testProductNotice.getPriorityDisplay()).isEqualTo(UPDATED_PRIORITY_DISPLAY);
+        assertThat(testProductNotice.getAllProductDisplay()).isEqualTo(UPDATED_ALL_PRODUCT_DISPLAY);
+        assertThat(testProductNotice.getTarget()).isEqualTo(UPDATED_TARGET);
+        assertThat(testProductNotice.getEnableDisplayDate()).isEqualTo(UPDATED_ENABLE_DISPLAY_DATE);
+        assertThat(testProductNotice.getDisplayDateFrom()).isEqualTo(UPDATED_DISPLAY_DATE_FROM);
+        assertThat(testProductNotice.getDisplayDateTo()).isEqualTo(UPDATED_DISPLAY_DATE_TO);
         assertThat(testProductNotice.getActivated()).isEqualTo(UPDATED_ACTIVATED);
         assertThat(testProductNotice.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
         assertThat(testProductNotice.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);

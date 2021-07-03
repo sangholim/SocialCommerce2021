@@ -1,3 +1,10 @@
+## 2021-07-03
+## Clazz, ProductNotice, ProductView, ProductTemplate 데이터모델링 수정
+## ProductViewContent 추가
+## Product Model - entityGraph 도입 (N+1 이슈 해결)
+## TODO: class video 모델링 작업 수행
+## dir> jhipster jdl 2021-06-26-product.jdl --json-only
+
 ## 2021-06-27
 ## 관리자 UI 보고 상품 설계
 ## 상품 옵션, 옵션 디자인 데이터 모델링
@@ -5,7 +12,6 @@
 ## dir> jhipster jdl 2021-06-26-product.jdl --json-only
 ## dir> jhipster entity Product --skip-client
 ## 기본 데이터 셋 맞추기
-
 
 ## 2021-06-26
 ## 관리자 UI 보고 상품 설계

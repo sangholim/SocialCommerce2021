@@ -3,7 +3,6 @@ package com.toy.project.service.dto;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
-import javax.persistence.Lob;
 import javax.validation.constraints.*;
 
 /**
@@ -17,8 +16,7 @@ public class ProductTemplateDTO implements Serializable {
 
     private String type;
 
-    @Lob
-    private String content;
+    private String contentFileUrl;
 
     private Boolean activated;
 
@@ -56,12 +54,12 @@ public class ProductTemplateDTO implements Serializable {
         this.type = type;
     }
 
-    public String getContent() {
-        return content;
+    public String getContentFileUrl() {
+        return contentFileUrl;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setContentFileUrl(String contentFileUrl) {
+        this.contentFileUrl = contentFileUrl;
     }
 
     public Boolean getActivated() {
@@ -132,7 +130,7 @@ public class ProductTemplateDTO implements Serializable {
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", type='" + getType() + "'" +
-            ", content='" + getContent() + "'" +
+            ", contentFileUrl='" + getContentFileUrl() + "'" +
             ", activated='" + getActivated() + "'" +
             ", createdBy='" + getCreatedBy() + "'" +
             ", createdDate='" + getCreatedDate() + "'" +

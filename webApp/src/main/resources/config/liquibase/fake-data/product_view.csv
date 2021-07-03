@@ -1,11 +1,11 @@
-id;name;type;content;is_detail;activated;created_by;created_date;last_modified_by;last_modified_date
-1;SMTP;orchestrate;../fake-data/blob/hipster.txt;true;false;orchestrate Granite web-enabled;2021-06-26T07:06:20;innovate;2021-06-25T09:15:56
-2;e-services Republic) Berkshire;Global Infrastructure Soft;../fake-data/blob/hipster.txt;true;false;Engineer;2021-06-25T16:09:38;yellow Forward Practical;2021-06-25T18:16:45
-3;mobile Agent up;Avon Cambridgeshire National;../fake-data/blob/hipster.txt;true;true;compress administration communities;2021-06-25T15:27:46;program Bedfordshire Adaptive;2021-06-25T08:36:30
-4;읍 Ergonomic Identity;cultivate Dinar;../fake-data/blob/hipster.txt;false;true;parsing;2021-06-25T20:59:36;Computer;2021-06-25T23:19:39
-5;matrix;Officer platforms Branding;../fake-data/blob/hipster.txt;false;false;array Sausages;2021-06-25T12:41:51;Creative 면 Agent;2021-06-26T03:59:50
-6;red;동;../fake-data/blob/hipster.txt;true;true;경북 Adaptive Metal;2021-06-25T19:55:48;calculate;2021-06-25T14:24:38
-7;Books program optical;Future Berkshire function;../fake-data/blob/hipster.txt;false;false;Bermudian 동 Argentine;2021-06-26T01:23:18;transmitting hacking cultivate;2021-06-25T09:17:10
-8;Lebanese;Handmade HDD;../fake-data/blob/hipster.txt;true;false;Hat sky;2021-06-26T00:49:38;e-markets Checking drive;2021-06-25T11:44:31
-9;parsing transmitter capacitor;Wooden;../fake-data/blob/hipster.txt;false;false;Legacy Canada Sausages;2021-06-26T07:23:10;Borders Salad Customizable;2021-06-25T14:14:59
-10;Steel 면;synthesizing Account Cambridgeshire;../fake-data/blob/hipster.txt;false;true;Executive connecting;2021-06-25T23:37:48;District Dirham Automotive;2021-06-25T16:12:53
+id;name;activated;created_by;created_date;last_modified_by;last_modified_date
+1;SMTP;false;Towels Keyboard;2021-06-26T04:41:25;대전 auxiliary;2021-06-25T22:22:06
+2;Upgradable e-services Republic);false;deliverables Avon;2021-06-25T18:11:29;Soft Senior Engineer;2021-06-25T16:09:38
+3;yellow Forward Practical;true;mobile Agent up;2021-06-25T15:25:53;Incredible overriding;2021-06-25T23:46:05
+4;Legacy compress administration;false;Ruble;2021-06-25T13:19:58;Granite Nakfa Chips;2021-06-25T20:42:45
+5;primary;false;revolutionary cultivate Dinar;2021-06-26T01:52:44;protocol District Computer;2021-06-25T23:19:39
+6;matrix;true;Towels Salad payment;2021-06-26T05:03:11;array Sausages;2021-06-25T12:41:51
+7;Creative 면 Agent;false;red;2021-06-26T04:30:19;indexing Producer;2021-06-26T02:56:01
+8;Adaptive Metal;false;calculate;2021-06-25T14:24:38;Books program optical;2021-06-25T10:36:39
+9;Monitored robust expedite;false;Bermudian 동 Argentine;2021-06-26T01:23:18;transmitting hacking cultivate;2021-06-25T09:17:10
+10;Lebanese;false;program;2021-06-25T17:06:43;primary;2021-06-26T06:12:36

@@ -24,22 +24,16 @@ public class ProductView extends AbstractAuditingEntity implements Serializable 
     @Column(name = "name")
     private String name;
 
-    @Column(name = "type")
-    private String type;
-
-    @Lob
-    @Column(name = "content")
-    private String content;
-
-    @Column(name = "is_detail")
-    private Boolean isDetail;
-
     @Column(name = "activated")
     private Boolean activated;
 
     @OneToMany(mappedBy = "productView")
     @JsonIgnoreProperties(value = { "product", "productView" }, allowSetters = true)
     private Set<ProductViewRel> productViewRels = new HashSet<>();
+
+    @OneToMany(mappedBy = "productView")
+    @JsonIgnoreProperties(value = { "productView" }, allowSetters = true)
+    private Set<ProductViewContent> productViewContents = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -66,45 +60,6 @@ public class ProductView extends AbstractAuditingEntity implements Serializable 
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getType() {
-        return this.type;
-    }
-
-    public ProductView type(String type) {
-        this.type = type;
-        return this;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getContent() {
-        return this.content;
-    }
-
-    public ProductView content(String content) {
-        this.content = content;
-        return this;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public Boolean getIsDetail() {
-        return this.isDetail;
-    }
-
-    public ProductView isDetail(Boolean isDetail) {
-        this.isDetail = isDetail;
-        return this;
-    }
-
-    public void setIsDetail(Boolean isDetail) {
-        this.isDetail = isDetail;
     }
 
     public Boolean getActivated() {
@@ -149,6 +104,18 @@ public class ProductView extends AbstractAuditingEntity implements Serializable 
         return this;
     }
 
+    public ProductView addProductViewRel(ProductViewRel productViewRel) {
+        this.productViewRels.add(productViewRel);
+        productViewRel.setProductView(this);
+        return this;
+    }
+
+    public ProductView removeProductViewRel(ProductViewRel productViewRel) {
+        this.productViewRels.remove(productViewRel);
+        productViewRel.setProductView(null);
+        return this;
+    }
+
     public void setProductViewRels(Set<ProductViewRel> productViewRels) {
         if (this.productViewRels != null) {
             this.productViewRels.forEach(i -> i.setProductView(null));
@@ -157,6 +124,37 @@ public class ProductView extends AbstractAuditingEntity implements Serializable 
             productViewRels.forEach(i -> i.setProductView(this));
         }
         this.productViewRels = productViewRels;
+    }
+
+    public Set<ProductViewContent> getProductViewContents() {
+        return this.productViewContents;
+    }
+
+    public ProductView productViewContents(Set<ProductViewContent> productViewContents) {
+        this.setProductViewContents(productViewContents);
+        return this;
+    }
+
+    public ProductView addProductViewContent(ProductViewContent productViewContent) {
+        this.productViewContents.add(productViewContent);
+        productViewContent.setProductView(this);
+        return this;
+    }
+
+    public ProductView removeProductViewContent(ProductViewContent productViewContent) {
+        this.productViewContents.remove(productViewContent);
+        productViewContent.setProductView(null);
+        return this;
+    }
+
+    public void setProductViewContents(Set<ProductViewContent> productViewContents) {
+        if (this.productViewContents != null) {
+            this.productViewContents.forEach(i -> i.setProductView(null));
+        }
+        if (productViewContents != null) {
+            productViewContents.forEach(i -> i.setProductView(this));
+        }
+        this.productViewContents = productViewContents;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
@@ -184,9 +182,6 @@ public class ProductView extends AbstractAuditingEntity implements Serializable 
         return "ProductView{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
-            ", type='" + getType() + "'" +
-            ", content='" + getContent() + "'" +
-            ", isDetail='" + getIsDetail() + "'" +
             ", activated='" + getActivated() + "'" +
             ", createdBy='" + getCreatedBy() + "'" +
             ", createdDate='" + getCreatedDate() + "'" +

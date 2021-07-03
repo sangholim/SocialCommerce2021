@@ -27,9 +27,26 @@ public class ProductNotice extends AbstractAuditingEntity implements Serializabl
     @Column(name = "type")
     private String type;
 
-    @Lob
-    @Column(name = "content")
-    private String content;
+    @Column(name = "content_file_url")
+    private String contentFileUrl;
+
+    @Column(name = "priority_display")
+    private Boolean priorityDisplay;
+
+    @Column(name = "all_product_display")
+    private Boolean allProductDisplay;
+
+    @Column(name = "target")
+    private String target;
+
+    @Column(name = "enable_display_date")
+    private Boolean enableDisplayDate;
+
+    @Column(name = "display_date_from")
+    private Instant displayDateFrom;
+
+    @Column(name = "display_date_to")
+    private Instant displayDateTo;
 
     @Column(name = "activated")
     private Boolean activated;
@@ -78,17 +95,95 @@ public class ProductNotice extends AbstractAuditingEntity implements Serializabl
         this.type = type;
     }
 
-    public String getContent() {
-        return this.content;
+    public String getContentFileUrl() {
+        return this.contentFileUrl;
     }
 
-    public ProductNotice content(String content) {
-        this.content = content;
+    public ProductNotice contentFileUrl(String contentFileUrl) {
+        this.contentFileUrl = contentFileUrl;
         return this;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setContentFileUrl(String contentFileUrl) {
+        this.contentFileUrl = contentFileUrl;
+    }
+
+    public Boolean getPriorityDisplay() {
+        return this.priorityDisplay;
+    }
+
+    public ProductNotice priorityDisplay(Boolean priorityDisplay) {
+        this.priorityDisplay = priorityDisplay;
+        return this;
+    }
+
+    public void setPriorityDisplay(Boolean priorityDisplay) {
+        this.priorityDisplay = priorityDisplay;
+    }
+
+    public Boolean getAllProductDisplay() {
+        return this.allProductDisplay;
+    }
+
+    public ProductNotice allProductDisplay(Boolean allProductDisplay) {
+        this.allProductDisplay = allProductDisplay;
+        return this;
+    }
+
+    public void setAllProductDisplay(Boolean allProductDisplay) {
+        this.allProductDisplay = allProductDisplay;
+    }
+
+    public String getTarget() {
+        return this.target;
+    }
+
+    public ProductNotice target(String target) {
+        this.target = target;
+        return this;
+    }
+
+    public void setTarget(String target) {
+        this.target = target;
+    }
+
+    public Boolean getEnableDisplayDate() {
+        return this.enableDisplayDate;
+    }
+
+    public ProductNotice enableDisplayDate(Boolean enableDisplayDate) {
+        this.enableDisplayDate = enableDisplayDate;
+        return this;
+    }
+
+    public void setEnableDisplayDate(Boolean enableDisplayDate) {
+        this.enableDisplayDate = enableDisplayDate;
+    }
+
+    public Instant getDisplayDateFrom() {
+        return this.displayDateFrom;
+    }
+
+    public ProductNotice displayDateFrom(Instant displayDateFrom) {
+        this.displayDateFrom = displayDateFrom;
+        return this;
+    }
+
+    public void setDisplayDateFrom(Instant displayDateFrom) {
+        this.displayDateFrom = displayDateFrom;
+    }
+
+    public Instant getDisplayDateTo() {
+        return this.displayDateTo;
+    }
+
+    public ProductNotice displayDateTo(Instant displayDateTo) {
+        this.displayDateTo = displayDateTo;
+        return this;
+    }
+
+    public void setDisplayDateTo(Instant displayDateTo) {
+        this.displayDateTo = displayDateTo;
     }
 
     public Boolean getActivated() {
@@ -133,6 +228,18 @@ public class ProductNotice extends AbstractAuditingEntity implements Serializabl
         return this;
     }
 
+    public ProductNotice addProductNoticeRel(ProductNoticeRel productNoticeRel) {
+        this.productNoticeRels.add(productNoticeRel);
+        productNoticeRel.setProductNotice(this);
+        return this;
+    }
+
+    public ProductNotice removeProductNoticeRel(ProductNoticeRel productNoticeRel) {
+        this.productNoticeRels.remove(productNoticeRel);
+        productNoticeRel.setProductNotice(null);
+        return this;
+    }
+
     public void setProductNoticeRels(Set<ProductNoticeRel> productNoticeRels) {
         if (this.productNoticeRels != null) {
             this.productNoticeRels.forEach(i -> i.setProductNotice(null));
@@ -169,7 +276,13 @@ public class ProductNotice extends AbstractAuditingEntity implements Serializabl
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", type='" + getType() + "'" +
-            ", content='" + getContent() + "'" +
+            ", contentFileUrl='" + getContentFileUrl() + "'" +
+            ", priorityDisplay='" + getPriorityDisplay() + "'" +
+            ", allProductDisplay='" + getAllProductDisplay() + "'" +
+            ", target='" + getTarget() + "'" +
+            ", enableDisplayDate='" + getEnableDisplayDate() + "'" +
+            ", displayDateFrom='" + getDisplayDateFrom() + "'" +
+            ", displayDateTo='" + getDisplayDateTo() + "'" +
             ", activated='" + getActivated() + "'" +
             ", createdBy='" + getCreatedBy() + "'" +
             ", createdDate='" + getCreatedDate() + "'" +

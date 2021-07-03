@@ -7,6 +7,8 @@ import com.toy.project.service.criteria.ProductCriteria;
 import com.toy.project.service.dto.ProductDTO;
 import com.toy.project.service.mapper.ProductMapper;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 import javax.persistence.criteria.JoinType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

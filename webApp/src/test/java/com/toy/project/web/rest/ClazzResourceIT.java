@@ -45,11 +45,31 @@ class ClazzResourceIT {
     private static final String DEFAULT_TYPE = "AAAAAAAAAA";
     private static final String UPDATED_TYPE = "BBBBBBBBBB";
 
+    private static final String DEFAULT_MAIN_IMAGE_FILE_URL = "AAAAAAAAAA";
+    private static final String UPDATED_MAIN_IMAGE_FILE_URL = "BBBBBBBBBB";
+
     private static final String DEFAULT_LEVEL = "AAAAAAAAAA";
     private static final String UPDATED_LEVEL = "BBBBBBBBBB";
 
     private static final Boolean DEFAULT_ENABLE_LECTURE = false;
     private static final Boolean UPDATED_ENABLE_LECTURE = true;
+
+    private static final Boolean DEFAULT_FREE_LECTURE = false;
+    private static final Boolean UPDATED_FREE_LECTURE = true;
+
+    private static final Long DEFAULT_PRICE_LECTURE = 1L;
+    private static final Long UPDATED_PRICE_LECTURE = 2L;
+    private static final Long SMALLER_PRICE_LECTURE = 1L - 1L;
+
+    private static final String DEFAULT_PRICE_UNIT_LECTURE = "AAAAAAAAAA";
+    private static final String UPDATED_PRICE_UNIT_LECTURE = "BBBBBBBBBB";
+
+    private static final Instant DEFAULT_LECTURE_START_DATE_FROM = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_LECTURE_START_DATE_FROM = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+
+    private static final Integer DEFAULT_LECTURE_INTERVAL = 1;
+    private static final Integer UPDATED_LECTURE_INTERVAL = 2;
+    private static final Integer SMALLER_LECTURE_INTERVAL = 1 - 1;
 
     private static final String DEFAULT_LECTURER = "AAAAAAAAAA";
     private static final String UPDATED_LECTURER = "BBBBBBBBBB";
@@ -57,6 +77,12 @@ class ClazzResourceIT {
     private static final Integer DEFAULT_CALCULATION = 1;
     private static final Integer UPDATED_CALCULATION = 2;
     private static final Integer SMALLER_CALCULATION = 1 - 1;
+
+    private static final Boolean DEFAULT_IS_VIEW = false;
+    private static final Boolean UPDATED_IS_VIEW = true;
+
+    private static final Boolean DEFAULT_IS_SELL = false;
+    private static final Boolean UPDATED_IS_SELL = true;
 
     private static final Boolean DEFAULT_ACTIVATED = false;
     private static final Boolean UPDATED_ACTIVATED = true;
@@ -103,10 +129,18 @@ class ClazzResourceIT {
         Clazz clazz = new Clazz()
             .name(DEFAULT_NAME)
             .type(DEFAULT_TYPE)
+            .mainImageFileUrl(DEFAULT_MAIN_IMAGE_FILE_URL)
             .level(DEFAULT_LEVEL)
             .enableLecture(DEFAULT_ENABLE_LECTURE)
+            .freeLecture(DEFAULT_FREE_LECTURE)
+            .priceLecture(DEFAULT_PRICE_LECTURE)
+            .priceUnitLecture(DEFAULT_PRICE_UNIT_LECTURE)
+            .lectureStartDateFrom(DEFAULT_LECTURE_START_DATE_FROM)
+            .lectureInterval(DEFAULT_LECTURE_INTERVAL)
             .lecturer(DEFAULT_LECTURER)
             .calculation(DEFAULT_CALCULATION)
+            .isView(DEFAULT_IS_VIEW)
+            .isSell(DEFAULT_IS_SELL)
             .activated(DEFAULT_ACTIVATED)
             .createdBy(DEFAULT_CREATED_BY)
             .createdDate(DEFAULT_CREATED_DATE)
@@ -125,10 +159,18 @@ class ClazzResourceIT {
         Clazz clazz = new Clazz()
             .name(UPDATED_NAME)
             .type(UPDATED_TYPE)
+            .mainImageFileUrl(UPDATED_MAIN_IMAGE_FILE_URL)
             .level(UPDATED_LEVEL)
             .enableLecture(UPDATED_ENABLE_LECTURE)
+            .freeLecture(UPDATED_FREE_LECTURE)
+            .priceLecture(UPDATED_PRICE_LECTURE)
+            .priceUnitLecture(UPDATED_PRICE_UNIT_LECTURE)
+            .lectureStartDateFrom(UPDATED_LECTURE_START_DATE_FROM)
+            .lectureInterval(UPDATED_LECTURE_INTERVAL)
             .lecturer(UPDATED_LECTURER)
             .calculation(UPDATED_CALCULATION)
+            .isView(UPDATED_IS_VIEW)
+            .isSell(UPDATED_IS_SELL)
             .activated(UPDATED_ACTIVATED)
             .createdBy(UPDATED_CREATED_BY)
             .createdDate(UPDATED_CREATED_DATE)
@@ -158,10 +200,18 @@ class ClazzResourceIT {
         Clazz testClazz = clazzList.get(clazzList.size() - 1);
         assertThat(testClazz.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testClazz.getType()).isEqualTo(DEFAULT_TYPE);
+        assertThat(testClazz.getMainImageFileUrl()).isEqualTo(DEFAULT_MAIN_IMAGE_FILE_URL);
         assertThat(testClazz.getLevel()).isEqualTo(DEFAULT_LEVEL);
         assertThat(testClazz.getEnableLecture()).isEqualTo(DEFAULT_ENABLE_LECTURE);
+        assertThat(testClazz.getFreeLecture()).isEqualTo(DEFAULT_FREE_LECTURE);
+        assertThat(testClazz.getPriceLecture()).isEqualTo(DEFAULT_PRICE_LECTURE);
+        assertThat(testClazz.getPriceUnitLecture()).isEqualTo(DEFAULT_PRICE_UNIT_LECTURE);
+        assertThat(testClazz.getLectureStartDateFrom()).isEqualTo(DEFAULT_LECTURE_START_DATE_FROM);
+        assertThat(testClazz.getLectureInterval()).isEqualTo(DEFAULT_LECTURE_INTERVAL);
         assertThat(testClazz.getLecturer()).isEqualTo(DEFAULT_LECTURER);
         assertThat(testClazz.getCalculation()).isEqualTo(DEFAULT_CALCULATION);
+        assertThat(testClazz.getIsView()).isEqualTo(DEFAULT_IS_VIEW);
+        assertThat(testClazz.getIsSell()).isEqualTo(DEFAULT_IS_SELL);
         assertThat(testClazz.getActivated()).isEqualTo(DEFAULT_ACTIVATED);
         assertThat(testClazz.getCreatedBy()).isEqualTo(DEFAULT_CREATED_BY);
         assertThat(testClazz.getCreatedDate()).isEqualTo(DEFAULT_CREATED_DATE);
@@ -202,10 +252,18 @@ class ClazzResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(clazz.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE)))
+            .andExpect(jsonPath("$.[*].mainImageFileUrl").value(hasItem(DEFAULT_MAIN_IMAGE_FILE_URL)))
             .andExpect(jsonPath("$.[*].level").value(hasItem(DEFAULT_LEVEL)))
             .andExpect(jsonPath("$.[*].enableLecture").value(hasItem(DEFAULT_ENABLE_LECTURE.booleanValue())))
+            .andExpect(jsonPath("$.[*].freeLecture").value(hasItem(DEFAULT_FREE_LECTURE.booleanValue())))
+            .andExpect(jsonPath("$.[*].priceLecture").value(hasItem(DEFAULT_PRICE_LECTURE.intValue())))
+            .andExpect(jsonPath("$.[*].priceUnitLecture").value(hasItem(DEFAULT_PRICE_UNIT_LECTURE)))
+            .andExpect(jsonPath("$.[*].lectureStartDateFrom").value(hasItem(DEFAULT_LECTURE_START_DATE_FROM.toString())))
+            .andExpect(jsonPath("$.[*].lectureInterval").value(hasItem(DEFAULT_LECTURE_INTERVAL)))
             .andExpect(jsonPath("$.[*].lecturer").value(hasItem(DEFAULT_LECTURER)))
             .andExpect(jsonPath("$.[*].calculation").value(hasItem(DEFAULT_CALCULATION)))
+            .andExpect(jsonPath("$.[*].isView").value(hasItem(DEFAULT_IS_VIEW.booleanValue())))
+            .andExpect(jsonPath("$.[*].isSell").value(hasItem(DEFAULT_IS_SELL.booleanValue())))
             .andExpect(jsonPath("$.[*].activated").value(hasItem(DEFAULT_ACTIVATED.booleanValue())))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
             .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
@@ -227,10 +285,18 @@ class ClazzResourceIT {
             .andExpect(jsonPath("$.id").value(clazz.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.type").value(DEFAULT_TYPE))
+            .andExpect(jsonPath("$.mainImageFileUrl").value(DEFAULT_MAIN_IMAGE_FILE_URL))
             .andExpect(jsonPath("$.level").value(DEFAULT_LEVEL))
             .andExpect(jsonPath("$.enableLecture").value(DEFAULT_ENABLE_LECTURE.booleanValue()))
+            .andExpect(jsonPath("$.freeLecture").value(DEFAULT_FREE_LECTURE.booleanValue()))
+            .andExpect(jsonPath("$.priceLecture").value(DEFAULT_PRICE_LECTURE.intValue()))
+            .andExpect(jsonPath("$.priceUnitLecture").value(DEFAULT_PRICE_UNIT_LECTURE))
+            .andExpect(jsonPath("$.lectureStartDateFrom").value(DEFAULT_LECTURE_START_DATE_FROM.toString()))
+            .andExpect(jsonPath("$.lectureInterval").value(DEFAULT_LECTURE_INTERVAL))
             .andExpect(jsonPath("$.lecturer").value(DEFAULT_LECTURER))
             .andExpect(jsonPath("$.calculation").value(DEFAULT_CALCULATION))
+            .andExpect(jsonPath("$.isView").value(DEFAULT_IS_VIEW.booleanValue()))
+            .andExpect(jsonPath("$.isSell").value(DEFAULT_IS_SELL.booleanValue()))
             .andExpect(jsonPath("$.activated").value(DEFAULT_ACTIVATED.booleanValue()))
             .andExpect(jsonPath("$.createdBy").value(DEFAULT_CREATED_BY))
             .andExpect(jsonPath("$.createdDate").value(DEFAULT_CREATED_DATE.toString()))
@@ -414,6 +480,84 @@ class ClazzResourceIT {
 
     @Test
     @Transactional
+    void getAllClazzesByMainImageFileUrlIsEqualToSomething() throws Exception {
+        // Initialize the database
+        clazzRepository.saveAndFlush(clazz);
+
+        // Get all the clazzList where mainImageFileUrl equals to DEFAULT_MAIN_IMAGE_FILE_URL
+        defaultClazzShouldBeFound("mainImageFileUrl.equals=" + DEFAULT_MAIN_IMAGE_FILE_URL);
+
+        // Get all the clazzList where mainImageFileUrl equals to UPDATED_MAIN_IMAGE_FILE_URL
+        defaultClazzShouldNotBeFound("mainImageFileUrl.equals=" + UPDATED_MAIN_IMAGE_FILE_URL);
+    }
+
+    @Test
+    @Transactional
+    void getAllClazzesByMainImageFileUrlIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        clazzRepository.saveAndFlush(clazz);
+
+        // Get all the clazzList where mainImageFileUrl not equals to DEFAULT_MAIN_IMAGE_FILE_URL
+        defaultClazzShouldNotBeFound("mainImageFileUrl.notEquals=" + DEFAULT_MAIN_IMAGE_FILE_URL);
+
+        // Get all the clazzList where mainImageFileUrl not equals to UPDATED_MAIN_IMAGE_FILE_URL
+        defaultClazzShouldBeFound("mainImageFileUrl.notEquals=" + UPDATED_MAIN_IMAGE_FILE_URL);
+    }
+
+    @Test
+    @Transactional
+    void getAllClazzesByMainImageFileUrlIsInShouldWork() throws Exception {
+        // Initialize the database
+        clazzRepository.saveAndFlush(clazz);
+
+        // Get all the clazzList where mainImageFileUrl in DEFAULT_MAIN_IMAGE_FILE_URL or UPDATED_MAIN_IMAGE_FILE_URL
+        defaultClazzShouldBeFound("mainImageFileUrl.in=" + DEFAULT_MAIN_IMAGE_FILE_URL + "," + UPDATED_MAIN_IMAGE_FILE_URL);
+
+        // Get all the clazzList where mainImageFileUrl equals to UPDATED_MAIN_IMAGE_FILE_URL
+        defaultClazzShouldNotBeFound("mainImageFileUrl.in=" + UPDATED_MAIN_IMAGE_FILE_URL);
+    }
+
+    @Test
+    @Transactional
+    void getAllClazzesByMainImageFileUrlIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        clazzRepository.saveAndFlush(clazz);
+
+        // Get all the clazzList where mainImageFileUrl is not null
+        defaultClazzShouldBeFound("mainImageFileUrl.specified=true");
+
+        // Get all the clazzList where mainImageFileUrl is null
+        defaultClazzShouldNotBeFound("mainImageFileUrl.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllClazzesByMainImageFileUrlContainsSomething() throws Exception {
+        // Initialize the database
+        clazzRepository.saveAndFlush(clazz);
+
+        // Get all the clazzList where mainImageFileUrl contains DEFAULT_MAIN_IMAGE_FILE_URL
+        defaultClazzShouldBeFound("mainImageFileUrl.contains=" + DEFAULT_MAIN_IMAGE_FILE_URL);
+
+        // Get all the clazzList where mainImageFileUrl contains UPDATED_MAIN_IMAGE_FILE_URL
+        defaultClazzShouldNotBeFound("mainImageFileUrl.contains=" + UPDATED_MAIN_IMAGE_FILE_URL);
+    }
+
+    @Test
+    @Transactional
+    void getAllClazzesByMainImageFileUrlNotContainsSomething() throws Exception {
+        // Initialize the database
+        clazzRepository.saveAndFlush(clazz);
+
+        // Get all the clazzList where mainImageFileUrl does not contain DEFAULT_MAIN_IMAGE_FILE_URL
+        defaultClazzShouldNotBeFound("mainImageFileUrl.doesNotContain=" + DEFAULT_MAIN_IMAGE_FILE_URL);
+
+        // Get all the clazzList where mainImageFileUrl does not contain UPDATED_MAIN_IMAGE_FILE_URL
+        defaultClazzShouldBeFound("mainImageFileUrl.doesNotContain=" + UPDATED_MAIN_IMAGE_FILE_URL);
+    }
+
+    @Test
+    @Transactional
     void getAllClazzesByLevelIsEqualToSomething() throws Exception {
         // Initialize the database
         clazzRepository.saveAndFlush(clazz);
@@ -540,6 +684,396 @@ class ClazzResourceIT {
 
         // Get all the clazzList where enableLecture is null
         defaultClazzShouldNotBeFound("enableLecture.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllClazzesByFreeLectureIsEqualToSomething() throws Exception {
+        // Initialize the database
+        clazzRepository.saveAndFlush(clazz);
+
+        // Get all the clazzList where freeLecture equals to DEFAULT_FREE_LECTURE
+        defaultClazzShouldBeFound("freeLecture.equals=" + DEFAULT_FREE_LECTURE);
+
+        // Get all the clazzList where freeLecture equals to UPDATED_FREE_LECTURE
+        defaultClazzShouldNotBeFound("freeLecture.equals=" + UPDATED_FREE_LECTURE);
+    }
+
+    @Test
+    @Transactional
+    void getAllClazzesByFreeLectureIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        clazzRepository.saveAndFlush(clazz);
+
+        // Get all the clazzList where freeLecture not equals to DEFAULT_FREE_LECTURE
+        defaultClazzShouldNotBeFound("freeLecture.notEquals=" + DEFAULT_FREE_LECTURE);
+
+        // Get all the clazzList where freeLecture not equals to UPDATED_FREE_LECTURE
+        defaultClazzShouldBeFound("freeLecture.notEquals=" + UPDATED_FREE_LECTURE);
+    }
+
+    @Test
+    @Transactional
+    void getAllClazzesByFreeLectureIsInShouldWork() throws Exception {
+        // Initialize the database
+        clazzRepository.saveAndFlush(clazz);
+
+        // Get all the clazzList where freeLecture in DEFAULT_FREE_LECTURE or UPDATED_FREE_LECTURE
+        defaultClazzShouldBeFound("freeLecture.in=" + DEFAULT_FREE_LECTURE + "," + UPDATED_FREE_LECTURE);
+
+        // Get all the clazzList where freeLecture equals to UPDATED_FREE_LECTURE
+        defaultClazzShouldNotBeFound("freeLecture.in=" + UPDATED_FREE_LECTURE);
+    }
+
+    @Test
+    @Transactional
+    void getAllClazzesByFreeLectureIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        clazzRepository.saveAndFlush(clazz);
+
+        // Get all the clazzList where freeLecture is not null
+        defaultClazzShouldBeFound("freeLecture.specified=true");
+
+        // Get all the clazzList where freeLecture is null
+        defaultClazzShouldNotBeFound("freeLecture.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllClazzesByPriceLectureIsEqualToSomething() throws Exception {
+        // Initialize the database
+        clazzRepository.saveAndFlush(clazz);
+
+        // Get all the clazzList where priceLecture equals to DEFAULT_PRICE_LECTURE
+        defaultClazzShouldBeFound("priceLecture.equals=" + DEFAULT_PRICE_LECTURE);
+
+        // Get all the clazzList where priceLecture equals to UPDATED_PRICE_LECTURE
+        defaultClazzShouldNotBeFound("priceLecture.equals=" + UPDATED_PRICE_LECTURE);
+    }
+
+    @Test
+    @Transactional
+    void getAllClazzesByPriceLectureIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        clazzRepository.saveAndFlush(clazz);
+
+        // Get all the clazzList where priceLecture not equals to DEFAULT_PRICE_LECTURE
+        defaultClazzShouldNotBeFound("priceLecture.notEquals=" + DEFAULT_PRICE_LECTURE);
+
+        // Get all the clazzList where priceLecture not equals to UPDATED_PRICE_LECTURE
+        defaultClazzShouldBeFound("priceLecture.notEquals=" + UPDATED_PRICE_LECTURE);
+    }
+
+    @Test
+    @Transactional
+    void getAllClazzesByPriceLectureIsInShouldWork() throws Exception {
+        // Initialize the database
+        clazzRepository.saveAndFlush(clazz);
+
+        // Get all the clazzList where priceLecture in DEFAULT_PRICE_LECTURE or UPDATED_PRICE_LECTURE
+        defaultClazzShouldBeFound("priceLecture.in=" + DEFAULT_PRICE_LECTURE + "," + UPDATED_PRICE_LECTURE);
+
+        // Get all the clazzList where priceLecture equals to UPDATED_PRICE_LECTURE
+        defaultClazzShouldNotBeFound("priceLecture.in=" + UPDATED_PRICE_LECTURE);
+    }
+
+    @Test
+    @Transactional
+    void getAllClazzesByPriceLectureIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        clazzRepository.saveAndFlush(clazz);
+
+        // Get all the clazzList where priceLecture is not null
+        defaultClazzShouldBeFound("priceLecture.specified=true");
+
+        // Get all the clazzList where priceLecture is null
+        defaultClazzShouldNotBeFound("priceLecture.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllClazzesByPriceLectureIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        clazzRepository.saveAndFlush(clazz);
+
+        // Get all the clazzList where priceLecture is greater than or equal to DEFAULT_PRICE_LECTURE
+        defaultClazzShouldBeFound("priceLecture.greaterThanOrEqual=" + DEFAULT_PRICE_LECTURE);
+
+        // Get all the clazzList where priceLecture is greater than or equal to UPDATED_PRICE_LECTURE
+        defaultClazzShouldNotBeFound("priceLecture.greaterThanOrEqual=" + UPDATED_PRICE_LECTURE);
+    }
+
+    @Test
+    @Transactional
+    void getAllClazzesByPriceLectureIsLessThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        clazzRepository.saveAndFlush(clazz);
+
+        // Get all the clazzList where priceLecture is less than or equal to DEFAULT_PRICE_LECTURE
+        defaultClazzShouldBeFound("priceLecture.lessThanOrEqual=" + DEFAULT_PRICE_LECTURE);
+
+        // Get all the clazzList where priceLecture is less than or equal to SMALLER_PRICE_LECTURE
+        defaultClazzShouldNotBeFound("priceLecture.lessThanOrEqual=" + SMALLER_PRICE_LECTURE);
+    }
+
+    @Test
+    @Transactional
+    void getAllClazzesByPriceLectureIsLessThanSomething() throws Exception {
+        // Initialize the database
+        clazzRepository.saveAndFlush(clazz);
+
+        // Get all the clazzList where priceLecture is less than DEFAULT_PRICE_LECTURE
+        defaultClazzShouldNotBeFound("priceLecture.lessThan=" + DEFAULT_PRICE_LECTURE);
+
+        // Get all the clazzList where priceLecture is less than UPDATED_PRICE_LECTURE
+        defaultClazzShouldBeFound("priceLecture.lessThan=" + UPDATED_PRICE_LECTURE);
+    }
+
+    @Test
+    @Transactional
+    void getAllClazzesByPriceLectureIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        clazzRepository.saveAndFlush(clazz);
+
+        // Get all the clazzList where priceLecture is greater than DEFAULT_PRICE_LECTURE
+        defaultClazzShouldNotBeFound("priceLecture.greaterThan=" + DEFAULT_PRICE_LECTURE);
+
+        // Get all the clazzList where priceLecture is greater than SMALLER_PRICE_LECTURE
+        defaultClazzShouldBeFound("priceLecture.greaterThan=" + SMALLER_PRICE_LECTURE);
+    }
+
+    @Test
+    @Transactional
+    void getAllClazzesByPriceUnitLectureIsEqualToSomething() throws Exception {
+        // Initialize the database
+        clazzRepository.saveAndFlush(clazz);
+
+        // Get all the clazzList where priceUnitLecture equals to DEFAULT_PRICE_UNIT_LECTURE
+        defaultClazzShouldBeFound("priceUnitLecture.equals=" + DEFAULT_PRICE_UNIT_LECTURE);
+
+        // Get all the clazzList where priceUnitLecture equals to UPDATED_PRICE_UNIT_LECTURE
+        defaultClazzShouldNotBeFound("priceUnitLecture.equals=" + UPDATED_PRICE_UNIT_LECTURE);
+    }
+
+    @Test
+    @Transactional
+    void getAllClazzesByPriceUnitLectureIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        clazzRepository.saveAndFlush(clazz);
+
+        // Get all the clazzList where priceUnitLecture not equals to DEFAULT_PRICE_UNIT_LECTURE
+        defaultClazzShouldNotBeFound("priceUnitLecture.notEquals=" + DEFAULT_PRICE_UNIT_LECTURE);
+
+        // Get all the clazzList where priceUnitLecture not equals to UPDATED_PRICE_UNIT_LECTURE
+        defaultClazzShouldBeFound("priceUnitLecture.notEquals=" + UPDATED_PRICE_UNIT_LECTURE);
+    }
+
+    @Test
+    @Transactional
+    void getAllClazzesByPriceUnitLectureIsInShouldWork() throws Exception {
+        // Initialize the database
+        clazzRepository.saveAndFlush(clazz);
+
+        // Get all the clazzList where priceUnitLecture in DEFAULT_PRICE_UNIT_LECTURE or UPDATED_PRICE_UNIT_LECTURE
+        defaultClazzShouldBeFound("priceUnitLecture.in=" + DEFAULT_PRICE_UNIT_LECTURE + "," + UPDATED_PRICE_UNIT_LECTURE);
+
+        // Get all the clazzList where priceUnitLecture equals to UPDATED_PRICE_UNIT_LECTURE
+        defaultClazzShouldNotBeFound("priceUnitLecture.in=" + UPDATED_PRICE_UNIT_LECTURE);
+    }
+
+    @Test
+    @Transactional
+    void getAllClazzesByPriceUnitLectureIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        clazzRepository.saveAndFlush(clazz);
+
+        // Get all the clazzList where priceUnitLecture is not null
+        defaultClazzShouldBeFound("priceUnitLecture.specified=true");
+
+        // Get all the clazzList where priceUnitLecture is null
+        defaultClazzShouldNotBeFound("priceUnitLecture.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllClazzesByPriceUnitLectureContainsSomething() throws Exception {
+        // Initialize the database
+        clazzRepository.saveAndFlush(clazz);
+
+        // Get all the clazzList where priceUnitLecture contains DEFAULT_PRICE_UNIT_LECTURE
+        defaultClazzShouldBeFound("priceUnitLecture.contains=" + DEFAULT_PRICE_UNIT_LECTURE);
+
+        // Get all the clazzList where priceUnitLecture contains UPDATED_PRICE_UNIT_LECTURE
+        defaultClazzShouldNotBeFound("priceUnitLecture.contains=" + UPDATED_PRICE_UNIT_LECTURE);
+    }
+
+    @Test
+    @Transactional
+    void getAllClazzesByPriceUnitLectureNotContainsSomething() throws Exception {
+        // Initialize the database
+        clazzRepository.saveAndFlush(clazz);
+
+        // Get all the clazzList where priceUnitLecture does not contain DEFAULT_PRICE_UNIT_LECTURE
+        defaultClazzShouldNotBeFound("priceUnitLecture.doesNotContain=" + DEFAULT_PRICE_UNIT_LECTURE);
+
+        // Get all the clazzList where priceUnitLecture does not contain UPDATED_PRICE_UNIT_LECTURE
+        defaultClazzShouldBeFound("priceUnitLecture.doesNotContain=" + UPDATED_PRICE_UNIT_LECTURE);
+    }
+
+    @Test
+    @Transactional
+    void getAllClazzesByLectureStartDateFromIsEqualToSomething() throws Exception {
+        // Initialize the database
+        clazzRepository.saveAndFlush(clazz);
+
+        // Get all the clazzList where lectureStartDateFrom equals to DEFAULT_LECTURE_START_DATE_FROM
+        defaultClazzShouldBeFound("lectureStartDateFrom.equals=" + DEFAULT_LECTURE_START_DATE_FROM);
+
+        // Get all the clazzList where lectureStartDateFrom equals to UPDATED_LECTURE_START_DATE_FROM
+        defaultClazzShouldNotBeFound("lectureStartDateFrom.equals=" + UPDATED_LECTURE_START_DATE_FROM);
+    }
+
+    @Test
+    @Transactional
+    void getAllClazzesByLectureStartDateFromIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        clazzRepository.saveAndFlush(clazz);
+
+        // Get all the clazzList where lectureStartDateFrom not equals to DEFAULT_LECTURE_START_DATE_FROM
+        defaultClazzShouldNotBeFound("lectureStartDateFrom.notEquals=" + DEFAULT_LECTURE_START_DATE_FROM);
+
+        // Get all the clazzList where lectureStartDateFrom not equals to UPDATED_LECTURE_START_DATE_FROM
+        defaultClazzShouldBeFound("lectureStartDateFrom.notEquals=" + UPDATED_LECTURE_START_DATE_FROM);
+    }
+
+    @Test
+    @Transactional
+    void getAllClazzesByLectureStartDateFromIsInShouldWork() throws Exception {
+        // Initialize the database
+        clazzRepository.saveAndFlush(clazz);
+
+        // Get all the clazzList where lectureStartDateFrom in DEFAULT_LECTURE_START_DATE_FROM or UPDATED_LECTURE_START_DATE_FROM
+        defaultClazzShouldBeFound("lectureStartDateFrom.in=" + DEFAULT_LECTURE_START_DATE_FROM + "," + UPDATED_LECTURE_START_DATE_FROM);
+
+        // Get all the clazzList where lectureStartDateFrom equals to UPDATED_LECTURE_START_DATE_FROM
+        defaultClazzShouldNotBeFound("lectureStartDateFrom.in=" + UPDATED_LECTURE_START_DATE_FROM);
+    }
+
+    @Test
+    @Transactional
+    void getAllClazzesByLectureStartDateFromIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        clazzRepository.saveAndFlush(clazz);
+
+        // Get all the clazzList where lectureStartDateFrom is not null
+        defaultClazzShouldBeFound("lectureStartDateFrom.specified=true");
+
+        // Get all the clazzList where lectureStartDateFrom is null
+        defaultClazzShouldNotBeFound("lectureStartDateFrom.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllClazzesByLectureIntervalIsEqualToSomething() throws Exception {
+        // Initialize the database
+        clazzRepository.saveAndFlush(clazz);
+
+        // Get all the clazzList where lectureInterval equals to DEFAULT_LECTURE_INTERVAL
+        defaultClazzShouldBeFound("lectureInterval.equals=" + DEFAULT_LECTURE_INTERVAL);
+
+        // Get all the clazzList where lectureInterval equals to UPDATED_LECTURE_INTERVAL
+        defaultClazzShouldNotBeFound("lectureInterval.equals=" + UPDATED_LECTURE_INTERVAL);
+    }
+
+    @Test
+    @Transactional
+    void getAllClazzesByLectureIntervalIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        clazzRepository.saveAndFlush(clazz);
+
+        // Get all the clazzList where lectureInterval not equals to DEFAULT_LECTURE_INTERVAL
+        defaultClazzShouldNotBeFound("lectureInterval.notEquals=" + DEFAULT_LECTURE_INTERVAL);
+
+        // Get all the clazzList where lectureInterval not equals to UPDATED_LECTURE_INTERVAL
+        defaultClazzShouldBeFound("lectureInterval.notEquals=" + UPDATED_LECTURE_INTERVAL);
+    }
+
+    @Test
+    @Transactional
+    void getAllClazzesByLectureIntervalIsInShouldWork() throws Exception {
+        // Initialize the database
+        clazzRepository.saveAndFlush(clazz);
+
+        // Get all the clazzList where lectureInterval in DEFAULT_LECTURE_INTERVAL or UPDATED_LECTURE_INTERVAL
+        defaultClazzShouldBeFound("lectureInterval.in=" + DEFAULT_LECTURE_INTERVAL + "," + UPDATED_LECTURE_INTERVAL);
+
+        // Get all the clazzList where lectureInterval equals to UPDATED_LECTURE_INTERVAL
+        defaultClazzShouldNotBeFound("lectureInterval.in=" + UPDATED_LECTURE_INTERVAL);
+    }
+
+    @Test
+    @Transactional
+    void getAllClazzesByLectureIntervalIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        clazzRepository.saveAndFlush(clazz);
+
+        // Get all the clazzList where lectureInterval is not null
+        defaultClazzShouldBeFound("lectureInterval.specified=true");
+
+        // Get all the clazzList where lectureInterval is null
+        defaultClazzShouldNotBeFound("lectureInterval.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllClazzesByLectureIntervalIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        clazzRepository.saveAndFlush(clazz);
+
+        // Get all the clazzList where lectureInterval is greater than or equal to DEFAULT_LECTURE_INTERVAL
+        defaultClazzShouldBeFound("lectureInterval.greaterThanOrEqual=" + DEFAULT_LECTURE_INTERVAL);
+
+        // Get all the clazzList where lectureInterval is greater than or equal to UPDATED_LECTURE_INTERVAL
+        defaultClazzShouldNotBeFound("lectureInterval.greaterThanOrEqual=" + UPDATED_LECTURE_INTERVAL);
+    }
+
+    @Test
+    @Transactional
+    void getAllClazzesByLectureIntervalIsLessThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        clazzRepository.saveAndFlush(clazz);
+
+        // Get all the clazzList where lectureInterval is less than or equal to DEFAULT_LECTURE_INTERVAL
+        defaultClazzShouldBeFound("lectureInterval.lessThanOrEqual=" + DEFAULT_LECTURE_INTERVAL);
+
+        // Get all the clazzList where lectureInterval is less than or equal to SMALLER_LECTURE_INTERVAL
+        defaultClazzShouldNotBeFound("lectureInterval.lessThanOrEqual=" + SMALLER_LECTURE_INTERVAL);
+    }
+
+    @Test
+    @Transactional
+    void getAllClazzesByLectureIntervalIsLessThanSomething() throws Exception {
+        // Initialize the database
+        clazzRepository.saveAndFlush(clazz);
+
+        // Get all the clazzList where lectureInterval is less than DEFAULT_LECTURE_INTERVAL
+        defaultClazzShouldNotBeFound("lectureInterval.lessThan=" + DEFAULT_LECTURE_INTERVAL);
+
+        // Get all the clazzList where lectureInterval is less than UPDATED_LECTURE_INTERVAL
+        defaultClazzShouldBeFound("lectureInterval.lessThan=" + UPDATED_LECTURE_INTERVAL);
+    }
+
+    @Test
+    @Transactional
+    void getAllClazzesByLectureIntervalIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        clazzRepository.saveAndFlush(clazz);
+
+        // Get all the clazzList where lectureInterval is greater than DEFAULT_LECTURE_INTERVAL
+        defaultClazzShouldNotBeFound("lectureInterval.greaterThan=" + DEFAULT_LECTURE_INTERVAL);
+
+        // Get all the clazzList where lectureInterval is greater than SMALLER_LECTURE_INTERVAL
+        defaultClazzShouldBeFound("lectureInterval.greaterThan=" + SMALLER_LECTURE_INTERVAL);
     }
 
     @Test
@@ -722,6 +1256,110 @@ class ClazzResourceIT {
 
         // Get all the clazzList where calculation is greater than SMALLER_CALCULATION
         defaultClazzShouldBeFound("calculation.greaterThan=" + SMALLER_CALCULATION);
+    }
+
+    @Test
+    @Transactional
+    void getAllClazzesByIsViewIsEqualToSomething() throws Exception {
+        // Initialize the database
+        clazzRepository.saveAndFlush(clazz);
+
+        // Get all the clazzList where isView equals to DEFAULT_IS_VIEW
+        defaultClazzShouldBeFound("isView.equals=" + DEFAULT_IS_VIEW);
+
+        // Get all the clazzList where isView equals to UPDATED_IS_VIEW
+        defaultClazzShouldNotBeFound("isView.equals=" + UPDATED_IS_VIEW);
+    }
+
+    @Test
+    @Transactional
+    void getAllClazzesByIsViewIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        clazzRepository.saveAndFlush(clazz);
+
+        // Get all the clazzList where isView not equals to DEFAULT_IS_VIEW
+        defaultClazzShouldNotBeFound("isView.notEquals=" + DEFAULT_IS_VIEW);
+
+        // Get all the clazzList where isView not equals to UPDATED_IS_VIEW
+        defaultClazzShouldBeFound("isView.notEquals=" + UPDATED_IS_VIEW);
+    }
+
+    @Test
+    @Transactional
+    void getAllClazzesByIsViewIsInShouldWork() throws Exception {
+        // Initialize the database
+        clazzRepository.saveAndFlush(clazz);
+
+        // Get all the clazzList where isView in DEFAULT_IS_VIEW or UPDATED_IS_VIEW
+        defaultClazzShouldBeFound("isView.in=" + DEFAULT_IS_VIEW + "," + UPDATED_IS_VIEW);
+
+        // Get all the clazzList where isView equals to UPDATED_IS_VIEW
+        defaultClazzShouldNotBeFound("isView.in=" + UPDATED_IS_VIEW);
+    }
+
+    @Test
+    @Transactional
+    void getAllClazzesByIsViewIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        clazzRepository.saveAndFlush(clazz);
+
+        // Get all the clazzList where isView is not null
+        defaultClazzShouldBeFound("isView.specified=true");
+
+        // Get all the clazzList where isView is null
+        defaultClazzShouldNotBeFound("isView.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllClazzesByIsSellIsEqualToSomething() throws Exception {
+        // Initialize the database
+        clazzRepository.saveAndFlush(clazz);
+
+        // Get all the clazzList where isSell equals to DEFAULT_IS_SELL
+        defaultClazzShouldBeFound("isSell.equals=" + DEFAULT_IS_SELL);
+
+        // Get all the clazzList where isSell equals to UPDATED_IS_SELL
+        defaultClazzShouldNotBeFound("isSell.equals=" + UPDATED_IS_SELL);
+    }
+
+    @Test
+    @Transactional
+    void getAllClazzesByIsSellIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        clazzRepository.saveAndFlush(clazz);
+
+        // Get all the clazzList where isSell not equals to DEFAULT_IS_SELL
+        defaultClazzShouldNotBeFound("isSell.notEquals=" + DEFAULT_IS_SELL);
+
+        // Get all the clazzList where isSell not equals to UPDATED_IS_SELL
+        defaultClazzShouldBeFound("isSell.notEquals=" + UPDATED_IS_SELL);
+    }
+
+    @Test
+    @Transactional
+    void getAllClazzesByIsSellIsInShouldWork() throws Exception {
+        // Initialize the database
+        clazzRepository.saveAndFlush(clazz);
+
+        // Get all the clazzList where isSell in DEFAULT_IS_SELL or UPDATED_IS_SELL
+        defaultClazzShouldBeFound("isSell.in=" + DEFAULT_IS_SELL + "," + UPDATED_IS_SELL);
+
+        // Get all the clazzList where isSell equals to UPDATED_IS_SELL
+        defaultClazzShouldNotBeFound("isSell.in=" + UPDATED_IS_SELL);
+    }
+
+    @Test
+    @Transactional
+    void getAllClazzesByIsSellIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        clazzRepository.saveAndFlush(clazz);
+
+        // Get all the clazzList where isSell is not null
+        defaultClazzShouldBeFound("isSell.specified=true");
+
+        // Get all the clazzList where isSell is null
+        defaultClazzShouldNotBeFound("isSell.specified=false");
     }
 
     @Test
@@ -1066,10 +1704,18 @@ class ClazzResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(clazz.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE)))
+            .andExpect(jsonPath("$.[*].mainImageFileUrl").value(hasItem(DEFAULT_MAIN_IMAGE_FILE_URL)))
             .andExpect(jsonPath("$.[*].level").value(hasItem(DEFAULT_LEVEL)))
             .andExpect(jsonPath("$.[*].enableLecture").value(hasItem(DEFAULT_ENABLE_LECTURE.booleanValue())))
+            .andExpect(jsonPath("$.[*].freeLecture").value(hasItem(DEFAULT_FREE_LECTURE.booleanValue())))
+            .andExpect(jsonPath("$.[*].priceLecture").value(hasItem(DEFAULT_PRICE_LECTURE.intValue())))
+            .andExpect(jsonPath("$.[*].priceUnitLecture").value(hasItem(DEFAULT_PRICE_UNIT_LECTURE)))
+            .andExpect(jsonPath("$.[*].lectureStartDateFrom").value(hasItem(DEFAULT_LECTURE_START_DATE_FROM.toString())))
+            .andExpect(jsonPath("$.[*].lectureInterval").value(hasItem(DEFAULT_LECTURE_INTERVAL)))
             .andExpect(jsonPath("$.[*].lecturer").value(hasItem(DEFAULT_LECTURER)))
             .andExpect(jsonPath("$.[*].calculation").value(hasItem(DEFAULT_CALCULATION)))
+            .andExpect(jsonPath("$.[*].isView").value(hasItem(DEFAULT_IS_VIEW.booleanValue())))
+            .andExpect(jsonPath("$.[*].isSell").value(hasItem(DEFAULT_IS_SELL.booleanValue())))
             .andExpect(jsonPath("$.[*].activated").value(hasItem(DEFAULT_ACTIVATED.booleanValue())))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
             .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
@@ -1125,10 +1771,18 @@ class ClazzResourceIT {
         updatedClazz
             .name(UPDATED_NAME)
             .type(UPDATED_TYPE)
+            .mainImageFileUrl(UPDATED_MAIN_IMAGE_FILE_URL)
             .level(UPDATED_LEVEL)
             .enableLecture(UPDATED_ENABLE_LECTURE)
+            .freeLecture(UPDATED_FREE_LECTURE)
+            .priceLecture(UPDATED_PRICE_LECTURE)
+            .priceUnitLecture(UPDATED_PRICE_UNIT_LECTURE)
+            .lectureStartDateFrom(UPDATED_LECTURE_START_DATE_FROM)
+            .lectureInterval(UPDATED_LECTURE_INTERVAL)
             .lecturer(UPDATED_LECTURER)
             .calculation(UPDATED_CALCULATION)
+            .isView(UPDATED_IS_VIEW)
+            .isSell(UPDATED_IS_SELL)
             .activated(UPDATED_ACTIVATED)
             .createdBy(UPDATED_CREATED_BY)
             .createdDate(UPDATED_CREATED_DATE)
@@ -1150,10 +1804,18 @@ class ClazzResourceIT {
         Clazz testClazz = clazzList.get(clazzList.size() - 1);
         assertThat(testClazz.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testClazz.getType()).isEqualTo(UPDATED_TYPE);
+        assertThat(testClazz.getMainImageFileUrl()).isEqualTo(UPDATED_MAIN_IMAGE_FILE_URL);
         assertThat(testClazz.getLevel()).isEqualTo(UPDATED_LEVEL);
         assertThat(testClazz.getEnableLecture()).isEqualTo(UPDATED_ENABLE_LECTURE);
+        assertThat(testClazz.getFreeLecture()).isEqualTo(UPDATED_FREE_LECTURE);
+        assertThat(testClazz.getPriceLecture()).isEqualTo(UPDATED_PRICE_LECTURE);
+        assertThat(testClazz.getPriceUnitLecture()).isEqualTo(UPDATED_PRICE_UNIT_LECTURE);
+        assertThat(testClazz.getLectureStartDateFrom()).isEqualTo(UPDATED_LECTURE_START_DATE_FROM);
+        assertThat(testClazz.getLectureInterval()).isEqualTo(UPDATED_LECTURE_INTERVAL);
         assertThat(testClazz.getLecturer()).isEqualTo(UPDATED_LECTURER);
         assertThat(testClazz.getCalculation()).isEqualTo(UPDATED_CALCULATION);
+        assertThat(testClazz.getIsView()).isEqualTo(UPDATED_IS_VIEW);
+        assertThat(testClazz.getIsSell()).isEqualTo(UPDATED_IS_SELL);
         assertThat(testClazz.getActivated()).isEqualTo(UPDATED_ACTIVATED);
         assertThat(testClazz.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
         assertThat(testClazz.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);
@@ -1240,11 +1902,14 @@ class ClazzResourceIT {
 
         partialUpdatedClazz
             .name(UPDATED_NAME)
+            .mainImageFileUrl(UPDATED_MAIN_IMAGE_FILE_URL)
             .level(UPDATED_LEVEL)
             .enableLecture(UPDATED_ENABLE_LECTURE)
+            .priceLecture(UPDATED_PRICE_LECTURE)
+            .priceUnitLecture(UPDATED_PRICE_UNIT_LECTURE)
             .lecturer(UPDATED_LECTURER)
+            .isView(UPDATED_IS_VIEW)
             .activated(UPDATED_ACTIVATED)
-            .createdBy(UPDATED_CREATED_BY)
             .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE);
 
         restClazzMockMvc
@@ -1261,12 +1926,20 @@ class ClazzResourceIT {
         Clazz testClazz = clazzList.get(clazzList.size() - 1);
         assertThat(testClazz.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testClazz.getType()).isEqualTo(DEFAULT_TYPE);
+        assertThat(testClazz.getMainImageFileUrl()).isEqualTo(UPDATED_MAIN_IMAGE_FILE_URL);
         assertThat(testClazz.getLevel()).isEqualTo(UPDATED_LEVEL);
         assertThat(testClazz.getEnableLecture()).isEqualTo(UPDATED_ENABLE_LECTURE);
+        assertThat(testClazz.getFreeLecture()).isEqualTo(DEFAULT_FREE_LECTURE);
+        assertThat(testClazz.getPriceLecture()).isEqualTo(UPDATED_PRICE_LECTURE);
+        assertThat(testClazz.getPriceUnitLecture()).isEqualTo(UPDATED_PRICE_UNIT_LECTURE);
+        assertThat(testClazz.getLectureStartDateFrom()).isEqualTo(DEFAULT_LECTURE_START_DATE_FROM);
+        assertThat(testClazz.getLectureInterval()).isEqualTo(DEFAULT_LECTURE_INTERVAL);
         assertThat(testClazz.getLecturer()).isEqualTo(UPDATED_LECTURER);
         assertThat(testClazz.getCalculation()).isEqualTo(DEFAULT_CALCULATION);
+        assertThat(testClazz.getIsView()).isEqualTo(UPDATED_IS_VIEW);
+        assertThat(testClazz.getIsSell()).isEqualTo(DEFAULT_IS_SELL);
         assertThat(testClazz.getActivated()).isEqualTo(UPDATED_ACTIVATED);
-        assertThat(testClazz.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
+        assertThat(testClazz.getCreatedBy()).isEqualTo(DEFAULT_CREATED_BY);
         assertThat(testClazz.getCreatedDate()).isEqualTo(DEFAULT_CREATED_DATE);
         assertThat(testClazz.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
         assertThat(testClazz.getLastModifiedDate()).isEqualTo(UPDATED_LAST_MODIFIED_DATE);
@@ -1287,10 +1960,18 @@ class ClazzResourceIT {
         partialUpdatedClazz
             .name(UPDATED_NAME)
             .type(UPDATED_TYPE)
+            .mainImageFileUrl(UPDATED_MAIN_IMAGE_FILE_URL)
             .level(UPDATED_LEVEL)
             .enableLecture(UPDATED_ENABLE_LECTURE)
+            .freeLecture(UPDATED_FREE_LECTURE)
+            .priceLecture(UPDATED_PRICE_LECTURE)
+            .priceUnitLecture(UPDATED_PRICE_UNIT_LECTURE)
+            .lectureStartDateFrom(UPDATED_LECTURE_START_DATE_FROM)
+            .lectureInterval(UPDATED_LECTURE_INTERVAL)
             .lecturer(UPDATED_LECTURER)
             .calculation(UPDATED_CALCULATION)
+            .isView(UPDATED_IS_VIEW)
+            .isSell(UPDATED_IS_SELL)
             .activated(UPDATED_ACTIVATED)
             .createdBy(UPDATED_CREATED_BY)
             .createdDate(UPDATED_CREATED_DATE)
@@ -1311,10 +1992,18 @@ class ClazzResourceIT {
         Clazz testClazz = clazzList.get(clazzList.size() - 1);
         assertThat(testClazz.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testClazz.getType()).isEqualTo(UPDATED_TYPE);
+        assertThat(testClazz.getMainImageFileUrl()).isEqualTo(UPDATED_MAIN_IMAGE_FILE_URL);
         assertThat(testClazz.getLevel()).isEqualTo(UPDATED_LEVEL);
         assertThat(testClazz.getEnableLecture()).isEqualTo(UPDATED_ENABLE_LECTURE);
+        assertThat(testClazz.getFreeLecture()).isEqualTo(UPDATED_FREE_LECTURE);
+        assertThat(testClazz.getPriceLecture()).isEqualTo(UPDATED_PRICE_LECTURE);
+        assertThat(testClazz.getPriceUnitLecture()).isEqualTo(UPDATED_PRICE_UNIT_LECTURE);
+        assertThat(testClazz.getLectureStartDateFrom()).isEqualTo(UPDATED_LECTURE_START_DATE_FROM);
+        assertThat(testClazz.getLectureInterval()).isEqualTo(UPDATED_LECTURE_INTERVAL);
         assertThat(testClazz.getLecturer()).isEqualTo(UPDATED_LECTURER);
         assertThat(testClazz.getCalculation()).isEqualTo(UPDATED_CALCULATION);
+        assertThat(testClazz.getIsView()).isEqualTo(UPDATED_IS_VIEW);
+        assertThat(testClazz.getIsSell()).isEqualTo(UPDATED_IS_SELL);
         assertThat(testClazz.getActivated()).isEqualTo(UPDATED_ACTIVATED);
         assertThat(testClazz.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
         assertThat(testClazz.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);

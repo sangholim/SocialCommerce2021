@@ -7,14 +7,20 @@
                         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
     <!--
-        Added the entity ProductView.
+        Added the entity ProductViewContent.
     -->
-    <changeSet id="20210626074208-1" author="jhipster">
-        <createTable tableName="product_view">
+    <changeSet id="20210703062422-1" author="jhipster">
+        <createTable tableName="product_view_content">
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="name" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="content" type="${clobType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="is_detail" type="boolean">
                 <constraints nullable="true" />
             </column>
             <column name="activated" type="boolean">
@@ -32,10 +38,13 @@
             <column name="last_modified_date" type="${datetimeType}">
                 <constraints nullable="true" />
             </column>
+            <column name="product_view_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
-        <dropDefaultValue tableName="product_view" columnName="created_date" columnDataType="${datetimeType}"/>
-        <dropDefaultValue tableName="product_view" columnName="last_modified_date" columnDataType="${datetimeType}"/>
+        <dropDefaultValue tableName="product_view_content" columnName="created_date" columnDataType="${datetimeType}"/>
+        <dropDefaultValue tableName="product_view_content" columnName="last_modified_date" columnDataType="${datetimeType}"/>
     </changeSet>
 
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
@@ -48,13 +57,15 @@
           This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
           Spring Boot configuration key.
     -->
-    <changeSet id="20210626074208-1-data" author="jhipster" context="faker">
+    <changeSet id="20210703062422-1-data" author="jhipster" context="faker">
         <loadData
-                  file="config/liquibase/fake-data/product_view.csv"
+                  file="config/liquibase/fake-data/product_view_content.csv"
                   separator=";"
-                  tableName="product_view">
+                  tableName="product_view_content">
             <column name="id" type="numeric"/>
             <column name="name" type="string"/>
+            <column name="content" type="clob"/>
+            <column name="is_detail" type="boolean"/>
             <column name="activated" type="boolean"/>
             <column name="created_by" type="string"/>
             <column name="created_date" type="${datetimeType}"/>

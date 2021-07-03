@@ -13,15 +13,15 @@ import tech.jhipster.service.filter.LongFilter;
 import tech.jhipster.service.filter.StringFilter;
 
 /**
- * Criteria class for the {@link com.toy.project.domain.ProductTemplate} entity. This class is used
- * in {@link com.toy.project.web.rest.ProductTemplateResource} to receive all the possible filtering options from
+ * Criteria class for the {@link com.toy.project.domain.ProductViewContent} entity. This class is used
+ * in {@link com.toy.project.web.rest.ProductViewContentResource} to receive all the possible filtering options from
  * the Http GET request parameters.
  * For example the following could be a valid request:
- * {@code /product-templates?id.greaterThan=5&attr1.contains=something&attr2.specified=false}
+ * {@code /product-view-contents?id.greaterThan=5&attr1.contains=something&attr2.specified=false}
  * As Spring is unable to properly convert the types, unless specific {@link Filter} class are used, we need to use
  * fix type specific filters.
  */
-public class ProductTemplateCriteria implements Serializable, Criteria {
+public class ProductViewContentCriteria implements Serializable, Criteria {
 
     private static final long serialVersionUID = 1L;
 
@@ -29,9 +29,7 @@ public class ProductTemplateCriteria implements Serializable, Criteria {
 
     private StringFilter name;
 
-    private StringFilter type;
-
-    private StringFilter contentFileUrl;
+    private BooleanFilter isDetail;
 
     private BooleanFilter activated;
 
@@ -43,26 +41,25 @@ public class ProductTemplateCriteria implements Serializable, Criteria {
 
     private InstantFilter lastModifiedDate;
 
-    private LongFilter productTemplateRelId;
+    private LongFilter productViewId;
 
-    public ProductTemplateCriteria() {}
+    public ProductViewContentCriteria() {}
 
-    public ProductTemplateCriteria(ProductTemplateCriteria other) {
+    public ProductViewContentCriteria(ProductViewContentCriteria other) {
         this.id = other.id == null ? null : other.id.copy();
         this.name = other.name == null ? null : other.name.copy();
-        this.type = other.type == null ? null : other.type.copy();
-        this.contentFileUrl = other.contentFileUrl == null ? null : other.contentFileUrl.copy();
+        this.isDetail = other.isDetail == null ? null : other.isDetail.copy();
         this.activated = other.activated == null ? null : other.activated.copy();
         this.createdBy = other.createdBy == null ? null : other.createdBy.copy();
         this.createdDate = other.createdDate == null ? null : other.createdDate.copy();
         this.lastModifiedBy = other.lastModifiedBy == null ? null : other.lastModifiedBy.copy();
         this.lastModifiedDate = other.lastModifiedDate == null ? null : other.lastModifiedDate.copy();
-        this.productTemplateRelId = other.productTemplateRelId == null ? null : other.productTemplateRelId.copy();
+        this.productViewId = other.productViewId == null ? null : other.productViewId.copy();
     }
 
     @Override
-    public ProductTemplateCriteria copy() {
-        return new ProductTemplateCriteria(this);
+    public ProductViewContentCriteria copy() {
+        return new ProductViewContentCriteria(this);
     }
 
     public LongFilter getId() {
@@ -95,34 +92,19 @@ public class ProductTemplateCriteria implements Serializable, Criteria {
         this.name = name;
     }
 
-    public StringFilter getType() {
-        return type;
+    public BooleanFilter getIsDetail() {
+        return isDetail;
     }
 
-    public StringFilter type() {
-        if (type == null) {
-            type = new StringFilter();
+    public BooleanFilter isDetail() {
+        if (isDetail == null) {
+            isDetail = new BooleanFilter();
         }
-        return type;
+        return isDetail;
     }
 
-    public void setType(StringFilter type) {
-        this.type = type;
-    }
-
-    public StringFilter getContentFileUrl() {
-        return contentFileUrl;
-    }
-
-    public StringFilter contentFileUrl() {
-        if (contentFileUrl == null) {
-            contentFileUrl = new StringFilter();
-        }
-        return contentFileUrl;
-    }
-
-    public void setContentFileUrl(StringFilter contentFileUrl) {
-        this.contentFileUrl = contentFileUrl;
+    public void setIsDetail(BooleanFilter isDetail) {
+        this.isDetail = isDetail;
     }
 
     public BooleanFilter getActivated() {
@@ -200,19 +182,19 @@ public class ProductTemplateCriteria implements Serializable, Criteria {
         this.lastModifiedDate = lastModifiedDate;
     }
 
-    public LongFilter getProductTemplateRelId() {
-        return productTemplateRelId;
+    public LongFilter getProductViewId() {
+        return productViewId;
     }
 
-    public LongFilter productTemplateRelId() {
-        if (productTemplateRelId == null) {
-            productTemplateRelId = new LongFilter();
+    public LongFilter productViewId() {
+        if (productViewId == null) {
+            productViewId = new LongFilter();
         }
-        return productTemplateRelId;
+        return productViewId;
     }
 
-    public void setProductTemplateRelId(LongFilter productTemplateRelId) {
-        this.productTemplateRelId = productTemplateRelId;
+    public void setProductViewId(LongFilter productViewId) {
+        this.productViewId = productViewId;
     }
 
     @Override
@@ -223,51 +205,38 @@ public class ProductTemplateCriteria implements Serializable, Criteria {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        final ProductTemplateCriteria that = (ProductTemplateCriteria) o;
+        final ProductViewContentCriteria that = (ProductViewContentCriteria) o;
         return (
             Objects.equals(id, that.id) &&
             Objects.equals(name, that.name) &&
-            Objects.equals(type, that.type) &&
-            Objects.equals(contentFileUrl, that.contentFileUrl) &&
+            Objects.equals(isDetail, that.isDetail) &&
             Objects.equals(activated, that.activated) &&
             Objects.equals(createdBy, that.createdBy) &&
             Objects.equals(createdDate, that.createdDate) &&
             Objects.equals(lastModifiedBy, that.lastModifiedBy) &&
             Objects.equals(lastModifiedDate, that.lastModifiedDate) &&
-            Objects.equals(productTemplateRelId, that.productTemplateRelId)
+            Objects.equals(productViewId, that.productViewId)
         );
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(
-            id,
-            name,
-            type,
-            contentFileUrl,
-            activated,
-            createdBy,
-            createdDate,
-            lastModifiedBy,
-            lastModifiedDate,
-            productTemplateRelId
-        );
+        return Objects.hash(id, name, isDetail, activated, createdBy, createdDate, lastModifiedBy, lastModifiedDate, productViewId);
     }
 
     // prettier-ignore
     @Override
     public String toString() {
-        return "ProductTemplateCriteria{" +
+        return "ProductViewContentCriteria{" +
             (id != null ? "id=" + id + ", " : "") +
             (name != null ? "name=" + name + ", " : "") +
-            (type != null ? "type=" + type + ", " : "") +
-            (contentFileUrl != null ? "contentFileUrl=" + contentFileUrl + ", " : "") +
+            (isDetail != null ? "isDetail=" + isDetail + ", " : "") +
             (activated != null ? "activated=" + activated + ", " : "") +
             (createdBy != null ? "createdBy=" + createdBy + ", " : "") +
             (createdDate != null ? "createdDate=" + createdDate + ", " : "") +
             (lastModifiedBy != null ? "lastModifiedBy=" + lastModifiedBy + ", " : "") +
             (lastModifiedDate != null ? "lastModifiedDate=" + lastModifiedDate + ", " : "") +
-            (productTemplateRelId != null ? "productTemplateRelId=" + productTemplateRelId + ", " : "") +
+            (productViewId != null ? "productViewId=" + productViewId + ", " : "") +
             "}";
     }
 }

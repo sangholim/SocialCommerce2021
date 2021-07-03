@@ -3,16 +3,22 @@ package com.toy.project.service.dto;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
+import javax.persistence.Lob;
 import javax.validation.constraints.*;
 
 /**
- * A DTO for the {@link com.toy.project.domain.ProductView} entity.
+ * A DTO for the {@link com.toy.project.domain.ProductViewContent} entity.
  */
-public class ProductViewDTO implements Serializable {
+public class ProductViewContentDTO implements Serializable {
 
     private Long id;
 
     private String name;
+
+    @Lob
+    private String content;
+
+    private Boolean isDetail;
 
     private Boolean activated;
 
@@ -25,6 +31,8 @@ public class ProductViewDTO implements Serializable {
     private String lastModifiedBy;
 
     private Instant lastModifiedDate;
+
+    private ProductViewDTO productView;
 
     public Long getId() {
         return id;
@@ -40,6 +48,22 @@ public class ProductViewDTO implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public Boolean getIsDetail() {
+        return isDetail;
+    }
+
+    public void setIsDetail(Boolean isDetail) {
+        this.isDetail = isDetail;
     }
 
     public Boolean getActivated() {
@@ -82,20 +106,28 @@ public class ProductViewDTO implements Serializable {
         this.lastModifiedDate = lastModifiedDate;
     }
 
+    public ProductViewDTO getProductView() {
+        return productView;
+    }
+
+    public void setProductView(ProductViewDTO productView) {
+        this.productView = productView;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof ProductViewDTO)) {
+        if (!(o instanceof ProductViewContentDTO)) {
             return false;
         }
 
-        ProductViewDTO productViewDTO = (ProductViewDTO) o;
+        ProductViewContentDTO productViewContentDTO = (ProductViewContentDTO) o;
         if (this.id == null) {
             return false;
         }
-        return Objects.equals(this.id, productViewDTO.id);
+        return Objects.equals(this.id, productViewContentDTO.id);
     }
 
     @Override
@@ -106,14 +138,17 @@ public class ProductViewDTO implements Serializable {
     // prettier-ignore
     @Override
     public String toString() {
-        return "ProductViewDTO{" +
+        return "ProductViewContentDTO{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
+            ", content='" + getContent() + "'" +
+            ", isDetail='" + getIsDetail() + "'" +
             ", activated='" + getActivated() + "'" +
             ", createdBy='" + getCreatedBy() + "'" +
             ", createdDate='" + getCreatedDate() + "'" +
             ", lastModifiedBy='" + getLastModifiedBy() + "'" +
             ", lastModifiedDate='" + getLastModifiedDate() + "'" +
+            ", productView=" + getProductView() +
             "}";
     }
 }

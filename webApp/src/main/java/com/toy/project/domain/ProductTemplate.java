@@ -27,9 +27,8 @@ public class ProductTemplate extends AbstractAuditingEntity implements Serializa
     @Column(name = "type")
     private String type;
 
-    @Lob
-    @Column(name = "content")
-    private String content;
+    @Column(name = "content_file_url")
+    private String contentFileUrl;
 
     @Column(name = "activated")
     private Boolean activated;
@@ -78,17 +77,17 @@ public class ProductTemplate extends AbstractAuditingEntity implements Serializa
         this.type = type;
     }
 
-    public String getContent() {
-        return this.content;
+    public String getContentFileUrl() {
+        return this.contentFileUrl;
     }
 
-    public ProductTemplate content(String content) {
-        this.content = content;
+    public ProductTemplate contentFileUrl(String contentFileUrl) {
+        this.contentFileUrl = contentFileUrl;
         return this;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setContentFileUrl(String contentFileUrl) {
+        this.contentFileUrl = contentFileUrl;
     }
 
     public Boolean getActivated() {
@@ -133,6 +132,18 @@ public class ProductTemplate extends AbstractAuditingEntity implements Serializa
         return this;
     }
 
+    public ProductTemplate addProductTemplateRel(ProductTemplateRel productTemplateRel) {
+        this.productTemplateRels.add(productTemplateRel);
+        productTemplateRel.setProductTemplate(this);
+        return this;
+    }
+
+    public ProductTemplate removeProductTemplateRel(ProductTemplateRel productTemplateRel) {
+        this.productTemplateRels.remove(productTemplateRel);
+        productTemplateRel.setProductTemplate(null);
+        return this;
+    }
+
     public void setProductTemplateRels(Set<ProductTemplateRel> productTemplateRels) {
         if (this.productTemplateRels != null) {
             this.productTemplateRels.forEach(i -> i.setProductTemplate(null));
@@ -169,7 +180,7 @@ public class ProductTemplate extends AbstractAuditingEntity implements Serializa
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", type='" + getType() + "'" +
-            ", content='" + getContent() + "'" +
+            ", contentFileUrl='" + getContentFileUrl() + "'" +
             ", activated='" + getActivated() + "'" +
             ", createdBy='" + getCreatedBy() + "'" +
             ", createdDate='" + getCreatedDate() + "'" +

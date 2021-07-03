@@ -10,9 +10,8 @@
       "fieldType": "String"
     },
     {
-      "fieldName": "content",
-      "fieldType": "byte[]",
-      "fieldTypeBlobContent": "text"
+      "fieldName": "contentFileUrl",
+      "fieldType": "String"
     },
     {
       "fieldName": "activated",

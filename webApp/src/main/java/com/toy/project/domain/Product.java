@@ -12,6 +12,33 @@ import javax.validation.constraints.*;
  * A Product.
  */
 @Entity
+@NamedEntityGraph(
+    name = "graph.product.productCategory",
+    attributeNodes = {
+        @NamedAttributeNode(value = "productCategoryRels", subgraph = "productCategoryRels"),
+        @NamedAttributeNode(value = "productLabelRels", subgraph = "productLabelRels"),
+        @NamedAttributeNode(value = "productMappingRels", subgraph = "productMappingRels"),
+        @NamedAttributeNode(value = "productTemplateRels", subgraph = "productTemplateRels"),
+        @NamedAttributeNode(value = "productViewRels", subgraph = "productViewRels"),
+        @NamedAttributeNode(value = "productNoticeRels", subgraph = "productNoticeRels"),
+        @NamedAttributeNode(value = "productShippingRels", subgraph = "productShippingRels"),
+        @NamedAttributeNode(value = "productOptionRels", subgraph = "productOptionRels"),
+        @NamedAttributeNode(value = "productClazzRels", subgraph = "productClazzRels"),
+        @NamedAttributeNode(value = "productStoreRels", subgraph = "productStoreRels"),
+    },
+    subgraphs = {
+        @NamedSubgraph(name = "productCategoryRels", attributeNodes = @NamedAttributeNode("productCategory")),
+        @NamedSubgraph(name = "productLabelRels", attributeNodes = @NamedAttributeNode("productLabel")),
+        @NamedSubgraph(name = "productMappingRels", attributeNodes = @NamedAttributeNode("productMapping")),
+        @NamedSubgraph(name = "productTemplateRels", attributeNodes = @NamedAttributeNode("productTemplate")),
+        @NamedSubgraph(name = "productViewRels", attributeNodes = @NamedAttributeNode("productView")),
+        @NamedSubgraph(name = "productNoticeRels", attributeNodes = @NamedAttributeNode("productNotice")),
+        @NamedSubgraph(name = "productShippingRels", attributeNodes = @NamedAttributeNode("productShipping")),
+        @NamedSubgraph(name = "productOptionRels", attributeNodes = @NamedAttributeNode("productOption")),
+        @NamedSubgraph(name = "productClazzRels", attributeNodes = @NamedAttributeNode("clazz")),
+        @NamedSubgraph(name = "productStoreRels", attributeNodes = @NamedAttributeNode("store")),
+    }
+)
 @Table(name = "product")
 public class Product extends AbstractAuditingEntity implements Serializable {
 

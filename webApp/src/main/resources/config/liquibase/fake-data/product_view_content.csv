@@ -1,0 +1,11 @@
+id;name;content;is_detail;activated;created_by;created_date;last_modified_by;last_modified_date
+1;copying Ariary;../fake-data/blob/hipster.txt;true;true;Malawi next-generation;2021-07-03T01:57:41;Fresh;2021-07-02T11:16:03
+2;Coordinator;../fake-data/blob/hipster.txt;true;false;Coordinator blue;2021-07-03T04:21:55;Identity context-sensitive;2021-07-02T22:47:44
+3;광주 COM redundant;../fake-data/blob/hipster.txt;true;true;yellow;2021-07-02T22:08:03;Account;2021-07-03T01:24:55
+4;back-end 동;../fake-data/blob/hipster.txt;true;false;Tools green;2021-07-02T08:35:48;payment;2021-07-03T03:36:01
+5;Web connecting monitor;../fake-data/blob/hipster.txt;false;false;transition Hat Borders;2021-07-02T13:08:45;back-end auxiliary Checking;2021-07-02T11:25:33
+6;Incredible;../fake-data/blob/hipster.txt;false;false;impactful Avon;2021-07-02T09:59:02;경남;2021-07-03T05:23:29
+7;Frozen Turkish hard;../fake-data/blob/hipster.txt;true;true;bus synergistic Argentine;2021-07-02T07:35:51;XSS;2021-07-03T01:27:42
+8;Web Fresh;../fake-data/blob/hipster.txt;true;false;CFA;2021-07-02T13:12:06;Gorgeous Strategist e-markets;2021-07-03T02:50:40
+9;Networked;../fake-data/blob/hipster.txt;false;false;Awesome;2021-07-02T23:49:10;JBOD Cheese integrated;2021-07-03T06:03:23
+10;Berkshire Zloty;../fake-data/blob/hipster.txt;true;false;azure;2021-07-02T11:50:33;Hungary redefine;2021-07-02T13:28:09

@@ -92,6 +92,9 @@ public class ProductTemplateQueryService extends QueryService<ProductTemplate> {
             if (criteria.getType() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getType(), ProductTemplate_.type));
             }
+            if (criteria.getContentFileUrl() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getContentFileUrl(), ProductTemplate_.contentFileUrl));
+            }
             if (criteria.getActivated() != null) {
                 specification = specification.and(buildSpecification(criteria.getActivated(), ProductTemplate_.activated));
             }

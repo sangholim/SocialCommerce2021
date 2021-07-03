@@ -86,7 +86,8 @@ public class ProductService {
     @Transactional(readOnly = true)
     public Optional<ProductVM> findOne(Long id) {
         log.debug("Request to get Product : {}", id);
-        return productRepository.findById(id).map(ProductVM::new);
+
+        return Optional.of(productRepository.findOneById(id)).map(ProductVM::new);
     }
 
     /**

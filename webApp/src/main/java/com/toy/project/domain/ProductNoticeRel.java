@@ -22,7 +22,7 @@ public class ProductNoticeRel extends AbstractAuditingEntity implements Serializ
     @Column(name = "activated")
     private Boolean activated;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
         value = {
             "productCategoryRels",
@@ -40,7 +40,7 @@ public class ProductNoticeRel extends AbstractAuditingEntity implements Serializ
     )
     private Product product;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value = { "productNoticeRels" }, allowSetters = true)
     private ProductNotice productNotice;
 

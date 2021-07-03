@@ -161,10 +161,18 @@ entity ProductStoreRel {
 entity Clazz {
   name String,
   type String,
+  mainImageFileUrl	String,
   level String,
   enableLecture Boolean,
+  freeLecture	Boolean,
+  priceLecture	Long,
+  priceUnitLecture	String,
+  lectureStartDateFrom	Instant,
+  lectureInterval	Integer,
   lecturer String,
   calculation Integer,
+  isView	Boolean,
+  isSell	Boolean,
   activated Boolean,
   createdBy	String maxlength(50),
   createdDate	Instant,
@@ -235,7 +243,15 @@ entity ProductLabelRel {
 
 entity ProductView {
   name String,
-  type String,
+  activated Boolean,
+  createdBy	String maxlength(50),
+  createdDate	Instant,
+  lastModifiedBy	String maxlength(50),
+  lastModifiedDate	Instant
+}
+
+entity ProductViewContent {
+  name String,
   content TextBlob,
   isDetail Boolean,
   activated Boolean,
@@ -284,7 +300,7 @@ entity ProductShippingRel {
 entity ProductTemplate {
   name String,
   type String,
-  content  TextBlob,
+  contentFileUrl  String,
   activated Boolean,
   createdBy	String maxlength(50),
   createdDate	Instant,
@@ -305,7 +321,13 @@ entity ProductTemplateRel {
 entity ProductNotice {
   name String,
   type String,
-  content  TextBlob,
+  contentFileUrl  String,
+  priorityDisplay	Boolean,
+  allProductDisplay	Boolean,
+  target String,
+  enableDisplayDate	Boolean,
+  displayDateFrom	Instant,
+  displayDateTo	Instant,
   activated Boolean,
   createdBy	String maxlength(50),
   createdDate	Instant,
@@ -391,6 +413,8 @@ relationship OneToMany {
     // 상품 옵션 - 옵션 디자인
     ProductOption{productOptionDesignRel} to ProductOptionDesignRel
     OptionDesign{productOptionDesignRel} to ProductOptionDesignRel
+    // 상품 고시 - 상품 고시 내용
+    ProductView{productViewContent} to ProductViewContent
 
 }
 

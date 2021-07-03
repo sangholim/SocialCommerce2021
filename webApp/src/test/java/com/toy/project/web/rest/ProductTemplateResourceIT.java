@@ -29,7 +29,6 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Base64Utils;
 
 /**
  * Integration tests for the {@link ProductTemplateResource} REST controller.
@@ -46,8 +45,8 @@ class ProductTemplateResourceIT {
     private static final String DEFAULT_TYPE = "AAAAAAAAAA";
     private static final String UPDATED_TYPE = "BBBBBBBBBB";
 
-    private static final String DEFAULT_CONTENT = "AAAAAAAAAA";
-    private static final String UPDATED_CONTENT = "BBBBBBBBBB";
+    private static final String DEFAULT_CONTENT_FILE_URL = "AAAAAAAAAA";
+    private static final String UPDATED_CONTENT_FILE_URL = "BBBBBBBBBB";
 
     private static final Boolean DEFAULT_ACTIVATED = false;
     private static final Boolean UPDATED_ACTIVATED = true;
@@ -94,7 +93,7 @@ class ProductTemplateResourceIT {
         ProductTemplate productTemplate = new ProductTemplate()
             .name(DEFAULT_NAME)
             .type(DEFAULT_TYPE)
-            .content(DEFAULT_CONTENT)
+            .contentFileUrl(DEFAULT_CONTENT_FILE_URL)
             .activated(DEFAULT_ACTIVATED)
             .createdBy(DEFAULT_CREATED_BY)
             .createdDate(DEFAULT_CREATED_DATE)
@@ -113,7 +112,7 @@ class ProductTemplateResourceIT {
         ProductTemplate productTemplate = new ProductTemplate()
             .name(UPDATED_NAME)
             .type(UPDATED_TYPE)
-            .content(UPDATED_CONTENT)
+            .contentFileUrl(UPDATED_CONTENT_FILE_URL)
             .activated(UPDATED_ACTIVATED)
             .createdBy(UPDATED_CREATED_BY)
             .createdDate(UPDATED_CREATED_DATE)
@@ -145,7 +144,7 @@ class ProductTemplateResourceIT {
         ProductTemplate testProductTemplate = productTemplateList.get(productTemplateList.size() - 1);
         assertThat(testProductTemplate.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testProductTemplate.getType()).isEqualTo(DEFAULT_TYPE);
-        assertThat(testProductTemplate.getContent()).isEqualTo(DEFAULT_CONTENT);
+        assertThat(testProductTemplate.getContentFileUrl()).isEqualTo(DEFAULT_CONTENT_FILE_URL);
         assertThat(testProductTemplate.getActivated()).isEqualTo(DEFAULT_ACTIVATED);
         assertThat(testProductTemplate.getCreatedBy()).isEqualTo(DEFAULT_CREATED_BY);
         assertThat(testProductTemplate.getCreatedDate()).isEqualTo(DEFAULT_CREATED_DATE);
@@ -188,7 +187,7 @@ class ProductTemplateResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(productTemplate.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE)))
-            .andExpect(jsonPath("$.[*].content").value(hasItem(DEFAULT_CONTENT.toString())))
+            .andExpect(jsonPath("$.[*].contentFileUrl").value(hasItem(DEFAULT_CONTENT_FILE_URL)))
             .andExpect(jsonPath("$.[*].activated").value(hasItem(DEFAULT_ACTIVATED.booleanValue())))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
             .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
@@ -210,7 +209,7 @@ class ProductTemplateResourceIT {
             .andExpect(jsonPath("$.id").value(productTemplate.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.type").value(DEFAULT_TYPE))
-            .andExpect(jsonPath("$.content").value(DEFAULT_CONTENT.toString()))
+            .andExpect(jsonPath("$.contentFileUrl").value(DEFAULT_CONTENT_FILE_URL))
             .andExpect(jsonPath("$.activated").value(DEFAULT_ACTIVATED.booleanValue()))
             .andExpect(jsonPath("$.createdBy").value(DEFAULT_CREATED_BY))
             .andExpect(jsonPath("$.createdDate").value(DEFAULT_CREATED_DATE.toString()))
@@ -390,6 +389,84 @@ class ProductTemplateResourceIT {
 
         // Get all the productTemplateList where type does not contain UPDATED_TYPE
         defaultProductTemplateShouldBeFound("type.doesNotContain=" + UPDATED_TYPE);
+    }
+
+    @Test
+    @Transactional
+    void getAllProductTemplatesByContentFileUrlIsEqualToSomething() throws Exception {
+        // Initialize the database
+        productTemplateRepository.saveAndFlush(productTemplate);
+
+        // Get all the productTemplateList where contentFileUrl equals to DEFAULT_CONTENT_FILE_URL
+        defaultProductTemplateShouldBeFound("contentFileUrl.equals=" + DEFAULT_CONTENT_FILE_URL);
+
+        // Get all the productTemplateList where contentFileUrl equals to UPDATED_CONTENT_FILE_URL
+        defaultProductTemplateShouldNotBeFound("contentFileUrl.equals=" + UPDATED_CONTENT_FILE_URL);
+    }
+
+    @Test
+    @Transactional
+    void getAllProductTemplatesByContentFileUrlIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        productTemplateRepository.saveAndFlush(productTemplate);
+
+        // Get all the productTemplateList where contentFileUrl not equals to DEFAULT_CONTENT_FILE_URL
+        defaultProductTemplateShouldNotBeFound("contentFileUrl.notEquals=" + DEFAULT_CONTENT_FILE_URL);
+
+        // Get all the productTemplateList where contentFileUrl not equals to UPDATED_CONTENT_FILE_URL
+        defaultProductTemplateShouldBeFound("contentFileUrl.notEquals=" + UPDATED_CONTENT_FILE_URL);
+    }
+
+    @Test
+    @Transactional
+    void getAllProductTemplatesByContentFileUrlIsInShouldWork() throws Exception {
+        // Initialize the database
+        productTemplateRepository.saveAndFlush(productTemplate);
+
+        // Get all the productTemplateList where contentFileUrl in DEFAULT_CONTENT_FILE_URL or UPDATED_CONTENT_FILE_URL
+        defaultProductTemplateShouldBeFound("contentFileUrl.in=" + DEFAULT_CONTENT_FILE_URL + "," + UPDATED_CONTENT_FILE_URL);
+
+        // Get all the productTemplateList where contentFileUrl equals to UPDATED_CONTENT_FILE_URL
+        defaultProductTemplateShouldNotBeFound("contentFileUrl.in=" + UPDATED_CONTENT_FILE_URL);
+    }
+
+    @Test
+    @Transactional
+    void getAllProductTemplatesByContentFileUrlIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        productTemplateRepository.saveAndFlush(productTemplate);
+
+        // Get all the productTemplateList where contentFileUrl is not null
+        defaultProductTemplateShouldBeFound("contentFileUrl.specified=true");
+
+        // Get all the productTemplateList where contentFileUrl is null
+        defaultProductTemplateShouldNotBeFound("contentFileUrl.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllProductTemplatesByContentFileUrlContainsSomething() throws Exception {
+        // Initialize the database
+        productTemplateRepository.saveAndFlush(productTemplate);
+
+        // Get all the productTemplateList where contentFileUrl contains DEFAULT_CONTENT_FILE_URL
+        defaultProductTemplateShouldBeFound("contentFileUrl.contains=" + DEFAULT_CONTENT_FILE_URL);
+
+        // Get all the productTemplateList where contentFileUrl contains UPDATED_CONTENT_FILE_URL
+        defaultProductTemplateShouldNotBeFound("contentFileUrl.contains=" + UPDATED_CONTENT_FILE_URL);
+    }
+
+    @Test
+    @Transactional
+    void getAllProductTemplatesByContentFileUrlNotContainsSomething() throws Exception {
+        // Initialize the database
+        productTemplateRepository.saveAndFlush(productTemplate);
+
+        // Get all the productTemplateList where contentFileUrl does not contain DEFAULT_CONTENT_FILE_URL
+        defaultProductTemplateShouldNotBeFound("contentFileUrl.doesNotContain=" + DEFAULT_CONTENT_FILE_URL);
+
+        // Get all the productTemplateList where contentFileUrl does not contain UPDATED_CONTENT_FILE_URL
+        defaultProductTemplateShouldBeFound("contentFileUrl.doesNotContain=" + UPDATED_CONTENT_FILE_URL);
     }
 
     @Test
@@ -734,7 +811,7 @@ class ProductTemplateResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(productTemplate.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE)))
-            .andExpect(jsonPath("$.[*].content").value(hasItem(DEFAULT_CONTENT.toString())))
+            .andExpect(jsonPath("$.[*].contentFileUrl").value(hasItem(DEFAULT_CONTENT_FILE_URL)))
             .andExpect(jsonPath("$.[*].activated").value(hasItem(DEFAULT_ACTIVATED.booleanValue())))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
             .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
@@ -790,7 +867,7 @@ class ProductTemplateResourceIT {
         updatedProductTemplate
             .name(UPDATED_NAME)
             .type(UPDATED_TYPE)
-            .content(UPDATED_CONTENT)
+            .contentFileUrl(UPDATED_CONTENT_FILE_URL)
             .activated(UPDATED_ACTIVATED)
             .createdBy(UPDATED_CREATED_BY)
             .createdDate(UPDATED_CREATED_DATE)
@@ -812,7 +889,7 @@ class ProductTemplateResourceIT {
         ProductTemplate testProductTemplate = productTemplateList.get(productTemplateList.size() - 1);
         assertThat(testProductTemplate.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testProductTemplate.getType()).isEqualTo(UPDATED_TYPE);
-        assertThat(testProductTemplate.getContent()).isEqualTo(UPDATED_CONTENT);
+        assertThat(testProductTemplate.getContentFileUrl()).isEqualTo(UPDATED_CONTENT_FILE_URL);
         assertThat(testProductTemplate.getActivated()).isEqualTo(UPDATED_ACTIVATED);
         assertThat(testProductTemplate.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
         assertThat(testProductTemplate.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);
@@ -915,7 +992,7 @@ class ProductTemplateResourceIT {
         ProductTemplate testProductTemplate = productTemplateList.get(productTemplateList.size() - 1);
         assertThat(testProductTemplate.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testProductTemplate.getType()).isEqualTo(DEFAULT_TYPE);
-        assertThat(testProductTemplate.getContent()).isEqualTo(DEFAULT_CONTENT);
+        assertThat(testProductTemplate.getContentFileUrl()).isEqualTo(DEFAULT_CONTENT_FILE_URL);
         assertThat(testProductTemplate.getActivated()).isEqualTo(UPDATED_ACTIVATED);
         assertThat(testProductTemplate.getCreatedBy()).isEqualTo(DEFAULT_CREATED_BY);
         assertThat(testProductTemplate.getCreatedDate()).isEqualTo(DEFAULT_CREATED_DATE);
@@ -938,7 +1015,7 @@ class ProductTemplateResourceIT {
         partialUpdatedProductTemplate
             .name(UPDATED_NAME)
             .type(UPDATED_TYPE)
-            .content(UPDATED_CONTENT)
+            .contentFileUrl(UPDATED_CONTENT_FILE_URL)
             .activated(UPDATED_ACTIVATED)
             .createdBy(UPDATED_CREATED_BY)
             .createdDate(UPDATED_CREATED_DATE)
@@ -959,7 +1036,7 @@ class ProductTemplateResourceIT {
         ProductTemplate testProductTemplate = productTemplateList.get(productTemplateList.size() - 1);
         assertThat(testProductTemplate.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testProductTemplate.getType()).isEqualTo(UPDATED_TYPE);
-        assertThat(testProductTemplate.getContent()).isEqualTo(UPDATED_CONTENT);
+        assertThat(testProductTemplate.getContentFileUrl()).isEqualTo(UPDATED_CONTENT_FILE_URL);
         assertThat(testProductTemplate.getActivated()).isEqualTo(UPDATED_ACTIVATED);
         assertThat(testProductTemplate.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
         assertThat(testProductTemplate.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);

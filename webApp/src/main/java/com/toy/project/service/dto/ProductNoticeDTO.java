@@ -3,7 +3,6 @@ package com.toy.project.service.dto;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
-import javax.persistence.Lob;
 import javax.validation.constraints.*;
 
 /**
@@ -17,8 +16,19 @@ public class ProductNoticeDTO implements Serializable {
 
     private String type;
 
-    @Lob
-    private String content;
+    private String contentFileUrl;
+
+    private Boolean priorityDisplay;
+
+    private Boolean allProductDisplay;
+
+    private String target;
+
+    private Boolean enableDisplayDate;
+
+    private Instant displayDateFrom;
+
+    private Instant displayDateTo;
 
     private Boolean activated;
 
@@ -56,12 +66,60 @@ public class ProductNoticeDTO implements Serializable {
         this.type = type;
     }
 
-    public String getContent() {
-        return content;
+    public String getContentFileUrl() {
+        return contentFileUrl;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setContentFileUrl(String contentFileUrl) {
+        this.contentFileUrl = contentFileUrl;
+    }
+
+    public Boolean getPriorityDisplay() {
+        return priorityDisplay;
+    }
+
+    public void setPriorityDisplay(Boolean priorityDisplay) {
+        this.priorityDisplay = priorityDisplay;
+    }
+
+    public Boolean getAllProductDisplay() {
+        return allProductDisplay;
+    }
+
+    public void setAllProductDisplay(Boolean allProductDisplay) {
+        this.allProductDisplay = allProductDisplay;
+    }
+
+    public String getTarget() {
+        return target;
+    }
+
+    public void setTarget(String target) {
+        this.target = target;
+    }
+
+    public Boolean getEnableDisplayDate() {
+        return enableDisplayDate;
+    }
+
+    public void setEnableDisplayDate(Boolean enableDisplayDate) {
+        this.enableDisplayDate = enableDisplayDate;
+    }
+
+    public Instant getDisplayDateFrom() {
+        return displayDateFrom;
+    }
+
+    public void setDisplayDateFrom(Instant displayDateFrom) {
+        this.displayDateFrom = displayDateFrom;
+    }
+
+    public Instant getDisplayDateTo() {
+        return displayDateTo;
+    }
+
+    public void setDisplayDateTo(Instant displayDateTo) {
+        this.displayDateTo = displayDateTo;
     }
 
     public Boolean getActivated() {
@@ -132,7 +190,13 @@ public class ProductNoticeDTO implements Serializable {
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", type='" + getType() + "'" +
-            ", content='" + getContent() + "'" +
+            ", contentFileUrl='" + getContentFileUrl() + "'" +
+            ", priorityDisplay='" + getPriorityDisplay() + "'" +
+            ", allProductDisplay='" + getAllProductDisplay() + "'" +
+            ", target='" + getTarget() + "'" +
+            ", enableDisplayDate='" + getEnableDisplayDate() + "'" +
+            ", displayDateFrom='" + getDisplayDateFrom() + "'" +
+            ", displayDateTo='" + getDisplayDateTo() + "'" +
             ", activated='" + getActivated() + "'" +
             ", createdBy='" + getCreatedBy() + "'" +
             ", createdDate='" + getCreatedDate() + "'" +

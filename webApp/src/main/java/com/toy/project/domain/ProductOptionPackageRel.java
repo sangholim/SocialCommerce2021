@@ -28,14 +28,14 @@ public class ProductOptionPackageRel extends AbstractAuditingEntity implements S
     @Column(name = "activated")
     private Boolean activated;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
         value = { "productOptionRels", "productOptionPackageRels", "productOptionColorRels", "productOptionDesignRels" },
         allowSetters = true
     )
     private ProductOption productOption;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value = { "productOptionPackageRels" }, allowSetters = true)
     private OptionPackage optionPackage;
 

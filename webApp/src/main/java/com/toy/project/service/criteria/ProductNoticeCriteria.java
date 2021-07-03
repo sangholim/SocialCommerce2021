@@ -31,6 +31,20 @@ public class ProductNoticeCriteria implements Serializable, Criteria {
 
     private StringFilter type;
 
+    private StringFilter contentFileUrl;
+
+    private BooleanFilter priorityDisplay;
+
+    private BooleanFilter allProductDisplay;
+
+    private StringFilter target;
+
+    private BooleanFilter enableDisplayDate;
+
+    private InstantFilter displayDateFrom;
+
+    private InstantFilter displayDateTo;
+
     private BooleanFilter activated;
 
     private StringFilter createdBy;
@@ -49,6 +63,13 @@ public class ProductNoticeCriteria implements Serializable, Criteria {
         this.id = other.id == null ? null : other.id.copy();
         this.name = other.name == null ? null : other.name.copy();
         this.type = other.type == null ? null : other.type.copy();
+        this.contentFileUrl = other.contentFileUrl == null ? null : other.contentFileUrl.copy();
+        this.priorityDisplay = other.priorityDisplay == null ? null : other.priorityDisplay.copy();
+        this.allProductDisplay = other.allProductDisplay == null ? null : other.allProductDisplay.copy();
+        this.target = other.target == null ? null : other.target.copy();
+        this.enableDisplayDate = other.enableDisplayDate == null ? null : other.enableDisplayDate.copy();
+        this.displayDateFrom = other.displayDateFrom == null ? null : other.displayDateFrom.copy();
+        this.displayDateTo = other.displayDateTo == null ? null : other.displayDateTo.copy();
         this.activated = other.activated == null ? null : other.activated.copy();
         this.createdBy = other.createdBy == null ? null : other.createdBy.copy();
         this.createdDate = other.createdDate == null ? null : other.createdDate.copy();
@@ -105,6 +126,111 @@ public class ProductNoticeCriteria implements Serializable, Criteria {
 
     public void setType(StringFilter type) {
         this.type = type;
+    }
+
+    public StringFilter getContentFileUrl() {
+        return contentFileUrl;
+    }
+
+    public StringFilter contentFileUrl() {
+        if (contentFileUrl == null) {
+            contentFileUrl = new StringFilter();
+        }
+        return contentFileUrl;
+    }
+
+    public void setContentFileUrl(StringFilter contentFileUrl) {
+        this.contentFileUrl = contentFileUrl;
+    }
+
+    public BooleanFilter getPriorityDisplay() {
+        return priorityDisplay;
+    }
+
+    public BooleanFilter priorityDisplay() {
+        if (priorityDisplay == null) {
+            priorityDisplay = new BooleanFilter();
+        }
+        return priorityDisplay;
+    }
+
+    public void setPriorityDisplay(BooleanFilter priorityDisplay) {
+        this.priorityDisplay = priorityDisplay;
+    }
+
+    public BooleanFilter getAllProductDisplay() {
+        return allProductDisplay;
+    }
+
+    public BooleanFilter allProductDisplay() {
+        if (allProductDisplay == null) {
+            allProductDisplay = new BooleanFilter();
+        }
+        return allProductDisplay;
+    }
+
+    public void setAllProductDisplay(BooleanFilter allProductDisplay) {
+        this.allProductDisplay = allProductDisplay;
+    }
+
+    public StringFilter getTarget() {
+        return target;
+    }
+
+    public StringFilter target() {
+        if (target == null) {
+            target = new StringFilter();
+        }
+        return target;
+    }
+
+    public void setTarget(StringFilter target) {
+        this.target = target;
+    }
+
+    public BooleanFilter getEnableDisplayDate() {
+        return enableDisplayDate;
+    }
+
+    public BooleanFilter enableDisplayDate() {
+        if (enableDisplayDate == null) {
+            enableDisplayDate = new BooleanFilter();
+        }
+        return enableDisplayDate;
+    }
+
+    public void setEnableDisplayDate(BooleanFilter enableDisplayDate) {
+        this.enableDisplayDate = enableDisplayDate;
+    }
+
+    public InstantFilter getDisplayDateFrom() {
+        return displayDateFrom;
+    }
+
+    public InstantFilter displayDateFrom() {
+        if (displayDateFrom == null) {
+            displayDateFrom = new InstantFilter();
+        }
+        return displayDateFrom;
+    }
+
+    public void setDisplayDateFrom(InstantFilter displayDateFrom) {
+        this.displayDateFrom = displayDateFrom;
+    }
+
+    public InstantFilter getDisplayDateTo() {
+        return displayDateTo;
+    }
+
+    public InstantFilter displayDateTo() {
+        if (displayDateTo == null) {
+            displayDateTo = new InstantFilter();
+        }
+        return displayDateTo;
+    }
+
+    public void setDisplayDateTo(InstantFilter displayDateTo) {
+        this.displayDateTo = displayDateTo;
     }
 
     public BooleanFilter getActivated() {
@@ -210,6 +336,13 @@ public class ProductNoticeCriteria implements Serializable, Criteria {
             Objects.equals(id, that.id) &&
             Objects.equals(name, that.name) &&
             Objects.equals(type, that.type) &&
+            Objects.equals(contentFileUrl, that.contentFileUrl) &&
+            Objects.equals(priorityDisplay, that.priorityDisplay) &&
+            Objects.equals(allProductDisplay, that.allProductDisplay) &&
+            Objects.equals(target, that.target) &&
+            Objects.equals(enableDisplayDate, that.enableDisplayDate) &&
+            Objects.equals(displayDateFrom, that.displayDateFrom) &&
+            Objects.equals(displayDateTo, that.displayDateTo) &&
             Objects.equals(activated, that.activated) &&
             Objects.equals(createdBy, that.createdBy) &&
             Objects.equals(createdDate, that.createdDate) &&
@@ -221,7 +354,24 @@ public class ProductNoticeCriteria implements Serializable, Criteria {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, type, activated, createdBy, createdDate, lastModifiedBy, lastModifiedDate, productNoticeRelId);
+        return Objects.hash(
+            id,
+            name,
+            type,
+            contentFileUrl,
+            priorityDisplay,
+            allProductDisplay,
+            target,
+            enableDisplayDate,
+            displayDateFrom,
+            displayDateTo,
+            activated,
+            createdBy,
+            createdDate,
+            lastModifiedBy,
+            lastModifiedDate,
+            productNoticeRelId
+        );
     }
 
     // prettier-ignore
@@ -231,6 +381,13 @@ public class ProductNoticeCriteria implements Serializable, Criteria {
             (id != null ? "id=" + id + ", " : "") +
             (name != null ? "name=" + name + ", " : "") +
             (type != null ? "type=" + type + ", " : "") +
+            (contentFileUrl != null ? "contentFileUrl=" + contentFileUrl + ", " : "") +
+            (priorityDisplay != null ? "priorityDisplay=" + priorityDisplay + ", " : "") +
+            (allProductDisplay != null ? "allProductDisplay=" + allProductDisplay + ", " : "") +
+            (target != null ? "target=" + target + ", " : "") +
+            (enableDisplayDate != null ? "enableDisplayDate=" + enableDisplayDate + ", " : "") +
+            (displayDateFrom != null ? "displayDateFrom=" + displayDateFrom + ", " : "") +
+            (displayDateTo != null ? "displayDateTo=" + displayDateTo + ", " : "") +
             (activated != null ? "activated=" + activated + ", " : "") +
             (createdBy != null ? "createdBy=" + createdBy + ", " : "") +
             (createdDate != null ? "createdDate=" + createdDate + ", " : "") +

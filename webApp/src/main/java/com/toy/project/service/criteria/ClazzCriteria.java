@@ -31,13 +31,29 @@ public class ClazzCriteria implements Serializable, Criteria {
 
     private StringFilter type;
 
+    private StringFilter mainImageFileUrl;
+
     private StringFilter level;
 
     private BooleanFilter enableLecture;
 
+    private BooleanFilter freeLecture;
+
+    private LongFilter priceLecture;
+
+    private StringFilter priceUnitLecture;
+
+    private InstantFilter lectureStartDateFrom;
+
+    private IntegerFilter lectureInterval;
+
     private StringFilter lecturer;
 
     private IntegerFilter calculation;
+
+    private BooleanFilter isView;
+
+    private BooleanFilter isSell;
 
     private BooleanFilter activated;
 
@@ -57,10 +73,18 @@ public class ClazzCriteria implements Serializable, Criteria {
         this.id = other.id == null ? null : other.id.copy();
         this.name = other.name == null ? null : other.name.copy();
         this.type = other.type == null ? null : other.type.copy();
+        this.mainImageFileUrl = other.mainImageFileUrl == null ? null : other.mainImageFileUrl.copy();
         this.level = other.level == null ? null : other.level.copy();
         this.enableLecture = other.enableLecture == null ? null : other.enableLecture.copy();
+        this.freeLecture = other.freeLecture == null ? null : other.freeLecture.copy();
+        this.priceLecture = other.priceLecture == null ? null : other.priceLecture.copy();
+        this.priceUnitLecture = other.priceUnitLecture == null ? null : other.priceUnitLecture.copy();
+        this.lectureStartDateFrom = other.lectureStartDateFrom == null ? null : other.lectureStartDateFrom.copy();
+        this.lectureInterval = other.lectureInterval == null ? null : other.lectureInterval.copy();
         this.lecturer = other.lecturer == null ? null : other.lecturer.copy();
         this.calculation = other.calculation == null ? null : other.calculation.copy();
+        this.isView = other.isView == null ? null : other.isView.copy();
+        this.isSell = other.isSell == null ? null : other.isSell.copy();
         this.activated = other.activated == null ? null : other.activated.copy();
         this.createdBy = other.createdBy == null ? null : other.createdBy.copy();
         this.createdDate = other.createdDate == null ? null : other.createdDate.copy();
@@ -119,6 +143,21 @@ public class ClazzCriteria implements Serializable, Criteria {
         this.type = type;
     }
 
+    public StringFilter getMainImageFileUrl() {
+        return mainImageFileUrl;
+    }
+
+    public StringFilter mainImageFileUrl() {
+        if (mainImageFileUrl == null) {
+            mainImageFileUrl = new StringFilter();
+        }
+        return mainImageFileUrl;
+    }
+
+    public void setMainImageFileUrl(StringFilter mainImageFileUrl) {
+        this.mainImageFileUrl = mainImageFileUrl;
+    }
+
     public StringFilter getLevel() {
         return level;
     }
@@ -149,6 +188,81 @@ public class ClazzCriteria implements Serializable, Criteria {
         this.enableLecture = enableLecture;
     }
 
+    public BooleanFilter getFreeLecture() {
+        return freeLecture;
+    }
+
+    public BooleanFilter freeLecture() {
+        if (freeLecture == null) {
+            freeLecture = new BooleanFilter();
+        }
+        return freeLecture;
+    }
+
+    public void setFreeLecture(BooleanFilter freeLecture) {
+        this.freeLecture = freeLecture;
+    }
+
+    public LongFilter getPriceLecture() {
+        return priceLecture;
+    }
+
+    public LongFilter priceLecture() {
+        if (priceLecture == null) {
+            priceLecture = new LongFilter();
+        }
+        return priceLecture;
+    }
+
+    public void setPriceLecture(LongFilter priceLecture) {
+        this.priceLecture = priceLecture;
+    }
+
+    public StringFilter getPriceUnitLecture() {
+        return priceUnitLecture;
+    }
+
+    public StringFilter priceUnitLecture() {
+        if (priceUnitLecture == null) {
+            priceUnitLecture = new StringFilter();
+        }
+        return priceUnitLecture;
+    }
+
+    public void setPriceUnitLecture(StringFilter priceUnitLecture) {
+        this.priceUnitLecture = priceUnitLecture;
+    }
+
+    public InstantFilter getLectureStartDateFrom() {
+        return lectureStartDateFrom;
+    }
+
+    public InstantFilter lectureStartDateFrom() {
+        if (lectureStartDateFrom == null) {
+            lectureStartDateFrom = new InstantFilter();
+        }
+        return lectureStartDateFrom;
+    }
+
+    public void setLectureStartDateFrom(InstantFilter lectureStartDateFrom) {
+        this.lectureStartDateFrom = lectureStartDateFrom;
+    }
+
+    public IntegerFilter getLectureInterval() {
+        return lectureInterval;
+    }
+
+    public IntegerFilter lectureInterval() {
+        if (lectureInterval == null) {
+            lectureInterval = new IntegerFilter();
+        }
+        return lectureInterval;
+    }
+
+    public void setLectureInterval(IntegerFilter lectureInterval) {
+        this.lectureInterval = lectureInterval;
+    }
+
     public StringFilter getLecturer() {
         return lecturer;
     }
@@ -177,6 +291,36 @@ public class ClazzCriteria implements Serializable, Criteria {
 
     public void setCalculation(IntegerFilter calculation) {
         this.calculation = calculation;
+    }
+
+    public BooleanFilter getIsView() {
+        return isView;
+    }
+
+    public BooleanFilter isView() {
+        if (isView == null) {
+            isView = new BooleanFilter();
+        }
+        return isView;
+    }
+
+    public void setIsView(BooleanFilter isView) {
+        this.isView = isView;
+    }
+
+    public BooleanFilter getIsSell() {
+        return isSell;
+    }
+
+    public BooleanFilter isSell() {
+        if (isSell == null) {
+            isSell = new BooleanFilter();
+        }
+        return isSell;
+    }
+
+    public void setIsSell(BooleanFilter isSell) {
+        this.isSell = isSell;
     }
 
     public BooleanFilter getActivated() {
@@ -282,10 +426,18 @@ public class ClazzCriteria implements Serializable, Criteria {
             Objects.equals(id, that.id) &&
             Objects.equals(name, that.name) &&
             Objects.equals(type, that.type) &&
+            Objects.equals(mainImageFileUrl, that.mainImageFileUrl) &&
             Objects.equals(level, that.level) &&
             Objects.equals(enableLecture, that.enableLecture) &&
+            Objects.equals(freeLecture, that.freeLecture) &&
+            Objects.equals(priceLecture, that.priceLecture) &&
+            Objects.equals(priceUnitLecture, that.priceUnitLecture) &&
+            Objects.equals(lectureStartDateFrom, that.lectureStartDateFrom) &&
+            Objects.equals(lectureInterval, that.lectureInterval) &&
             Objects.equals(lecturer, that.lecturer) &&
             Objects.equals(calculation, that.calculation) &&
+            Objects.equals(isView, that.isView) &&
+            Objects.equals(isSell, that.isSell) &&
             Objects.equals(activated, that.activated) &&
             Objects.equals(createdBy, that.createdBy) &&
             Objects.equals(createdDate, that.createdDate) &&
@@ -301,10 +453,18 @@ public class ClazzCriteria implements Serializable, Criteria {
             id,
             name,
             type,
+            mainImageFileUrl,
             level,
             enableLecture,
+            freeLecture,
+            priceLecture,
+            priceUnitLecture,
+            lectureStartDateFrom,
+            lectureInterval,
             lecturer,
             calculation,
+            isView,
+            isSell,
             activated,
             createdBy,
             createdDate,
@@ -321,10 +481,18 @@ public class ClazzCriteria implements Serializable, Criteria {
             (id != null ? "id=" + id + ", " : "") +
             (name != null ? "name=" + name + ", " : "") +
             (type != null ? "type=" + type + ", " : "") +
+            (mainImageFileUrl != null ? "mainImageFileUrl=" + mainImageFileUrl + ", " : "") +
             (level != null ? "level=" + level + ", " : "") +
             (enableLecture != null ? "enableLecture=" + enableLecture + ", " : "") +
+            (freeLecture != null ? "freeLecture=" + freeLecture + ", " : "") +
+            (priceLecture != null ? "priceLecture=" + priceLecture + ", " : "") +
+            (priceUnitLecture != null ? "priceUnitLecture=" + priceUnitLecture + ", " : "") +
+            (lectureStartDateFrom != null ? "lectureStartDateFrom=" + lectureStartDateFrom + ", " : "") +
+            (lectureInterval != null ? "lectureInterval=" + lectureInterval + ", " : "") +
             (lecturer != null ? "lecturer=" + lecturer + ", " : "") +
             (calculation != null ? "calculation=" + calculation + ", " : "") +
+            (isView != null ? "isView=" + isView + ", " : "") +
+            (isSell != null ? "isSell=" + isSell + ", " : "") +
             (activated != null ? "activated=" + activated + ", " : "") +
             (createdBy != null ? "createdBy=" + createdBy + ", " : "") +
             (createdDate != null ? "createdDate=" + createdDate + ", " : "") +

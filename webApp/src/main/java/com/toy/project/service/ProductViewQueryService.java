@@ -89,12 +89,6 @@ public class ProductViewQueryService extends QueryService<ProductView> {
             if (criteria.getName() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getName(), ProductView_.name));
             }
-            if (criteria.getType() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getType(), ProductView_.type));
-            }
-            if (criteria.getIsDetail() != null) {
-                specification = specification.and(buildSpecification(criteria.getIsDetail(), ProductView_.isDetail));
-            }
             if (criteria.getActivated() != null) {
                 specification = specification.and(buildSpecification(criteria.getActivated(), ProductView_.activated));
             }
@@ -116,6 +110,15 @@ public class ProductViewQueryService extends QueryService<ProductView> {
                         buildSpecification(
                             criteria.getProductViewRelId(),
                             root -> root.join(ProductView_.productViewRels, JoinType.LEFT).get(ProductViewRel_.id)
+                        )
+                    );
+            }
+            if (criteria.getProductViewContentId() != null) {
+                specification =
+                    specification.and(
+                        buildSpecification(
+                            criteria.getProductViewContentId(),
+                            root -> root.join(ProductView_.productViewContents, JoinType.LEFT).get(ProductViewContent_.id)
                         )
                     );
             }
