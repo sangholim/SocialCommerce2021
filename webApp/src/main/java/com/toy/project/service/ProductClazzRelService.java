@@ -1,10 +1,14 @@
 package com.toy.project.service;
 
 import com.toy.project.domain.ProductClazzRel;
+import com.toy.project.domain.ProductViewRel;
 import com.toy.project.repository.ProductClazzRelRepository;
 import com.toy.project.service.dto.ProductClazzRelDTO;
+import com.toy.project.service.dto.ProductViewRelDTO;
 import com.toy.project.service.mapper.ProductClazzRelMapper;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -41,6 +45,14 @@ public class ProductClazzRelService {
         ProductClazzRel productClazzRel = productClazzRelMapper.toEntity(productClazzRelDTO);
         productClazzRel = productClazzRelRepository.save(productClazzRel);
         return productClazzRelMapper.toDto(productClazzRel);
+    }
+
+    public Set<ProductClazzRelDTO> saveAll(Set<ProductClazzRelDTO> productClazzRelDTOS) {
+        Set<ProductClazzRel> productClazzRels = productClazzRelDTOS
+            .stream()
+            .map(productClazzRelMapper::toEntity)
+            .collect(Collectors.toSet());
+        return productClazzRelRepository.saveAll(productClazzRels).stream().map(productClazzRelMapper::toDto).collect(Collectors.toSet());
     }
 
     /**

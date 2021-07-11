@@ -43,9 +43,8 @@ class ProductClazzRelResourceIT {
     private static final Boolean DEFAULT_USE_CALCULATION = false;
     private static final Boolean UPDATED_USE_CALCULATION = true;
 
-    private static final Integer DEFAULT_CALCULATION = 1;
-    private static final Integer UPDATED_CALCULATION = 2;
-    private static final Integer SMALLER_CALCULATION = 1 - 1;
+    private static final String DEFAULT_CALCULATION = "AAAAAAAAAA";
+    private static final String UPDATED_CALCULATION = "BBBBBBBBBB";
 
     private static final Instant DEFAULT_CALCULATION_DATE_FROM = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_CALCULATION_DATE_FROM = Instant.now().truncatedTo(ChronoUnit.MILLIS);
@@ -351,54 +350,28 @@ class ProductClazzRelResourceIT {
 
     @Test
     @Transactional
-    void getAllProductClazzRelsByCalculationIsGreaterThanOrEqualToSomething() throws Exception {
+    void getAllProductClazzRelsByCalculationContainsSomething() throws Exception {
         // Initialize the database
         productClazzRelRepository.saveAndFlush(productClazzRel);
 
-        // Get all the productClazzRelList where calculation is greater than or equal to DEFAULT_CALCULATION
-        defaultProductClazzRelShouldBeFound("calculation.greaterThanOrEqual=" + DEFAULT_CALCULATION);
+        // Get all the productClazzRelList where calculation contains DEFAULT_CALCULATION
+        defaultProductClazzRelShouldBeFound("calculation.contains=" + DEFAULT_CALCULATION);
 
-        // Get all the productClazzRelList where calculation is greater than or equal to UPDATED_CALCULATION
-        defaultProductClazzRelShouldNotBeFound("calculation.greaterThanOrEqual=" + UPDATED_CALCULATION);
+        // Get all the productClazzRelList where calculation contains UPDATED_CALCULATION
+        defaultProductClazzRelShouldNotBeFound("calculation.contains=" + UPDATED_CALCULATION);
     }
 
     @Test
     @Transactional
-    void getAllProductClazzRelsByCalculationIsLessThanOrEqualToSomething() throws Exception {
+    void getAllProductClazzRelsByCalculationNotContainsSomething() throws Exception {
         // Initialize the database
         productClazzRelRepository.saveAndFlush(productClazzRel);
 
-        // Get all the productClazzRelList where calculation is less than or equal to DEFAULT_CALCULATION
-        defaultProductClazzRelShouldBeFound("calculation.lessThanOrEqual=" + DEFAULT_CALCULATION);
+        // Get all the productClazzRelList where calculation does not contain DEFAULT_CALCULATION
+        defaultProductClazzRelShouldNotBeFound("calculation.doesNotContain=" + DEFAULT_CALCULATION);
 
-        // Get all the productClazzRelList where calculation is less than or equal to SMALLER_CALCULATION
-        defaultProductClazzRelShouldNotBeFound("calculation.lessThanOrEqual=" + SMALLER_CALCULATION);
-    }
-
-    @Test
-    @Transactional
-    void getAllProductClazzRelsByCalculationIsLessThanSomething() throws Exception {
-        // Initialize the database
-        productClazzRelRepository.saveAndFlush(productClazzRel);
-
-        // Get all the productClazzRelList where calculation is less than DEFAULT_CALCULATION
-        defaultProductClazzRelShouldNotBeFound("calculation.lessThan=" + DEFAULT_CALCULATION);
-
-        // Get all the productClazzRelList where calculation is less than UPDATED_CALCULATION
-        defaultProductClazzRelShouldBeFound("calculation.lessThan=" + UPDATED_CALCULATION);
-    }
-
-    @Test
-    @Transactional
-    void getAllProductClazzRelsByCalculationIsGreaterThanSomething() throws Exception {
-        // Initialize the database
-        productClazzRelRepository.saveAndFlush(productClazzRel);
-
-        // Get all the productClazzRelList where calculation is greater than DEFAULT_CALCULATION
-        defaultProductClazzRelShouldNotBeFound("calculation.greaterThan=" + DEFAULT_CALCULATION);
-
-        // Get all the productClazzRelList where calculation is greater than SMALLER_CALCULATION
-        defaultProductClazzRelShouldBeFound("calculation.greaterThan=" + SMALLER_CALCULATION);
+        // Get all the productClazzRelList where calculation does not contain UPDATED_CALCULATION
+        defaultProductClazzRelShouldBeFound("calculation.doesNotContain=" + UPDATED_CALCULATION);
     }
 
     @Test

@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.time.Instant;
 import javax.persistence.*;
-import javax.validation.constraints.*;
 
 /**
  * A ProductCategoryRel.
@@ -18,6 +17,12 @@ public class ProductCategoryRel extends AbstractAuditingEntity implements Serial
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "product_id")
+    private Long productId;
+
+    @Column(name = "product_category_id")
+    private Long productCategoryId;
 
     @Column(name = "activated")
     private Boolean activated;
@@ -38,9 +43,11 @@ public class ProductCategoryRel extends AbstractAuditingEntity implements Serial
         },
         allowSetters = true
     )
+    @JoinColumn(name = "product_id", updatable = false, insertable = false)
     private Product product;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_category_id", updatable = false, insertable = false)
     @JsonIgnoreProperties(value = { "productCategoryRels" }, allowSetters = true)
     private ProductCategory productCategory;
 
@@ -119,6 +126,22 @@ public class ProductCategoryRel extends AbstractAuditingEntity implements Serial
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
+    public Long getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Long productId) {
+        this.productId = productId;
+    }
+
+    public Long getProductCategoryId() {
+        return productCategoryId;
+    }
+
+    public void setProductCategoryId(Long productCategoryId) {
+        this.productCategoryId = productCategoryId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -141,6 +164,8 @@ public class ProductCategoryRel extends AbstractAuditingEntity implements Serial
     public String toString() {
         return "ProductCategoryRel{" +
             "id=" + getId() +
+            ", productId='" + getProductId() + "'" +
+            ", productCategoryId='" + getProductCategoryId() + "'" +
             ", activated='" + getActivated() + "'" +
             ", createdBy='" + getCreatedBy() + "'" +
             ", createdDate='" + getCreatedDate() + "'" +

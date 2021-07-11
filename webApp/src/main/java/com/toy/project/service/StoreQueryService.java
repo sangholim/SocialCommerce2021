@@ -93,7 +93,7 @@ public class StoreQueryService extends QueryService<Store> {
                 specification = specification.and(buildStringSpecification(criteria.getType(), Store_.type));
             }
             if (criteria.getCalculation() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getCalculation(), Store_.calculation));
+                specification = specification.and(buildStringSpecification(criteria.getCalculation(), Store_.calculation));
             }
             if (criteria.getActivated() != null) {
                 specification = specification.and(buildSpecification(criteria.getActivated(), Store_.activated));

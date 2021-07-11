@@ -1,10 +1,14 @@
 package com.toy.project.service;
 
+import com.toy.project.domain.ProductStoreRel;
 import com.toy.project.domain.ProductViewRel;
 import com.toy.project.repository.ProductViewRelRepository;
+import com.toy.project.service.dto.ProductStoreRelDTO;
 import com.toy.project.service.dto.ProductViewRelDTO;
 import com.toy.project.service.mapper.ProductViewRelMapper;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -41,6 +45,11 @@ public class ProductViewRelService {
         ProductViewRel productViewRel = productViewRelMapper.toEntity(productViewRelDTO);
         productViewRel = productViewRelRepository.save(productViewRel);
         return productViewRelMapper.toDto(productViewRel);
+    }
+
+    public Set<ProductViewRelDTO> saveAll(Set<ProductViewRelDTO> productViewRelDTOS) {
+        Set<ProductViewRel> productViewRels = productViewRelDTOS.stream().map(productViewRelMapper::toEntity).collect(Collectors.toSet());
+        return productViewRelRepository.saveAll(productViewRels).stream().map(productViewRelMapper::toDto).collect(Collectors.toSet());
     }
 
     /**

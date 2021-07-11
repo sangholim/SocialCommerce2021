@@ -1363,7 +1363,6 @@ class ProductShippingResourceIT {
         ProductShippingRel productShippingRel = ProductShippingRelResourceIT.createEntity(em);
         em.persist(productShippingRel);
         em.flush();
-        productShipping.addProductShippingRel(productShippingRel);
         productShippingRepository.saveAndFlush(productShipping);
         Long productShippingRelId = productShippingRel.getId();
 

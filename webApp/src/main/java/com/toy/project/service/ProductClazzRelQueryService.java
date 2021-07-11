@@ -90,7 +90,7 @@ public class ProductClazzRelQueryService extends QueryService<ProductClazzRel> {
                 specification = specification.and(buildSpecification(criteria.getUseCalculation(), ProductClazzRel_.useCalculation));
             }
             if (criteria.getCalculation() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getCalculation(), ProductClazzRel_.calculation));
+                specification = specification.and(buildStringSpecification(criteria.getCalculation(), ProductClazzRel_.calculation));
             }
             if (criteria.getCalculationDateFrom() != null) {
                 specification =

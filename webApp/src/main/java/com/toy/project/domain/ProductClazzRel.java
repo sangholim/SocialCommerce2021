@@ -19,11 +19,17 @@ public class ProductClazzRel extends AbstractAuditingEntity implements Serializa
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "product_id")
+    private Long productId;
+
+    @Column(name = "clazz_id")
+    private Long clazzId;
+
     @Column(name = "use_calculation")
     private Boolean useCalculation;
 
     @Column(name = "calculation")
-    private Integer calculation;
+    private String calculation;
 
     @Column(name = "calculation_date_from")
     private Instant calculationDateFrom;
@@ -50,10 +56,12 @@ public class ProductClazzRel extends AbstractAuditingEntity implements Serializa
         },
         allowSetters = true
     )
+    @JoinColumn(name = "product_id", updatable = false, insertable = false)
     private Product product;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value = { "productClazzRels" }, allowSetters = true)
+    @JoinColumn(name = "clazz_id", updatable = false, insertable = false)
     private Clazz clazz;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
@@ -70,6 +78,22 @@ public class ProductClazzRel extends AbstractAuditingEntity implements Serializa
         return this;
     }
 
+    public Long getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Long productId) {
+        this.productId = productId;
+    }
+
+    public Long getClazzId() {
+        return clazzId;
+    }
+
+    public void setClazzId(Long clazzId) {
+        this.clazzId = clazzId;
+    }
+
     public Boolean getUseCalculation() {
         return this.useCalculation;
     }
@@ -83,16 +107,16 @@ public class ProductClazzRel extends AbstractAuditingEntity implements Serializa
         this.useCalculation = useCalculation;
     }
 
-    public Integer getCalculation() {
-        return this.calculation;
-    }
-
-    public ProductClazzRel calculation(Integer calculation) {
+    public ProductClazzRel calculation(String calculation) {
         this.calculation = calculation;
         return this;
     }
 
-    public void setCalculation(Integer calculation) {
+    public String getCalculation() {
+        return calculation;
+    }
+
+    public void setCalculation(String calculation) {
         this.calculation = calculation;
     }
 

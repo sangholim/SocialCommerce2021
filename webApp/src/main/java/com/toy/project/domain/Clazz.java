@@ -6,7 +6,6 @@ import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
-import javax.validation.constraints.*;
 
 /**
  * A Clazz.
@@ -55,7 +54,7 @@ public class Clazz extends AbstractAuditingEntity implements Serializable {
     private String lecturer;
 
     @Column(name = "calculation")
-    private Integer calculation;
+    private String calculation;
 
     @Column(name = "is_view")
     private Boolean isView;
@@ -69,6 +68,10 @@ public class Clazz extends AbstractAuditingEntity implements Serializable {
     @OneToMany(mappedBy = "clazz")
     @JsonIgnoreProperties(value = { "product", "clazz" }, allowSetters = true)
     private Set<ProductClazzRel> productClazzRels = new HashSet<>();
+
+    @OneToMany(mappedBy = "clazz")
+    @JsonIgnoreProperties(value = { "clazzChapterVideos", "clazz" }, allowSetters = true)
+    private Set<ClazzChapter> clazzChapters = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -227,16 +230,16 @@ public class Clazz extends AbstractAuditingEntity implements Serializable {
         this.lecturer = lecturer;
     }
 
-    public Integer getCalculation() {
-        return this.calculation;
-    }
-
-    public Clazz calculation(Integer calculation) {
+    public Clazz calculation(String calculation) {
         this.calculation = calculation;
         return this;
     }
 
-    public void setCalculation(Integer calculation) {
+    public String getCalculation() {
+        return calculation;
+    }
+
+    public void setCalculation(String calculation) {
         this.calculation = calculation;
     }
 
@@ -328,6 +331,37 @@ public class Clazz extends AbstractAuditingEntity implements Serializable {
             productClazzRels.forEach(i -> i.setClazz(this));
         }
         this.productClazzRels = productClazzRels;
+    }
+
+    public Set<ClazzChapter> getClazzChapters() {
+        return this.clazzChapters;
+    }
+
+    public Clazz clazzChapters(Set<ClazzChapter> clazzChapters) {
+        this.setClazzChapters(clazzChapters);
+        return this;
+    }
+
+    public Clazz addClazzChapter(ClazzChapter clazzChapter) {
+        this.clazzChapters.add(clazzChapter);
+        clazzChapter.setClazz(this);
+        return this;
+    }
+
+    public Clazz removeClazzChapter(ClazzChapter clazzChapter) {
+        this.clazzChapters.remove(clazzChapter);
+        clazzChapter.setClazz(null);
+        return this;
+    }
+
+    public void setClazzChapters(Set<ClazzChapter> clazzChapters) {
+        if (this.clazzChapters != null) {
+            this.clazzChapters.forEach(i -> i.setClazz(null));
+        }
+        if (clazzChapters != null) {
+            clazzChapters.forEach(i -> i.setClazz(this));
+        }
+        this.clazzChapters = clazzChapters;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

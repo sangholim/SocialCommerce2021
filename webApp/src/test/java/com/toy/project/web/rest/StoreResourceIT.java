@@ -45,9 +45,8 @@ class StoreResourceIT {
     private static final String DEFAULT_TYPE = "AAAAAAAAAA";
     private static final String UPDATED_TYPE = "BBBBBBBBBB";
 
-    private static final Integer DEFAULT_CALCULATION = 1;
-    private static final Integer UPDATED_CALCULATION = 2;
-    private static final Integer SMALLER_CALCULATION = 1 - 1;
+    private static final String DEFAULT_CALCULATION = "AAAAAAAAAA";
+    private static final String UPDATED_CALCULATION = "BBBBBBBBBB";
 
     private static final Boolean DEFAULT_ACTIVATED = false;
     private static final Boolean UPDATED_ACTIVATED = true;
@@ -442,54 +441,28 @@ class StoreResourceIT {
 
     @Test
     @Transactional
-    void getAllStoresByCalculationIsGreaterThanOrEqualToSomething() throws Exception {
+    void getAllStoresByCalculationContainsSomething() throws Exception {
         // Initialize the database
         storeRepository.saveAndFlush(store);
 
-        // Get all the storeList where calculation is greater than or equal to DEFAULT_CALCULATION
-        defaultStoreShouldBeFound("calculation.greaterThanOrEqual=" + DEFAULT_CALCULATION);
+        // Get all the storeList where calculation contains DEFAULT_CALCULATION
+        defaultStoreShouldBeFound("calculation.contains=" + DEFAULT_CALCULATION);
 
-        // Get all the storeList where calculation is greater than or equal to UPDATED_CALCULATION
-        defaultStoreShouldNotBeFound("calculation.greaterThanOrEqual=" + UPDATED_CALCULATION);
+        // Get all the storeList where calculation contains UPDATED_CALCULATION
+        defaultStoreShouldNotBeFound("calculation.contains=" + UPDATED_CALCULATION);
     }
 
     @Test
     @Transactional
-    void getAllStoresByCalculationIsLessThanOrEqualToSomething() throws Exception {
+    void getAllStoresByCalculationNotContainsSomething() throws Exception {
         // Initialize the database
         storeRepository.saveAndFlush(store);
 
-        // Get all the storeList where calculation is less than or equal to DEFAULT_CALCULATION
-        defaultStoreShouldBeFound("calculation.lessThanOrEqual=" + DEFAULT_CALCULATION);
+        // Get all the storeList where calculation does not contain DEFAULT_CALCULATION
+        defaultStoreShouldNotBeFound("calculation.doesNotContain=" + DEFAULT_CALCULATION);
 
-        // Get all the storeList where calculation is less than or equal to SMALLER_CALCULATION
-        defaultStoreShouldNotBeFound("calculation.lessThanOrEqual=" + SMALLER_CALCULATION);
-    }
-
-    @Test
-    @Transactional
-    void getAllStoresByCalculationIsLessThanSomething() throws Exception {
-        // Initialize the database
-        storeRepository.saveAndFlush(store);
-
-        // Get all the storeList where calculation is less than DEFAULT_CALCULATION
-        defaultStoreShouldNotBeFound("calculation.lessThan=" + DEFAULT_CALCULATION);
-
-        // Get all the storeList where calculation is less than UPDATED_CALCULATION
-        defaultStoreShouldBeFound("calculation.lessThan=" + UPDATED_CALCULATION);
-    }
-
-    @Test
-    @Transactional
-    void getAllStoresByCalculationIsGreaterThanSomething() throws Exception {
-        // Initialize the database
-        storeRepository.saveAndFlush(store);
-
-        // Get all the storeList where calculation is greater than DEFAULT_CALCULATION
-        defaultStoreShouldNotBeFound("calculation.greaterThan=" + DEFAULT_CALCULATION);
-
-        // Get all the storeList where calculation is greater than SMALLER_CALCULATION
-        defaultStoreShouldBeFound("calculation.greaterThan=" + SMALLER_CALCULATION);
+        // Get all the storeList where calculation does not contain UPDATED_CALCULATION
+        defaultStoreShouldBeFound("calculation.doesNotContain=" + UPDATED_CALCULATION);
     }
 
     @Test
@@ -812,7 +785,6 @@ class StoreResourceIT {
         ProductStoreRel productStoreRel = ProductStoreRelResourceIT.createEntity(em);
         em.persist(productStoreRel);
         em.flush();
-        store.addProductStoreRel(productStoreRel);
         storeRepository.saveAndFlush(store);
         Long productStoreRelId = productStoreRel.getId();
 

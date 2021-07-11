@@ -1018,7 +1018,6 @@ class ProductOptionResourceIT {
         ProductOptionRel productOptionRel = ProductOptionRelResourceIT.createEntity(em);
         em.persist(productOptionRel);
         em.flush();
-        productOption.addProductOptionRel(productOptionRel);
         productOptionRepository.saveAndFlush(productOption);
         Long productOptionRelId = productOptionRel.getId();
 
@@ -1037,7 +1036,6 @@ class ProductOptionResourceIT {
         ProductOptionPackageRel productOptionPackageRel = ProductOptionPackageRelResourceIT.createEntity(em);
         em.persist(productOptionPackageRel);
         em.flush();
-        productOption.addProductOptionPackageRel(productOptionPackageRel);
         productOptionRepository.saveAndFlush(productOption);
         Long productOptionPackageRelId = productOptionPackageRel.getId();
 
@@ -1056,7 +1054,6 @@ class ProductOptionResourceIT {
         ProductOptionColorRel productOptionColorRel = ProductOptionColorRelResourceIT.createEntity(em);
         em.persist(productOptionColorRel);
         em.flush();
-        productOption.addProductOptionColorRel(productOptionColorRel);
         productOptionRepository.saveAndFlush(productOption);
         Long productOptionColorRelId = productOptionColorRel.getId();
 
@@ -1075,7 +1072,6 @@ class ProductOptionResourceIT {
         ProductOptionDesignRel productOptionDesignRel = ProductOptionDesignRelResourceIT.createEntity(em);
         em.persist(productOptionDesignRel);
         em.flush();
-        productOption.addProductOptionDesignRel(productOptionDesignRel);
         productOptionRepository.saveAndFlush(productOption);
         Long productOptionDesignRelId = productOptionDesignRel.getId();
 

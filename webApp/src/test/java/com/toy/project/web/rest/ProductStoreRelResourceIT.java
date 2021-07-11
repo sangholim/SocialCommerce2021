@@ -43,9 +43,8 @@ class ProductStoreRelResourceIT {
     private static final Boolean DEFAULT_USE_CALCULATION = false;
     private static final Boolean UPDATED_USE_CALCULATION = true;
 
-    private static final Integer DEFAULT_CALCULATION = 1;
-    private static final Integer UPDATED_CALCULATION = 2;
-    private static final Integer SMALLER_CALCULATION = 1 - 1;
+    private static final String DEFAULT_CALCULATION = "AAAAAAAAAA";
+    private static final String UPDATED_CALCULATION = "BBBBBBBBBB";
 
     private static final Instant DEFAULT_CALCULATION_DATE_FROM = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_CALCULATION_DATE_FROM = Instant.now().truncatedTo(ChronoUnit.MILLIS);
@@ -351,54 +350,28 @@ class ProductStoreRelResourceIT {
 
     @Test
     @Transactional
-    void getAllProductStoreRelsByCalculationIsGreaterThanOrEqualToSomething() throws Exception {
+    void getAllProductStoreRelsByCalculationContainsSomething() throws Exception {
         // Initialize the database
         productStoreRelRepository.saveAndFlush(productStoreRel);
 
-        // Get all the productStoreRelList where calculation is greater than or equal to DEFAULT_CALCULATION
-        defaultProductStoreRelShouldBeFound("calculation.greaterThanOrEqual=" + DEFAULT_CALCULATION);
+        // Get all the productStoreRelList where calculation contains DEFAULT_CALCULATION
+        defaultProductStoreRelShouldBeFound("calculation.contains=" + DEFAULT_CALCULATION);
 
-        // Get all the productStoreRelList where calculation is greater than or equal to UPDATED_CALCULATION
-        defaultProductStoreRelShouldNotBeFound("calculation.greaterThanOrEqual=" + UPDATED_CALCULATION);
+        // Get all the productStoreRelList where calculation contains UPDATED_CALCULATION
+        defaultProductStoreRelShouldNotBeFound("calculation.contains=" + UPDATED_CALCULATION);
     }
 
     @Test
     @Transactional
-    void getAllProductStoreRelsByCalculationIsLessThanOrEqualToSomething() throws Exception {
+    void getAllProductStoreRelsByCalculationNotContainsSomething() throws Exception {
         // Initialize the database
         productStoreRelRepository.saveAndFlush(productStoreRel);
 
-        // Get all the productStoreRelList where calculation is less than or equal to DEFAULT_CALCULATION
-        defaultProductStoreRelShouldBeFound("calculation.lessThanOrEqual=" + DEFAULT_CALCULATION);
+        // Get all the productStoreRelList where calculation does not contain DEFAULT_CALCULATION
+        defaultProductStoreRelShouldNotBeFound("calculation.doesNotContain=" + DEFAULT_CALCULATION);
 
-        // Get all the productStoreRelList where calculation is less than or equal to SMALLER_CALCULATION
-        defaultProductStoreRelShouldNotBeFound("calculation.lessThanOrEqual=" + SMALLER_CALCULATION);
-    }
-
-    @Test
-    @Transactional
-    void getAllProductStoreRelsByCalculationIsLessThanSomething() throws Exception {
-        // Initialize the database
-        productStoreRelRepository.saveAndFlush(productStoreRel);
-
-        // Get all the productStoreRelList where calculation is less than DEFAULT_CALCULATION
-        defaultProductStoreRelShouldNotBeFound("calculation.lessThan=" + DEFAULT_CALCULATION);
-
-        // Get all the productStoreRelList where calculation is less than UPDATED_CALCULATION
-        defaultProductStoreRelShouldBeFound("calculation.lessThan=" + UPDATED_CALCULATION);
-    }
-
-    @Test
-    @Transactional
-    void getAllProductStoreRelsByCalculationIsGreaterThanSomething() throws Exception {
-        // Initialize the database
-        productStoreRelRepository.saveAndFlush(productStoreRel);
-
-        // Get all the productStoreRelList where calculation is greater than DEFAULT_CALCULATION
-        defaultProductStoreRelShouldNotBeFound("calculation.greaterThan=" + DEFAULT_CALCULATION);
-
-        // Get all the productStoreRelList where calculation is greater than SMALLER_CALCULATION
-        defaultProductStoreRelShouldBeFound("calculation.greaterThan=" + SMALLER_CALCULATION);
+        // Get all the productStoreRelList where calculation does not contain UPDATED_CALCULATION
+        defaultProductStoreRelShouldBeFound("calculation.doesNotContain=" + UPDATED_CALCULATION);
     }
 
     @Test

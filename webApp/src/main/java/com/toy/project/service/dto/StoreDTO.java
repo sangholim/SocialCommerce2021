@@ -16,7 +16,7 @@ public class StoreDTO implements Serializable {
 
     private String type;
 
-    private Integer calculation;
+    private String calculation;
 
     private Boolean activated;
 
@@ -54,11 +54,11 @@ public class StoreDTO implements Serializable {
         this.type = type;
     }
 
-    public Integer getCalculation() {
+    public String getCalculation() {
         return calculation;
     }
 
-    public void setCalculation(Integer calculation) {
+    public void setCalculation(String calculation) {
         this.calculation = calculation;
     }
 

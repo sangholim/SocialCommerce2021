@@ -34,7 +34,7 @@ public class ClazzDTO implements Serializable {
 
     private String lecturer;
 
-    private Integer calculation;
+    private String calculation;
 
     private Boolean isView;
 
@@ -148,11 +148,11 @@ public class ClazzDTO implements Serializable {
         this.lecturer = lecturer;
     }
 
-    public Integer getCalculation() {
+    public String getCalculation() {
         return calculation;
     }
 
-    public void setCalculation(Integer calculation) {
+    public void setCalculation(String calculation) {
         this.calculation = calculation;
     }
 

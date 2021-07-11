@@ -1,9 +1,24 @@
+## 2021-07-11
+## api용 테스트 작성
+## 상품 등록시 상품 관계테이블로 등록
+## 컬럼 타입 변경
+   * clazz, product_clazz_rel, store , product_store_rel -> calculation int(11) -> varchar(255)
+   * liquibase 컬럼 타입 변경
+   * entity, dto 부분 변경 (테스트 클래스 포함)
+
+## 2021-07-10
+## ClazzChapter, ClazzChapterVideo 데이터모델링 수정
+## entity - relationship_entity - entity 관계에서
+   relationship_entity 추가 수정시, 부모 엔티티는 수정, 추가하지 않게 하고
+   부모 외래키 참조키를 추가한다.
+
 ## 2021-07-03
 ## Clazz, ProductNotice, ProductView, ProductTemplate 데이터모델링 수정
 ## ProductViewContent 추가
 ## Product Model - entityGraph 도입 (N+1 이슈 해결)
 ## TODO: class video 모델링 작업 수행
 ## dir> jhipster jdl 2021-06-26-product.jdl --json-only
+## dir> jhipster entity Product --skip-client
 
 ## 2021-06-27
 ## 관리자 UI 보고 상품 설계

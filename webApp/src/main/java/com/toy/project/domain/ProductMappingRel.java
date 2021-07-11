@@ -19,6 +19,12 @@ public class ProductMappingRel extends AbstractAuditingEntity implements Seriali
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "product_id")
+    private Long productId;
+
+    @Column(name = "product_mapping_id")
+    private Long productMappingId;
+
     @Column(name = "activated")
     private Boolean activated;
 
@@ -38,10 +44,12 @@ public class ProductMappingRel extends AbstractAuditingEntity implements Seriali
         },
         allowSetters = true
     )
+    @JoinColumn(name = "product_id", updatable = false, insertable = false)
     private Product product;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value = { "productMappingRels" }, allowSetters = true)
+    @JoinColumn(name = "product_mapping_id", updatable = false, insertable = false)
     private ProductMapping productMapping;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
@@ -56,6 +64,22 @@ public class ProductMappingRel extends AbstractAuditingEntity implements Seriali
     public ProductMappingRel id(Long id) {
         this.id = id;
         return this;
+    }
+
+    public Long getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Long productId) {
+        this.productId = productId;
+    }
+
+    public Long getProductMappingId() {
+        return productMappingId;
+    }
+
+    public void setProductMappingId(Long productMappingId) {
+        this.productMappingId = productMappingId;
     }
 
     public Boolean getActivated() {

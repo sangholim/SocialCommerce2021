@@ -70,7 +70,9 @@
       "ProductOptionRel",
       "ProductStoreRel",
       "Store",
-      "ProductViewContent"
+      "ProductViewContent",
+      "ClazzChapter",
+      "ClazzChapterVideo"
     ],
     "lastLiquibaseTimestamp": 1625293462000
   }

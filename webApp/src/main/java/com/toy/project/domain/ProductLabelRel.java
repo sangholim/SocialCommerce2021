@@ -19,6 +19,12 @@ public class ProductLabelRel extends AbstractAuditingEntity implements Serializa
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "product_id")
+    private Long productId;
+
+    @Column(name = "product_label_id")
+    private Long productLabelId;
+
     @Column(name = "is_display_date")
     private Boolean isDisplayDate;
 
@@ -47,10 +53,12 @@ public class ProductLabelRel extends AbstractAuditingEntity implements Serializa
         },
         allowSetters = true
     )
+    @JoinColumn(name = "product_id", updatable = false, insertable = false)
     private Product product;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value = { "productLabelRels" }, allowSetters = true)
+    @JoinColumn(name = "product_label_id", updatable = false, insertable = false)
     private ProductLabel productLabel;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
@@ -65,6 +73,22 @@ public class ProductLabelRel extends AbstractAuditingEntity implements Serializa
     public ProductLabelRel id(Long id) {
         this.id = id;
         return this;
+    }
+
+    public Long getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Long productId) {
+        this.productId = productId;
+    }
+
+    public Long getProductLabelId() {
+        return productLabelId;
+    }
+
+    public void setProductLabelId(Long productLabelId) {
+        this.productLabelId = productLabelId;
     }
 
     public Boolean getIsDisplayDate() {

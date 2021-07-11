@@ -617,7 +617,6 @@ class OptionDesignResourceIT {
         ProductOptionDesignRel productOptionDesignRel = ProductOptionDesignRelResourceIT.createEntity(em);
         em.persist(productOptionDesignRel);
         em.flush();
-        optionDesign.addProductOptionDesignRel(productOptionDesignRel);
         optionDesignRepository.saveAndFlush(optionDesign);
         Long productOptionDesignRelId = productOptionDesignRel.getId();
 

@@ -3399,7 +3399,6 @@ class ProductResourceIT {
         ProductCategoryRel productCategoryRel = ProductCategoryRelResourceIT.createEntity(em);
         em.persist(productCategoryRel);
         em.flush();
-        product.addProductCategoryRel(productCategoryRel);
         productRepository.saveAndFlush(product);
         Long productCategoryRelId = productCategoryRel.getId();
 
@@ -3418,7 +3417,6 @@ class ProductResourceIT {
         ProductLabelRel productLabelRel = ProductLabelRelResourceIT.createEntity(em);
         em.persist(productLabelRel);
         em.flush();
-        product.addProductLabelRel(productLabelRel);
         productRepository.saveAndFlush(product);
         Long productLabelRelId = productLabelRel.getId();
 
@@ -3437,7 +3435,6 @@ class ProductResourceIT {
         ProductMappingRel productMappingRel = ProductMappingRelResourceIT.createEntity(em);
         em.persist(productMappingRel);
         em.flush();
-        product.addProductMappingRel(productMappingRel);
         productRepository.saveAndFlush(product);
         Long productMappingRelId = productMappingRel.getId();
 
@@ -3456,7 +3453,6 @@ class ProductResourceIT {
         ProductViewRel productViewRel = ProductViewRelResourceIT.createEntity(em);
         em.persist(productViewRel);
         em.flush();
-        product.addProductViewRel(productViewRel);
         productRepository.saveAndFlush(product);
         Long productViewRelId = productViewRel.getId();
 
@@ -3475,7 +3471,6 @@ class ProductResourceIT {
         ProductNoticeRel productNoticeRel = ProductNoticeRelResourceIT.createEntity(em);
         em.persist(productNoticeRel);
         em.flush();
-        product.addProductNoticeRel(productNoticeRel);
         productRepository.saveAndFlush(product);
         Long productNoticeRelId = productNoticeRel.getId();
 
@@ -3494,7 +3489,6 @@ class ProductResourceIT {
         ProductShippingRel productShippingRel = ProductShippingRelResourceIT.createEntity(em);
         em.persist(productShippingRel);
         em.flush();
-        product.addProductShippingRel(productShippingRel);
         productRepository.saveAndFlush(product);
         Long productShippingRelId = productShippingRel.getId();
 
@@ -3513,7 +3507,6 @@ class ProductResourceIT {
         ProductTemplateRel productTemplateRel = ProductTemplateRelResourceIT.createEntity(em);
         em.persist(productTemplateRel);
         em.flush();
-        product.addProductTemplateRel(productTemplateRel);
         productRepository.saveAndFlush(product);
         Long productTemplateRelId = productTemplateRel.getId();
 
@@ -3532,7 +3525,6 @@ class ProductResourceIT {
         ProductOptionRel productOptionRel = ProductOptionRelResourceIT.createEntity(em);
         em.persist(productOptionRel);
         em.flush();
-        product.addProductOptionRel(productOptionRel);
         productRepository.saveAndFlush(product);
         Long productOptionRelId = productOptionRel.getId();
 
@@ -3551,7 +3543,6 @@ class ProductResourceIT {
         ProductClazzRel productClazzRel = ProductClazzRelResourceIT.createEntity(em);
         em.persist(productClazzRel);
         em.flush();
-        product.addProductClazzRel(productClazzRel);
         productRepository.saveAndFlush(product);
         Long productClazzRelId = productClazzRel.getId();
 
@@ -3570,7 +3561,6 @@ class ProductResourceIT {
         ProductStoreRel productStoreRel = ProductStoreRelResourceIT.createEntity(em);
         em.persist(productStoreRel);
         em.flush();
-        product.addProductStoreRel(productStoreRel);
         productRepository.saveAndFlush(product);
         Long productStoreRelId = productStoreRel.getId();
 

@@ -918,7 +918,6 @@ class OptionPackageResourceIT {
         ProductOptionPackageRel productOptionPackageRel = ProductOptionPackageRelResourceIT.createEntity(em);
         em.persist(productOptionPackageRel);
         em.flush();
-        optionPackage.addProductOptionPackageRel(productOptionPackageRel);
         optionPackageRepository.saveAndFlush(optionPackage);
         Long productOptionPackageRelId = productOptionPackageRel.getId();
 

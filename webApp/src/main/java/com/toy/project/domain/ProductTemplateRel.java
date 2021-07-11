@@ -19,6 +19,12 @@ public class ProductTemplateRel extends AbstractAuditingEntity implements Serial
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "product_id")
+    private Long productId;
+
+    @Column(name = "product_template_id")
+    private Long productTemplateId;
+
     @Column(name = "activated")
     private Boolean activated;
 
@@ -38,10 +44,12 @@ public class ProductTemplateRel extends AbstractAuditingEntity implements Serial
         },
         allowSetters = true
     )
+    @JoinColumn(name = "product_id", updatable = false, insertable = false)
     private Product product;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value = { "productTemplateRels" }, allowSetters = true)
+    @JoinColumn(name = "product_template_id", updatable = false, insertable = false)
     private ProductTemplate productTemplate;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
@@ -56,6 +64,22 @@ public class ProductTemplateRel extends AbstractAuditingEntity implements Serial
     public ProductTemplateRel id(Long id) {
         this.id = id;
         return this;
+    }
+
+    public Long getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Long productId) {
+        this.productId = productId;
+    }
+
+    public Long getProductTemplateId() {
+        return productTemplateId;
+    }
+
+    public void setProductTemplateId(Long productTemplateId) {
+        this.productTemplateId = productTemplateId;
     }
 
     public Boolean getActivated() {

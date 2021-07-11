@@ -12,6 +12,10 @@ public class ProductShippingRelDTO implements Serializable {
 
     private Long id;
 
+    private Long productId;
+
+    private Long ProductShippingId;
+
     private Boolean activated;
 
     @Size(max = 50)
@@ -34,6 +38,22 @@ public class ProductShippingRelDTO implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Long productId) {
+        this.productId = productId;
+    }
+
+    public Long getProductShippingId() {
+        return ProductShippingId;
+    }
+
+    public void setProductShippingId(Long productShippingId) {
+        ProductShippingId = productShippingId;
     }
 
     public Boolean getActivated() {

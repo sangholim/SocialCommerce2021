@@ -17,7 +17,7 @@
             <column name="use_calculation" type="boolean">
                 <constraints nullable="true" />
             </column>
-            <column name="calculation" type="integer">
+            <column name="calculation" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="calculation_date_from" type="${datetimeType}">
@@ -72,7 +72,7 @@
                   tableName="product_clazz_rel">
             <column name="id" type="numeric"/>
             <column name="use_calculation" type="boolean"/>
-            <column name="calculation" type="numeric"/>
+            <column name="calculation" type="string"/>
             <column name="calculation_date_from" type="${datetimeType}"/>
             <column name="calculation_date_to" type="${datetimeType}"/>
             <column name="activated" type="boolean"/>

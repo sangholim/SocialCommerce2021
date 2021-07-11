@@ -798,7 +798,6 @@ class ProductLabelResourceIT {
         ProductLabelRel productLabelRel = ProductLabelRelResourceIT.createEntity(em);
         em.persist(productLabelRel);
         em.flush();
-        productLabel.addProductLabelRel(productLabelRel);
         productLabelRepository.saveAndFlush(productLabel);
         Long productLabelRelId = productLabelRel.getId();
 

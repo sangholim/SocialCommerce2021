@@ -19,6 +19,12 @@ public class ProductOptionRel extends AbstractAuditingEntity implements Serializ
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "product_id")
+    private Long productId;
+
+    @Column(name = "product_option_id")
+    private Long productOptionId;
+
     @Column(name = "activated")
     private Boolean activated;
 
@@ -38,6 +44,7 @@ public class ProductOptionRel extends AbstractAuditingEntity implements Serializ
         },
         allowSetters = true
     )
+    @JoinColumn(name = "product_id", updatable = false, insertable = false)
     private Product product;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -45,6 +52,7 @@ public class ProductOptionRel extends AbstractAuditingEntity implements Serializ
         value = { "productOptionRels", "productOptionPackageRels", "productOptionColorRels", "productOptionDesignRels" },
         allowSetters = true
     )
+    @JoinColumn(name = "product_option_id", updatable = false, insertable = false)
     private ProductOption productOption;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
@@ -59,6 +67,22 @@ public class ProductOptionRel extends AbstractAuditingEntity implements Serializ
     public ProductOptionRel id(Long id) {
         this.id = id;
         return this;
+    }
+
+    public Long getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Long productId) {
+        this.productId = productId;
+    }
+
+    public Long getProductOptionId() {
+        return productOptionId;
+    }
+
+    public void setProductOptionId(Long productOptionId) {
+        this.productOptionId = productOptionId;
     }
 
     public Boolean getActivated() {

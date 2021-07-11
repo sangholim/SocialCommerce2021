@@ -1,13 +1,15 @@
 package com.toy.project.web.rest;
 
 import com.toy.project.repository.ProductRepository;
+import com.toy.project.security.AuthoritiesConstants;
+import com.toy.project.service.ProductExtendService;
 import com.toy.project.service.ProductQueryService;
-import com.toy.project.service.ProductService;
 import com.toy.project.service.criteria.ProductCriteria;
 import com.toy.project.service.dto.ProductDTO;
+import com.toy.project.service.dto.ProductExtendDTO;
 import com.toy.project.web.rest.errors.BadRequestAlertException;
 import com.toy.project.web.rest.vm.ProductVM;
-import java.net.URI;
+import io.swagger.annotations.ApiOperation;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
@@ -20,8 +22,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import tech.jhipster.web.util.HeaderUtil;
@@ -42,48 +44,104 @@ public class ProductResource {
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
-    private final ProductService productService;
+    private final ProductExtendService productExtendService;
 
     private final ProductRepository productRepository;
 
     private final ProductQueryService productQueryService;
 
-    public ProductResource(ProductService productService, ProductRepository productRepository, ProductQueryService productQueryService) {
-        this.productService = productService;
+    public ProductResource(
+        ProductExtendService productExtendService,
+        ProductRepository productRepository,
+        ProductQueryService productQueryService
+    ) {
+        this.productExtendService = productExtendService;
         this.productRepository = productRepository;
         this.productQueryService = productQueryService;
     }
 
-    /**
-     * {@code POST  /products} : Create a new product.
-     *
-     * @param productDTO the productDTO to create.
-     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new productDTO, or with status {@code 400 (Bad Request)} if the product has already an ID.
-     * @throws URISyntaxException if the Location URI syntax is incorrect.
-     */
+    @ApiOperation(
+        value = "P.1.1 [A] 상품 등록",
+        notes = "" +
+        "{<br />" +
+        "&nbsp;\"name\": 상품명,<br />" +
+        "&nbsp;\"code\": 상품코드,<br />" +
+        "&nbsp;\"calculation\": 정산율(0~1),<br />" +
+        "&nbsp;\"calculationDateFrom\": 정산 시작일(YYYY-MM-DDThh:mm:ssZ),<br />" +
+        "&nbsp;\"calculationDateTo\": 정산 종료일(YYYY-MM-DDThh:mm:ssZ),<br />" +
+        "&nbsp;\"price\": 상품 공시가격,<br />" +
+        "&nbsp;\"allPriceUnit\": 가격 단위 (WON,DOLLAR),<br />" +
+        "&nbsp;\"discount\": 할인타입(ALL, PC, MOBILE, NONE),<br />" +
+        "&nbsp;\"discountPrice\": 할인가격(ex: 12,000 (-1,000) ),<br />" +
+        "&nbsp;\"discountUnit\": 할인 가격 단위(WON,DOLLAR),<br />" +
+        "&nbsp;\"discountDateFrom\": 할인 시작일(YYYY-MM-DDThh:mm:ssZ),<br />" +
+        "&nbsp;\"discountDateTo\": 정산 종료일(YYYY-MM-DDThh:mm:ssZ),<br />" +
+        "&nbsp;\"isInstallment\": 할부 여부(true,false),<br />" +
+        "&nbsp;\"installmentMonth\": 할부 기간(Month),<br />" +
+        "&nbsp;\"isSell\": 판매 여부(true, false),<br />" +
+        "&nbsp;\"sellDateFrom\": 판매 시작일(YYYY-MM-DDThh:mm:ssZ),<br />" +
+        "&nbsp;\"sellDateTo\": 판매 종료일(YYYY-MM-DDThh:mm:ssZ),<br />" +
+        "&nbsp;\"minPurchaseAmount\": 최소 구매량,<br />" +
+        "&nbsp;\"manPurchaseAmount\": 최대 구매량,<br />" +
+        "&nbsp;\"mainImageFileUrl\": 메인 이미지 파일 경로,<br />" +
+        "&nbsp;\"addImageFileUrl\": 추가 이미지 파일 경로,<br />" +
+        "&nbsp;\"mainVideoFileUrl\": 메인 비디오 파일 경로,<br />" +
+        "&nbsp;\"descriptionFileUrl\": 상세설명 파일 경로,<br />" +
+        "&nbsp;\"shippingType\": 배송 타입(TODAY, NORMAL, ETC),<br />" +
+        "&nbsp;\"separateShippingPriceType\": 상품별 배송비 타입 (PAY, FREE, CONDITION_FREE),<br />" +
+        "&nbsp;\"defaultShippingPrice\": 배송료,<br />" +
+        "&nbsp;\"freeShippingPrice\": 특정 가격 이상 구매시 무료 배송 (ex: xxx원 이상 구매시 무료 배송),<br />" +
+        "&nbsp;\"jejuShippingPrice\": 제주도 지역 배송 가격,<br />" +
+        "&nbsp;\"difficultShippingPrice\": 제주도를 제외한 도서산간 배송 가격,<br />" +
+        "&nbsp;\"refundShippingPrice\": 반품시 배송 가격,<br />" +
+        "&nbsp;\"exchangeShippingPrice\": 교환시 배송 가격,<br />" +
+        "&nbsp;\"exchangeShippingFileUrl\": 배송/환불/반품 안내 파일 경로,<br />" +
+        "&nbsp;\"isView\": 전시 상태 여부[true,false],<br />" +
+        "&nbsp;\"viewReservationDate\": 예약 전시 날짜 (YYYY-MM-DDThh:mm:ssZ),<br />" +
+        "&nbsp;\"productCategories\": 등록된 카테고리들 <br /> " +
+        "&nbsp;&nbsp;[{\"id\" : 1},{\"id\" : 2}],<br />" +
+        "&nbsp;\"productOptions\": 등록된 상품 옵션들 <br />" +
+        "&nbsp;&nbsp;[{\"id\" : 1},{\"id\" : 2}],<br />" +
+        "&nbsp;\"productLabels\": 등록된 상품 라벨들 <br />" +
+        "&nbsp;[{<br />" +
+        "&nbsp;&nbsp;&nbsp;\"id\" : 1,<br />" +
+        "&nbsp;&nbsp;&nbsp;\"displayDate\" : 상품 전시 여부 [true, false],<br />" +
+        "&nbsp;&nbsp;&nbsp;\"displayDateFrom\" : 상품 전시 시작일 (YYYY-MM-DDThh:mm:ssZ),<br />" +
+        "&nbsp;&nbsp;&nbsp;\"displayDateTo\" : 상품 전시 종료일 (YYYY-MM-DDThh:mm:ssZ)<br />" +
+        "&nbsp;&nbsp;},...],<br />" +
+        "&nbsp;\"productNotices\": 등록된 상품 공지들 <br />" +
+        "&nbsp;&nbsp;[{\"id\" : 1},...],<br />" +
+        "&nbsp;\"productShippings\": 등록된 상품 배송정보들 <br />" +
+        "&nbsp;&nbsp;[{\"id\" : 1},...],<br />" +
+        "&nbsp;\"productTemplates\": 등록된 상품 템플릿들 <br />" +
+        "&nbsp;&nbsp;[{\"id\" : 1},...],<br />" +
+        "&nbsp;\"productMappings\": 등록된 연관 상품들 <br />" +
+        "&nbsp;&nbsp;[{\"id\" : 1},...],<br />" +
+        "&nbsp;\"stores\": 등록된 스토어 상품 정보들 <br />" +
+        "&nbsp;&nbsp;[{\"id\" : 1,<br />" +
+        "&nbsp;&nbsp;&nbsp;\"productUseCalculation\" : 정산율 사용 여부 [true, false],<br />" +
+        "&nbsp;&nbsp;&nbsp;\"productCalculation\" : 정산율 (0~1),<br />" +
+        "&nbsp;&nbsp;&nbsp;\"productCalculationDateFrom\" : 정산 시작일 (YYYY-MM-DDThh:mm:ssZ),<br />" +
+        "&nbsp;&nbsp;&nbsp;\"productCalculationDateTo\" : 정산 종료일 (YYYY-MM-DDThh:mm:ssZ)<br />" +
+        "&nbsp;&nbsp;},...],<br />" +
+        "&nbsp;\"productViews\": [{\"id\" : 1},...],<br />" +
+        "&nbsp;\"clazzs\": 등록된 클래스 상품 정보들 <br />" +
+        "&nbsp;&nbsp;[{\"id\" : 1,<br />" +
+        "&nbsp;&nbsp;&nbsp;\"productUseCalculation\" : 정산율 사용 여부 [true, false],<br />" +
+        "&nbsp;&nbsp;&nbsp;\"productCalculation\" : 정산율 (0~1),<br />" +
+        "&nbsp;&nbsp;&nbsp;\"productCalculationDateFrom\" : 정산 시작일 (YYYY-MM-DDThh:mm:ssZ),<br />" +
+        "&nbsp;&nbsp;&nbsp;\"productCalculationDateTo\" : 정산 종료일 (YYYY-MM-DDThh:mm:ssZ)<br />" +
+        "&nbsp;&nbsp;},...]<br />" +
+        "}<br />"
+    )
+    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
     @PostMapping("/products")
-    public ResponseEntity<ProductDTO> createProduct(@Valid @RequestBody ProductDTO productDTO) throws URISyntaxException {
-        log.debug("REST request to save Product : {}", productDTO);
-        if (productDTO.getId() != null) {
-            throw new BadRequestAlertException("A new product cannot already have an ID", ENTITY_NAME, "idexists");
-        }
-        ProductDTO result = productService.save(productDTO);
-        return ResponseEntity
-            .created(new URI("/api/products/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
-            .body(result);
+    public void createProduct(@RequestBody ProductExtendDTO productExtendDTO) throws URISyntaxException {
+        productExtendService.save(productExtendDTO);
     }
 
-    /**
-     * {@code PUT  /products/:id} : Updates an existing product.
-     *
-     * @param id the id of the productDTO to save.
-     * @param productDTO the productDTO to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated productDTO,
-     * or with status {@code 400 (Bad Request)} if the productDTO is not valid,
-     * or with status {@code 500 (Internal Server Error)} if the productDTO couldn't be updated.
-     * @throws URISyntaxException if the Location URI syntax is incorrect.
-     */
+    @ApiOperation(value = "P.1.2 [A] 상품 수정")
+    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
     @PutMapping("/products/{id}")
     public ResponseEntity<ProductDTO> updateProduct(
         @PathVariable(value = "id", required = false) final Long id,
@@ -101,24 +159,15 @@ public class ProductResource {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
 
-        ProductDTO result = productService.save(productDTO);
+        ProductDTO result = productExtendService.save(productDTO);
         return ResponseEntity
             .ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, productDTO.getId().toString()))
             .body(result);
     }
 
-    /**
-     * {@code PATCH  /products/:id} : Partial updates given fields of an existing product, field will ignore if it is null
-     *
-     * @param id the id of the productDTO to save.
-     * @param productDTO the productDTO to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated productDTO,
-     * or with status {@code 400 (Bad Request)} if the productDTO is not valid,
-     * or with status {@code 404 (Not Found)} if the productDTO is not found,
-     * or with status {@code 500 (Internal Server Error)} if the productDTO couldn't be updated.
-     * @throws URISyntaxException if the Location URI syntax is incorrect.
-     */
+    @ApiOperation(value = "P.1.2.1 [A] 상품 부분 수정")
+    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
     @PatchMapping(value = "/products/{id}", consumes = "application/merge-patch+json")
     public ResponseEntity<ProductDTO> partialUpdateProduct(
         @PathVariable(value = "id", required = false) final Long id,
@@ -136,7 +185,7 @@ public class ProductResource {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
 
-        Optional<ProductDTO> result = productService.partialUpdate(productDTO);
+        Optional<ProductDTO> result = productExtendService.partialUpdate(productDTO);
 
         return ResponseUtil.wrapOrNotFound(
             result,
@@ -144,13 +193,7 @@ public class ProductResource {
         );
     }
 
-    /**
-     * {@code GET  /products} : get all the products.
-     *
-     * @param pageable the pagination information.
-     * @param criteria the criteria which the requested entities should match.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of products in body.
-     */
+    @ApiOperation(value = "P.1.3 상품 리스트")
     @GetMapping("/products")
     public ResponseEntity<List<ProductDTO>> getAllProducts(ProductCriteria criteria, Pageable pageable) {
         log.debug("REST request to get Products by criteria: {}", criteria);
@@ -159,40 +202,26 @@ public class ProductResource {
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
-    /**
-     * {@code GET  /products/count} : count all the products.
-     *
-     * @param criteria the criteria which the requested entities should match.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
-     */
+    @ApiOperation(value = "P.1.3.1 상품 리스트 카운트")
     @GetMapping("/products/count")
     public ResponseEntity<Long> countProducts(ProductCriteria criteria) {
         log.debug("REST request to count Products by criteria: {}", criteria);
         return ResponseEntity.ok().body(productQueryService.countByCriteria(criteria));
     }
 
-    /**
-     * {@code GET  /products/:id} : get the "id" product.
-     *
-     * @param id the id of the productDTO to retrieve.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the productDTO, or with status {@code 404 (Not Found)}.
-     */
+    @ApiOperation(value = "P.1.4 상품 조회")
     @GetMapping("/products/{id}")
     public ResponseEntity<ProductVM> getProduct(@PathVariable Long id) {
         log.debug("REST request to get Product : {}", id);
-        return ResponseUtil.wrapOrNotFound(productService.findOne(id));
+        return ResponseUtil.wrapOrNotFound(productExtendService.findOne(id));
     }
 
-    /**
-     * {@code DELETE  /products/:id} : delete the "id" product.
-     *
-     * @param id the id of the productDTO to delete.
-     * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
-     */
+    @ApiOperation(value = "P.1.5 [A] 상품 삭제")
+    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
     @DeleteMapping("/products/{id}")
     public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
         log.debug("REST request to delete Product : {}", id);
-        productService.delete(id);
+        productExtendService.delete(id);
         return ResponseEntity
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))

@@ -4,7 +4,10 @@ import com.toy.project.domain.ProductCategoryRel;
 import com.toy.project.repository.ProductCategoryRelRepository;
 import com.toy.project.service.dto.ProductCategoryRelDTO;
 import com.toy.project.service.mapper.ProductCategoryRelMapper;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -33,12 +36,18 @@ public class ProductCategoryRelService {
         this.productCategoryRelMapper = productCategoryRelMapper;
     }
 
-    /**
-     * Save a productCategoryRel.
-     *
-     * @param productCategoryRelDTO the entity to save.
-     * @return the persisted entity.
-     */
+    public Set<ProductCategoryRelDTO> saveAll(Set<ProductCategoryRelDTO> productCategoryRelDTOs) {
+        Set<ProductCategoryRel> productCategoryRels = productCategoryRelDTOs
+            .stream()
+            .map(productCategoryRelMapper::toEntity)
+            .collect(Collectors.toSet());
+        return productCategoryRelRepository
+            .saveAll(productCategoryRels)
+            .stream()
+            .map(productCategoryRelMapper::toDto)
+            .collect(Collectors.toSet());
+    }
+
     public ProductCategoryRelDTO save(ProductCategoryRelDTO productCategoryRelDTO) {
         log.debug("Request to save ProductCategoryRel : {}", productCategoryRelDTO);
         ProductCategoryRel productCategoryRel = productCategoryRelMapper.toEntity(productCategoryRelDTO);
@@ -46,12 +55,6 @@ public class ProductCategoryRelService {
         return productCategoryRelMapper.toDto(productCategoryRel);
     }
 
-    /**
-     * Partially update a productCategoryRel.
-     *
-     * @param productCategoryRelDTO the entity to update partially.
-     * @return the persisted entity.
-     */
     public Optional<ProductCategoryRelDTO> partialUpdate(ProductCategoryRelDTO productCategoryRelDTO) {
         log.debug("Request to partially update ProductCategoryRel : {}", productCategoryRelDTO);
 

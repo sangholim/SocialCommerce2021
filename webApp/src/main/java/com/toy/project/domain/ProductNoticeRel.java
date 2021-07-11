@@ -19,6 +19,12 @@ public class ProductNoticeRel extends AbstractAuditingEntity implements Serializ
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "product_id")
+    private Long productId;
+
+    @Column(name = "product_notice_id")
+    private Long productNoticeId;
+
     @Column(name = "activated")
     private Boolean activated;
 
@@ -38,10 +44,12 @@ public class ProductNoticeRel extends AbstractAuditingEntity implements Serializ
         },
         allowSetters = true
     )
+    @JoinColumn(name = "product_id", updatable = false, insertable = false)
     private Product product;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value = { "productNoticeRels" }, allowSetters = true)
+    @JoinColumn(name = "product_notice_id", updatable = false, insertable = false)
     private ProductNotice productNotice;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
@@ -51,6 +59,22 @@ public class ProductNoticeRel extends AbstractAuditingEntity implements Serializ
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Long productId) {
+        this.productId = productId;
+    }
+
+    public Long getProductNoticeId() {
+        return productNoticeId;
+    }
+
+    public void setProductNoticeId(Long productNoticeId) {
+        this.productNoticeId = productNoticeId;
     }
 
     public ProductNoticeRel id(Long id) {

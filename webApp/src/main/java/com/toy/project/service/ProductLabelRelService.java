@@ -5,6 +5,8 @@ import com.toy.project.repository.ProductLabelRelRepository;
 import com.toy.project.service.dto.ProductLabelRelDTO;
 import com.toy.project.service.mapper.ProductLabelRelMapper;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -96,5 +98,13 @@ public class ProductLabelRelService {
     public void delete(Long id) {
         log.debug("Request to delete ProductLabelRel : {}", id);
         productLabelRelRepository.deleteById(id);
+    }
+
+    public Set<ProductLabelRelDTO> saveAll(Set<ProductLabelRelDTO> productLabelRelDTOS) {
+        Set<ProductLabelRel> productLabelRels = productLabelRelDTOS
+            .stream()
+            .map(productLabelRelMapper::toEntity)
+            .collect(Collectors.toSet());
+        return productLabelRelRepository.saveAll(productLabelRels).stream().map(productLabelRelMapper::toDto).collect(Collectors.toSet());
     }
 }

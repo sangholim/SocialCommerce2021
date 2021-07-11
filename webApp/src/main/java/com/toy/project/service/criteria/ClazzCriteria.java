@@ -49,7 +49,7 @@ public class ClazzCriteria implements Serializable, Criteria {
 
     private StringFilter lecturer;
 
-    private IntegerFilter calculation;
+    private StringFilter calculation;
 
     private BooleanFilter isView;
 
@@ -66,6 +66,8 @@ public class ClazzCriteria implements Serializable, Criteria {
     private InstantFilter lastModifiedDate;
 
     private LongFilter productClazzRelId;
+
+    private LongFilter clazzChapterId;
 
     public ClazzCriteria() {}
 
@@ -91,6 +93,7 @@ public class ClazzCriteria implements Serializable, Criteria {
         this.lastModifiedBy = other.lastModifiedBy == null ? null : other.lastModifiedBy.copy();
         this.lastModifiedDate = other.lastModifiedDate == null ? null : other.lastModifiedDate.copy();
         this.productClazzRelId = other.productClazzRelId == null ? null : other.productClazzRelId.copy();
+        this.clazzChapterId = other.clazzChapterId == null ? null : other.clazzChapterId.copy();
     }
 
     @Override
@@ -278,18 +281,18 @@ public class ClazzCriteria implements Serializable, Criteria {
         this.lecturer = lecturer;
     }
 
-    public IntegerFilter getCalculation() {
+    public StringFilter getCalculation() {
         return calculation;
     }
 
-    public IntegerFilter calculation() {
+    public StringFilter calculation() {
         if (calculation == null) {
-            calculation = new IntegerFilter();
+            calculation = new StringFilter();
         }
         return calculation;
     }
 
-    public void setCalculation(IntegerFilter calculation) {
+    public void setCalculation(StringFilter calculation) {
         this.calculation = calculation;
     }
 
@@ -413,6 +416,21 @@ public class ClazzCriteria implements Serializable, Criteria {
         this.productClazzRelId = productClazzRelId;
     }
 
+    public LongFilter getClazzChapterId() {
+        return clazzChapterId;
+    }
+
+    public LongFilter clazzChapterId() {
+        if (clazzChapterId == null) {
+            clazzChapterId = new LongFilter();
+        }
+        return clazzChapterId;
+    }
+
+    public void setClazzChapterId(LongFilter clazzChapterId) {
+        this.clazzChapterId = clazzChapterId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -443,7 +461,8 @@ public class ClazzCriteria implements Serializable, Criteria {
             Objects.equals(createdDate, that.createdDate) &&
             Objects.equals(lastModifiedBy, that.lastModifiedBy) &&
             Objects.equals(lastModifiedDate, that.lastModifiedDate) &&
-            Objects.equals(productClazzRelId, that.productClazzRelId)
+            Objects.equals(productClazzRelId, that.productClazzRelId) &&
+            Objects.equals(clazzChapterId, that.clazzChapterId)
         );
     }
 
@@ -470,7 +489,8 @@ public class ClazzCriteria implements Serializable, Criteria {
             createdDate,
             lastModifiedBy,
             lastModifiedDate,
-            productClazzRelId
+            productClazzRelId,
+            clazzChapterId
         );
     }
 
@@ -499,6 +519,7 @@ public class ClazzCriteria implements Serializable, Criteria {
             (lastModifiedBy != null ? "lastModifiedBy=" + lastModifiedBy + ", " : "") +
             (lastModifiedDate != null ? "lastModifiedDate=" + lastModifiedDate + ", " : "") +
             (productClazzRelId != null ? "productClazzRelId=" + productClazzRelId + ", " : "") +
+            (clazzChapterId != null ? "clazzChapterId=" + clazzChapterId + ", " : "") +
             "}";
     }
 }

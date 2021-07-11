@@ -136,7 +136,7 @@ entity ProductOptionPackageRel {
 entity Store {
   name String,
   type String,
-  calculation Integer,
+  calculation String,
   activated Boolean,
   createdBy	String maxlength(50),
   createdDate	Instant,
@@ -148,7 +148,7 @@ entity ProductStoreRel {
   // ProductId Long,
   // StoreId Long,
   useCalculation Boolean,
-  calculation Integer,
+  calculation String,
   calculationDateFrom	Instant,
   calculationDateTo	Instant,
   activated Boolean,
@@ -170,9 +170,34 @@ entity Clazz {
   lectureStartDateFrom	Instant,
   lectureInterval	Integer,
   lecturer String,
-  calculation Integer,
+  calculation String,
   isView	Boolean,
   isSell	Boolean,
+  activated Boolean,
+  createdBy	String maxlength(50),
+  createdDate	Instant,
+  lastModifiedBy	String maxlength(50),
+  lastModifiedDate	Instant
+}
+
+entity ClazzChapter {
+  name String,
+  description TextBlob,
+  fileUrl	String,
+  order Integer,
+  activated Boolean,
+  createdBy	String maxlength(50),
+  createdDate	Instant,
+  lastModifiedBy	String maxlength(50),
+  lastModifiedDate	Instant
+}
+
+entity ClazzChapterVideo {
+  name String,
+  thumbFileUrl	String,
+  originalLinkUrl	String,
+  time	String,
+  order Integer,
   activated Boolean,
   createdBy	String maxlength(50),
   createdDate	Instant,
@@ -184,7 +209,7 @@ entity ProductClazzRel {
   // ProductId Long,
   // ClazzId Long,
   useCalculation Boolean,
-  calculation Integer,
+  calculation String,
   calculationDateFrom	Instant,
   calculationDateTo	Instant,
   activated Boolean,
@@ -415,6 +440,10 @@ relationship OneToMany {
     OptionDesign{productOptionDesignRel} to ProductOptionDesignRel
     // 상품 고시 - 상품 고시 내용
     ProductView{productViewContent} to ProductViewContent
+    // 클래스 - 클래스 챕터 (1:N)
+    Clazz{clazzChapter} to ClazzChapter
+    // 클래스 챕터 - 클래스 챕터 영상 (1:N)
+    ClazzChapter{clazzChapterVideo} to ClazzChapterVideo
 
 }
 

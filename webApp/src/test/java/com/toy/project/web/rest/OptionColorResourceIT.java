@@ -703,7 +703,6 @@ class OptionColorResourceIT {
         ProductOptionColorRel productOptionColorRel = ProductOptionColorRelResourceIT.createEntity(em);
         em.persist(productOptionColorRel);
         em.flush();
-        optionColor.addProductOptionColorRel(productOptionColorRel);
         optionColorRepository.saveAndFlush(optionColor);
         Long productOptionColorRelId = productOptionColorRel.getId();
 

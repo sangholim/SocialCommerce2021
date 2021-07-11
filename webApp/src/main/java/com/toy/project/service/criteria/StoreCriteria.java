@@ -31,7 +31,7 @@ public class StoreCriteria implements Serializable, Criteria {
 
     private StringFilter type;
 
-    private IntegerFilter calculation;
+    private StringFilter calculation;
 
     private BooleanFilter activated;
 
@@ -110,18 +110,18 @@ public class StoreCriteria implements Serializable, Criteria {
         this.type = type;
     }
 
-    public IntegerFilter getCalculation() {
+    public StringFilter getCalculation() {
         return calculation;
     }
 
-    public IntegerFilter calculation() {
+    public StringFilter calculation() {
         if (calculation == null) {
-            calculation = new IntegerFilter();
+            calculation = new StringFilter();
         }
         return calculation;
     }
 
-    public void setCalculation(IntegerFilter calculation) {
+    public void setCalculation(StringFilter calculation) {
         this.calculation = calculation;
     }
 

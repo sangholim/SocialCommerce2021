@@ -712,7 +712,6 @@ class ProductMappingResourceIT {
         ProductMappingRel productMappingRel = ProductMappingRelResourceIT.createEntity(em);
         em.persist(productMappingRel);
         em.flush();
-        productMapping.addProductMappingRel(productMappingRel);
         productMappingRepository.saveAndFlush(productMapping);
         Long productMappingRelId = productMappingRel.getId();
 

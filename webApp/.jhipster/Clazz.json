@@ -47,7 +47,7 @@
     },
     {
       "fieldName": "calculation",
-      "fieldType": "Integer"
+      "fieldType": "String"
     },
     {
       "fieldName": "isView",
@@ -88,6 +88,12 @@
       "otherEntityName": "productClazzRel",
       "otherEntityRelationshipName": "clazz",
       "relationshipName": "productClazzRel"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "clazzChapter",
+      "otherEntityRelationshipName": "clazz",
+      "relationshipName": "clazzChapter"
     }
   ],
   "entityTableName": "clazz",

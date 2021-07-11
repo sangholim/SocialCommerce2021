@@ -12,6 +12,10 @@ public class ProductOptionRelDTO implements Serializable {
 
     private Long id;
 
+    private Long productId;
+
+    private Long productOptionId;
+
     private Boolean activated;
 
     @Size(max = 50)
@@ -34,6 +38,22 @@ public class ProductOptionRelDTO implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Long productId) {
+        this.productId = productId;
+    }
+
+    public Long getProductOptionId() {
+        return productOptionId;
+    }
+
+    public void setProductOptionId(Long productOptionId) {
+        this.productOptionId = productOptionId;
     }
 
     public Boolean getActivated() {

@@ -11,7 +11,7 @@
     },
     {
       "fieldName": "calculation",
-      "fieldType": "Integer"
+      "fieldType": "String"
     },
     {
       "fieldName": "activated",

@@ -7,6 +7,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.toy.project.IntegrationTest;
 import com.toy.project.domain.Clazz;
+import com.toy.project.domain.ClazzChapter;
 import com.toy.project.domain.ProductClazzRel;
 import com.toy.project.repository.ClazzRepository;
 import com.toy.project.service.criteria.ClazzCriteria;
@@ -74,9 +75,8 @@ class ClazzResourceIT {
     private static final String DEFAULT_LECTURER = "AAAAAAAAAA";
     private static final String UPDATED_LECTURER = "BBBBBBBBBB";
 
-    private static final Integer DEFAULT_CALCULATION = 1;
-    private static final Integer UPDATED_CALCULATION = 2;
-    private static final Integer SMALLER_CALCULATION = 1 - 1;
+    private static final String DEFAULT_CALCULATION = "AAAAAAAAAA";
+    private static final String UPDATED_CALCULATION = "BBBBBBBBBB";
 
     private static final Boolean DEFAULT_IS_VIEW = false;
     private static final Boolean UPDATED_IS_VIEW = true;
@@ -1208,54 +1208,28 @@ class ClazzResourceIT {
 
     @Test
     @Transactional
-    void getAllClazzesByCalculationIsGreaterThanOrEqualToSomething() throws Exception {
+    void getAllClazzesByCalculationContainsSomething() throws Exception {
         // Initialize the database
         clazzRepository.saveAndFlush(clazz);
 
-        // Get all the clazzList where calculation is greater than or equal to DEFAULT_CALCULATION
-        defaultClazzShouldBeFound("calculation.greaterThanOrEqual=" + DEFAULT_CALCULATION);
+        // Get all the clazzList where calculation contains DEFAULT_CALCULATION
+        defaultClazzShouldBeFound("calculation.contains=" + DEFAULT_CALCULATION);
 
-        // Get all the clazzList where calculation is greater than or equal to UPDATED_CALCULATION
-        defaultClazzShouldNotBeFound("calculation.greaterThanOrEqual=" + UPDATED_CALCULATION);
+        // Get all the clazzList where calculation contains UPDATED_CALCULATION
+        defaultClazzShouldNotBeFound("calculation.contains=" + UPDATED_CALCULATION);
     }
 
     @Test
     @Transactional
-    void getAllClazzesByCalculationIsLessThanOrEqualToSomething() throws Exception {
+    void getAllClazzesByCalculationNotContainsSomething() throws Exception {
         // Initialize the database
         clazzRepository.saveAndFlush(clazz);
 
-        // Get all the clazzList where calculation is less than or equal to DEFAULT_CALCULATION
-        defaultClazzShouldBeFound("calculation.lessThanOrEqual=" + DEFAULT_CALCULATION);
+        // Get all the clazzList where calculation does not contain DEFAULT_CALCULATION
+        defaultClazzShouldNotBeFound("calculation.doesNotContain=" + DEFAULT_CALCULATION);
 
-        // Get all the clazzList where calculation is less than or equal to SMALLER_CALCULATION
-        defaultClazzShouldNotBeFound("calculation.lessThanOrEqual=" + SMALLER_CALCULATION);
-    }
-
-    @Test
-    @Transactional
-    void getAllClazzesByCalculationIsLessThanSomething() throws Exception {
-        // Initialize the database
-        clazzRepository.saveAndFlush(clazz);
-
-        // Get all the clazzList where calculation is less than DEFAULT_CALCULATION
-        defaultClazzShouldNotBeFound("calculation.lessThan=" + DEFAULT_CALCULATION);
-
-        // Get all the clazzList where calculation is less than UPDATED_CALCULATION
-        defaultClazzShouldBeFound("calculation.lessThan=" + UPDATED_CALCULATION);
-    }
-
-    @Test
-    @Transactional
-    void getAllClazzesByCalculationIsGreaterThanSomething() throws Exception {
-        // Initialize the database
-        clazzRepository.saveAndFlush(clazz);
-
-        // Get all the clazzList where calculation is greater than DEFAULT_CALCULATION
-        defaultClazzShouldNotBeFound("calculation.greaterThan=" + DEFAULT_CALCULATION);
-
-        // Get all the clazzList where calculation is greater than SMALLER_CALCULATION
-        defaultClazzShouldBeFound("calculation.greaterThan=" + SMALLER_CALCULATION);
+        // Get all the clazzList where calculation does not contain UPDATED_CALCULATION
+        defaultClazzShouldBeFound("calculation.doesNotContain=" + UPDATED_CALCULATION);
     }
 
     @Test
@@ -1691,6 +1665,25 @@ class ClazzResourceIT {
 
         // Get all the clazzList where productClazzRel equals to (productClazzRelId + 1)
         defaultClazzShouldNotBeFound("productClazzRelId.equals=" + (productClazzRelId + 1));
+    }
+
+    @Test
+    @Transactional
+    void getAllClazzesByClazzChapterIsEqualToSomething() throws Exception {
+        // Initialize the database
+        clazzRepository.saveAndFlush(clazz);
+        ClazzChapter clazzChapter = ClazzChapterResourceIT.createEntity(em);
+        em.persist(clazzChapter);
+        em.flush();
+        clazz.addClazzChapter(clazzChapter);
+        clazzRepository.saveAndFlush(clazz);
+        Long clazzChapterId = clazzChapter.getId();
+
+        // Get all the clazzList where clazzChapter equals to clazzChapterId
+        defaultClazzShouldBeFound("clazzChapterId.equals=" + clazzChapterId);
+
+        // Get all the clazzList where clazzChapter equals to (clazzChapterId + 1)
+        defaultClazzShouldNotBeFound("clazzChapterId.equals=" + (clazzChapterId + 1));
     }
 
     /**

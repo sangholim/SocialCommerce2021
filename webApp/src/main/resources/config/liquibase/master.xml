@@ -43,6 +43,8 @@
     <include file="config/liquibase/changelog/20210627045503_added_entity_ProductStoreRel.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20210627045504_added_entity_Store.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20210703062422_added_entity_ProductViewContent.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210710040840_added_entity_ClazzChapter.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210710040841_added_entity_ClazzChapterVideo.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20210626074157_added_entity_constraints_ProductCategoryRel.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20210626074159_added_entity_constraints_ProductLabelRel.xml" relativeToChangelogFile="false"/>
@@ -58,6 +60,8 @@
     <include file="config/liquibase/changelog/20210627045502_added_entity_constraints_ProductOptionRel.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20210627045503_added_entity_constraints_ProductStoreRel.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20210703062422_added_entity_constraints_ProductViewContent.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210710040840_added_entity_constraints_ClazzChapter.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210710040841_added_entity_constraints_ClazzChapterVideo.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
 </databaseChangeLog>

@@ -19,11 +19,17 @@ public class ProductStoreRel extends AbstractAuditingEntity implements Serializa
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "product_id")
+    private Long productId;
+
+    @Column(name = "store_id")
+    private Long storeId;
+
     @Column(name = "use_calculation")
     private Boolean useCalculation;
 
     @Column(name = "calculation")
-    private Integer calculation;
+    private String calculation;
 
     @Column(name = "calculation_date_from")
     private Instant calculationDateFrom;
@@ -50,10 +56,12 @@ public class ProductStoreRel extends AbstractAuditingEntity implements Serializa
         },
         allowSetters = true
     )
+    @JoinColumn(name = "product_id", updatable = false, insertable = false)
     private Product product;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value = { "productStoreRels" }, allowSetters = true)
+    @JoinColumn(name = "store_id", updatable = false, insertable = false)
     private Store store;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
@@ -70,6 +78,22 @@ public class ProductStoreRel extends AbstractAuditingEntity implements Serializa
         return this;
     }
 
+    public Long getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Long productId) {
+        this.productId = productId;
+    }
+
+    public Long getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(Long storeId) {
+        this.storeId = storeId;
+    }
+
     public Boolean getUseCalculation() {
         return this.useCalculation;
     }
@@ -83,16 +107,16 @@ public class ProductStoreRel extends AbstractAuditingEntity implements Serializa
         this.useCalculation = useCalculation;
     }
 
-    public Integer getCalculation() {
+    public String getCalculation() {
         return this.calculation;
     }
 
-    public ProductStoreRel calculation(Integer calculation) {
+    public ProductStoreRel calculation(String calculation) {
         this.calculation = calculation;
         return this;
     }
 
-    public void setCalculation(Integer calculation) {
+    public void setCalculation(String calculation) {
         this.calculation = calculation;
     }
 

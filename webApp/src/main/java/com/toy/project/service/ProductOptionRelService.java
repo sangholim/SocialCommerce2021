@@ -1,10 +1,13 @@
 package com.toy.project.service;
 
+import com.toy.project.domain.ProductCategoryRel;
 import com.toy.project.domain.ProductOptionRel;
 import com.toy.project.repository.ProductOptionRelRepository;
 import com.toy.project.service.dto.ProductOptionRelDTO;
 import com.toy.project.service.mapper.ProductOptionRelMapper;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -96,5 +99,17 @@ public class ProductOptionRelService {
     public void delete(Long id) {
         log.debug("Request to delete ProductOptionRel : {}", id);
         productOptionRelRepository.deleteById(id);
+    }
+
+    public Set<ProductOptionRelDTO> saveAll(Set<ProductOptionRelDTO> productOptionRelDTOSet) {
+        Set<ProductOptionRel> productOptionRels = productOptionRelDTOSet
+            .stream()
+            .map(productOptionRelMapper::toEntity)
+            .collect(Collectors.toSet());
+        return productOptionRelRepository
+            .saveAll(productOptionRels)
+            .stream()
+            .map(productOptionRelMapper::toDto)
+            .collect(Collectors.toSet());
     }
 }

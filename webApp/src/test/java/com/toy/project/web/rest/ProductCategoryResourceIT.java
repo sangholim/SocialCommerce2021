@@ -911,7 +911,6 @@ class ProductCategoryResourceIT {
         ProductCategoryRel productCategoryRel = ProductCategoryRelResourceIT.createEntity(em);
         em.persist(productCategoryRel);
         em.flush();
-        productCategory.addProductCategoryRel(productCategoryRel);
         productCategoryRepository.saveAndFlush(productCategory);
         Long productCategoryRelId = productCategoryRel.getId();
 

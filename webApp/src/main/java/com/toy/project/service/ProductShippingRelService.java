@@ -1,10 +1,14 @@
 package com.toy.project.service;
 
+import com.toy.project.domain.ProductLabelRel;
 import com.toy.project.domain.ProductShippingRel;
 import com.toy.project.repository.ProductShippingRelRepository;
+import com.toy.project.service.dto.ProductLabelRelDTO;
 import com.toy.project.service.dto.ProductShippingRelDTO;
 import com.toy.project.service.mapper.ProductShippingRelMapper;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -44,6 +48,18 @@ public class ProductShippingRelService {
         ProductShippingRel productShippingRel = productShippingRelMapper.toEntity(productShippingRelDTO);
         productShippingRel = productShippingRelRepository.save(productShippingRel);
         return productShippingRelMapper.toDto(productShippingRel);
+    }
+
+    public Set<ProductShippingRelDTO> saveAll(Set<ProductShippingRelDTO> productShippingRelDTOS) {
+        Set<ProductShippingRel> productShippingRels = productShippingRelDTOS
+            .stream()
+            .map(productShippingRelMapper::toEntity)
+            .collect(Collectors.toSet());
+        return productShippingRelRepository
+            .saveAll(productShippingRels)
+            .stream()
+            .map(productShippingRelMapper::toDto)
+            .collect(Collectors.toSet());
     }
 
     /**

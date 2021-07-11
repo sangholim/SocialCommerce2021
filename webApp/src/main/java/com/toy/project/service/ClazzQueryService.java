@@ -92,17 +92,41 @@ public class ClazzQueryService extends QueryService<Clazz> {
             if (criteria.getType() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getType(), Clazz_.type));
             }
+            if (criteria.getMainImageFileUrl() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getMainImageFileUrl(), Clazz_.mainImageFileUrl));
+            }
             if (criteria.getLevel() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getLevel(), Clazz_.level));
             }
             if (criteria.getEnableLecture() != null) {
                 specification = specification.and(buildSpecification(criteria.getEnableLecture(), Clazz_.enableLecture));
             }
+            if (criteria.getFreeLecture() != null) {
+                specification = specification.and(buildSpecification(criteria.getFreeLecture(), Clazz_.freeLecture));
+            }
+            if (criteria.getPriceLecture() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getPriceLecture(), Clazz_.priceLecture));
+            }
+            if (criteria.getPriceUnitLecture() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getPriceUnitLecture(), Clazz_.priceUnitLecture));
+            }
+            if (criteria.getLectureStartDateFrom() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getLectureStartDateFrom(), Clazz_.lectureStartDateFrom));
+            }
+            if (criteria.getLectureInterval() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getLectureInterval(), Clazz_.lectureInterval));
+            }
             if (criteria.getLecturer() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getLecturer(), Clazz_.lecturer));
             }
             if (criteria.getCalculation() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getCalculation(), Clazz_.calculation));
+                specification = specification.and(buildStringSpecification(criteria.getCalculation(), Clazz_.calculation));
+            }
+            if (criteria.getIsView() != null) {
+                specification = specification.and(buildSpecification(criteria.getIsView(), Clazz_.isView));
+            }
+            if (criteria.getIsSell() != null) {
+                specification = specification.and(buildSpecification(criteria.getIsSell(), Clazz_.isSell));
             }
             if (criteria.getActivated() != null) {
                 specification = specification.and(buildSpecification(criteria.getActivated(), Clazz_.activated));
@@ -125,6 +149,15 @@ public class ClazzQueryService extends QueryService<Clazz> {
                         buildSpecification(
                             criteria.getProductClazzRelId(),
                             root -> root.join(Clazz_.productClazzRels, JoinType.LEFT).get(ProductClazzRel_.id)
+                        )
+                    );
+            }
+            if (criteria.getClazzChapterId() != null) {
+                specification =
+                    specification.and(
+                        buildSpecification(
+                            criteria.getClazzChapterId(),
+                            root -> root.join(Clazz_.clazzChapters, JoinType.LEFT).get(ClazzChapter_.id)
                         )
                     );
             }

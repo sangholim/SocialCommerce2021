@@ -28,7 +28,7 @@ public class Store extends AbstractAuditingEntity implements Serializable {
     private String type;
 
     @Column(name = "calculation")
-    private Integer calculation;
+    private String calculation;
 
     @Column(name = "activated")
     private Boolean activated;
@@ -77,16 +77,16 @@ public class Store extends AbstractAuditingEntity implements Serializable {
         this.type = type;
     }
 
-    public Integer getCalculation() {
+    public String getCalculation() {
         return this.calculation;
     }
 
-    public Store calculation(Integer calculation) {
+    public Store calculation(String calculation) {
         this.calculation = calculation;
         return this;
     }
 
-    public void setCalculation(Integer calculation) {
+    public void setCalculation(String calculation) {
         this.calculation = calculation;
     }
 

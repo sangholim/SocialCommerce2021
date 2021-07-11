@@ -12,6 +12,10 @@ public class ProductMappingRelDTO implements Serializable {
 
     private Long id;
 
+    private Long productId;
+
+    private Long productMappingId;
+
     private Boolean activated;
 
     @Size(max = 50)
@@ -34,6 +38,22 @@ public class ProductMappingRelDTO implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Long productId) {
+        this.productId = productId;
+    }
+
+    public Long getProductMappingId() {
+        return productMappingId;
+    }
+
+    public void setProductMappingId(Long productMappingId) {
+        this.productMappingId = productMappingId;
     }
 
     public Boolean getActivated() {

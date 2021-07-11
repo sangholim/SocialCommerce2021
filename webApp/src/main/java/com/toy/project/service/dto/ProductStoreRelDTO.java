@@ -12,9 +12,13 @@ public class ProductStoreRelDTO implements Serializable {
 
     private Long id;
 
+    private Long productId;
+
+    private Long storeId;
+
     private Boolean useCalculation;
 
-    private Integer calculation;
+    private String calculation;
 
     private Instant calculationDateFrom;
 
@@ -44,6 +48,22 @@ public class ProductStoreRelDTO implements Serializable {
         this.id = id;
     }
 
+    public Long getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Long productId) {
+        this.productId = productId;
+    }
+
+    public Long getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(Long storeId) {
+        this.storeId = storeId;
+    }
+
     public Boolean getUseCalculation() {
         return useCalculation;
     }
@@ -52,11 +72,11 @@ public class ProductStoreRelDTO implements Serializable {
         this.useCalculation = useCalculation;
     }
 
-    public Integer getCalculation() {
+    public String getCalculation() {
         return calculation;
     }
 
-    public void setCalculation(Integer calculation) {
+    public void setCalculation(String calculation) {
         this.calculation = calculation;
     }
 

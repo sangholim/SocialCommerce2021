@@ -3,6 +3,7 @@ package com.toy.project.service.dto;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
+import javax.persistence.Column;
 import javax.validation.constraints.*;
 
 /**
@@ -11,6 +12,10 @@ import javax.validation.constraints.*;
 public class ProductCategoryRelDTO implements Serializable {
 
     private Long id;
+
+    private Long productId;
+
+    private Long productCategoryId;
 
     private Boolean activated;
 
@@ -92,6 +97,22 @@ public class ProductCategoryRelDTO implements Serializable {
         this.productCategory = productCategory;
     }
 
+    public Long getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Long productId) {
+        this.productId = productId;
+    }
+
+    public Long getProductCategoryId() {
+        return productCategoryId;
+    }
+
+    public void setProductCategoryId(Long productCategoryId) {
+        this.productCategoryId = productCategoryId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -118,6 +139,8 @@ public class ProductCategoryRelDTO implements Serializable {
     public String toString() {
         return "ProductCategoryRelDTO{" +
             "id=" + getId() +
+            ", productCategoryId='" + getProductCategoryId() + "'" +
+            ", productId='" + getProductId() + "'" +
             ", activated='" + getActivated() + "'" +
             ", createdBy='" + getCreatedBy() + "'" +
             ", createdDate='" + getCreatedDate() + "'" +

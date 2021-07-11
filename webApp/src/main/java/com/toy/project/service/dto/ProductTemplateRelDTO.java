@@ -12,6 +12,10 @@ public class ProductTemplateRelDTO implements Serializable {
 
     private Long id;
 
+    private Long productId;
+
+    private Long productTemplateId;
+
     private Boolean activated;
 
     @Size(max = 50)
@@ -34,6 +38,22 @@ public class ProductTemplateRelDTO implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Long productId) {
+        this.productId = productId;
+    }
+
+    public Long getProductTemplateId() {
+        return productTemplateId;
+    }
+
+    public void setProductTemplateId(Long productTemplateId) {
+        this.productTemplateId = productTemplateId;
     }
 
     public Boolean getActivated() {

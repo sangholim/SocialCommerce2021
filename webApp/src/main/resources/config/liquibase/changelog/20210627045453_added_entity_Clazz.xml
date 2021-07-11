@@ -47,7 +47,7 @@
             <column name="lecturer" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="calculation" type="integer">
+            <column name="calculation" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="is_view" type="boolean">
@@ -105,7 +105,7 @@
             <column name="lecture_start_date_from" type="${datetimeType}"/>
             <column name="lecture_interval" type="numeric"/>
             <column name="lecturer" type="string"/>
-            <column name="calculation" type="numeric"/>
+            <column name="calculation" type="string"/>
             <column name="is_view" type="boolean"/>
             <column name="is_sell" type="boolean"/>
             <column name="activated" type="boolean"/>
