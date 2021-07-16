@@ -2,9 +2,11 @@ package com.toy.project.service;
 
 import com.toy.project.domain.ProductCategoryRel;
 import com.toy.project.repository.ProductCategoryRelRepository;
+import com.toy.project.service.dto.ProductCategoryDTO;
 import com.toy.project.service.dto.ProductCategoryRelDTO;
 import com.toy.project.service.mapper.ProductCategoryRelMapper;
-import java.util.HashSet;
+import java.util.Collection;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -14,6 +16,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 /**
  * Service Implementation for managing {@link ProductCategoryRel}.
@@ -37,6 +40,9 @@ public class ProductCategoryRelService {
     }
 
     public Set<ProductCategoryRelDTO> saveAll(Set<ProductCategoryRelDTO> productCategoryRelDTOs) {
+        if (CollectionUtils.isEmpty(productCategoryRelDTOs)) {
+            return null;
+        }
         Set<ProductCategoryRel> productCategoryRels = productCategoryRelDTOs
             .stream()
             .map(productCategoryRelMapper::toEntity)
@@ -53,6 +59,21 @@ public class ProductCategoryRelService {
         ProductCategoryRel productCategoryRel = productCategoryRelMapper.toEntity(productCategoryRelDTO);
         productCategoryRel = productCategoryRelRepository.save(productCategoryRel);
         return productCategoryRelMapper.toDto(productCategoryRel);
+    }
+
+    public Set<ProductCategoryRelDTO> toProductCategoryRelDTOSet(
+        Long productId,
+        Boolean activated,
+        Collection<ProductCategoryDTO> productCategoryDTOs
+    ) {
+        if (CollectionUtils.isEmpty(productCategoryDTOs)) {
+            return null;
+        }
+        return productCategoryDTOs
+            .stream()
+            .filter(Objects::nonNull)
+            .map(productCategoryDTO -> new ProductCategoryRelDTO(null, productId, productCategoryDTO.getId(), activated))
+            .collect(Collectors.toSet());
     }
 
     public Optional<ProductCategoryRelDTO> partialUpdate(ProductCategoryRelDTO productCategoryRelDTO) {

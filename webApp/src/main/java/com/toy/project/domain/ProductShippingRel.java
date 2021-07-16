@@ -23,7 +23,7 @@ public class ProductShippingRel extends AbstractAuditingEntity implements Serial
     private Long productId;
 
     @Column(name = "product_shipping_id")
-    private Long ProductShippingId;
+    private Long productShippingId;
 
     @Column(name = "activated")
     private Boolean activated;
@@ -75,11 +75,11 @@ public class ProductShippingRel extends AbstractAuditingEntity implements Serial
     }
 
     public Long getProductShippingId() {
-        return ProductShippingId;
+        return productShippingId;
     }
 
     public void setProductShippingId(Long productShippingId) {
-        ProductShippingId = productShippingId;
+        this.productShippingId = productShippingId;
     }
 
     public Boolean getActivated() {

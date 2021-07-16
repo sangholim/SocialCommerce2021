@@ -40,6 +40,28 @@ public class ProductClazzRelDTO implements Serializable {
 
     private ClazzDTO clazz;
 
+    public ProductClazzRelDTO() {}
+
+    public ProductClazzRelDTO(
+        Long id,
+        Long productId,
+        Long clazzId,
+        Boolean useCalculation,
+        String calculation,
+        Instant calculationDateFrom,
+        Instant calculationDateTo,
+        Boolean activated
+    ) {
+        this.id = id;
+        this.productId = productId;
+        this.clazzId = clazzId;
+        this.useCalculation = useCalculation;
+        this.calculation = calculation;
+        this.calculationDateFrom = calculationDateFrom;
+        this.calculationDateTo = calculationDateTo;
+        this.activated = activated;
+    }
+
     public Long getId() {
         return id;
     }

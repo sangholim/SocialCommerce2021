@@ -1,11 +1,12 @@
 package com.toy.project.service;
 
-import com.toy.project.domain.ProductLabelRel;
 import com.toy.project.domain.ProductNoticeRel;
 import com.toy.project.repository.ProductNoticeRelRepository;
-import com.toy.project.service.dto.ProductLabelRelDTO;
+import com.toy.project.service.dto.ProductNoticeDTO;
 import com.toy.project.service.dto.ProductNoticeRelDTO;
 import com.toy.project.service.mapper.ProductNoticeRelMapper;
+import java.util.Collection;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -15,6 +16,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 /**
  * Service Implementation for managing {@link ProductNoticeRel}.
@@ -48,6 +50,9 @@ public class ProductNoticeRelService {
     }
 
     public Set<ProductNoticeRelDTO> saveAll(Set<ProductNoticeRelDTO> productNoticeRelDTOS) {
+        if (CollectionUtils.isEmpty(productNoticeRelDTOS)) {
+            return null;
+        }
         Set<ProductNoticeRel> productNoticeRels = productNoticeRelDTOS
             .stream()
             .map(productNoticeRelMapper::toEntity)
@@ -56,6 +61,21 @@ public class ProductNoticeRelService {
             .saveAll(productNoticeRels)
             .stream()
             .map(productNoticeRelMapper::toDto)
+            .collect(Collectors.toSet());
+    }
+
+    public Set<ProductNoticeRelDTO> toProductNoticeRelDTOS(
+        Long productId,
+        Boolean activated,
+        Collection<ProductNoticeDTO> productNoticeDTOS
+    ) {
+        if (CollectionUtils.isEmpty(productNoticeDTOS)) {
+            return null;
+        }
+        return productNoticeDTOS
+            .stream()
+            .filter(Objects::nonNull)
+            .map(productNoticeDTO -> new ProductNoticeRelDTO(null, productId, productNoticeDTO.getId(), activated))
             .collect(Collectors.toSet());
     }
 

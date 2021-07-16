@@ -32,6 +32,15 @@ public class ProductMappingRelDTO implements Serializable {
 
     private ProductMappingDTO productMapping;
 
+    public ProductMappingRelDTO() {}
+
+    public ProductMappingRelDTO(Long id, Long productId, Long productMappingId, Boolean activated) {
+        this.id = id;
+        this.productId = productId;
+        this.productMappingId = productMappingId;
+        this.activated = activated;
+    }
+
     public Long getId() {
         return id;
     }

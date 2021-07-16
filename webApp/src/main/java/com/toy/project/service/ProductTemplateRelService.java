@@ -1,11 +1,12 @@
 package com.toy.project.service;
 
-import com.toy.project.domain.ProductLabelRel;
 import com.toy.project.domain.ProductTemplateRel;
 import com.toy.project.repository.ProductTemplateRelRepository;
-import com.toy.project.service.dto.ProductLabelRelDTO;
+import com.toy.project.service.dto.ProductTemplateDTO;
 import com.toy.project.service.dto.ProductTemplateRelDTO;
 import com.toy.project.service.mapper.ProductTemplateRelMapper;
+import java.util.Collection;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -15,6 +16,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 /**
  * Service Implementation for managing {@link ProductTemplateRel}.
@@ -51,6 +53,9 @@ public class ProductTemplateRelService {
     }
 
     public Set<ProductTemplateRelDTO> saveAll(Set<ProductTemplateRelDTO> productTemplateRelDTOS) {
+        if (CollectionUtils.isEmpty(productTemplateRelDTOS)) {
+            return null;
+        }
         Set<ProductTemplateRel> productTemplateRels = productTemplateRelDTOS
             .stream()
             .map(productTemplateRelMapper::toEntity)
@@ -59,6 +64,21 @@ public class ProductTemplateRelService {
             .saveAll(productTemplateRels)
             .stream()
             .map(productTemplateRelMapper::toDto)
+            .collect(Collectors.toSet());
+    }
+
+    public Set<ProductTemplateRelDTO> toProductTemplateRelDTOSet(
+        Long productId,
+        Boolean activated,
+        Collection<ProductTemplateDTO> productTemplateDTOS
+    ) {
+        if (CollectionUtils.isEmpty(productTemplateDTOS)) {
+            return null;
+        }
+        return productTemplateDTOS
+            .stream()
+            .filter(Objects::nonNull)
+            .map(productTemplateDTO -> new ProductTemplateRelDTO(null, productId, productTemplateDTO.getId(), activated))
             .collect(Collectors.toSet());
     }
 

@@ -38,6 +38,26 @@ public class ProductLabelRelDTO implements Serializable {
 
     private ProductLabelDTO productLabel;
 
+    public ProductLabelRelDTO() {}
+
+    public ProductLabelRelDTO(
+        Long id,
+        Long productId,
+        Long productLabelId,
+        Boolean isDisplayDate,
+        Instant displayDateFrom,
+        Instant displayDateTo,
+        Boolean activated
+    ) {
+        this.id = id;
+        this.productId = productId;
+        this.productLabelId = productLabelId;
+        this.isDisplayDate = isDisplayDate;
+        this.displayDateFrom = displayDateFrom;
+        this.displayDateTo = displayDateTo;
+        this.activated = activated;
+    }
+
     public Long getId() {
         return id;
     }

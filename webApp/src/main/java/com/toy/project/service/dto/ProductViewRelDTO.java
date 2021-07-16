@@ -32,6 +32,15 @@ public class ProductViewRelDTO implements Serializable {
 
     private ProductViewDTO productView;
 
+    public ProductViewRelDTO() {}
+
+    public ProductViewRelDTO(Long id, Long productId, Long productViewId, Boolean activated) {
+        this.id = id;
+        this.productId = productId;
+        this.productViewId = productViewId;
+        this.activated = activated;
+    }
+
     public Long getId() {
         return id;
     }

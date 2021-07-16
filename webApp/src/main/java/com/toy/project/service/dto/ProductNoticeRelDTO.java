@@ -32,6 +32,15 @@ public class ProductNoticeRelDTO implements Serializable {
 
     private ProductNoticeDTO productNotice;
 
+    public ProductNoticeRelDTO() {}
+
+    public ProductNoticeRelDTO(Long id, Long productId, Long productNoticeId, Boolean activated) {
+        this.id = id;
+        this.productId = productId;
+        this.productNoticeId = productNoticeId;
+        this.activated = activated;
+    }
+
     public Long getId() {
         return id;
     }

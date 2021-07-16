@@ -1,11 +1,12 @@
 package com.toy.project.service;
 
-import com.toy.project.domain.ProductLabelRel;
 import com.toy.project.domain.ProductShippingRel;
 import com.toy.project.repository.ProductShippingRelRepository;
-import com.toy.project.service.dto.ProductLabelRelDTO;
+import com.toy.project.service.dto.ProductShippingDTO;
 import com.toy.project.service.dto.ProductShippingRelDTO;
 import com.toy.project.service.mapper.ProductShippingRelMapper;
+import java.util.Collection;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -15,6 +16,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 /**
  * Service Implementation for managing {@link ProductShippingRel}.
@@ -51,6 +53,9 @@ public class ProductShippingRelService {
     }
 
     public Set<ProductShippingRelDTO> saveAll(Set<ProductShippingRelDTO> productShippingRelDTOS) {
+        if (CollectionUtils.isEmpty(productShippingRelDTOS)) {
+            return null;
+        }
         Set<ProductShippingRel> productShippingRels = productShippingRelDTOS
             .stream()
             .map(productShippingRelMapper::toEntity)
@@ -59,6 +64,21 @@ public class ProductShippingRelService {
             .saveAll(productShippingRels)
             .stream()
             .map(productShippingRelMapper::toDto)
+            .collect(Collectors.toSet());
+    }
+
+    public Set<ProductShippingRelDTO> toProductShippingRelDTOSet(
+        Long productId,
+        Boolean activated,
+        Collection<ProductShippingDTO> productShippingDTOS
+    ) {
+        if (CollectionUtils.isEmpty(productShippingDTOS)) {
+            return null;
+        }
+        return productShippingDTOS
+            .stream()
+            .filter(Objects::nonNull)
+            .map(productShippingDTO -> new ProductShippingRelDTO(null, productId, productShippingDTO.getId(), activated))
             .collect(Collectors.toSet());
     }
 

@@ -1,5 +1,6 @@
 package com.toy.project.service.dto;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -7,105 +8,105 @@ import java.util.Set;
  */
 public class ProductExtendDTO extends ProductDTO {
 
-    private Set<ProductOptionDTO> productOptions;
+    private List<ProductOptionDTO> productOptions;
 
-    private Set<ProductLabelExtendDTO> productLabels;
+    private List<ProductLabelExtendDTO> productLabels;
 
-    private Set<ProductNoticeDTO> productNotices;
+    private List<ProductNoticeDTO> productNotices;
 
-    private Set<ProductShippingDTO> productShippings;
+    private List<ProductShippingDTO> productShippings;
 
-    private Set<ProductTemplateDTO> productTemplates;
+    private List<ProductTemplateDTO> productTemplates;
 
-    private Set<ProductMappingDTO> productMappings;
+    private List<ProductMappingDTO> productMappings;
 
-    private Set<StoreExtendDTO> stores;
+    private List<StoreExtendDTO> stores;
 
-    private Set<ProductCategoryDTO> productCategories;
+    private List<ProductCategoryDTO> productCategories;
 
-    private Set<ProductViewDTO> productViews;
+    private List<ProductViewDTO> productViews;
 
-    private Set<ClazzExtendDTO> clazzs;
+    private List<ClazzExtendDTO> clazzs;
 
     public ProductExtendDTO() {}
 
-    public Set<ProductOptionDTO> getProductOptions() {
+    public List<ProductOptionDTO> getProductOptions() {
         return productOptions;
     }
 
-    public void setProductOptions(Set<ProductOptionDTO> productOptions) {
+    public void setProductOptions(List<ProductOptionDTO> productOptions) {
         this.productOptions = productOptions;
     }
 
-    public Set<ProductNoticeDTO> getProductNotices() {
-        return productNotices;
-    }
-
-    public void setProductNotices(Set<ProductNoticeDTO> productNotices) {
-        this.productNotices = productNotices;
-    }
-
-    public Set<ProductShippingDTO> getProductShippings() {
-        return productShippings;
-    }
-
-    public void setProductShippings(Set<ProductShippingDTO> productShippings) {
-        this.productShippings = productShippings;
-    }
-
-    public Set<ProductTemplateDTO> getProductTemplates() {
-        return productTemplates;
-    }
-
-    public void setProductTemplates(Set<ProductTemplateDTO> productTemplates) {
-        this.productTemplates = productTemplates;
-    }
-
-    public Set<ProductMappingDTO> getProductMappings() {
-        return productMappings;
-    }
-
-    public void setProductMappings(Set<ProductMappingDTO> productMappings) {
-        this.productMappings = productMappings;
-    }
-
-    public Set<ProductCategoryDTO> getProductCategories() {
-        return productCategories;
-    }
-
-    public void setProductCategories(Set<ProductCategoryDTO> productCategories) {
-        this.productCategories = productCategories;
-    }
-
-    public Set<ProductViewDTO> getProductViews() {
-        return productViews;
-    }
-
-    public void setProductViews(Set<ProductViewDTO> productViews) {
-        this.productViews = productViews;
-    }
-
-    public Set<ProductLabelExtendDTO> getProductLabels() {
+    public List<ProductLabelExtendDTO> getProductLabels() {
         return productLabels;
     }
 
-    public void setProductLabels(Set<ProductLabelExtendDTO> productLabels) {
+    public void setProductLabels(List<ProductLabelExtendDTO> productLabels) {
         this.productLabels = productLabels;
     }
 
-    public Set<StoreExtendDTO> getStores() {
+    public List<ProductNoticeDTO> getProductNotices() {
+        return productNotices;
+    }
+
+    public void setProductNotices(List<ProductNoticeDTO> productNotices) {
+        this.productNotices = productNotices;
+    }
+
+    public List<ProductShippingDTO> getProductShippings() {
+        return productShippings;
+    }
+
+    public void setProductShippings(List<ProductShippingDTO> productShippings) {
+        this.productShippings = productShippings;
+    }
+
+    public List<ProductTemplateDTO> getProductTemplates() {
+        return productTemplates;
+    }
+
+    public void setProductTemplates(List<ProductTemplateDTO> productTemplates) {
+        this.productTemplates = productTemplates;
+    }
+
+    public List<ProductMappingDTO> getProductMappings() {
+        return productMappings;
+    }
+
+    public void setProductMappings(List<ProductMappingDTO> productMappings) {
+        this.productMappings = productMappings;
+    }
+
+    public List<StoreExtendDTO> getStores() {
         return stores;
     }
 
-    public void setStores(Set<StoreExtendDTO> stores) {
+    public void setStores(List<StoreExtendDTO> stores) {
         this.stores = stores;
     }
 
-    public Set<ClazzExtendDTO> getClazzs() {
+    public List<ProductCategoryDTO> getProductCategories() {
+        return productCategories;
+    }
+
+    public void setProductCategories(List<ProductCategoryDTO> productCategories) {
+        this.productCategories = productCategories;
+    }
+
+    public List<ProductViewDTO> getProductViews() {
+        return productViews;
+    }
+
+    public void setProductViews(List<ProductViewDTO> productViews) {
+        this.productViews = productViews;
+    }
+
+    public List<ClazzExtendDTO> getClazzs() {
         return clazzs;
     }
 
-    public void setClazzs(Set<ClazzExtendDTO> clazzs) {
+    public void setClazzs(List<ClazzExtendDTO> clazzs) {
         this.clazzs = clazzs;
     }
 }

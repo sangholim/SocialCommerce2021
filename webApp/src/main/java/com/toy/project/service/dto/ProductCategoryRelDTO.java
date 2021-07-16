@@ -33,6 +33,15 @@ public class ProductCategoryRelDTO implements Serializable {
 
     private ProductCategoryDTO productCategory;
 
+    public ProductCategoryRelDTO() {}
+
+    public ProductCategoryRelDTO(Long id, Long productId, Long productCategoryId, Boolean activated) {
+        this.id = id;
+        this.productId = productId;
+        this.productCategoryId = productCategoryId;
+        this.activated = activated;
+    }
+
     public Long getId() {
         return id;
     }

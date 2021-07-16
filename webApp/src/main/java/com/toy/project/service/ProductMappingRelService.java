@@ -1,11 +1,12 @@
 package com.toy.project.service;
 
-import com.toy.project.domain.ProductLabelRel;
 import com.toy.project.domain.ProductMappingRel;
 import com.toy.project.repository.ProductMappingRelRepository;
-import com.toy.project.service.dto.ProductLabelRelDTO;
+import com.toy.project.service.dto.ProductMappingDTO;
 import com.toy.project.service.dto.ProductMappingRelDTO;
 import com.toy.project.service.mapper.ProductMappingRelMapper;
+import java.util.Collection;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -15,6 +16,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 /**
  * Service Implementation for managing {@link ProductMappingRel}.
@@ -51,6 +53,9 @@ public class ProductMappingRelService {
     }
 
     public Set<ProductMappingRelDTO> saveAll(Set<ProductMappingRelDTO> productMappingRelDTOS) {
+        if (CollectionUtils.isEmpty(productMappingRelDTOS)) {
+            return null;
+        }
         Set<ProductMappingRel> productMappingRels = productMappingRelDTOS
             .stream()
             .map(productMappingRelMapper::toEntity)
@@ -59,6 +64,21 @@ public class ProductMappingRelService {
             .saveAll(productMappingRels)
             .stream()
             .map(productMappingRelMapper::toDto)
+            .collect(Collectors.toSet());
+    }
+
+    public Set<ProductMappingRelDTO> toProductMappingRelDTOSet(
+        Long productId,
+        Boolean activated,
+        Collection<ProductMappingDTO> productMappingDTOS
+    ) {
+        if (CollectionUtils.isEmpty(productMappingDTOS)) {
+            return null;
+        }
+        return productMappingDTOS
+            .stream()
+            .filter(Objects::nonNull)
+            .map(productMappingDTO -> new ProductMappingRelDTO(null, productId, productMappingDTO.getId(), activated))
             .collect(Collectors.toSet());
     }
 

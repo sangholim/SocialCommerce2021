@@ -1,11 +1,12 @@
 package com.toy.project.service;
 
-import com.toy.project.domain.ProductMappingRel;
 import com.toy.project.domain.ProductStoreRel;
 import com.toy.project.repository.ProductStoreRelRepository;
-import com.toy.project.service.dto.ProductMappingRelDTO;
 import com.toy.project.service.dto.ProductStoreRelDTO;
+import com.toy.project.service.dto.StoreExtendDTO;
 import com.toy.project.service.mapper.ProductStoreRelMapper;
+import java.util.Collection;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -15,6 +16,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 /**
  * Service Implementation for managing {@link ProductStoreRel}.
@@ -48,11 +50,37 @@ public class ProductStoreRelService {
     }
 
     public Set<ProductStoreRelDTO> saveAll(Set<ProductStoreRelDTO> productStoreRelDTOS) {
+        if (CollectionUtils.isEmpty(productStoreRelDTOS)) {
+            return null;
+        }
         Set<ProductStoreRel> productStoreRels = productStoreRelDTOS
             .stream()
             .map(productStoreRelMapper::toEntity)
             .collect(Collectors.toSet());
         return productStoreRelRepository.saveAll(productStoreRels).stream().map(productStoreRelMapper::toDto).collect(Collectors.toSet());
+    }
+
+    public Set<ProductStoreRelDTO> toProductStoreRelDTOSet(Long productId, Boolean activated, Collection<StoreExtendDTO> storeDTOS) {
+        if (CollectionUtils.isEmpty(storeDTOS)) {
+            return null;
+        }
+        return storeDTOS
+            .stream()
+            .filter(Objects::nonNull)
+            .map(
+                storeDTO ->
+                    new ProductStoreRelDTO(
+                        null,
+                        productId,
+                        storeDTO.getId(),
+                        storeDTO.getProductUseCalculation(),
+                        storeDTO.getProductCalculation(),
+                        storeDTO.getProductCalculationDateFrom(),
+                        storeDTO.getProductCalculationDateTo(),
+                        activated
+                    )
+            )
+            .collect(Collectors.toSet());
     }
 
     /**

@@ -32,6 +32,15 @@ public class ProductTemplateRelDTO implements Serializable {
 
     private ProductTemplateDTO productTemplate;
 
+    public ProductTemplateRelDTO() {}
+
+    public ProductTemplateRelDTO(Long id, Long productId, Long productTemplateId, Boolean activated) {
+        this.id = id;
+        this.productId = productId;
+        this.productTemplateId = productTemplateId;
+        this.activated = activated;
+    }
+
     public Long getId() {
         return id;
     }

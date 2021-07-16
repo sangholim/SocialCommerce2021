@@ -40,6 +40,28 @@ public class ProductStoreRelDTO implements Serializable {
 
     private StoreDTO store;
 
+    public ProductStoreRelDTO() {}
+
+    public ProductStoreRelDTO(
+        Long id,
+        Long productId,
+        Long storeId,
+        Boolean useCalculation,
+        String calculation,
+        Instant calculationDateFrom,
+        Instant calculationDateTo,
+        Boolean activated
+    ) {
+        this.id = id;
+        this.productId = productId;
+        this.storeId = storeId;
+        this.useCalculation = useCalculation;
+        this.calculation = calculation;
+        this.calculationDateFrom = calculationDateFrom;
+        this.calculationDateTo = calculationDateTo;
+        this.activated = activated;
+    }
+
     public Long getId() {
         return id;
     }

@@ -22,6 +22,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -135,8 +137,13 @@ public class ProductResource {
         "}<br />"
     )
     @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
-    @PostMapping("/products")
-    public void createProduct(@RequestBody ProductExtendDTO productExtendDTO) throws URISyntaxException {
+    @PostMapping(value = "/products", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public void createProduct(ProductExtendDTO productExtendDTO) throws URISyntaxException {
+        // TODO: parameter 유효성 검사
+        if (productExtendDTO == null) {
+            throw new RuntimeException("not found product data");
+        }
+        // 응답 정책
         productExtendService.save(productExtendDTO);
     }
 

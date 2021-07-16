@@ -32,6 +32,15 @@ public class ProductOptionRelDTO implements Serializable {
 
     private ProductOptionDTO productOption;
 
+    public ProductOptionRelDTO() {}
+
+    public ProductOptionRelDTO(Long id, Long productId, Long productOptionId, Boolean activated) {
+        this.id = id;
+        this.productId = productId;
+        this.productOptionId = productOptionId;
+        this.activated = activated;
+    }
+
     public Long getId() {
         return id;
     }

@@ -1,6 +1,7 @@
 package com.toy.project.client.product;
 
 import com.toy.project.client.BaseAPITest;
+import java.time.Instant;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -8,6 +9,8 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -15,119 +18,94 @@ public class ProductApiTest {
 
     // P.1.1 [A] 상품 등록
     @Test
-    public void createProductTest() {
+    public void createProductTest() throws Exception {
         String url = "/products";
+        MultiValueMap<String, Object> multiValueMap = new LinkedMultiValueMap<>();
+        String instant = Instant.now().toString();
+        multiValueMap.set("name", "zdzd");
+        multiValueMap.set("code", "zdzd");
+        multiValueMap.set("calculation", "0.05");
+        multiValueMap.set("calculationDateFrom", instant);
+        multiValueMap.set("calculationDateTo", instant);
+        multiValueMap.set("price", 1234);
+        multiValueMap.set("allPriceUnit", "KR");
+        multiValueMap.set("discount", true);
+        multiValueMap.set("discountPrice", 12345);
+        multiValueMap.set("discountUnit", "KR");
+        multiValueMap.set("discountDateFrom", instant);
+        multiValueMap.set("discountDateTo", instant);
+        multiValueMap.set("isInstallment", true);
+        multiValueMap.set("installmentMonth", 5);
+        multiValueMap.set("isSell", true);
+        multiValueMap.set("sellDateFrom", instant);
+        multiValueMap.set("sellDateTo", instant);
+        multiValueMap.set("minPurchaseAmount", 2);
+        multiValueMap.set("manPurchaseAmount", 5);
+        multiValueMap.set("mainImageFileUrl", "url1");
+        multiValueMap.set("addImageFileUrl", "url2");
+        multiValueMap.set("mainVideoFileUrl", "url3");
+        multiValueMap.set("descriptionFileUrl", "url4");
+        multiValueMap.set("shippingType", "type1");
+        multiValueMap.set("separateShippingPriceType", "type2");
+        multiValueMap.set("defaultShippingPrice", 12345);
+        multiValueMap.set("freeShippingPrice", 12345);
+        multiValueMap.set("jejuShippingPrice", 12345);
+        multiValueMap.set("difficultShippingPrice", 12345);
+        multiValueMap.set("refundShippingPrice", 12345);
+        multiValueMap.set("exchangeShippingPrice", 12345);
+        multiValueMap.set("exchangeShippingFileUrl", 12345);
+        multiValueMap.set("isView", true);
+        multiValueMap.set("viewReservationDate", instant);
+        // child product-category
+        multiValueMap.set("productCategories[0].id", 1);
+        multiValueMap.set("productCategories[1].id", 2);
+        // child product-option
+        multiValueMap.set("productOptions[0].id", 1);
+        multiValueMap.set("productOptions[1].id", 2);
+        // child product-label
+        multiValueMap.set("productLabels[0].id", 1);
+        multiValueMap.set("productLabels[0].displayDate", true);
+        multiValueMap.set("productLabels[0].displayDateFrom", instant);
+        multiValueMap.set("productLabels[0].displayDateTo", instant);
 
-        String json =
-            "" +
-            "{\n" +
-            "    \"name\": \"ax\",\n" +
-            "    \"code\": \"axx\",\n" +
-            "    \"calculation\": \"0.05\",\n" +
-            "    \"calculationDateFrom\": \"2001-09-09T01:46:40Z\",\n" +
-            "    \"calculationDateTo\": \"2001-09-09T01:46:40Z\",\n" +
-            "    \"price\": 12345,\n" +
-            "    \"allPriceUnit\": \"KR\",\n" +
-            "    \"discount\": \"ALL\",\n" +
-            "    \"discountPrice\": 12345,\n" +
-            "    \"discountUnit\": \"KR\",\n" +
-            "    \"discountDateFrom\": \"2001-09-09T01:46:40Z\",\n" +
-            "    \"discountDateTo\": \"2001-09-09T01:46:40Z\",\n" +
-            "    \"isInstallment\": \"false\",\n" +
-            "    \"installmentMonth\": 2,\n" +
-            "    \"isSell\": \"true\",\n" +
-            "    \"sellDateFrom\": \"2001-09-09T01:46:40Z\",\n" +
-            "    \"sellDateTo\": \"2001-09-09T01:46:40Z\",\n" +
-            "    \"minPurchaseAmount\": 1,\n" +
-            "    \"manPurchaseAmount\": 2,\n" +
-            "    \"mainImageFileUrl\": \"a\",\n" +
-            "    \"addImageFileUrl\": \"a\",\n" +
-            "    \"mainVideoFileUrl\": \"a\",\n" +
-            "    \"descriptionFileUrl\": \"a\",\n" +
-            "    \"shippingType\": \"a\",\n" +
-            "    \"separateShippingPriceType\": \"a\",\n" +
-            "    \"defaultShippingPrice\": 1234,\n" +
-            "    \"freeShippingPrice\": 1,\n" +
-            "    \"jejuShippingPrice\": 12,\n" +
-            "    \"difficultShippingPrice\": 123,\n" +
-            "    \"refundShippingPrice\": 55,\n" +
-            "    \"exchangeShippingPrice\": 44,\n" +
-            "    \"exchangeShippingFileUrl\": \"z\",\n" +
-            "    \"isView\": \"true\",\n" +
-            "    \"viewReservationDate\": \"2001-09-09T01:46:40Z\",\n" +
-            "    \"activated\": \"true\",\n" +
-            // productCategories 카테고리 등록
-            "    \"productCategories\": [{\"id\" : 1},{\"id\" : 2}],\n" +
-            // productOptions;
-            "    \"productOptions\": [{\"id\" : 1},{\"id\" : 2}],\n" +
-            // productLabels
-            "    \"productLabels\": [\n" +
-            "            {\n" +
-            "                \"id\" : 1,\n" +
-            "                \"displayDate\" : \"true\",\n" +
-            "                \"displayDateFrom\" : \"2001-09-09T01:46:40Z\",\n" +
-            "                \"displayDateTo\" : \"2001-09-09T01:46:40Z\"\n" +
-            "            }," +
-            "            {\n" +
-            "                \"id\" : 2,\n" +
-            "                \"displayDate\" : \"false\",\n" +
-            "                \"displayDateFrom\" : \"2001-09-09T01:46:40Z\",\n" +
-            "                \"displayDateTo\" : \"2001-09-09T01:46:40Z\"\n" +
-            "            }" +
-            "]," +
-            // productNotices
-            "    \"productNotices\": [{\"id\" : 1},{\"id\" : 2}],\n" +
-            // productShippings
-            "    \"productShippings\": [{\"id\" : 1},{\"id\" : 2}],\n" +
-            // productTemplates
-            "    \"productTemplates\": [{\"id\" : 1},{\"id\" : 2}],\n" +
-            // productMappings
-            "    \"productMappings\": [{\"id\" : 1},{\"id\" : 2}],\n" +
-            // stores
-            "    \"stores\": [" +
-            "            {\n" +
-            "                \"id\" : 1,\n" +
-            "                \"productUseCalculation\" : \"false\",\n" +
-            "                \"productCalculation\" : \"0.05\",\n" +
-            "                \"productCalculationDateFrom\" : \"2001-09-09T01:46:40Z\",\n" +
-            "                \"productCalculationDateTo\" : \"2001-09-09T01:46:40Z\"\n" +
-            "            }" +
-            "," +
-            "            {\n" +
-            "                \"id\" : 2,\n" +
-            "                \"productUseCalculation\" : \"false\",\n" +
-            "                \"productCalculation\" : \"0.05\",\n" +
-            "                \"productCalculationDateFrom\" : \"2001-09-09T01:46:40Z\",\n" +
-            "                \"productCalculationDateTo\" : \"2001-09-09T01:46:40Z\"\n" +
-            "            }" +
-            "],\n" +
-            // productViews
-            "    \"productViews\": [{\"id\" : 1},{\"id\" : 2}],\n" +
-            // clazzs
-            "    \"clazzs\": [" +
-            "            {\n" +
-            "                \"id\" : 1,\n" +
-            "                \"productUseCalculation\" : \"false\",\n" +
-            "                \"productCalculation\" : \"0.05\",\n" +
-            "                \"productCalculationDateFrom\" : \"2001-09-09T01:46:40Z\",\n" +
-            "                \"productCalculationDateTo\" : \"2001-09-09T01:46:40Z\"\n" +
-            "            }" +
-            "," +
-            "            {\n" +
-            "                \"id\" : 2,\n" +
-            "                \"productUseCalculation\" : \"false\",\n" +
-            "                \"productCalculation\" : \"0.05\",\n" +
-            "                \"productCalculationDateFrom\" : \"2001-09-09T01:46:40Z\",\n" +
-            "                \"productCalculationDateTo\" : \"2001-09-09T01:46:40Z\"\n" +
-            "            }" +
-            "],\n" +
-            "    \"dummy\": \"true\"\n" +
-            "}\n";
+        multiValueMap.set("productLabels[1].id", 2);
+        multiValueMap.set("productLabels[1].displayDate", true);
+        multiValueMap.set("productLabels[1].displayDateFrom", instant);
+        multiValueMap.set("productLabels[1].displayDateTo", instant);
+        // child product-notice
+        multiValueMap.set("productNotices[0].id", 1);
+        multiValueMap.set("productNotices[1].id", 2);
+        // child product-shipping
+        multiValueMap.set("productShippings[0].id", 1);
+        multiValueMap.set("productShippings[1].id", 2);
+        // child product-template
+        multiValueMap.set("productTemplates[0].id", 1);
+        multiValueMap.set("productTemplates[1].id", 2);
+        // child product-mapping
+        multiValueMap.set("productMappings[0].id", 1);
+        multiValueMap.set("productMappings[1].id", 2);
+        // child product-view
+        multiValueMap.set("productViews[0].id", 1);
+        multiValueMap.set("productViews[1].id", 2);
+
+        // child store
+        multiValueMap.set("stores[0].id", 1);
+        multiValueMap.set("stores[0].productUseCalculation", true);
+        multiValueMap.set("stores[0].productCalculation", 1);
+        multiValueMap.set("stores[0].productCalculationDateFrom", instant);
+        multiValueMap.set("stores[0].productCalculationDateTo", instant);
+
+        // child clazz
+        multiValueMap.set("clazzs[0].id", 1);
+        multiValueMap.set("clazzs[0].productUseCalculation", true);
+        multiValueMap.set("clazzs[0].productCalculation", 1);
+        multiValueMap.set("clazzs[0].productCalculationDateFrom", instant);
+        multiValueMap.set("clazzs[0].productCalculationDateTo", instant);
 
         HttpHeaders headers = new HttpHeaders();
         BaseAPITest.setAuthHeaders(headers, "admin", "admin");
-        headers.set("Content-type", "application/json;charset=UTF-8");
-        HttpEntity entity = new HttpEntity(json, headers);
+        headers.set("Content-type", "multipart/form-data;charset=UTF-8");
+        HttpEntity entity = new HttpEntity(multiValueMap, headers);
         BaseAPITest.callClientTest(url, HttpMethod.POST, entity);
     }
 }

@@ -1,10 +1,12 @@
 package com.toy.project.service;
 
-import com.toy.project.domain.ProductCategoryRel;
 import com.toy.project.domain.ProductOptionRel;
 import com.toy.project.repository.ProductOptionRelRepository;
+import com.toy.project.service.dto.ProductOptionDTO;
 import com.toy.project.service.dto.ProductOptionRelDTO;
 import com.toy.project.service.mapper.ProductOptionRelMapper;
+import java.util.Collection;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -14,6 +16,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 /**
  * Service Implementation for managing {@link ProductOptionRel}.
@@ -102,6 +105,9 @@ public class ProductOptionRelService {
     }
 
     public Set<ProductOptionRelDTO> saveAll(Set<ProductOptionRelDTO> productOptionRelDTOSet) {
+        if (CollectionUtils.isEmpty(productOptionRelDTOSet)) {
+            return null;
+        }
         Set<ProductOptionRel> productOptionRels = productOptionRelDTOSet
             .stream()
             .map(productOptionRelMapper::toEntity)
@@ -110,6 +116,21 @@ public class ProductOptionRelService {
             .saveAll(productOptionRels)
             .stream()
             .map(productOptionRelMapper::toDto)
+            .collect(Collectors.toSet());
+    }
+
+    public Set<ProductOptionRelDTO> toProductOptionRelDTOSet(
+        Long productId,
+        Boolean activated,
+        Collection<ProductOptionDTO> productOptionDTOs
+    ) {
+        if (CollectionUtils.isEmpty(productOptionDTOs)) {
+            return null;
+        }
+        return productOptionDTOs
+            .stream()
+            .filter(Objects::nonNull)
+            .map(productOptionDTO -> new ProductOptionRelDTO(null, productId, productOptionDTO.getId(), activated))
             .collect(Collectors.toSet());
     }
 }
