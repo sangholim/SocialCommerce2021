@@ -7,8 +7,6 @@ import com.toy.project.service.criteria.ProductCriteria;
 import com.toy.project.service.dto.ProductDTO;
 import com.toy.project.service.mapper.ProductMapper;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 import javax.persistence.criteria.JoinType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -209,75 +207,13 @@ public class ProductQueryService extends QueryService<Product> {
             if (criteria.getLastModifiedDate() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getLastModifiedDate(), Product_.lastModifiedDate));
             }
-            if (criteria.getProductCategoryRelId() != null) {
-                specification =
-                    specification.and(
-                        buildSpecification(
-                            criteria.getProductCategoryRelId(),
-                            root -> root.join(Product_.productCategoryRels, JoinType.LEFT).get(ProductCategoryRel_.id)
-                        )
-                    );
-            }
+
             if (criteria.getProductLabelRelId() != null) {
                 specification =
                     specification.and(
                         buildSpecification(
                             criteria.getProductLabelRelId(),
                             root -> root.join(Product_.productLabelRels, JoinType.LEFT).get(ProductLabelRel_.id)
-                        )
-                    );
-            }
-            if (criteria.getProductMappingRelId() != null) {
-                specification =
-                    specification.and(
-                        buildSpecification(
-                            criteria.getProductMappingRelId(),
-                            root -> root.join(Product_.productMappingRels, JoinType.LEFT).get(ProductMappingRel_.id)
-                        )
-                    );
-            }
-            if (criteria.getProductViewRelId() != null) {
-                specification =
-                    specification.and(
-                        buildSpecification(
-                            criteria.getProductViewRelId(),
-                            root -> root.join(Product_.productViewRels, JoinType.LEFT).get(ProductViewRel_.id)
-                        )
-                    );
-            }
-            if (criteria.getProductNoticeRelId() != null) {
-                specification =
-                    specification.and(
-                        buildSpecification(
-                            criteria.getProductNoticeRelId(),
-                            root -> root.join(Product_.productNoticeRels, JoinType.LEFT).get(ProductNoticeRel_.id)
-                        )
-                    );
-            }
-            if (criteria.getProductShippingRelId() != null) {
-                specification =
-                    specification.and(
-                        buildSpecification(
-                            criteria.getProductShippingRelId(),
-                            root -> root.join(Product_.productShippingRels, JoinType.LEFT).get(ProductShippingRel_.id)
-                        )
-                    );
-            }
-            if (criteria.getProductTemplateRelId() != null) {
-                specification =
-                    specification.and(
-                        buildSpecification(
-                            criteria.getProductTemplateRelId(),
-                            root -> root.join(Product_.productTemplateRels, JoinType.LEFT).get(ProductTemplateRel_.id)
-                        )
-                    );
-            }
-            if (criteria.getProductOptionRelId() != null) {
-                specification =
-                    specification.and(
-                        buildSpecification(
-                            criteria.getProductOptionRelId(),
-                            root -> root.join(Product_.productOptionRels, JoinType.LEFT).get(ProductOptionRel_.id)
                         )
                     );
             }

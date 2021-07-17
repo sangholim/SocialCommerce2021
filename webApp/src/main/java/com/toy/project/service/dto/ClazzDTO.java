@@ -1,9 +1,16 @@
 package com.toy.project.service.dto;
 
+import com.toy.project.domain.Clazz;
+import com.toy.project.domain.ProductTemplate;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 import javax.validation.constraints.*;
+import org.springframework.util.CollectionUtils;
 
 /**
  * A DTO for the {@link com.toy.project.domain.Clazz} entity.
@@ -51,6 +58,48 @@ public class ClazzDTO implements Serializable {
     private String lastModifiedBy;
 
     private Instant lastModifiedDate;
+
+    public ClazzDTO() {}
+
+    public ClazzDTO(Clazz clazz) {
+        if (clazz == null) {
+            return;
+        }
+        this.id = clazz.getId();
+        this.name = clazz.getName();
+        this.type = clazz.getType();
+        this.mainImageFileUrl = clazz.getMainImageFileUrl();
+        this.level = clazz.getLevel();
+        this.enableLecture = clazz.getEnableLecture();
+        this.freeLecture = clazz.getFreeLecture();
+        this.priceLecture = clazz.getPriceLecture();
+        this.priceUnitLecture = clazz.getPriceUnitLecture();
+        this.lectureStartDateFrom = clazz.getLectureStartDateFrom();
+        this.lectureInterval = clazz.getLectureInterval();
+        this.lecturer = clazz.getLecturer();
+        this.calculation = clazz.getCalculation();
+        this.isView = clazz.getIsView();
+        this.isSell = clazz.getIsSell();
+        this.activated = clazz.getActivated();
+        this.createdBy = clazz.getCreatedBy();
+        this.createdDate = clazz.getCreatedDate();
+        this.lastModifiedBy = clazz.getLastModifiedBy();
+        this.lastModifiedDate = clazz.getLastModifiedDate();
+    }
+
+    public static Set<ClazzDTO> toSet(Collection<Clazz> clazzs) {
+        if (CollectionUtils.isEmpty(clazzs)) {
+            return null;
+        }
+        return clazzs.stream().map(ClazzDTO::new).collect(Collectors.toSet());
+    }
+
+    public static List<ClazzDTO> toList(Collection<Clazz> clazzs) {
+        if (CollectionUtils.isEmpty(clazzs)) {
+            return null;
+        }
+        return clazzs.stream().map(ClazzDTO::new).collect(Collectors.toList());
+    }
 
     public Long getId() {
         return id;

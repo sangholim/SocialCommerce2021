@@ -1,9 +1,15 @@
 package com.toy.project.service.dto;
 
+import com.toy.project.domain.Store;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 import javax.validation.constraints.*;
+import org.springframework.util.CollectionUtils;
 
 /**
  * A DTO for the {@link com.toy.project.domain.Store} entity.
@@ -29,6 +35,37 @@ public class StoreDTO implements Serializable {
     private String lastModifiedBy;
 
     private Instant lastModifiedDate;
+
+    public StoreDTO() {}
+
+    public StoreDTO(Store store) {
+        if (store == null) {
+            return;
+        }
+        this.id = store.getId();
+        this.name = store.getName();
+        this.type = store.getType();
+        this.calculation = store.getCalculation();
+        this.activated = store.getActivated();
+        this.createdBy = store.getCreatedBy();
+        this.createdDate = store.getCreatedDate();
+        this.lastModifiedBy = store.getLastModifiedBy();
+        this.lastModifiedDate = store.getLastModifiedDate();
+    }
+
+    public static Set<StoreDTO> toSet(Collection<Store> stores) {
+        if (CollectionUtils.isEmpty(stores)) {
+            return null;
+        }
+        return stores.stream().map(StoreDTO::new).collect(Collectors.toSet());
+    }
+
+    public static List<StoreDTO> toList(Collection<Store> stores) {
+        if (CollectionUtils.isEmpty(stores)) {
+            return null;
+        }
+        return stores.stream().map(StoreDTO::new).collect(Collectors.toList());
+    }
 
     public Long getId() {
         return id;

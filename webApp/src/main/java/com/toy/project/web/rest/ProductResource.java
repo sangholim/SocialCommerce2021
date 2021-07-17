@@ -8,8 +8,8 @@ import com.toy.project.service.criteria.ProductCriteria;
 import com.toy.project.service.dto.ProductDTO;
 import com.toy.project.service.dto.ProductExtendDTO;
 import com.toy.project.web.rest.errors.BadRequestAlertException;
-import com.toy.project.web.rest.vm.ProductVM;
 import io.swagger.annotations.ApiOperation;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
@@ -22,7 +22,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -138,13 +137,16 @@ public class ProductResource {
     )
     @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
     @PostMapping(value = "/products", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public void createProduct(ProductExtendDTO productExtendDTO) throws URISyntaxException {
+    public ResponseEntity<ProductDTO> createProduct(ProductExtendDTO productExtendDTO) throws URISyntaxException {
         // TODO: parameter 유효성 검사
         if (productExtendDTO == null) {
             throw new RuntimeException("not found product data");
         }
-        // 응답 정책
-        productExtendService.save(productExtendDTO);
+        ProductDTO result = productExtendService.save(productExtendDTO);
+        return ResponseEntity
+            .created(new URI("/api/products/" + result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+            .body(result);
     }
 
     @ApiOperation(value = "P.1.2 [A] 상품 수정")
@@ -218,7 +220,7 @@ public class ProductResource {
 
     @ApiOperation(value = "P.1.4 상품 조회")
     @GetMapping("/products/{id}")
-    public ResponseEntity<ProductVM> getProduct(@PathVariable Long id) {
+    public ResponseEntity<ProductExtendDTO> getProduct(@PathVariable Long id) {
         log.debug("REST request to get Product : {}", id);
         return ResponseUtil.wrapOrNotFound(productExtendService.findOne(id));
     }

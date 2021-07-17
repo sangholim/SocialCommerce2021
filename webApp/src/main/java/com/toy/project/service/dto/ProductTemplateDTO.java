@@ -1,9 +1,16 @@
 package com.toy.project.service.dto;
 
+import com.toy.project.domain.ProductOption;
+import com.toy.project.domain.ProductTemplate;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 import javax.validation.constraints.*;
+import org.springframework.util.CollectionUtils;
 
 /**
  * A DTO for the {@link com.toy.project.domain.ProductTemplate} entity.
@@ -29,6 +36,37 @@ public class ProductTemplateDTO implements Serializable {
     private String lastModifiedBy;
 
     private Instant lastModifiedDate;
+
+    public ProductTemplateDTO() {}
+
+    public ProductTemplateDTO(ProductTemplate productTemplate) {
+        if (productTemplate == null) {
+            return;
+        }
+        this.id = productTemplate.getId();
+        this.name = productTemplate.getName();
+        this.type = productTemplate.getType();
+        this.contentFileUrl = productTemplate.getContentFileUrl();
+        this.activated = productTemplate.getActivated();
+        this.createdBy = productTemplate.getCreatedBy();
+        this.createdDate = productTemplate.getCreatedDate();
+        this.lastModifiedBy = productTemplate.getLastModifiedBy();
+        this.lastModifiedDate = productTemplate.getLastModifiedDate();
+    }
+
+    public static Set<ProductTemplateDTO> toSet(Collection<ProductTemplate> productTemplates) {
+        if (CollectionUtils.isEmpty(productTemplates)) {
+            return null;
+        }
+        return productTemplates.stream().map(ProductTemplateDTO::new).collect(Collectors.toSet());
+    }
+
+    public static List<ProductTemplateDTO> toList(Collection<ProductTemplate> productTemplates) {
+        if (CollectionUtils.isEmpty(productTemplates)) {
+            return null;
+        }
+        return productTemplates.stream().map(ProductTemplateDTO::new).collect(Collectors.toList());
+    }
 
     public Long getId() {
         return id;

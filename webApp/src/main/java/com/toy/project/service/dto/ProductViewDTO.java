@@ -1,9 +1,12 @@
 package com.toy.project.service.dto;
 
+import com.toy.project.domain.ProductView;
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
 import javax.validation.constraints.*;
+import org.springframework.util.CollectionUtils;
 
 /**
  * A DTO for the {@link com.toy.project.domain.ProductView} entity.
@@ -25,6 +28,35 @@ public class ProductViewDTO implements Serializable {
     private String lastModifiedBy;
 
     private Instant lastModifiedDate;
+
+    public ProductViewDTO() {}
+
+    public ProductViewDTO(ProductView productView) {
+        if (productView == null) {
+            return;
+        }
+        this.id = productView.getId();
+        this.activated = productView.getActivated();
+        this.createdBy = productView.getCreatedBy();
+        this.createdDate = productView.getCreatedDate();
+        this.lastModifiedBy = productView.getLastModifiedBy();
+        this.lastModifiedDate = productView.getLastModifiedDate();
+        this.name = productView.getName();
+    }
+
+    public static Set<ProductViewDTO> toSet(Collection<ProductView> productViews) {
+        if (CollectionUtils.isEmpty(productViews)) {
+            return null;
+        }
+        return productViews.stream().map(ProductViewDTO::new).collect(Collectors.toSet());
+    }
+
+    public static List<ProductViewDTO> toList(Collection<ProductView> productViews) {
+        if (CollectionUtils.isEmpty(productViews)) {
+            return null;
+        }
+        return productViews.stream().map(ProductViewDTO::new).collect(Collectors.toList());
+    }
 
     public Long getId() {
         return id;

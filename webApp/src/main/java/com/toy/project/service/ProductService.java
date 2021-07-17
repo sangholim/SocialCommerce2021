@@ -3,8 +3,8 @@ package com.toy.project.service;
 import com.toy.project.domain.Product;
 import com.toy.project.repository.ProductRepository;
 import com.toy.project.service.dto.ProductDTO;
+import com.toy.project.service.dto.ProductExtendDTO;
 import com.toy.project.service.mapper.ProductMapper;
-import com.toy.project.web.rest.vm.ProductVM;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -60,10 +60,10 @@ public class ProductService {
     }
 
     @Transactional(readOnly = true)
-    public Optional<ProductVM> findOne(Long id) {
+    public Optional<ProductExtendDTO> findOne(Long id) {
         log.debug("Request to get Product : {}", id);
 
-        return Optional.of(productRepository.findOneById(id)).map(ProductVM::new);
+        return Optional.of(productRepository.findOneById(id)).map(ProductExtendDTO::new);
     }
 
     public void delete(Long id) {

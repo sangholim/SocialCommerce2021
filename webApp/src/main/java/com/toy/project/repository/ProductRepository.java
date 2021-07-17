@@ -16,6 +16,5 @@ import org.springframework.stereotype.Repository;
 @SuppressWarnings("unused")
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long>, JpaSpecificationExecutor<Product> {
-    @EntityGraph(value = "graph.product.productCategory", type = EntityGraph.EntityGraphType.FETCH)
     Product findOneById(long id);
 }

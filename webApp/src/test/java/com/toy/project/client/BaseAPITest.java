@@ -2,6 +2,7 @@ package com.toy.project.client;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.Map;
+import java.util.Objects;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -37,12 +38,16 @@ public class BaseAPITest {
     }
 
     public static void callClientTest(String url, HttpMethod method, HttpEntity entity) {
+        String body = "";
         try {
             ResponseEntity result = restTemplate.exchange(local + url, method, entity, Object.class);
             System.out.println(result.getStatusCode());
-            System.out.println(result.getBody());
+            if (result.getBody() != null) {
+                body = new ObjectMapper().writeValueAsString(result.getBody());
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
+        System.out.println(body);
     }
 }

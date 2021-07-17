@@ -1,10 +1,17 @@
 package com.toy.project.service.dto;
 
+import com.toy.project.domain.ProductLabel;
+import com.toy.project.domain.Store;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 import javax.persistence.Lob;
 import javax.validation.constraints.*;
+import org.springframework.util.CollectionUtils;
 
 /**
  * A DTO for the {@link com.toy.project.domain.ProductLabel} entity.
@@ -33,6 +40,38 @@ public class ProductLabelDTO implements Serializable {
     private String lastModifiedBy;
 
     private Instant lastModifiedDate;
+
+    public ProductLabelDTO() {}
+
+    public ProductLabelDTO(ProductLabel productLabel) {
+        if (productLabel == null) {
+            return;
+        }
+        this.id = productLabel.getId();
+        this.name = productLabel.getName();
+        this.color = productLabel.getColor();
+        this.content = productLabel.getContent();
+        this.type = productLabel.getType();
+        this.activated = productLabel.getActivated();
+        this.createdBy = productLabel.getCreatedBy();
+        this.createdDate = productLabel.getCreatedDate();
+        this.lastModifiedBy = productLabel.getLastModifiedBy();
+        this.lastModifiedDate = productLabel.getLastModifiedDate();
+    }
+
+    public static Set<ProductLabelDTO> toSet(Collection<ProductLabel> productLabels) {
+        if (CollectionUtils.isEmpty(productLabels)) {
+            return null;
+        }
+        return productLabels.stream().map(ProductLabelDTO::new).collect(Collectors.toSet());
+    }
+
+    public static List<ProductLabelDTO> toList(Collection<ProductLabel> productLabels) {
+        if (CollectionUtils.isEmpty(productLabels)) {
+            return null;
+        }
+        return productLabels.stream().map(ProductLabelDTO::new).collect(Collectors.toList());
+    }
 
     public Long getId() {
         return id;

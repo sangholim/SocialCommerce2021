@@ -1,10 +1,17 @@
 package com.toy.project.service.dto;
 
+import com.toy.project.domain.ProductMapping;
+import com.toy.project.domain.ProductShipping;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 import javax.persistence.Lob;
 import javax.validation.constraints.*;
+import org.springframework.util.CollectionUtils;
 
 /**
  * A DTO for the {@link com.toy.project.domain.ProductMapping} entity.
@@ -31,6 +38,37 @@ public class ProductMappingDTO implements Serializable {
     private String lastModifiedBy;
 
     private Instant lastModifiedDate;
+
+    public ProductMappingDTO() {}
+
+    public ProductMappingDTO(ProductMapping productMapping) {
+        if (productMapping == null) {
+            return;
+        }
+        this.id = productMapping.getId();
+        this.name = productMapping.getName();
+        this.type = productMapping.getType();
+        this.content = productMapping.getContent();
+        this.activated = productMapping.getActivated();
+        this.createdBy = productMapping.getCreatedBy();
+        this.createdDate = productMapping.getCreatedDate();
+        this.lastModifiedBy = productMapping.getLastModifiedBy();
+        this.lastModifiedDate = productMapping.getLastModifiedDate();
+    }
+
+    public static Set<ProductMappingDTO> toSet(Collection<ProductMapping> productMappings) {
+        if (CollectionUtils.isEmpty(productMappings)) {
+            return null;
+        }
+        return productMappings.stream().map(ProductMappingDTO::new).collect(Collectors.toSet());
+    }
+
+    public static List<ProductMappingDTO> toList(Collection<ProductMapping> productMappings) {
+        if (CollectionUtils.isEmpty(productMappings)) {
+            return null;
+        }
+        return productMappings.stream().map(ProductMappingDTO::new).collect(Collectors.toList());
+    }
 
     public Long getId() {
         return id;

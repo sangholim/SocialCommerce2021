@@ -3,11 +3,8 @@ package com.toy.project.service;
 import com.toy.project.repository.ProductRepository;
 import com.toy.project.service.dto.*;
 import com.toy.project.service.mapper.ProductMapper;
-import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 
 @Service
 public class ProductExtendService extends ProductService {
@@ -21,12 +18,6 @@ public class ProductExtendService extends ProductService {
     private final ProductMappingRelService productMappingRelService;
 
     private final ProductNoticeRelService productNoticeRelService;
-
-    private final ProductOptionColorRelService productOptionColorRelService;
-
-    private final ProductOptionDesignRelService productOptionDesignRelService;
-
-    private final ProductOptionPackageRelService productOptionPackageRelService;
 
     private final ProductOptionRelService productOptionRelService;
 
@@ -61,9 +52,6 @@ public class ProductExtendService extends ProductService {
         this.productLabelRelService = productLabelRelService;
         this.productMappingRelService = productMappingRelService;
         this.productNoticeRelService = productNoticeRelService;
-        this.productOptionColorRelService = productOptionColorRelService;
-        this.productOptionDesignRelService = productOptionDesignRelService;
-        this.productOptionPackageRelService = productOptionPackageRelService;
         this.productOptionRelService = productOptionRelService;
         this.productShippingRelService = productShippingRelService;
         this.productStoreRelService = productStoreRelService;
@@ -71,7 +59,7 @@ public class ProductExtendService extends ProductService {
         this.productViewRelService = productViewRelService;
     }
 
-    public void save(ProductExtendDTO productExtendDTO) {
+    public ProductDTO save(ProductExtendDTO productExtendDTO) {
         // 1. product entity save
         ProductDTO productDTO = super.save(productExtendDTO);
         productDTO.setActivated(true);
@@ -146,5 +134,7 @@ public class ProductExtendService extends ProductService {
             productExtendDTO.getClazzs()
         );
         productClazzRelService.saveAll(productClazzRelDTOSet);
+
+        return productDTO;
     }
 }

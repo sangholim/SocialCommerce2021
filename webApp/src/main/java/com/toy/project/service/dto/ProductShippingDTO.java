@@ -1,9 +1,16 @@
 package com.toy.project.service.dto;
 
+import com.toy.project.domain.ProductShipping;
+import com.toy.project.domain.ProductTemplate;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 import javax.validation.constraints.*;
+import org.springframework.util.CollectionUtils;
 
 /**
  * A DTO for the {@link com.toy.project.domain.ProductShipping} entity.
@@ -39,6 +46,42 @@ public class ProductShippingDTO implements Serializable {
     private String lastModifiedBy;
 
     private Instant lastModifiedDate;
+
+    public ProductShippingDTO() {}
+
+    public ProductShippingDTO(ProductShipping productShipping) {
+        if (productShipping == null) {
+            return;
+        }
+        this.id = productShipping.getId();
+        this.name = productShipping.getName();
+        this.isGroup = productShipping.getIsGroup();
+        this.defaultShippingPrice = productShipping.getDefaultShippingPrice();
+        this.freeShippingPrice = productShipping.getFreeShippingPrice();
+        this.jejuShippingPrice = productShipping.getJejuShippingPrice();
+        this.difficultShippingPrice = productShipping.getDifficultShippingPrice();
+        this.refundShippingPrice = productShipping.getRefundShippingPrice();
+        this.exchangeShippingPrice = productShipping.getExchangeShippingPrice();
+        this.activated = productShipping.getActivated();
+        this.createdBy = productShipping.getCreatedBy();
+        this.createdDate = productShipping.getCreatedDate();
+        this.lastModifiedBy = productShipping.getLastModifiedBy();
+        this.lastModifiedDate = productShipping.getLastModifiedDate();
+    }
+
+    public static Set<ProductShippingDTO> toSet(Collection<ProductShipping> productShippings) {
+        if (CollectionUtils.isEmpty(productShippings)) {
+            return null;
+        }
+        return productShippings.stream().map(ProductShippingDTO::new).collect(Collectors.toSet());
+    }
+
+    public static List<ProductShippingDTO> toList(Collection<ProductShipping> productShippings) {
+        if (CollectionUtils.isEmpty(productShippings)) {
+            return null;
+        }
+        return productShippings.stream().map(ProductShippingDTO::new).collect(Collectors.toList());
+    }
 
     public Long getId() {
         return id;

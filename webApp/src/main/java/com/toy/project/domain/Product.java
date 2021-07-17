@@ -10,35 +10,9 @@ import javax.validation.constraints.*;
 
 /**
  * A Product.
+ * Fetch 전략은
  */
 @Entity
-@NamedEntityGraph(
-    name = "graph.product.productCategory",
-    attributeNodes = {
-        @NamedAttributeNode(value = "productCategoryRels", subgraph = "productCategoryRels"),
-        @NamedAttributeNode(value = "productLabelRels", subgraph = "productLabelRels"),
-        @NamedAttributeNode(value = "productMappingRels", subgraph = "productMappingRels"),
-        @NamedAttributeNode(value = "productTemplateRels", subgraph = "productTemplateRels"),
-        @NamedAttributeNode(value = "productViewRels", subgraph = "productViewRels"),
-        @NamedAttributeNode(value = "productNoticeRels", subgraph = "productNoticeRels"),
-        @NamedAttributeNode(value = "productShippingRels", subgraph = "productShippingRels"),
-        @NamedAttributeNode(value = "productOptionRels", subgraph = "productOptionRels"),
-        @NamedAttributeNode(value = "productClazzRels", subgraph = "productClazzRels"),
-        @NamedAttributeNode(value = "productStoreRels", subgraph = "productStoreRels"),
-    },
-    subgraphs = {
-        @NamedSubgraph(name = "productCategoryRels", attributeNodes = @NamedAttributeNode("productCategory")),
-        @NamedSubgraph(name = "productLabelRels", attributeNodes = @NamedAttributeNode("productLabel")),
-        @NamedSubgraph(name = "productMappingRels", attributeNodes = @NamedAttributeNode("productMapping")),
-        @NamedSubgraph(name = "productTemplateRels", attributeNodes = @NamedAttributeNode("productTemplate")),
-        @NamedSubgraph(name = "productViewRels", attributeNodes = @NamedAttributeNode("productView")),
-        @NamedSubgraph(name = "productNoticeRels", attributeNodes = @NamedAttributeNode("productNotice")),
-        @NamedSubgraph(name = "productShippingRels", attributeNodes = @NamedAttributeNode("productShipping")),
-        @NamedSubgraph(name = "productOptionRels", attributeNodes = @NamedAttributeNode("productOption")),
-        @NamedSubgraph(name = "productClazzRels", attributeNodes = @NamedAttributeNode("clazz")),
-        @NamedSubgraph(name = "productStoreRels", attributeNodes = @NamedAttributeNode("store")),
-    }
-)
 @Table(name = "product")
 public class Product extends AbstractAuditingEntity implements Serializable {
 
@@ -154,37 +128,72 @@ public class Product extends AbstractAuditingEntity implements Serializable {
     @Column(name = "activated")
     private Boolean activated;
 
-    @OneToMany(mappedBy = "product")
-    @JsonIgnoreProperties(value = { "product", "productCategory" }, allowSetters = true)
-    private Set<ProductCategoryRel> productCategoryRels = new HashSet<>();
+    @OneToMany
+    @JoinTable(
+        name = "product_category_rel",
+        joinColumns = @JoinColumn(name = "product_id"),
+        inverseJoinColumns = @JoinColumn(name = "product_category_id")
+    )
+    @JsonIgnoreProperties(value = { "productCategoryRel" }, allowSetters = true)
+    private Set<ProductCategory> productCategories = new HashSet<>();
+
+    @OneToMany
+    @JoinTable(
+        name = "product_mapping_rel",
+        joinColumns = @JoinColumn(name = "product_id"),
+        inverseJoinColumns = @JoinColumn(name = "product_mapping_id")
+    )
+    @JsonIgnoreProperties(value = { "productMappingRel" }, allowSetters = true)
+    private Set<ProductMapping> productMappings = new HashSet<>();
+
+    @OneToMany
+    @JoinTable(
+        name = "product_view_rel",
+        joinColumns = @JoinColumn(name = "product_id"),
+        inverseJoinColumns = @JoinColumn(name = "product_view_id")
+    )
+    @JsonIgnoreProperties(value = { "productViewRel" }, allowSetters = true)
+    private Set<ProductView> productViews = new HashSet<>();
+
+    @OneToMany
+    @JoinTable(
+        name = "product_notice_rel",
+        joinColumns = @JoinColumn(name = "product_id"),
+        inverseJoinColumns = @JoinColumn(name = "product_notice_id")
+    )
+    @JsonIgnoreProperties(value = { "productNoticeRel" }, allowSetters = true)
+    private Set<ProductNotice> productNotices = new HashSet<>();
+
+    @OneToMany
+    @JoinTable(
+        name = "product_shipping_rel",
+        joinColumns = @JoinColumn(name = "product_id"),
+        inverseJoinColumns = @JoinColumn(name = "product_shipping_id")
+    )
+    @JsonIgnoreProperties(value = { "productShippingRel" }, allowSetters = true)
+    private Set<ProductShipping> productShippings = new HashSet<>();
+
+    @OneToMany
+    @JoinTable(
+        name = "product_template_rel",
+        joinColumns = @JoinColumn(name = "product_id"),
+        inverseJoinColumns = @JoinColumn(name = "product_template_id")
+    )
+    @JsonIgnoreProperties(value = { "productTemplateRel" }, allowSetters = true)
+    private Set<ProductTemplate> productTemplates = new HashSet<>();
+
+    @OneToMany
+    @JoinTable(
+        name = "product_option_rel",
+        joinColumns = @JoinColumn(name = "product_id"),
+        inverseJoinColumns = @JoinColumn(name = "product_option_id")
+    )
+    @JsonIgnoreProperties(value = { "productOptionRel" }, allowSetters = true)
+    private Set<ProductOption> productOptions = new HashSet<>();
 
     @OneToMany(mappedBy = "product")
     @JsonIgnoreProperties(value = { "product", "productLabel" }, allowSetters = true)
     private Set<ProductLabelRel> productLabelRels = new HashSet<>();
-
-    @OneToMany(mappedBy = "product")
-    @JsonIgnoreProperties(value = { "product", "productMapping" }, allowSetters = true)
-    private Set<ProductMappingRel> productMappingRels = new HashSet<>();
-
-    @OneToMany(mappedBy = "product")
-    @JsonIgnoreProperties(value = { "product", "productView" }, allowSetters = true)
-    private Set<ProductViewRel> productViewRels = new HashSet<>();
-
-    @OneToMany(mappedBy = "product")
-    @JsonIgnoreProperties(value = { "product", "productNotice" }, allowSetters = true)
-    private Set<ProductNoticeRel> productNoticeRels = new HashSet<>();
-
-    @OneToMany(mappedBy = "product")
-    @JsonIgnoreProperties(value = { "product", "productShipping" }, allowSetters = true)
-    private Set<ProductShippingRel> productShippingRels = new HashSet<>();
-
-    @OneToMany(mappedBy = "product")
-    @JsonIgnoreProperties(value = { "product", "productTemplate" }, allowSetters = true)
-    private Set<ProductTemplateRel> productTemplateRels = new HashSet<>();
-
-    @OneToMany(mappedBy = "product")
-    @JsonIgnoreProperties(value = { "product", "productOption" }, allowSetters = true)
-    private Set<ProductOptionRel> productOptionRels = new HashSet<>();
 
     @OneToMany(mappedBy = "product")
     @JsonIgnoreProperties(value = { "product", "clazz" }, allowSetters = true)
@@ -683,23 +692,60 @@ public class Product extends AbstractAuditingEntity implements Serializable {
         return this;
     }
 
-    public Set<ProductCategoryRel> getProductCategoryRels() {
-        return this.productCategoryRels;
+    public Set<ProductCategory> getProductCategories() {
+        return productCategories;
     }
 
-    public Product productCategoryRels(Set<ProductCategoryRel> productCategoryRels) {
-        this.setProductCategoryRels(productCategoryRels);
-        return this;
+    public void setProductCategories(Set<ProductCategory> productCategories) {
+        this.productCategories = productCategories;
     }
 
-    public void setProductCategoryRels(Set<ProductCategoryRel> productCategoryRels) {
-        if (this.productCategoryRels != null) {
-            this.productCategoryRels.forEach(i -> i.setProduct(null));
-        }
-        if (productCategoryRels != null) {
-            productCategoryRels.forEach(i -> i.setProduct(this));
-        }
-        this.productCategoryRels = productCategoryRels;
+    public Set<ProductMapping> getProductMappings() {
+        return productMappings;
+    }
+
+    public void setProductMappings(Set<ProductMapping> productMappings) {
+        this.productMappings = productMappings;
+    }
+
+    public Set<ProductView> getProductViews() {
+        return productViews;
+    }
+
+    public void setProductViews(Set<ProductView> productViews) {
+        this.productViews = productViews;
+    }
+
+    public Set<ProductNotice> getProductNotices() {
+        return productNotices;
+    }
+
+    public void setProductNotices(Set<ProductNotice> productNotices) {
+        this.productNotices = productNotices;
+    }
+
+    public Set<ProductShipping> getProductShippings() {
+        return productShippings;
+    }
+
+    public void setProductShippings(Set<ProductShipping> productShippings) {
+        this.productShippings = productShippings;
+    }
+
+    public Set<ProductTemplate> getProductTemplates() {
+        return productTemplates;
+    }
+
+    public void setProductTemplates(Set<ProductTemplate> productTemplates) {
+        this.productTemplates = productTemplates;
+    }
+
+    public Set<ProductOption> getProductOptions() {
+        return productOptions;
+    }
+
+    public void setProductOptions(Set<ProductOption> productOptions) {
+        this.productOptions = productOptions;
     }
 
     public Set<ProductLabelRel> getProductLabelRels() {
@@ -719,120 +765,6 @@ public class Product extends AbstractAuditingEntity implements Serializable {
             productLabelRels.forEach(i -> i.setProduct(this));
         }
         this.productLabelRels = productLabelRels;
-    }
-
-    public Set<ProductMappingRel> getProductMappingRels() {
-        return this.productMappingRels;
-    }
-
-    public Product productMappingRels(Set<ProductMappingRel> productMappingRels) {
-        this.setProductMappingRels(productMappingRels);
-        return this;
-    }
-
-    public void setProductMappingRels(Set<ProductMappingRel> productMappingRels) {
-        if (this.productMappingRels != null) {
-            this.productMappingRels.forEach(i -> i.setProduct(null));
-        }
-        if (productMappingRels != null) {
-            productMappingRels.forEach(i -> i.setProduct(this));
-        }
-        this.productMappingRels = productMappingRels;
-    }
-
-    public Set<ProductViewRel> getProductViewRels() {
-        return this.productViewRels;
-    }
-
-    public Product productViewRels(Set<ProductViewRel> productViewRels) {
-        this.setProductViewRels(productViewRels);
-        return this;
-    }
-
-    public void setProductViewRels(Set<ProductViewRel> productViewRels) {
-        if (this.productViewRels != null) {
-            this.productViewRels.forEach(i -> i.setProduct(null));
-        }
-        if (productViewRels != null) {
-            productViewRels.forEach(i -> i.setProduct(this));
-        }
-        this.productViewRels = productViewRels;
-    }
-
-    public Set<ProductNoticeRel> getProductNoticeRels() {
-        return this.productNoticeRels;
-    }
-
-    public Product productNoticeRels(Set<ProductNoticeRel> productNoticeRels) {
-        this.setProductNoticeRels(productNoticeRels);
-        return this;
-    }
-
-    public void setProductNoticeRels(Set<ProductNoticeRel> productNoticeRels) {
-        if (this.productNoticeRels != null) {
-            this.productNoticeRels.forEach(i -> i.setProduct(null));
-        }
-        if (productNoticeRels != null) {
-            productNoticeRels.forEach(i -> i.setProduct(this));
-        }
-        this.productNoticeRels = productNoticeRels;
-    }
-
-    public Set<ProductShippingRel> getProductShippingRels() {
-        return this.productShippingRels;
-    }
-
-    public Product productShippingRels(Set<ProductShippingRel> productShippingRels) {
-        this.setProductShippingRels(productShippingRels);
-        return this;
-    }
-
-    public void setProductShippingRels(Set<ProductShippingRel> productShippingRels) {
-        if (this.productShippingRels != null) {
-            this.productShippingRels.forEach(i -> i.setProduct(null));
-        }
-        if (productShippingRels != null) {
-            productShippingRels.forEach(i -> i.setProduct(this));
-        }
-        this.productShippingRels = productShippingRels;
-    }
-
-    public Set<ProductTemplateRel> getProductTemplateRels() {
-        return this.productTemplateRels;
-    }
-
-    public Product productTemplateRels(Set<ProductTemplateRel> productTemplateRels) {
-        this.setProductTemplateRels(productTemplateRels);
-        return this;
-    }
-
-    public void setProductTemplateRels(Set<ProductTemplateRel> productTemplateRels) {
-        if (this.productTemplateRels != null) {
-            this.productTemplateRels.forEach(i -> i.setProduct(null));
-        }
-        if (productTemplateRels != null) {
-            productTemplateRels.forEach(i -> i.setProduct(this));
-        }
-        this.productTemplateRels = productTemplateRels;
-    }
-
-    public Set<ProductOptionRel> getProductOptionRels() {
-        return this.productOptionRels;
-    }
-
-    public Product productOptionRels(Set<ProductOptionRel> productOptionRels) {
-        this.setProductOptionRels(productOptionRels);
-        return this;
-    }
-
-    public void setProductOptionRels(Set<ProductOptionRel> productOptionRels) {
-        if (this.productOptionRels != null) {
-            this.productOptionRels.forEach(i -> i.setProduct(null));
-        }
-        if (productOptionRels != null) {
-            productOptionRels.forEach(i -> i.setProduct(this));
-        }
-        this.productOptionRels = productOptionRels;
     }
 
     public Set<ProductClazzRel> getProductClazzRels() {

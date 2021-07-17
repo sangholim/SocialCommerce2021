@@ -1,5 +1,6 @@
 package com.toy.project.service.dto;
 
+import com.toy.project.domain.Product;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
@@ -93,6 +94,55 @@ public class ProductDTO implements Serializable {
     private String lastModifiedBy;
 
     private Instant lastModifiedDate;
+
+    public ProductDTO() {}
+
+    public ProductDTO(Product product) {
+        if (product == null) {
+            return;
+        }
+
+        this.setId(product.getId());
+        this.setName(product.getName());
+        this.setCode(product.getCode());
+        this.setCalculation(product.getCalculation());
+        this.setCalculationDateFrom(product.getCalculationDateFrom());
+        this.setCalculationDateTo(product.getCalculationDateTo());
+        this.setPrice(product.getPrice());
+        this.setAllPriceUnit(product.getAllPriceUnit());
+        this.setDiscount(product.getDiscount());
+        this.setDiscountPrice(product.getDiscountPrice());
+        this.setDiscountUnit(product.getDiscountUnit());
+        this.setDiscountDateFrom(product.getDiscountDateFrom());
+        this.setDiscountDateTo(product.getDiscountDateTo());
+        this.setIsInstallment(product.getIsInstallment());
+        this.setInstallmentMonth(product.getInstallmentMonth());
+        this.setIsSell(product.getIsSell());
+        this.setSellDateFrom(product.getSellDateFrom());
+        this.setSellDateTo(product.getSellDateTo());
+        this.setMinPurchaseAmount(product.getMinPurchaseAmount());
+        this.setManPurchaseAmount(product.getManPurchaseAmount());
+        this.setMainImageFileUrl(product.getMainImageFileUrl());
+        this.setAddImageFileUrl(product.getAddImageFileUrl());
+        this.setMainVideoFileUrl(product.getMainVideoFileUrl());
+        this.setDescriptionFileUrl(product.getDescriptionFileUrl());
+        this.setShippingType(product.getShippingType());
+        this.setSeparateShippingPriceType(product.getSeparateShippingPriceType());
+        this.setDefaultShippingPrice(product.getDefaultShippingPrice());
+        this.setFreeShippingPrice(product.getFreeShippingPrice());
+        this.setJejuShippingPrice(product.getJejuShippingPrice());
+        this.setDifficultShippingPrice(product.getDifficultShippingPrice());
+        this.setRefundShippingPrice(product.getRefundShippingPrice());
+        this.setExchangeShippingPrice(product.getExchangeShippingPrice());
+        this.setExchangeShippingFileUrl(product.getExchangeShippingFileUrl());
+        this.setIsView(product.getIsView());
+        this.setViewReservationDate(product.getViewReservationDate());
+        this.setActivated(product.getActivated());
+        this.setCreatedBy(product.getCreatedBy());
+        this.setCreatedDate(product.getCreatedDate());
+        this.setLastModifiedBy(product.getLastModifiedBy());
+        this.setLastModifiedDate(product.getLastModifiedDate());
+    }
 
     public Long getId() {
         return id;

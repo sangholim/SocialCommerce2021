@@ -1,7 +1,7 @@
 package com.toy.project.service.dto;
 
+import com.toy.project.domain.Product;
 import java.util.List;
-import java.util.Set;
 
 /**
  * 상품 및 상품 관련키 관리하는 클래스
@@ -29,6 +29,24 @@ public class ProductExtendDTO extends ProductDTO {
     private List<ClazzExtendDTO> clazzs;
 
     public ProductExtendDTO() {}
+
+    public ProductExtendDTO(Product product) {
+        super(product);
+        if (product == null) {
+            return;
+        }
+        this.productViews = ProductViewDTO.toList(product.getProductViews());
+        this.productOptions = ProductOptionDTO.toList(product.getProductOptions());
+        this.productTemplates = ProductTemplateDTO.toList(product.getProductTemplates());
+        this.productShippings = ProductShippingDTO.toList(product.getProductShippings());
+        this.productMappings = ProductMappingDTO.toList(product.getProductMappings());
+        this.productCategories = ProductCategoryDTO.toList(product.getProductCategories());
+        this.productNotices = ProductNoticeDTO.toList(product.getProductNotices());
+        // 관계테이블에 외래키 이외의 컬럼이 정의된 경우
+        this.clazzs = ClazzExtendDTO.toExtendList(product.getProductClazzRels());
+        this.stores = StoreExtendDTO.toExtendList(product.getProductStoreRels());
+        this.productLabels = ProductLabelExtendDTO.toExtendList(product.getProductLabelRels());
+    }
 
     public List<ProductOptionDTO> getProductOptions() {
         return productOptions;

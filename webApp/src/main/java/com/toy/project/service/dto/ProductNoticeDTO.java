@@ -1,9 +1,16 @@
 package com.toy.project.service.dto;
 
+import com.toy.project.domain.ProductMapping;
+import com.toy.project.domain.ProductNotice;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 import javax.validation.constraints.*;
+import org.springframework.util.CollectionUtils;
 
 /**
  * A DTO for the {@link com.toy.project.domain.ProductNotice} entity.
@@ -41,6 +48,43 @@ public class ProductNoticeDTO implements Serializable {
     private String lastModifiedBy;
 
     private Instant lastModifiedDate;
+
+    public ProductNoticeDTO() {}
+
+    public ProductNoticeDTO(ProductNotice productNotice) {
+        if (productNotice == null) {
+            return;
+        }
+        this.id = productNotice.getId();
+        this.name = productNotice.getName();
+        this.type = productNotice.getType();
+        this.contentFileUrl = productNotice.getContentFileUrl();
+        this.priorityDisplay = productNotice.getPriorityDisplay();
+        this.allProductDisplay = productNotice.getAllProductDisplay();
+        this.target = productNotice.getTarget();
+        this.enableDisplayDate = productNotice.getEnableDisplayDate();
+        this.displayDateFrom = productNotice.getDisplayDateFrom();
+        this.displayDateTo = productNotice.getDisplayDateTo();
+        this.activated = productNotice.getActivated();
+        this.createdBy = productNotice.getCreatedBy();
+        this.createdDate = productNotice.getCreatedDate();
+        this.lastModifiedBy = productNotice.getLastModifiedBy();
+        this.lastModifiedDate = productNotice.getLastModifiedDate();
+    }
+
+    public static Set<ProductNoticeDTO> toSet(Collection<ProductNotice> productNotices) {
+        if (CollectionUtils.isEmpty(productNotices)) {
+            return null;
+        }
+        return productNotices.stream().map(ProductNoticeDTO::new).collect(Collectors.toSet());
+    }
+
+    public static List<ProductNoticeDTO> toList(Collection<ProductNotice> productNotices) {
+        if (CollectionUtils.isEmpty(productNotices)) {
+            return null;
+        }
+        return productNotices.stream().map(ProductNoticeDTO::new).collect(Collectors.toList());
+    }
 
     public Long getId() {
         return id;

@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -107,5 +108,19 @@ public class ProductApiTest {
         headers.set("Content-type", "multipart/form-data;charset=UTF-8");
         HttpEntity entity = new HttpEntity(multiValueMap, headers);
         BaseAPITest.callClientTest(url, HttpMethod.POST, entity);
+    }
+
+    //TODO: 상품 등록 수정 API 생성
+
+    // P.1.4 상품 조회/
+    @Test
+    public void getProductTest() throws Exception {
+        long id = 18;
+        String url = "/products/" + id;
+        HttpHeaders headers = new HttpHeaders();
+        BaseAPITest.setAuthHeaders(headers, "admin", "admin");
+        headers.set("Content-type", MediaType.APPLICATION_JSON_VALUE);
+        HttpEntity entity = new HttpEntity("", headers);
+        BaseAPITest.callClientTest(url, HttpMethod.GET, entity);
     }
 }

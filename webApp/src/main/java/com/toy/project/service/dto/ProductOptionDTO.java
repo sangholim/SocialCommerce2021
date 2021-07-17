@@ -1,9 +1,16 @@
 package com.toy.project.service.dto;
 
+import com.toy.project.domain.ProductOption;
+import com.toy.project.domain.ProductView;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 import javax.validation.constraints.*;
+import org.springframework.util.CollectionUtils;
 
 /**
  * A DTO for the {@link com.toy.project.domain.ProductOption} entity.
@@ -33,6 +40,39 @@ public class ProductOptionDTO implements Serializable {
     private String lastModifiedBy;
 
     private Instant lastModifiedDate;
+
+    public ProductOptionDTO() {}
+
+    public ProductOptionDTO(ProductOption productOption) {
+        if (productOption == null) {
+            return;
+        }
+        this.id = productOption.getId();
+        this.priceSign = productOption.getPriceSign();
+        this.price = productOption.getPrice();
+        this.stock = productOption.getStock();
+        this.status = productOption.getStatus();
+        this.code = productOption.getCode();
+        this.activated = productOption.getActivated();
+        this.createdBy = productOption.getCreatedBy();
+        this.createdDate = productOption.getCreatedDate();
+        this.lastModifiedBy = productOption.getLastModifiedBy();
+        this.lastModifiedDate = productOption.getLastModifiedDate();
+    }
+
+    public static Set<ProductOptionDTO> toSet(Collection<ProductOption> productOptions) {
+        if (CollectionUtils.isEmpty(productOptions)) {
+            return null;
+        }
+        return productOptions.stream().map(ProductOptionDTO::new).collect(Collectors.toSet());
+    }
+
+    public static List<ProductOptionDTO> toList(Collection<ProductOption> productOptions) {
+        if (CollectionUtils.isEmpty(productOptions)) {
+            return null;
+        }
+        return productOptions.stream().map(ProductOptionDTO::new).collect(Collectors.toList());
+    }
 
     public Long getId() {
         return id;

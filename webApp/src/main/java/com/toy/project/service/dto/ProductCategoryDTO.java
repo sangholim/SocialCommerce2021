@@ -1,10 +1,17 @@
 package com.toy.project.service.dto;
 
+import com.toy.project.domain.ProductCategory;
+import com.toy.project.domain.ProductMapping;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 import javax.persistence.Lob;
 import javax.validation.constraints.*;
+import org.springframework.util.CollectionUtils;
 
 /**
  * A DTO for the {@link com.toy.project.domain.ProductCategory} entity.
@@ -35,6 +42,39 @@ public class ProductCategoryDTO implements Serializable {
     private String lastModifiedBy;
 
     private Instant lastModifiedDate;
+
+    public ProductCategoryDTO() {}
+
+    public ProductCategoryDTO(ProductCategory productCategory) {
+        if (productCategory == null) {
+            return;
+        }
+        this.id = productCategory.getId();
+        this.name = productCategory.getName();
+        this.main = productCategory.getMain();
+        this.sub = productCategory.getSub();
+        this.description = productCategory.getDescription();
+        this.sortOrder = productCategory.getSortOrder();
+        this.activated = productCategory.getActivated();
+        this.createdBy = productCategory.getCreatedBy();
+        this.createdDate = productCategory.getCreatedDate();
+        this.lastModifiedBy = productCategory.getLastModifiedBy();
+        this.lastModifiedDate = productCategory.getLastModifiedDate();
+    }
+
+    public static Set<ProductCategoryDTO> toSet(Collection<ProductCategory> productCategories) {
+        if (CollectionUtils.isEmpty(productCategories)) {
+            return null;
+        }
+        return productCategories.stream().map(ProductCategoryDTO::new).collect(Collectors.toSet());
+    }
+
+    public static List<ProductCategoryDTO> toList(Collection<ProductCategory> productCategories) {
+        if (CollectionUtils.isEmpty(productCategories)) {
+            return null;
+        }
+        return productCategories.stream().map(ProductCategoryDTO::new).collect(Collectors.toList());
+    }
 
     public Long getId() {
         return id;
