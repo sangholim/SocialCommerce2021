@@ -1,11 +1,14 @@
 package com.toy.project.service.dto;
 
 import com.toy.project.domain.Product;
+import com.toy.project.service.ProductExtendService;
+import java.io.File;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
 import javax.persistence.Lob;
 import javax.validation.constraints.*;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * A DTO for the {@link com.toy.project.domain.Product} entity.
@@ -122,10 +125,22 @@ public class ProductDTO implements Serializable {
         this.setSellDateTo(product.getSellDateTo());
         this.setMinPurchaseAmount(product.getMinPurchaseAmount());
         this.setManPurchaseAmount(product.getManPurchaseAmount());
-        this.setMainImageFileUrl(product.getMainImageFileUrl());
-        this.setAddImageFileUrl(product.getAddImageFileUrl());
-        this.setMainVideoFileUrl(product.getMainVideoFileUrl());
-        this.setDescriptionFileUrl(product.getDescriptionFileUrl());
+        if (!StringUtils.isEmpty(product.getMainImageFileUrl())) {
+            this.setMainImageFileUrl(ProductExtendService.BASE_PATH + File.separator + product.getMainImageFileUrl());
+        }
+        if (!StringUtils.isEmpty(product.getAddImageFileUrl())) {
+            this.setAddImageFileUrl(ProductExtendService.BASE_PATH + File.separator + product.getAddImageFileUrl());
+        }
+        if (!StringUtils.isEmpty(product.getMainVideoFileUrl())) {
+            this.setMainVideoFileUrl(ProductExtendService.BASE_PATH + File.separator + product.getMainVideoFileUrl());
+        }
+        if (!StringUtils.isEmpty(product.getDescriptionFileUrl())) {
+            this.setDescriptionFileUrl(ProductExtendService.BASE_PATH + File.separator + product.getDescriptionFileUrl());
+        }
+        if (!StringUtils.isEmpty(product.getExchangeShippingFileUrl())) {
+            this.setExchangeShippingFileUrl(ProductExtendService.BASE_PATH + File.separator + product.getExchangeShippingFileUrl());
+        }
+
         this.setShippingType(product.getShippingType());
         this.setSeparateShippingPriceType(product.getSeparateShippingPriceType());
         this.setDefaultShippingPrice(product.getDefaultShippingPrice());
@@ -134,7 +149,6 @@ public class ProductDTO implements Serializable {
         this.setDifficultShippingPrice(product.getDifficultShippingPrice());
         this.setRefundShippingPrice(product.getRefundShippingPrice());
         this.setExchangeShippingPrice(product.getExchangeShippingPrice());
-        this.setExchangeShippingFileUrl(product.getExchangeShippingFileUrl());
         this.setIsView(product.getIsView());
         this.setViewReservationDate(product.getViewReservationDate());
         this.setActivated(product.getActivated());

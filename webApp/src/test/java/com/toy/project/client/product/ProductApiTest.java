@@ -1,7 +1,15 @@
 package com.toy.project.client.product;
 
 import com.toy.project.client.BaseAPITest;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.file.Files;
 import java.time.Instant;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItem;
+import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,6 +20,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -24,7 +34,7 @@ public class ProductApiTest {
         MultiValueMap<String, Object> multiValueMap = new LinkedMultiValueMap<>();
         String instant = Instant.now().toString();
         multiValueMap.set("name", "zdzd");
-        multiValueMap.set("code", "zdzd");
+        multiValueMap.set("code", "code-test");
         multiValueMap.set("calculation", "0.05");
         multiValueMap.set("calculationDateFrom", instant);
         multiValueMap.set("calculationDateTo", instant);
@@ -42,10 +52,6 @@ public class ProductApiTest {
         multiValueMap.set("sellDateTo", instant);
         multiValueMap.set("minPurchaseAmount", 2);
         multiValueMap.set("manPurchaseAmount", 5);
-        multiValueMap.set("mainImageFileUrl", "url1");
-        multiValueMap.set("addImageFileUrl", "url2");
-        multiValueMap.set("mainVideoFileUrl", "url3");
-        multiValueMap.set("descriptionFileUrl", "url4");
         multiValueMap.set("shippingType", "type1");
         multiValueMap.set("separateShippingPriceType", "type2");
         multiValueMap.set("defaultShippingPrice", 12345);
@@ -54,9 +60,17 @@ public class ProductApiTest {
         multiValueMap.set("difficultShippingPrice", 12345);
         multiValueMap.set("refundShippingPrice", 12345);
         multiValueMap.set("exchangeShippingPrice", 12345);
-        multiValueMap.set("exchangeShippingFileUrl", 12345);
         multiValueMap.set("isView", true);
         multiValueMap.set("viewReservationDate", instant);
+
+        // file resource
+        MultipartFile multipartFile = getMultiPartFile("C:\\Users\\hoya\\Desktop\\test.txt");
+        multiValueMap.set("mainImageFile", multipartFile.getResource());
+        multiValueMap.set("addImageFile", multipartFile.getResource());
+        multiValueMap.set("mainVideoFile", multipartFile.getResource());
+        multiValueMap.set("descriptionFile", multipartFile.getResource());
+        multiValueMap.set("exchangeShippingFile", multipartFile.getResource());
+
         // child product-category
         multiValueMap.set("productCategories[0].id", 1);
         multiValueMap.set("productCategories[1].id", 2);
@@ -68,11 +82,11 @@ public class ProductApiTest {
         multiValueMap.set("productLabels[0].displayDate", true);
         multiValueMap.set("productLabels[0].displayDateFrom", instant);
         multiValueMap.set("productLabels[0].displayDateTo", instant);
-
         multiValueMap.set("productLabels[1].id", 2);
         multiValueMap.set("productLabels[1].displayDate", true);
         multiValueMap.set("productLabels[1].displayDateFrom", instant);
         multiValueMap.set("productLabels[1].displayDateTo", instant);
+
         // child product-notice
         multiValueMap.set("productNotices[0].id", 1);
         multiValueMap.set("productNotices[1].id", 2);
@@ -88,7 +102,6 @@ public class ProductApiTest {
         // child product-view
         multiValueMap.set("productViews[0].id", 1);
         multiValueMap.set("productViews[1].id", 2);
-
         // child store
         multiValueMap.set("stores[0].id", 1);
         multiValueMap.set("stores[0].productUseCalculation", true);
@@ -115,12 +128,31 @@ public class ProductApiTest {
     // P.1.4 상품 조회/
     @Test
     public void getProductTest() throws Exception {
-        long id = 18;
+        long id = 25;
         String url = "/products/" + id;
         HttpHeaders headers = new HttpHeaders();
         BaseAPITest.setAuthHeaders(headers, "admin", "admin");
         headers.set("Content-type", MediaType.APPLICATION_JSON_VALUE);
         HttpEntity entity = new HttpEntity("", headers);
         BaseAPITest.callClientTest(url, HttpMethod.GET, entity);
+    }
+
+    public MultipartFile getMultiPartFile(String filePath) {
+        File file = new File(filePath);
+        FileItem fileItem = null;
+        try (InputStream is = new FileInputStream(file)) {
+            fileItem =
+                new DiskFileItem(
+                    "mainFile",
+                    Files.probeContentType(file.toPath()),
+                    false,
+                    file.getName(),
+                    (int) file.length(),
+                    file.getParentFile()
+                );
+            OutputStream os = fileItem.getOutputStream();
+            IOUtils.copy(is, os);
+        } catch (Exception e) {}
+        return new CommonsMultipartFile(fileItem);
     }
 }

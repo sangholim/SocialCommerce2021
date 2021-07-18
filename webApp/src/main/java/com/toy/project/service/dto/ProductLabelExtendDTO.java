@@ -1,8 +1,6 @@
 package com.toy.project.service.dto;
 
-import com.toy.project.domain.ProductLabel;
 import com.toy.project.domain.ProductLabelRel;
-import com.toy.project.domain.ProductStoreRel;
 import java.time.Instant;
 import java.util.Collection;
 import java.util.List;
@@ -20,6 +18,8 @@ public class ProductLabelExtendDTO extends ProductLabelDTO {
     private Instant displayDateFrom;
 
     private Instant displayDateTo;
+
+    public ProductLabelExtendDTO() {}
 
     public ProductLabelExtendDTO(ProductLabelRel productLabelRel) {
         super(productLabelRel.getProductLabel());

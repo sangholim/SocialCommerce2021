@@ -2,11 +2,8 @@ package com.toy.project.service;
 
 import com.toy.project.domain.ProductLabelRel;
 import com.toy.project.repository.ProductLabelRelRepository;
-import com.toy.project.service.dto.ProductLabelExtendDTO;
 import com.toy.project.service.dto.ProductLabelRelDTO;
 import com.toy.project.service.mapper.ProductLabelRelMapper;
-import java.util.Collection;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -113,32 +110,5 @@ public class ProductLabelRelService {
             .map(productLabelRelMapper::toEntity)
             .collect(Collectors.toSet());
         return productLabelRelRepository.saveAll(productLabelRels).stream().map(productLabelRelMapper::toDto).collect(Collectors.toSet());
-    }
-
-    public Set<ProductLabelRelDTO> toProductLabelRelDTOSet(
-        Long productId,
-        Boolean activated,
-        Collection<ProductLabelExtendDTO> productLabelExtendDTOS
-    ) {
-        if (CollectionUtils.isEmpty(productLabelExtendDTOS)) {
-            return null;
-        }
-
-        return productLabelExtendDTOS
-            .stream()
-            .filter(Objects::nonNull)
-            .map(
-                productLabelExtendDTO ->
-                    new ProductLabelRelDTO(
-                        null,
-                        productId,
-                        productLabelExtendDTO.getId(),
-                        productLabelExtendDTO.getDisplayDate(),
-                        productLabelExtendDTO.getDisplayDateFrom(),
-                        productLabelExtendDTO.getDisplayDateTo(),
-                        true
-                    )
-            )
-            .collect(Collectors.toSet());
     }
 }

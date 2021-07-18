@@ -3,10 +3,7 @@ package com.toy.project.service;
 import com.toy.project.domain.ProductStoreRel;
 import com.toy.project.repository.ProductStoreRelRepository;
 import com.toy.project.service.dto.ProductStoreRelDTO;
-import com.toy.project.service.dto.StoreExtendDTO;
 import com.toy.project.service.mapper.ProductStoreRelMapper;
-import java.util.Collection;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -58,29 +55,6 @@ public class ProductStoreRelService {
             .map(productStoreRelMapper::toEntity)
             .collect(Collectors.toSet());
         return productStoreRelRepository.saveAll(productStoreRels).stream().map(productStoreRelMapper::toDto).collect(Collectors.toSet());
-    }
-
-    public Set<ProductStoreRelDTO> toProductStoreRelDTOSet(Long productId, Boolean activated, Collection<StoreExtendDTO> storeDTOS) {
-        if (CollectionUtils.isEmpty(storeDTOS)) {
-            return null;
-        }
-        return storeDTOS
-            .stream()
-            .filter(Objects::nonNull)
-            .map(
-                storeDTO ->
-                    new ProductStoreRelDTO(
-                        null,
-                        productId,
-                        storeDTO.getId(),
-                        storeDTO.getProductUseCalculation(),
-                        storeDTO.getProductCalculation(),
-                        storeDTO.getProductCalculationDateFrom(),
-                        storeDTO.getProductCalculationDateTo(),
-                        activated
-                    )
-            )
-            .collect(Collectors.toSet());
     }
 
     /**

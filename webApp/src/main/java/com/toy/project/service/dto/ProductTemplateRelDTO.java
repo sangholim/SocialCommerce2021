@@ -2,8 +2,12 @@ package com.toy.project.service.dto;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.Collection;
 import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 import javax.validation.constraints.*;
+import org.springframework.util.CollectionUtils;
 
 /**
  * A DTO for the {@link com.toy.project.domain.ProductTemplateRel} entity.
@@ -39,6 +43,17 @@ public class ProductTemplateRelDTO implements Serializable {
         this.productId = productId;
         this.productTemplateId = productTemplateId;
         this.activated = activated;
+    }
+
+    public static Set<ProductTemplateRelDTO> toSet(Long productId, Boolean activated, Collection<ProductTemplateDTO> productTemplateDTOS) {
+        if (CollectionUtils.isEmpty(productTemplateDTOS)) {
+            return null;
+        }
+        return productTemplateDTOS
+            .stream()
+            .filter(Objects::nonNull)
+            .map(productTemplateDTO -> new ProductTemplateRelDTO(null, productId, productTemplateDTO.getId(), activated))
+            .collect(Collectors.toSet());
     }
 
     public Long getId() {

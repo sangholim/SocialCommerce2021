@@ -2,11 +2,8 @@ package com.toy.project.service;
 
 import com.toy.project.domain.ProductCategoryRel;
 import com.toy.project.repository.ProductCategoryRelRepository;
-import com.toy.project.service.dto.ProductCategoryDTO;
 import com.toy.project.service.dto.ProductCategoryRelDTO;
 import com.toy.project.service.mapper.ProductCategoryRelMapper;
-import java.util.Collection;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -59,21 +56,6 @@ public class ProductCategoryRelService {
         ProductCategoryRel productCategoryRel = productCategoryRelMapper.toEntity(productCategoryRelDTO);
         productCategoryRel = productCategoryRelRepository.save(productCategoryRel);
         return productCategoryRelMapper.toDto(productCategoryRel);
-    }
-
-    public Set<ProductCategoryRelDTO> toProductCategoryRelDTOSet(
-        Long productId,
-        Boolean activated,
-        Collection<ProductCategoryDTO> productCategoryDTOs
-    ) {
-        if (CollectionUtils.isEmpty(productCategoryDTOs)) {
-            return null;
-        }
-        return productCategoryDTOs
-            .stream()
-            .filter(Objects::nonNull)
-            .map(productCategoryDTO -> new ProductCategoryRelDTO(null, productId, productCategoryDTO.getId(), activated))
-            .collect(Collectors.toSet());
     }
 
     public Optional<ProductCategoryRelDTO> partialUpdate(ProductCategoryRelDTO productCategoryRelDTO) {

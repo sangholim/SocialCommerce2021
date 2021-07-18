@@ -2,11 +2,8 @@ package com.toy.project.service;
 
 import com.toy.project.domain.ProductClazzRel;
 import com.toy.project.repository.ProductClazzRelRepository;
-import com.toy.project.service.dto.ClazzExtendDTO;
 import com.toy.project.service.dto.ProductClazzRelDTO;
 import com.toy.project.service.mapper.ProductClazzRelMapper;
-import java.util.Collection;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -58,29 +55,6 @@ public class ProductClazzRelService {
             .map(productClazzRelMapper::toEntity)
             .collect(Collectors.toSet());
         return productClazzRelRepository.saveAll(productClazzRels).stream().map(productClazzRelMapper::toDto).collect(Collectors.toSet());
-    }
-
-    public Set<ProductClazzRelDTO> toProductClazzRelDTOSet(Long productId, Boolean activated, Collection<ClazzExtendDTO> clazzDTOS) {
-        if (CollectionUtils.isEmpty(clazzDTOS)) {
-            return null;
-        }
-        return clazzDTOS
-            .stream()
-            .filter(Objects::nonNull)
-            .map(
-                clazzDTO ->
-                    new ProductClazzRelDTO(
-                        null,
-                        productId,
-                        clazzDTO.getId(),
-                        clazzDTO.getProductUseCalculation(),
-                        clazzDTO.getProductCalculation(),
-                        clazzDTO.getProductCalculationDateFrom(),
-                        clazzDTO.getProductCalculationDateTo(),
-                        activated
-                    )
-            )
-            .collect(Collectors.toSet());
     }
 
     /**

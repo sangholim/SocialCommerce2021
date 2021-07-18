@@ -1,6 +1,5 @@
 package com.toy.project.service.dto;
 
-import com.toy.project.domain.Clazz;
 import com.toy.project.domain.ProductClazzRel;
 import java.time.Instant;
 import java.util.Collection;
@@ -21,6 +20,8 @@ public class ClazzExtendDTO extends ClazzDTO {
     private Instant productCalculationDateFrom;
 
     private Instant productCalculationDateTo;
+
+    public ClazzExtendDTO() {}
 
     public ClazzExtendDTO(ProductClazzRel productClazzRel) {
         super(productClazzRel.getClazz());

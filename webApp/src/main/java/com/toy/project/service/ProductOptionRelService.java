@@ -2,11 +2,8 @@ package com.toy.project.service;
 
 import com.toy.project.domain.ProductOptionRel;
 import com.toy.project.repository.ProductOptionRelRepository;
-import com.toy.project.service.dto.ProductOptionDTO;
 import com.toy.project.service.dto.ProductOptionRelDTO;
 import com.toy.project.service.mapper.ProductOptionRelMapper;
-import java.util.Collection;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -116,21 +113,6 @@ public class ProductOptionRelService {
             .saveAll(productOptionRels)
             .stream()
             .map(productOptionRelMapper::toDto)
-            .collect(Collectors.toSet());
-    }
-
-    public Set<ProductOptionRelDTO> toProductOptionRelDTOSet(
-        Long productId,
-        Boolean activated,
-        Collection<ProductOptionDTO> productOptionDTOs
-    ) {
-        if (CollectionUtils.isEmpty(productOptionDTOs)) {
-            return null;
-        }
-        return productOptionDTOs
-            .stream()
-            .filter(Objects::nonNull)
-            .map(productOptionDTO -> new ProductOptionRelDTO(null, productId, productOptionDTO.getId(), activated))
             .collect(Collectors.toSet());
     }
 }

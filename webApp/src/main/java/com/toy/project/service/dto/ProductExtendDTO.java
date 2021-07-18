@@ -2,11 +2,22 @@ package com.toy.project.service.dto;
 
 import com.toy.project.domain.Product;
 import java.util.List;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 상품 및 상품 관련키 관리하는 클래스
  */
 public class ProductExtendDTO extends ProductDTO {
+
+    private MultipartFile mainImageFile;
+
+    private MultipartFile addImageFile;
+
+    private MultipartFile mainVideoFile;
+
+    private MultipartFile descriptionFile;
+
+    private MultipartFile exchangeShippingFile;
 
     private List<ProductOptionDTO> productOptions;
 
@@ -46,6 +57,46 @@ public class ProductExtendDTO extends ProductDTO {
         this.clazzs = ClazzExtendDTO.toExtendList(product.getProductClazzRels());
         this.stores = StoreExtendDTO.toExtendList(product.getProductStoreRels());
         this.productLabels = ProductLabelExtendDTO.toExtendList(product.getProductLabelRels());
+    }
+
+    public MultipartFile getMainImageFile() {
+        return mainImageFile;
+    }
+
+    public void setMainImageFile(MultipartFile mainImageFile) {
+        this.mainImageFile = mainImageFile;
+    }
+
+    public MultipartFile getAddImageFile() {
+        return addImageFile;
+    }
+
+    public void setAddImageFile(MultipartFile addImageFile) {
+        this.addImageFile = addImageFile;
+    }
+
+    public MultipartFile getMainVideoFile() {
+        return mainVideoFile;
+    }
+
+    public void setMainVideoFile(MultipartFile mainVideoFile) {
+        this.mainVideoFile = mainVideoFile;
+    }
+
+    public MultipartFile getDescriptionFile() {
+        return descriptionFile;
+    }
+
+    public void setDescriptionFile(MultipartFile descriptionFile) {
+        this.descriptionFile = descriptionFile;
+    }
+
+    public MultipartFile getExchangeShippingFile() {
+        return exchangeShippingFile;
+    }
+
+    public void setExchangeShippingFile(MultipartFile exchangeShippingFile) {
+        this.exchangeShippingFile = exchangeShippingFile;
     }
 
     public List<ProductOptionDTO> getProductOptions() {

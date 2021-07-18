@@ -2,11 +2,8 @@ package com.toy.project.service;
 
 import com.toy.project.domain.ProductMappingRel;
 import com.toy.project.repository.ProductMappingRelRepository;
-import com.toy.project.service.dto.ProductMappingDTO;
 import com.toy.project.service.dto.ProductMappingRelDTO;
 import com.toy.project.service.mapper.ProductMappingRelMapper;
-import java.util.Collection;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -64,21 +61,6 @@ public class ProductMappingRelService {
             .saveAll(productMappingRels)
             .stream()
             .map(productMappingRelMapper::toDto)
-            .collect(Collectors.toSet());
-    }
-
-    public Set<ProductMappingRelDTO> toProductMappingRelDTOSet(
-        Long productId,
-        Boolean activated,
-        Collection<ProductMappingDTO> productMappingDTOS
-    ) {
-        if (CollectionUtils.isEmpty(productMappingDTOS)) {
-            return null;
-        }
-        return productMappingDTOS
-            .stream()
-            .filter(Objects::nonNull)
-            .map(productMappingDTO -> new ProductMappingRelDTO(null, productId, productMappingDTO.getId(), activated))
             .collect(Collectors.toSet());
     }
 

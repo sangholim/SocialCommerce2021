@@ -2,8 +2,12 @@ package com.toy.project.service.dto;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.Collection;
 import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 import javax.validation.constraints.*;
+import org.springframework.util.CollectionUtils;
 
 /**
  * A DTO for the {@link com.toy.project.domain.ProductClazzRel} entity.
@@ -60,6 +64,29 @@ public class ProductClazzRelDTO implements Serializable {
         this.calculationDateFrom = calculationDateFrom;
         this.calculationDateTo = calculationDateTo;
         this.activated = activated;
+    }
+
+    public static Set<ProductClazzRelDTO> toSet(Long productId, Boolean activated, Collection<ClazzExtendDTO> clazzDTOS) {
+        if (CollectionUtils.isEmpty(clazzDTOS)) {
+            return null;
+        }
+        return clazzDTOS
+            .stream()
+            .filter(Objects::nonNull)
+            .map(
+                clazzDTO ->
+                    new ProductClazzRelDTO(
+                        null,
+                        productId,
+                        clazzDTO.getId(),
+                        clazzDTO.getProductUseCalculation(),
+                        clazzDTO.getProductCalculation(),
+                        clazzDTO.getProductCalculationDateFrom(),
+                        clazzDTO.getProductCalculationDateTo(),
+                        activated
+                    )
+            )
+            .collect(Collectors.toSet());
     }
 
     public Long getId() {

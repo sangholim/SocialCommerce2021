@@ -10,7 +10,7 @@ import javax.validation.constraints.*;
 
 /**
  * A Product.
- * Fetch 전략은
+ * 1:M 관계의 엔티티는 Batch 사이즈를 정해서 가져옴
  */
 @Entity
 @Table(name = "product")

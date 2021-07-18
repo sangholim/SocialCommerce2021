@@ -40,7 +40,7 @@ public class ProductResource {
 
     private final Logger log = LoggerFactory.getLogger(ProductResource.class);
 
-    private static final String ENTITY_NAME = "product";
+    public static final String ENTITY_NAME = "product";
 
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
@@ -84,10 +84,10 @@ public class ProductResource {
         "&nbsp;\"sellDateTo\": 판매 종료일(YYYY-MM-DDThh:mm:ssZ),<br />" +
         "&nbsp;\"minPurchaseAmount\": 최소 구매량,<br />" +
         "&nbsp;\"manPurchaseAmount\": 최대 구매량,<br />" +
-        "&nbsp;\"mainImageFileUrl\": 메인 이미지 파일 경로,<br />" +
-        "&nbsp;\"addImageFileUrl\": 추가 이미지 파일 경로,<br />" +
-        "&nbsp;\"mainVideoFileUrl\": 메인 비디오 파일 경로,<br />" +
-        "&nbsp;\"descriptionFileUrl\": 상세설명 파일 경로,<br />" +
+        "&nbsp;\"mainImageFile\": 메인 이미지 파일,<br />" +
+        "&nbsp;\"addImageFile\": 추가 이미지 파일,<br />" +
+        "&nbsp;\"mainVideoFile\": 메인 비디오 파일,<br />" +
+        "&nbsp;\"descriptionFile\": 상세설명 파일,<br />" +
         "&nbsp;\"shippingType\": 배송 타입(TODAY, NORMAL, ETC),<br />" +
         "&nbsp;\"separateShippingPriceType\": 상품별 배송비 타입 (PAY, FREE, CONDITION_FREE),<br />" +
         "&nbsp;\"defaultShippingPrice\": 배송료,<br />" +
@@ -96,7 +96,7 @@ public class ProductResource {
         "&nbsp;\"difficultShippingPrice\": 제주도를 제외한 도서산간 배송 가격,<br />" +
         "&nbsp;\"refundShippingPrice\": 반품시 배송 가격,<br />" +
         "&nbsp;\"exchangeShippingPrice\": 교환시 배송 가격,<br />" +
-        "&nbsp;\"exchangeShippingFileUrl\": 배송/환불/반품 안내 파일 경로,<br />" +
+        "&nbsp;\"exchangeShippingFile\": 배송/환불/반품 안내 파일,<br />" +
         "&nbsp;\"isView\": 전시 상태 여부[true,false],<br />" +
         "&nbsp;\"viewReservationDate\": 예약 전시 날짜 (YYYY-MM-DDThh:mm:ssZ),<br />" +
         "&nbsp;\"productCategories\": 등록된 카테고리들 <br /> " +

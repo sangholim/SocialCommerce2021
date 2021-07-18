@@ -2,11 +2,8 @@ package com.toy.project.service;
 
 import com.toy.project.domain.ProductNoticeRel;
 import com.toy.project.repository.ProductNoticeRelRepository;
-import com.toy.project.service.dto.ProductNoticeDTO;
 import com.toy.project.service.dto.ProductNoticeRelDTO;
 import com.toy.project.service.mapper.ProductNoticeRelMapper;
-import java.util.Collection;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -61,21 +58,6 @@ public class ProductNoticeRelService {
             .saveAll(productNoticeRels)
             .stream()
             .map(productNoticeRelMapper::toDto)
-            .collect(Collectors.toSet());
-    }
-
-    public Set<ProductNoticeRelDTO> toProductNoticeRelDTOS(
-        Long productId,
-        Boolean activated,
-        Collection<ProductNoticeDTO> productNoticeDTOS
-    ) {
-        if (CollectionUtils.isEmpty(productNoticeDTOS)) {
-            return null;
-        }
-        return productNoticeDTOS
-            .stream()
-            .filter(Objects::nonNull)
-            .map(productNoticeDTO -> new ProductNoticeRelDTO(null, productId, productNoticeDTO.getId(), activated))
             .collect(Collectors.toSet());
     }
 

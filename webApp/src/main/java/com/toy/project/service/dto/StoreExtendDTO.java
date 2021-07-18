@@ -1,8 +1,6 @@
 package com.toy.project.service.dto;
 
-import com.toy.project.domain.ProductClazzRel;
 import com.toy.project.domain.ProductStoreRel;
-import com.toy.project.domain.Store;
 import java.time.Instant;
 import java.util.Collection;
 import java.util.List;
@@ -19,6 +17,8 @@ public class StoreExtendDTO extends StoreDTO {
     private Instant productCalculationDateFrom;
 
     private Instant productCalculationDateTo;
+
+    public StoreExtendDTO() {}
 
     public StoreExtendDTO(ProductStoreRel productStoreRel) {
         super(productStoreRel.getStore());
