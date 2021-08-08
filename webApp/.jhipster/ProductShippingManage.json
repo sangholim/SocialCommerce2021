@@ -1,0 +1,72 @@
+{
+  "name": "ProductShippingManage",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "useGroup",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "defaultShippingPrice",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "freeShippingPrice",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "jejuShippingPrice",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "difficultShippingPrice",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "refundShippingPrice",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "exchangeShippingPrice",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "activated",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lastModifiedBy",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "lastModifiedDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "relationships": [],
+  "entityTableName": "product_shipping_manage",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210725074344"
+}

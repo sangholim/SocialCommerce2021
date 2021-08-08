@@ -267,6 +267,8 @@ dependencies {
 
     testImplementation "org.testcontainers:testcontainers"
     //jhipster-needle-gradle-dependency - JHipster will add additional dependencies here
+    implementation group: 'commons-fileupload', name: 'commons-fileupload', version: '1.4'
+
 }
 
 if (project.hasProperty("gae")) {

@@ -1,0 +1,57 @@
+{
+  "name": "ProductMapping",
+  "fields": [
+    {
+      "fieldName": "type",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "activated",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lastModifiedBy",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "lastModifiedDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "productMappingManage",
+      "otherEntityRelationshipName": "productMapping",
+      "relationshipName": "productMappingManage"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "product",
+      "otherEntityRelationshipName": "productMapping",
+      "relationshipName": "product"
+    }
+  ],
+  "entityTableName": "product_mapping",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210725074340"
+}

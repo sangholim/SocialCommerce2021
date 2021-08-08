@@ -56,6 +56,10 @@ spring:
     cache-duration: PT1S # 1 second, see the ISO 8601 standard
   thymeleaf:
     cache: false
+  servlet:
+    multipart:
+      max-file-size: 512MB
+      max-request-size: 512MB
 
 server:
   port: 8080
@@ -109,4 +113,5 @@ jhipster:
 # https://www.jhipster.tech/common-application-properties/
 # ===================================================================
 
-# application:
+application:
+  base-dir: C:\data

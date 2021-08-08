@@ -1,0 +1,95 @@
+{
+  "name": "ProductStore",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "useCalculation",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "calculation",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "calculationUnit",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "useCalculationDate",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "calculationDateFrom",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "calculationDateTo",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "activated",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lastModifiedBy",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "lastModifiedDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "product",
+      "otherEntityRelationshipName": "productStore",
+      "relationshipName": "product"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "vendor",
+      "otherEntityRelationshipName": "productStore",
+      "relationshipName": "vendor"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "brand",
+      "otherEntityRelationshipName": "productStore",
+      "relationshipName": "brand"
+    }
+  ],
+  "entityTableName": "product_store",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210725074345"
+}

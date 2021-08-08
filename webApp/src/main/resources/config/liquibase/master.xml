@@ -16,7 +16,52 @@
 
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20210530065727_added_entity_Product.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210725074323_added_entity_Author.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210725074324_added_entity_Brand.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210725074325_added_entity_Clazz.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210725074326_added_entity_ClazzChapter.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210725074327_added_entity_ClazzChapterVideo.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210725074328_added_entity_ProductAddImage.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210725074329_added_entity_ProductAddOption.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210725074330_added_entity_ProductAnnounce.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210725074331_added_entity_ProductAnnounceTemplate.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210725074332_added_entity_ProductCategory.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210725074333_added_entity_ProductCategoryManage.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210725074334_added_entity_ProductClazzAuthor.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210725074335_added_entity_ProductDiscount.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210725074336_added_entity_ProductFaq.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210725074337_added_entity_ProductInputOption.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210725074338_added_entity_ProductLabel.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210725074339_added_entity_ProductLabelManage.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210725074340_added_entity_ProductMapping.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210725074341_added_entity_ProductMappingManage.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210725074342_added_entity_ProductNoticeManage.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210725074343_added_entity_ProductOption.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210725074344_added_entity_ProductShippingManage.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210725074345_added_entity_ProductStore.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210725074346_added_entity_ProductTemplate.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210725074347_added_entity_ProductTemplateManage.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210725074348_added_entity_Vendor.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20210530065727_added_entity_constraints_Product.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210725074325_added_entity_constraints_Clazz.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210725074326_added_entity_constraints_ClazzChapter.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210725074327_added_entity_constraints_ClazzChapterVideo.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210725074328_added_entity_constraints_ProductAddImage.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210725074329_added_entity_constraints_ProductAddOption.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210725074330_added_entity_constraints_ProductAnnounce.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210725074331_added_entity_constraints_ProductAnnounceTemplate.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210725074332_added_entity_constraints_ProductCategory.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210725074334_added_entity_constraints_ProductClazzAuthor.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210725074335_added_entity_constraints_ProductDiscount.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210725074336_added_entity_constraints_ProductFaq.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210725074337_added_entity_constraints_ProductInputOption.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210725074338_added_entity_constraints_ProductLabel.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210725074340_added_entity_constraints_ProductMapping.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210725074343_added_entity_constraints_ProductOption.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210725074345_added_entity_constraints_ProductStore.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210725074346_added_entity_constraints_ProductTemplate.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
+    <include file="config/liquibase/changelog/2021-08-06_changeLog.xml" relativeToChangelogFile="false"/>
 </databaseChangeLog>

@@ -1,0 +1,171 @@
+## 2021-08-08
+## 모델링 수정후, 상품 등록 테스트
+
+## 2021-08-01
+## 테이블 컬럼명 is_xxx -> use_xxx 로 변ㄴ경
+
+## 2021-07-31
+## 상품 등록시 체크 하는 flag들 계속 이용하는 이유
+## database 샘플 데이터생성
+     author, brand, clazz, clazz_chapter,
+     clazz_chapter_video, product_announce_template,
+     product_category_manage, product_label_manage,
+     product_mapping, product_mapping_manage,
+     product_template, product_template_manage, vendor
+## 다음 테스크로는 남은 테이블 케이스 생성, 상품 등록 해보기
+
+## 2021-07-27
+## 샘플 데이터 만들기
+## 모델링 재수정
+
+## 2021-07-25
+## 상품 모델링 재수정
+## dir> .jhipster 폴더 내 파일 비워줌
+## dir> jhipster jdl 2021-06-26-product.jdl --json-only
+## dir> jhipster entity Product --skip-client
+
+## 2021-07-24
+## 상품 옵션 역정규화 -> 필요없는 모델 정리
+   product_option_package_rel, product_option_color_rel, product_option_design_rel
+   option_package, option_color, option_design, product_option_rel
+## product_option 리팩토링
+## 작업한 모델링 삭제를 할때 수작업으로 해5
+야하는 단점이 있음
+## dir> .jhipster 폴더 내 파일 비워줌
+## dir> jhipster jdl 2021-06-26-product.jdl --json-only
+## dir> jhipster entity Product --skip-client
+## TypeError: Cannot read property 'changelogDate' of undefined 같은 오류가 나는 경우
+   .yo-rc.json 에서 삭제한 모델링 제거
+## 상품 - 상품 옵션 관계테이블이 반드시 필요한가?
+
+## 2021-07-18
+## 상품 DTO 변환 관련 로직 변경
+## 상품 등록시 관련 파일 업로드 추가
+## 상품 리소스 정책
+## resource-dir/product/UUID/매핑상품관련파일(들)
+## application.yml 에서 resource-dir 정책 관리 (main/test 둘다 동기화 필요하다.)
+## ** 응용서비스, 표현 영역
+## * 도메인 변경이 필요한 경우, 도메인 영역에 추가한다.
+## * 복합적인 도메인 처리를 위해 하나의 응용서비스로 관리하는 것 보다 클래스를 분리시키자.
+## * 도메인 영역내에 서비스 객체를 추가하지 않음
+## * 애그리거트간 복잡한 처리 작업이 필요한 경우 서비스 영역에서 처리할수 있게 구성
+
+
+## 2021-07-17
+## ProductExtendDTO field 변수중 엔티티 참조하는 부분 수정
+## DDD start 참조하여 엔티티 수정하기
+## ** ID를 이용한 애그리거트 참조
+## * ID를 이용한 애그리거트 참조의 필요성
+   - 엔티티 참조하기
+     참조시 다른 애그리거트 변경시 의존 결합도가 높아지는 어려움이 있음
+   - 엔티티 참조 관련 성능
+     LAZY > EAGER를 권장하며, 복합 쿼리는 JPQL, Criteria를 고려하여 전략을 짜야하는 어려움이 있음
+   - 확장 어려움
+     서비스 규모가 커짐에 따라 도메인 별로 DBMS 까지 분리되는 경우,JPA 단일 기술로는 한계가 있음
+## * ID를 이용한 애그리거트 참조의 필요성
+   - 애그리거트의 하위 엔티티 조회시 N+1 이슈
+     조회 전용 JPQL을 작성 (세타 조인)
+     개인적 의견으로 EntityGraph 이용해서 조회 메서드를 만드는것도 좋은 방법인거 같다.
+## ** 애그리거트 집합 연관 (M:1, M:N, 1:N)
+   -  애그리거트내 Set 엔티티 (1:N)이 존재하는 경우, 모든 데이터를 조회하지 않고, paging 처리가 필요하다.
+      반대로, M:1의 입장으로 데이터를 조회하는 경우도 존재
+   -  애그리거트내 M:N 관계 엔티티가 존재하는 경우, ElementCollection, CollectionTable을 이용해서
+      관계테이블에 매핑된 엔티티를 조회할 수 있다.
+
+## 2021-07-16
+## EndPoint CustomDTO -> domainDTO 매핑 전략 새우기
+## productExtendDTO: product 도메인 및 나머지 도메인들을 접근하는 객체
+## productExtendService : product 도메인 및 자식 도메인들을 접근하는 CRUD 시 사용하는 종합 서비스
+## productExtendService 에서 데이터 생성시 각 도메인들의 서비스에서 데이터 가공후, 데이터 추가.
+## 상품 등록 API
+    dataSet: json -> multivalues
+    content-type: multipart/form-data 로 수정
+## 상품 등록 API 수정 (json -> multivalueMap)
+
+
+## 2021-07-11
+## api용 테스트 작성
+## 상품 등록시 상품 관계테이블로 등록
+## 컬럼 타입 변경
+   * clazz, product_clazz_rel, store , product_store_rel -> calculation int(11) -> varchar(255)
+   * liquibase 컬럼 타입 변경
+   * entity, dto 부분 변경 (테스트 클래스 포함)
+
+## 2021-07-10
+## ClazzChapter, ClazzChapterVideo 데이터모델링 수정
+## entity - relationship_entity - entity 관계에서
+   relationship_entity 추가 수정시, 부모 엔티티는 수정, 추가하지 않게 하고
+   부모 외래키 참조키를 추가한다.
+
+## 2021-07-03
+## Clazz, ProductNotice, ProductView, ProductTemplate 데이터모델링 수정
+## ProductViewContent 추가
+## Product Model - entityGraph 도입 (N+1 이슈 해결)
+## dir> jhipster jdl 2021-06-26-product.jdl --json-only
+## dir> jhipster entity Product --skip-client
+
+## 2021-06-27
+## 관리자 UI 보고 상품 설계
+## 상품 옵션, 옵션 디자인 데이터 모델링
+## data-modeling file: 2021-06-26-product.jdl
+## dir> jhipster jdl 2021-06-26-product.jdl --json-only
+## dir> jhipster entity Product --skip-client
+## 기본 데이터 셋 맞추기
+
+## 2021-06-26
+## 관리자 UI 보고 상품 설계
+## data-modeling file: 2021-06-26-product.jdl
+## dir> jhipster jdl 2021-06-26-product.jdl --json-only
+## dir> jhipster entity Product --skip-client
+
+
+## 2021-06-20
+## 공유 스키마 자료, web app entity 동기화
+## 상품 부분 독립 엔티티 CRUD API 작업 (category, provider, p_stock, bundle_video)
+## 상품 스키마 정의서 변경 - jdl 참조
+## 20210530065727_added_entity_Product.xml -> 일부 컬럼 longtext로 변경
+## entity class 내에 set 필드 변수 -> add remove 메서드 제거
+## unmapped property 에러가 나는 경우 @mapper 에 'unmappedTargetPolicy = ReportingPolicy.IGNORE' 옵션 추가,
+   No property named exists in source parameter 인경우, source= 'getter, setter 변수명으로 확인'
+
+## 2021-06-06
+## M:N 데이터 불러오거나 할떄 성능 이슈 고려해서 변경할 필요 있음 (fetch 전략)
+## 기존 데이터 제거후, fake-data로 변경
+## API 기능 정의서 만든담에 API를 만들면서, JPA customizing 수행
+
+## 기획서, 디자인 반영하여 db 스키마 변경, jdl 적용 파일명: prodct-2021-06-06.jdl
+## table에서 mapping된 외래키가 존재하는 테이블을 entity mapping 하는 경우, 컬럼 정의를 굳이 명시할 필요 없음
+## jpa entity 설정 json 생성
+ProjectDir> jhipster jdl product-2021-06-06.jdl --json-only
+
+ProjectDir> jhipster entity BundleVideo --skip-client
+ProjectDir> jhipster entity PCategory --skip-client
+ProjectDir> jhipster entity POptionStock --skip-client
+ProjectDir> jhipster entity Product --skip-client
+ProjectDir> jhipster entity ProductCategory --skip-client
+ProjectDir> jhipster entity ProductRecommend --skip-client
+ProjectDir> jhipster entity ProductVideo --skip-client
+ProjectDir> jhipster entity Provider --skip-client
+ProjectDir> jhipster entity ProviderVideo --skip-client
+ProjectDir> jhipster entity PStock --skip-client
+ProjectDir> jhipster entity PVideo --skip-client
+
+## jhipster entity xxx 라고 실행하면, 테이블 이름에 매핑되는줄 알았는데..
+## .jhipster 에 정의된 .json 파일들을 통하여 JPA entity 생성
+
+## 2021-05-30
+## product.json 파일 생성
+ProjectDir> jhipster jdl product.jh  --json-only
+## product 'entity, dto, service, resource, filter 반영' (.json)
+   jhipster entity client쪽 소스 반영하지 않기
+ProjectDir> jhipster entity product --skip-client
+
+## pCategory.json 파일 생성
+ProjectDir> jhipster jdl pCategory.jh --json-only
+## pCategory 'entity, dto, service, resource, filter 반영' (.json)
+   jhipster entity client쪽 소스 반영하지 않기
+ProjectDir> jhipster entity PCategory --skip-client
+
+
+
+

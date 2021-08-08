@@ -1,0 +1,486 @@
+entity Product {
+    name String,
+    type String maxlength(50),
+    status String maxlength(50),
+    code String,
+    useClassOption Boolean,
+    price Integer,
+    useDiscountInstant Boolean,
+    useInstallment Boolean,
+    installmentMonth Integer,
+    useSellDate Boolean,
+    sellDateFrom Instant,
+    sellDateTo Instant,
+    quantity Integer,
+    useProductOption Boolean,
+    useProductInputOption Boolean,
+    useProductAddOption Boolean,
+    minPurchaseAmount Integer,
+    maxPurchaseAmountPerCount Integer,
+    maxPurchaseAmountPerOne Integer,
+    mainImageFileUrl String,
+    mainVideoFileUrl String,
+    useProductAnnounce Boolean,
+    useProductFaq Boolean,
+    descriptionFileUrl String,
+    shippingReleaseType String,
+    shippingStandardStartTime String,
+    etcShippingContent String maxlength(300),
+    separateShippingPriceType String,
+    bundleShippingType String,
+    defaultShippingPrice Integer,
+    freeShippingPrice Integer,
+    jejuShippingPrice Integer,
+    difficultShippingPrice Integer,
+    refundShippingPrice Integer,
+    exchangeShippingPrice Integer,
+    exchangeShippingFileType String,
+    exchangeShippingFileUrl String,
+    useView Boolean,
+    useViewReservation Boolean,
+    viewReservationDate Instant,
+    useProductNotice	Boolean,
+    useProductIllegal	Boolean,
+    useProductRecommend	Boolean,
+    useProductMapping	Boolean,
+    activated Boolean,
+    createdBy	String maxlength(50),
+    createdDate	Instant,
+    lastModifiedBy	String maxlength(50),
+    lastModifiedDate	Instant
+}
+
+entity ProductDiscount {
+    // productId Long,
+    discountDevice	String maxlength(50),
+    discountPrice Long,
+    discountPriceUnit String,
+    useDiscountDate Boolean,
+    discountDateFrom	Instant,
+    discountDateTo	Instant,
+    createdBy	String maxlength(50),
+    reducePrice String,
+    createdBy	String maxlength(50),
+    createdDate	Instant,
+    lastModifiedBy	String maxlength(50),
+    lastModifiedDate	Instant
+}
+entity ProductAddImage {
+    imageUrl String,
+    activated	Boolean,
+    createdBy	String maxlength(50),
+    createdDate	Instant,
+    lastModifiedBy	String maxlength(50),
+    lastModifiedDate	Instant
+}
+
+entity ProductFaq {
+    // productId Long,
+    sequence Integer,
+    question String maxlength(1000),
+    answer String maxlength(1000),
+    answerDate Instant,
+    activated Boolean,
+    createdBy	String maxlength(50),
+    createdDate	Instant,
+    lastModifiedBy	String maxlength(50),
+    lastModifiedDate	Instant
+}
+
+entity ProductLabel {
+  // productId Long,
+  // ProductLabelId Long,
+  type String,
+  useDisplayDate Boolean,
+  displayDateFrom	Instant,
+  displayDateTo	Instant,
+  activated Boolean,
+  createdBy	String maxlength(50),
+  createdDate	Instant,
+  lastModifiedBy	String maxlength(50),
+  lastModifiedDate	Instant
+}
+
+entity ProductLabelManage {
+  name String,
+  color String,
+  content TextBlob,
+  type String,
+  activated Boolean,
+  createdBy	String maxlength(50),
+  createdDate	Instant,
+  lastModifiedBy	String maxlength(50),
+  lastModifiedDate	Instant
+}
+
+entity ProductOption {
+  name String,
+  packageName String,
+  designName String,
+  colorCode	String,
+  colorName	String,
+  usePackageDescription	Boolean,
+  packageDescription	TextBlob,
+  displayRecommendPackage	Boolean,
+  packageThumbnailUrl	String,
+  price	String,
+  quantity Long,
+  status String maxlength(50),
+  optionCode String,
+  activated Boolean,
+  createdBy String maxlength(50),
+  createdDate Instant,
+  lastModifiedBy String maxlength(50),
+  lastModifiedDate Instant
+}
+
+entity ProductAddOption {
+  // productId
+  name String,
+  value String,
+  price	String,
+  quantity Long,
+  status String maxlength(50),
+  optionCode String,
+  activated Boolean,
+  createdBy String maxlength(50),
+  createdDate Instant,
+  lastModifiedBy String maxlength(50),
+  lastModifiedDate Instant
+}
+
+entity ProductInputOption {
+  // productId
+  name String,
+  activated Boolean,
+  createdBy String maxlength(50),
+  createdDate Instant,
+  lastModifiedBy String maxlength(50),
+  lastModifiedDate Instant
+}
+
+entity ProductTemplate {
+  // productId Long,
+  // ProductTemplateId Long,
+  type String,
+  activated Boolean,
+  createdBy	String maxlength(50),
+  createdDate	Instant,
+  lastModifiedBy	String maxlength(50),
+  lastModifiedDate	Instant
+}
+
+entity ProductTemplateManage {
+  name String,
+  type String,
+  illegalUsageType	String maxlength(50),
+  illegalUsageUrl	String,
+  exchangeType	String maxlength(50),
+  exchangeUrl	String,
+  shippingReleaseType	String,
+  separateShippingPriceType	String maxlength(50),
+  bundleShippingType	String maxlength(50),
+  defaultShippingPrice Long,
+  activated Boolean,
+  createdBy	String maxlength(50),
+  createdDate	Instant,
+  lastModifiedBy	String maxlength(50),
+  lastModifiedDate	Instant
+}
+
+entity ProductAnnounceTemplate {
+  name String,
+  content TextBlob,
+  useDetail Boolean,
+  activated Boolean,
+  createdBy	String maxlength(50),
+  createdDate	Instant,
+  lastModifiedBy	String maxlength(50),
+  lastModifiedDate	Instant
+  // ProductTemplateManageId
+}
+
+entity ProductNoticeManage {
+  name String,
+  status	String maxlength(50),
+  type	String maxlength(50),
+  contentFileUrl  String,
+  priorityDisplay	Boolean,
+  allProductDisplay	Boolean,
+  target String,
+  enableDisplayDate	Boolean,
+  displayDateFrom	Instant,
+  displayDateTo	Instant,
+  activated Boolean,
+  createdBy	String maxlength(50),
+  createdDate	Instant,
+  lastModifiedBy	String maxlength(50),
+  lastModifiedDate	Instant
+}
+
+
+entity ProductMapping {
+    //product_id
+    //product_mapping_manage_id
+    type String,
+    activated Boolean,
+    createdBy	String maxlength(50),
+    createdDate	Instant,
+    lastModifiedBy	String maxlength(50),
+    lastModifiedDate	Instant
+}
+
+entity ProductMappingManage {
+  name String,
+  type String,
+  count	Integer,
+  status    String maxlength(50),
+  displayDateFrom	Instant,
+  displayDateTo	Instant,
+  activated Boolean,
+  createdBy	String maxlength(50),
+  createdDate	Instant,
+  lastModifiedBy	String maxlength(50),
+  lastModifiedDate	Instant
+}
+
+entity ProductAnnounce {
+  name String,
+  content TextBlob,
+  useDetail Boolean,
+  activated Boolean,
+  createdBy	String maxlength(50),
+  createdDate	Instant,
+  lastModifiedBy	String maxlength(50),
+  lastModifiedDate	Instant
+}
+
+entity ProductShippingManage {
+  name String,
+  useGroup Boolean,
+  defaultShippingPrice Integer,
+  freeShippingPrice Integer,
+  jejuShippingPrice Integer,
+  difficultShippingPrice Integer,
+  refundShippingPrice Integer,
+  exchangeShippingPrice Integer,
+  activated Boolean,
+  createdBy	String maxlength(50),
+  createdDate	Instant,
+  lastModifiedBy	String maxlength(50),
+  lastModifiedDate	Instant
+}
+
+entity ProductCategoryManage {
+  name String,
+  type	String maxlength(50),
+  main String,
+  sub String,
+  description  TextBlob,
+  sequence Integer,
+  activated Boolean,
+  createdBy	String maxlength(50),
+  createdDate	Instant,
+  lastModifiedBy	String maxlength(50),
+  lastModifiedDate	Instant
+}
+
+entity ProductCategory {
+  // productId Long,
+  // ProductCategoryId Long,
+  type	String maxlength(50),
+  activated Boolean,
+  createdBy	String maxlength(50),
+  createdDate	Instant,
+  lastModifiedBy	String maxlength(50),
+  lastModifiedDate	Instant
+}
+
+entity Clazz {
+  name String,
+  status String maxlength(50),
+  type String,
+  mainImageFileUrl	String,
+  level String,
+  enableLecture Boolean,
+  freeLecture	Boolean,
+  priceLecture	Long,
+  priceUnitLecture	String,
+  lectureStartDateFrom	Instant,
+  lectureInterval	Integer,
+  calculation Integer,
+  calculationUnit String maxlength(50),
+  useView	Boolean,
+  activated Boolean,
+  createdBy	String maxlength(50),
+  createdDate	Instant,
+  lastModifiedBy	String maxlength(50),
+  lastModifiedDate	Instant
+  // author_id
+}
+
+entity Author {
+    name String,
+    calculation Integer,
+    calculationUnit String maxlength(50),
+    calculationDateFrom	Instant,
+    calculationDateTo	Instant,
+    activated Boolean,
+    createdBy	String maxlength(50),
+    createdDate	Instant,
+    lastModifiedBy	String maxlength(50),
+    lastModifiedDate	Instant
+}
+
+entity ClazzChapter {
+  name String,
+  description TextBlob,
+  fileUrl	String,
+  sequence Integer,
+  activated Boolean,
+  createdBy	String maxlength(50),
+  createdDate	Instant,
+  lastModifiedBy	String maxlength(50),
+  lastModifiedDate	Instant
+}
+
+entity ClazzChapterVideo {
+  name String,
+  thumbFileUrl	String,
+  originalLinkUrl	String,
+  time	String,
+  sequence Integer,
+  activated Boolean,
+  createdBy	String maxlength(50),
+  createdDate	Instant,
+  lastModifiedBy	String maxlength(50),
+  lastModifiedDate	Instant
+}
+
+entity ProductClazzAuthor {
+    // ProductId Long,
+    // ClazzId Long,
+    // AuthorId Long,
+    classType	String maxlength(50),
+    useCalculation Boolean,
+    calculation Integer,
+    calculationUnit String maxlength(50),
+    useCalculationDate Boolean,
+    calculationDateFrom	Instant,
+    calculationDateTo	Instant,
+    useDiscount Boolean,
+    discountPrice Long,
+    discountPriceUnit String,
+    useDiscountDate Boolean,
+    discountDateFrom	Instant,
+    discountDateTo	Instant,
+    activated Boolean,
+    createdBy	String maxlength(50),
+    createdDate	Instant,
+    lastModifiedBy	String maxlength(50),
+    lastModifiedDate	Instant
+}
+
+entity Brand {
+  name String,
+  activated Boolean,
+  createdBy	String maxlength(50),
+  createdDate	Instant,
+  lastModifiedBy	String maxlength(50),
+  lastModifiedDate	Instant
+}
+
+entity Vendor {
+  name String,
+  calculation Integer,
+  calculationUnit String maxlength(50),
+  calculationDateFrom	Instant,
+  calculationDateTo	Instant,
+  activated Boolean,
+  createdBy	String maxlength(50),
+  createdDate	Instant,
+  lastModifiedBy	String maxlength(50),
+  lastModifiedDate	Instant
+}
+
+entity ProductStore {
+    // vendor_id	int(11)
+    // brand_id	int(11)
+    name String,
+    type String maxlength(50),
+    useCalculation Boolean,
+    calculation Integer,
+    calculationUnit String maxlength(50),
+    useCalculationDate Boolean,
+    calculationDateFrom	Instant,
+    calculationDateTo	Instant,
+    activated Boolean,
+    createdBy	String maxlength(50),
+    createdDate	Instant,
+    lastModifiedBy	String maxlength(50),
+    lastModifiedDate	Instant
+}
+
+// defining multiple OneToMany relationships with comments
+relationship OneToMany {
+    // 상품 - 상품 할인 (1:N)
+    Product{productDiscount} to ProductDiscount
+    // 상품 - 상품 공지 관리(N:1)
+    ProductNoticeManage{product} to Product
+    // 추천/연관 상품 관리 -  추천/연관 상품 (1:N)
+    ProductMappingManage{productMapping} to ProductMapping
+    // 상품 -  추천/연관 상품 (1:N)
+    Product{productMapping} to ProductMapping
+    // 상품 -  상품 옵션 (1:N)
+    Product{productOption} to ProductOption
+    // 상품 -  상품 추가 옵션 (1:N)
+    Product{productAddOption} to ProductAddOption
+    // 상품 -  상품 직접 입력형 옵션 (1:N)
+    Product{productInputOption} to ProductInputOption
+    // 상품 -  상품 자주 묻는 질문 (1:N)
+    Product{productFaq} to ProductFaq
+    // 상품 -  상품 고시 (1:N)
+    Product{productAnnounce} to ProductAnnounce
+    // 상품 -  상품 추가 이미지 (1:N)
+    Product{productAddImage} to ProductAddImage
+    // 상품 템플릿 - 상품 템플릿 공시 (1:N)
+    ProductTemplateManage{productAnnounceTemplate} to ProductAnnounceTemplate
+    // 상품 -  상품 라벨 관리 (관계 매핑)
+    Product{productLabel} to ProductLabel
+    ProductLabelManage{productLabel} to ProductLabel
+    // 상품 -  상품 템플릿 관리 (관계 매핑)
+    Product{productTemplate} to ProductTemplate
+    ProductTemplateManage{productCategory} to ProductTemplate
+    // 상품 - 카테고리 (관계 매핑)
+    Product{productCategory} to ProductCategory
+    ProductCategoryManage{productCategory} to ProductCategory
+
+    // 상품 - 상품+클래스+작가 (N:1)
+    ProductClazzAuthor{product} to Product
+    // 상품+클래스+작가 - 클래스 (N:1)
+    Clazz{productClazzAuthor} to ProductClazzAuthor
+    // 상품+클래스+작가 - 작가 (N:1)
+    Author{productClazzAuthor} to ProductClazzAuthor
+    // 클래스 - 작가 (N:1)
+    Author{clazz} to Clazz
+    // 클래스 - 클래스 챕터 (1:N)
+    Clazz{clazzChapter} to ClazzChapter
+    // 클래스 챕터 - 클래스 챕터 영상 (1:N)
+    ClazzChapter{clazzChapterVideo} to ClazzChapterVideo
+
+    // 상품 - 상품+스토어 (N:1)
+    ProductStore{product} to Product
+    // 상품+스토어 - 판매자(vendor) (N:1)
+    Vendor{productStore} to ProductStore
+    // 상품+스토어 - 브랜드(brand) (N:1)
+    Brand{productStore} to ProductStore
+
+
+}
+
+paginate * with pagination
+dto * with mapstruct
+
+service * with serviceClass
+// 모든 기능 만들어진후 수행
+// filter *

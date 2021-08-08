@@ -1,0 +1,91 @@
+{
+  "name": "ProductNoticeManage",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "contentFileUrl",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "priorityDisplay",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "allProductDisplay",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "target",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "enableDisplayDate",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "displayDateFrom",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "displayDateTo",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "activated",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lastModifiedBy",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "lastModifiedDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "product",
+      "otherEntityRelationshipName": "productNoticeManage",
+      "relationshipName": "product"
+    }
+  ],
+  "entityTableName": "product_notice_manage",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210725074342"
+}

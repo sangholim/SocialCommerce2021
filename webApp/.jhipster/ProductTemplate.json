@@ -1,0 +1,57 @@
+{
+  "name": "ProductTemplate",
+  "fields": [
+    {
+      "fieldName": "type",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "activated",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lastModifiedBy",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "lastModifiedDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "product",
+      "otherEntityRelationshipName": "productTemplate",
+      "relationshipName": "product"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "productTemplateManage",
+      "otherEntityRelationshipName": "productCategory",
+      "relationshipName": "productTemplateManage"
+    }
+  ],
+  "entityTableName": "product_template",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210725074346"
+}

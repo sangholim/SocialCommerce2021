@@ -1,0 +1,73 @@
+{
+  "name": "ProductDiscount",
+  "fields": [
+    {
+      "fieldName": "discountDevice",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "discountPrice",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "discountPriceUnit",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "useDiscountDate",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "discountDateFrom",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "discountDateTo",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "reducePrice",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lastModifiedBy",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "lastModifiedDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "product",
+      "otherEntityRelationshipName": "productDiscount",
+      "relationshipName": "product"
+    }
+  ],
+  "entityTableName": "product_discount",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210725074335"
+}

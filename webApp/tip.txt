@@ -1,6 +1,0 @@
-## 2021-05-30
-## jhipster entity client쪽 소스 반영하지 않기
-ProjectDir> jhipster entity product --skip-client
-## jhipster product jdl 파일 생성
-ProjectDir> jhipster jdl product.jh
-

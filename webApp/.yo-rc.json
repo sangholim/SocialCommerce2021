@@ -42,6 +42,35 @@
     "clientPackageManager": "npm",
     "clientThemeVariant": "",
     "languages": ["ko", "en"],
-    "entities": ["Product"]
+    "entities": [
+      "Product",
+      "Author",
+      "Brand",
+      "Clazz",
+      "ClazzChapter",
+      "ClazzChapterVideo",
+      "ProductAddImage",
+      "ProductAddOption",
+      "ProductAnnounce",
+      "ProductAnnounceTemplate",
+      "ProductCategory",
+      "ProductCategoryManage",
+      "ProductClazzAuthor",
+      "ProductDiscount",
+      "ProductFaq",
+      "ProductInputOption",
+      "ProductLabel",
+      "ProductLabelManage",
+      "ProductMapping",
+      "ProductMappingManage",
+      "ProductNoticeManage",
+      "ProductOption",
+      "ProductShippingManage",
+      "ProductStore",
+      "ProductTemplate",
+      "ProductTemplateManage",
+      "Vendor"
+    ],
+    "lastLiquibaseTimestamp": 1627199028000
   }
 }

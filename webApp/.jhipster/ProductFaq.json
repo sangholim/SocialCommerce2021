@@ -1,0 +1,67 @@
+{
+  "name": "ProductFaq",
+  "fields": [
+    {
+      "fieldName": "sequence",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "question",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "1000"
+    },
+    {
+      "fieldName": "answer",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "1000"
+    },
+    {
+      "fieldName": "answerDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "activated",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lastModifiedBy",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "lastModifiedDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "product",
+      "otherEntityRelationshipName": "productFaq",
+      "relationshipName": "product"
+    }
+  ],
+  "entityTableName": "product_faq",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210725074336"
+}

@@ -1,0 +1,119 @@
+{
+  "name": "Clazz",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "mainImageFileUrl",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "level",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "enableLecture",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "freeLecture",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "priceLecture",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "priceUnitLecture",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lectureStartDateFrom",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lectureInterval",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "calculation",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "calculationUnit",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "useView",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "activated",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lastModifiedBy",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "lastModifiedDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "productClazzAuthor",
+      "otherEntityRelationshipName": "clazz",
+      "relationshipName": "productClazzAuthor"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "clazzChapter",
+      "otherEntityRelationshipName": "clazz",
+      "relationshipName": "clazzChapter"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "author",
+      "otherEntityRelationshipName": "clazz",
+      "relationshipName": "author"
+    }
+  ],
+  "entityTableName": "clazz",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210725074325"
+}

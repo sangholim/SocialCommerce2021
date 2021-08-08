@@ -34,7 +34,7 @@ spring:
     database-platform: tech.jhipster.domain.util.FixedH2Dialect
     open-in-view: false
     hibernate:
-      ddl-auto: none
+      ddl-auto: create-drop
       naming:
         physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
         implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
@@ -43,7 +43,7 @@ spring:
       hibernate.connection.provider_disables_autocommit: true
       hibernate.cache.use_second_level_cache: false
       hibernate.cache.use_query_cache: false
-      hibernate.generate_statistics: false
+      hibernacte.generate_statistics: false
       hibernate.hbm2ddl.auto: validate
       hibernate.jdbc.time_zone: UTC
       hibernate.query.fail_on_pagination_over_collection_fetch: true
@@ -68,6 +68,10 @@ spring:
         size: 1
   thymeleaf:
     mode: HTML
+  servlet:
+    multipart:
+      max-file-size: 512MB
+      max-request-size: 512MB
 
 server:
   port: 10344
@@ -109,4 +113,5 @@ jhipster:
 # https://www.jhipster.tech/common-application-properties/
 # ===================================================================
 
-# application:
+application:
+  base-dir: C:\data

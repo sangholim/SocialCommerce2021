@@ -6,101 +6,294 @@
       "fieldType": "String"
     },
     {
-      "fieldName": "difficulty",
-      "fieldType": "DifficultType",
-      "fieldValues": "VERYEASY,EASY,NORMAL,HARD,VERYHARD"
+      "fieldName": "type",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
     },
     {
-      "fieldName": "thumbnail",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "owner",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "regdate",
-      "fieldType": "Instant"
-    },
-    {
-      "fieldName": "priceRegular",
-      "fieldType": "Integer"
-    },
-    {
-      "fieldName": "isUseDiscount",
-      "fieldType": "Integer"
-    },
-    {
-      "fieldName": "discountUnit",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "discountValue",
-      "fieldType": "Integer"
-    },
-    {
-      "fieldName": "discountStartdate",
-      "fieldType": "Instant"
-    },
-    {
-      "fieldName": "discountInterval",
-      "fieldType": "Integer"
-    },
-    {
-      "fieldName": "video",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "startdate",
-      "fieldType": "Instant"
-    },
-    {
-      "fieldName": "prepareResource",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "introduceResource",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "shippingResource",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "refundResource",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "changeResource",
-      "fieldType": "String"
+      "fieldName": "status",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
     },
     {
       "fieldName": "code",
       "fieldType": "String"
     },
     {
+      "fieldName": "useClassOption",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "price",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "useDiscountInstant",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "useInstallment",
+      "fieldType": "Boolean"
+    },
+    {
       "fieldName": "installmentMonth",
       "fieldType": "Integer"
     },
     {
-      "fieldName": "type",
-      "fieldType": "ProductType",
-      "fieldValues": "CLASS,CLASS_VIDEO,DIYKIT,TOOL"
+      "fieldName": "useSellDate",
+      "fieldType": "Boolean"
     },
     {
-      "fieldName": "number",
+      "fieldName": "sellDateFrom",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "sellDateTo",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "quantity",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "useProductOption",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "useProductInputOption",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "useProductAddOption",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "minPurchaseAmount",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "maxPurchaseAmountPerCount",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "maxPurchaseAmountPerOne",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "mainImageFileUrl",
       "fieldType": "String"
     },
     {
-      "fieldName": "popularCount",
+      "fieldName": "mainVideoFileUrl",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "useProductAnnounce",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "useProductFaq",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "descriptionFileUrl",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "shippingReleaseType",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "shippingStandardStartTime",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "etcShippingContent",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "300"
+    },
+    {
+      "fieldName": "separateShippingPriceType",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "bundleShippingType",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "defaultShippingPrice",
       "fieldType": "Integer"
     },
     {
-      "fieldName": "reviewCount",
+      "fieldName": "freeShippingPrice",
       "fieldType": "Integer"
+    },
+    {
+      "fieldName": "jejuShippingPrice",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "difficultShippingPrice",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "refundShippingPrice",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "exchangeShippingPrice",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "exchangeShippingFileType",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "exchangeShippingFileUrl",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "useView",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "useViewReservation",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "viewReservationDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "useProductNotice",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "useProductIllegal",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "useProductRecommend",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "useProductMapping",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "activated",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lastModifiedBy",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "lastModifiedDate",
+      "fieldType": "Instant"
     }
   ],
-  "relationships": [],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "productDiscount",
+      "otherEntityRelationshipName": "product",
+      "relationshipName": "productDiscount"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "productMapping",
+      "otherEntityRelationshipName": "product",
+      "relationshipName": "productMapping"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "productOption",
+      "otherEntityRelationshipName": "product",
+      "relationshipName": "productOption"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "productAddOption",
+      "otherEntityRelationshipName": "product",
+      "relationshipName": "productAddOption"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "productInputOption",
+      "otherEntityRelationshipName": "product",
+      "relationshipName": "productInputOption"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "productFaq",
+      "otherEntityRelationshipName": "product",
+      "relationshipName": "productFaq"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "productAnnounce",
+      "otherEntityRelationshipName": "product",
+      "relationshipName": "productAnnounce"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "productAddImage",
+      "otherEntityRelationshipName": "product",
+      "relationshipName": "productAddImage"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "productLabel",
+      "otherEntityRelationshipName": "product",
+      "relationshipName": "productLabel"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "productTemplate",
+      "otherEntityRelationshipName": "product",
+      "relationshipName": "productTemplate"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "productCategory",
+      "otherEntityRelationshipName": "product",
+      "relationshipName": "productCategory"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "productNoticeManage",
+      "otherEntityRelationshipName": "product",
+      "relationshipName": "productNoticeManage"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "productClazzAuthor",
+      "otherEntityRelationshipName": "product",
+      "relationshipName": "productClazzAuthor"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "productStore",
+      "otherEntityRelationshipName": "product",
+      "relationshipName": "productStore"
+    }
+  ],
   "entityTableName": "product",
   "dto": "mapstruct",
   "pagination": "pagination",

@@ -1,0 +1,101 @@
+{
+  "name": "ProductTemplateManage",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "illegalUsageType",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "illegalUsageUrl",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "exchangeType",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "exchangeUrl",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "shippingReleaseType",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "separateShippingPriceType",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "bundleShippingType",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "defaultShippingPrice",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "activated",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lastModifiedBy",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "lastModifiedDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "productAnnounceTemplate",
+      "otherEntityRelationshipName": "productTemplateManage",
+      "relationshipName": "productAnnounceTemplate"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "productTemplate",
+      "otherEntityRelationshipName": "productTemplateManage",
+      "relationshipName": "productCategory"
+    }
+  ],
+  "entityTableName": "product_template_manage",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210725074347"
+}
