@@ -14,4 +14,13 @@ public interface VendorMapper extends EntityMapper<VendorDTO, Vendor> {
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "id", source = "id")
     VendorDTO toDtoId(Vendor vendor);
+
+    default Vendor fromId(final Long id) {
+        if (id == null) {
+            return null;
+        }
+        final Vendor vendor = new Vendor();
+        vendor.setId(id);
+        return vendor;
+    }
 }

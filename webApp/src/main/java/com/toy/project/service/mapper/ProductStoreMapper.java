@@ -13,4 +13,17 @@ public interface ProductStoreMapper extends EntityMapper<ProductStoreDTO, Produc
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "id", source = "id")
     ProductStoreDTO toDtoId(ProductStore productStore);
+
+    @Mapping(target = "vendor", source = "vendorId")
+    @Mapping(target = "brand", source = "brandId")
+    ProductStore toEntity(ProductStoreDTO productStoreDTO);
+
+    default ProductStore fromId(final Long id) {
+        if (id == null) {
+            return null;
+        }
+        final ProductStore productStore = new ProductStore();
+        productStore.setId(id);
+        return productStore;
+    }
 }

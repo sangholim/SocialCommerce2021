@@ -27,10 +27,6 @@ public class Brand extends AbstractAuditingEntity implements Serializable {
     @Column(name = "activated")
     private Boolean activated;
 
-    @OneToMany(mappedBy = "brand")
-    @JsonIgnoreProperties(value = { "products", "vendor", "brand" }, allowSetters = true)
-    private Set<ProductStore> productStores = new HashSet<>();
-
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
@@ -54,25 +50,6 @@ public class Brand extends AbstractAuditingEntity implements Serializable {
 
     public void setActivated(Boolean activated) {
         this.activated = activated;
-    }
-
-    public Set<ProductStore> getProductStores() {
-        return this.productStores;
-    }
-
-    public Brand productStores(Set<ProductStore> productStores) {
-        this.setProductStores(productStores);
-        return this;
-    }
-
-    public void setProductStores(Set<ProductStore> productStores) {
-        if (this.productStores != null) {
-            this.productStores.forEach(i -> i.setBrand(null));
-        }
-        if (productStores != null) {
-            productStores.forEach(i -> i.setBrand(this));
-        }
-        this.productStores = productStores;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

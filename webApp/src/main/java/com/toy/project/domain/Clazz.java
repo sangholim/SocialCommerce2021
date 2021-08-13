@@ -73,10 +73,6 @@ public class Clazz extends AbstractAuditingEntity implements Serializable {
     private Boolean activated;
 
     @OneToMany(mappedBy = "clazz")
-    @JsonIgnoreProperties(value = { "products", "clazz", "author" }, allowSetters = true)
-    private Set<ProductClazzAuthor> productClazzAuthors = new HashSet<>();
-
-    @OneToMany(mappedBy = "clazz")
     @JsonIgnoreProperties(value = { "clazzChapterVideos", "clazz" }, allowSetters = true)
     private Set<ClazzChapter> clazzChapters = new HashSet<>();
 
@@ -212,20 +208,6 @@ public class Clazz extends AbstractAuditingEntity implements Serializable {
 
     public void setActivated(Boolean activated) {
         this.activated = activated;
-    }
-
-    public Set<ProductClazzAuthor> getProductClazzAuthors() {
-        return this.productClazzAuthors;
-    }
-
-    public void setProductClazzAuthors(Set<ProductClazzAuthor> productClazzAuthors) {
-        if (this.productClazzAuthors != null) {
-            this.productClazzAuthors.forEach(i -> i.setClazz(null));
-        }
-        if (productClazzAuthors != null) {
-            productClazzAuthors.forEach(i -> i.setClazz(this));
-        }
-        this.productClazzAuthors = productClazzAuthors;
     }
 
     public Set<ClazzChapter> getClazzChapters() {

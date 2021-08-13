@@ -13,4 +13,16 @@ public interface ClazzMapper extends EntityMapper<ClazzDTO, Clazz> {
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "id", source = "id")
     ClazzDTO toDtoId(Clazz clazz);
+
+    @Mapping(target = "author", source = "authorId")
+    Clazz toEntity(ClazzDTO clazzDTO);
+
+    default Clazz fromId(final Long id) {
+        if (id == null) {
+            return null;
+        }
+        final Clazz clazz = new Clazz();
+        clazz.setId(id);
+        return clazz;
+    }
 }

@@ -1,8 +1,9 @@
 package com.toy.project.service.dto;
 
+import com.toy.project.domain.ClazzChapter;
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.Objects;
+import java.util.*;
 import javax.validation.constraints.*;
 
 /**
@@ -53,6 +54,8 @@ public class ClazzDTO implements Serializable {
     private String lastModifiedBy;
 
     private Instant lastModifiedDate;
+
+    private List<ClazzChapter> clazzChapters = new ArrayList<>();
 
     private Long authorId;
 
@@ -222,6 +225,14 @@ public class ClazzDTO implements Serializable {
 
     public void setAuthorId(Long authorId) {
         this.authorId = authorId;
+    }
+
+    public List<ClazzChapter> getClazzChapters() {
+        return clazzChapters;
+    }
+
+    public void setClazzChapters(List<ClazzChapter> clazzChapters) {
+        this.clazzChapters = clazzChapters;
     }
 
     @Override

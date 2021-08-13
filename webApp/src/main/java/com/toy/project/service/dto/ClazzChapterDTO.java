@@ -1,8 +1,9 @@
 package com.toy.project.service.dto;
 
+import com.toy.project.domain.ClazzChapterVideo;
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.Objects;
+import java.util.*;
 import javax.persistence.Lob;
 import javax.validation.constraints.*;
 
@@ -33,6 +34,8 @@ public class ClazzChapterDTO implements Serializable {
     private String lastModifiedBy;
 
     private Instant lastModifiedDate;
+
+    private List<ClazzChapterVideo> clazzChapterVideos = new ArrayList<>();
 
     private Long clazzId;
 
@@ -124,6 +127,14 @@ public class ClazzChapterDTO implements Serializable {
         this.clazzId = clazzId;
     }
 
+    public List<ClazzChapterVideo> getClazzChapterVideos() {
+        return clazzChapterVideos;
+    }
+
+    public void setClazzChapterVideos(List<ClazzChapterVideo> clazzChapterVideos) {
+        this.clazzChapterVideos = clazzChapterVideos;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -145,21 +156,40 @@ public class ClazzChapterDTO implements Serializable {
         return Objects.hash(this.id);
     }
 
-    // prettier-ignore
     @Override
     public String toString() {
-        return "ClazzChapterDTO{" +
-            "id=" + getId() +
-            ", name='" + getName() + "'" +
-            ", description='" + getDescription() + "'" +
-            ", fileUrl='" + getFileUrl() + "'" +
-            ", sequence=" + getSequence() +
-            ", activated='" + getActivated() + "'" +
-            ", createdBy='" + getCreatedBy() + "'" +
-            ", createdDate='" + getCreatedDate() + "'" +
-            ", lastModifiedBy='" + getLastModifiedBy() + "'" +
-            ", lastModifiedDate='" + getLastModifiedDate() + "'" +
-            ", clazzId=" + getClazzId() +
-            "}";
+        return (
+            "ClazzChapterDTO{" +
+            "id=" +
+            id +
+            ", name='" +
+            name +
+            '\'' +
+            ", description='" +
+            description +
+            '\'' +
+            ", fileUrl='" +
+            fileUrl +
+            '\'' +
+            ", sequence=" +
+            sequence +
+            ", activated=" +
+            activated +
+            ", createdBy='" +
+            createdBy +
+            '\'' +
+            ", createdDate=" +
+            createdDate +
+            ", lastModifiedBy='" +
+            lastModifiedBy +
+            '\'' +
+            ", lastModifiedDate=" +
+            lastModifiedDate +
+            ", clazzChapterVideos=" +
+            clazzChapterVideos +
+            ", clazzId=" +
+            clazzId +
+            '}'
+        );
     }
 }

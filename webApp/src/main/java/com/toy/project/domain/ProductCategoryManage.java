@@ -44,10 +44,6 @@ public class ProductCategoryManage extends AbstractAuditingEntity implements Ser
     @Column(name = "activated")
     private Boolean activated;
 
-    @OneToMany(mappedBy = "productCategoryManage")
-    @JsonIgnoreProperties(value = { "product", "productCategoryManage" }, allowSetters = true)
-    private Set<ProductCategory> productCategories = new HashSet<>();
-
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
@@ -111,20 +107,6 @@ public class ProductCategoryManage extends AbstractAuditingEntity implements Ser
 
     public void setActivated(Boolean activated) {
         this.activated = activated;
-    }
-
-    public Set<ProductCategory> getProductCategories() {
-        return this.productCategories;
-    }
-
-    public void setProductCategories(Set<ProductCategory> productCategories) {
-        if (this.productCategories != null) {
-            this.productCategories.forEach(i -> i.setProductCategoryManage(null));
-        }
-        if (productCategories != null) {
-            productCategories.forEach(i -> i.setProductCategoryManage(this));
-        }
-        this.productCategories = productCategories;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

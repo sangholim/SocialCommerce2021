@@ -64,7 +64,7 @@ public class ProductTemplateManage extends AbstractAuditingEntity implements Ser
 
     @OneToMany(mappedBy = "productTemplateManage")
     @JsonIgnoreProperties(value = { "product", "productTemplateManage" }, allowSetters = true)
-    private Set<ProductTemplate> productCategories = new HashSet<>();
+    private Set<ProductTemplate> productTemplateManages = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -175,20 +175,6 @@ public class ProductTemplateManage extends AbstractAuditingEntity implements Ser
             productAnnounceTemplates.forEach(i -> i.setProductTemplateManage(this));
         }
         this.productAnnounceTemplates = productAnnounceTemplates;
-    }
-
-    public Set<ProductTemplate> getProductCategories() {
-        return this.productCategories;
-    }
-
-    public void setProductCategories(Set<ProductTemplate> productTemplates) {
-        if (this.productCategories != null) {
-            this.productCategories.forEach(i -> i.setProductTemplateManage(null));
-        }
-        if (productTemplates != null) {
-            productTemplates.forEach(i -> i.setProductTemplateManage(this));
-        }
-        this.productCategories = productTemplates;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

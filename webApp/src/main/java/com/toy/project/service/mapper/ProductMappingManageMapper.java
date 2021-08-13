@@ -13,4 +13,13 @@ public interface ProductMappingManageMapper extends EntityMapper<ProductMappingM
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "id", source = "id")
     ProductMappingManageDTO toDtoId(ProductMappingManage productMappingManage);
+
+    default ProductMappingManage fromId(final Long id) {
+        if (id == null) {
+            return null;
+        }
+        final ProductMappingManage productMappingManage = new ProductMappingManage();
+        productMappingManage.setId(id);
+        return productMappingManage;
+    }
 }

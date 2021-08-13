@@ -13,4 +13,13 @@ public interface BrandMapper extends EntityMapper<BrandDTO, Brand> {
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "id", source = "id")
     BrandDTO toDtoId(Brand brand);
+
+    default Brand fromId(final Long id) {
+        if (id == null) {
+            return null;
+        }
+        final Brand brand = new Brand();
+        brand.setId(id);
+        return brand;
+    }
 }

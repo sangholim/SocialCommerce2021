@@ -53,28 +53,6 @@ public class ProductStore extends AbstractAuditingEntity implements Serializable
     @Column(name = "activated")
     private Boolean activated;
 
-    @OneToMany(mappedBy = "productStore")
-    @JsonIgnoreProperties(
-        value = {
-            "productDiscounts",
-            "productMappings",
-            "productOptions",
-            "productAddOptions",
-            "productInputOptions",
-            "productFaqs",
-            "productAnnounces",
-            "productAddImages",
-            "productLabels",
-            "productTemplates",
-            "productCategories",
-            "productNoticeManage",
-            "productClazzAuthor",
-            "productStore",
-        },
-        allowSetters = true
-    )
-    private Set<Product> products = new HashSet<>();
-
     @ManyToOne
     @JoinColumn(name = "vendor_id", insertable = false, updatable = false)
     @JsonIgnoreProperties(value = { "productStores" }, allowSetters = true)
@@ -158,20 +136,6 @@ public class ProductStore extends AbstractAuditingEntity implements Serializable
         this.activated = activated;
     }
 
-    public Set<Product> getProducts() {
-        return this.products;
-    }
-
-    public void setProducts(Set<Product> products) {
-        if (this.products != null) {
-            this.products.forEach(i -> i.setProductStore(null));
-        }
-        if (products != null) {
-            products.forEach(i -> i.setProductStore(this));
-        }
-        this.products = products;
-    }
-
     public Vendor getVendor() {
         return this.vendor;
     }
@@ -239,7 +203,6 @@ public class ProductStore extends AbstractAuditingEntity implements Serializable
             ", calculationDateFrom=" + calculationDateFrom +
             ", calculationDateTo=" + calculationDateTo +
             ", activated=" + activated +
-            ", products=" + products +
             ", vendor=" + vendor +
             ", brand=" + brand +
             '}';

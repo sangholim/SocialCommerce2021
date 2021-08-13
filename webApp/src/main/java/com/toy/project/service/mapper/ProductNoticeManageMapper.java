@@ -13,4 +13,13 @@ public interface ProductNoticeManageMapper extends EntityMapper<ProductNoticeMan
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "id", source = "id")
     ProductNoticeManageDTO toDtoId(ProductNoticeManage productNoticeManage);
+
+    default ProductNoticeManage fromId(final Long id) {
+        if (id == null) {
+            return null;
+        }
+        final ProductNoticeManage productNoticeManage = new ProductNoticeManage();
+        productNoticeManage.setId(id);
+        return productNoticeManage;
+    }
 }

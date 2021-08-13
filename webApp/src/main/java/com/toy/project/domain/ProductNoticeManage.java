@@ -56,28 +56,6 @@ public class ProductNoticeManage extends AbstractAuditingEntity implements Seria
     @Column(name = "activated")
     private Boolean activated;
 
-    @OneToMany(mappedBy = "productNoticeManage")
-    @JsonIgnoreProperties(
-        value = {
-            "productDiscounts",
-            "productMappings",
-            "productOptions",
-            "productAddOptions",
-            "productInputOptions",
-            "productFaqs",
-            "productAnnounces",
-            "productAddImages",
-            "productLabels",
-            "productTemplates",
-            "productCategories",
-            "productNoticeManage",
-            "productClazzAuthor",
-            "productStore",
-        },
-        allowSetters = true
-    )
-    private Set<Product> products = new HashSet<>();
-
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
@@ -173,20 +151,6 @@ public class ProductNoticeManage extends AbstractAuditingEntity implements Seria
 
     public void setActivated(Boolean activated) {
         this.activated = activated;
-    }
-
-    public Set<Product> getProducts() {
-        return this.products;
-    }
-
-    public void setProducts(Set<Product> products) {
-        if (this.products != null) {
-            this.products.forEach(i -> i.setProductNoticeManage(null));
-        }
-        if (products != null) {
-            products.forEach(i -> i.setProductNoticeManage(this));
-        }
-        this.products = products;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

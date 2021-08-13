@@ -8,4 +8,13 @@ import org.mapstruct.*;
  * Mapper for the entity {@link ProductAnnounceTemplate} and its DTO {@link ProductAnnounceTemplateDTO}.
  */
 @Mapper(componentModel = "spring", uses = { ProductTemplateManageMapper.class })
-public interface ProductAnnounceTemplateMapper extends EntityMapper<ProductAnnounceTemplateDTO, ProductAnnounceTemplate> {}
+public interface ProductAnnounceTemplateMapper extends EntityMapper<ProductAnnounceTemplateDTO, ProductAnnounceTemplate> {
+    default ProductAnnounceTemplate fromId(final Long id) {
+        if (id == null) {
+            return null;
+        }
+        final ProductAnnounceTemplate productAnnounceTemplate = new ProductAnnounceTemplate();
+        productAnnounceTemplate.setId(id);
+        return productAnnounceTemplate;
+    }
+}

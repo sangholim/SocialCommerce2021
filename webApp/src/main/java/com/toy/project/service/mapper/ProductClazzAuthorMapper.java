@@ -13,4 +13,8 @@ public interface ProductClazzAuthorMapper extends EntityMapper<ProductClazzAutho
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "id", source = "id")
     ProductClazzAuthorDTO toDtoId(ProductClazzAuthor productClazzAuthor);
+
+    @Mapping(target = "clazz", source = "clazzId")
+    @Mapping(target = "author", source = "authorId")
+    ProductClazzAuthor toEntity(ProductClazzAuthorDTO productClazzAuthorDTO);
 }

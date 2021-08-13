@@ -8,4 +8,7 @@ import org.mapstruct.*;
  * Mapper for the entity {@link ProductInputOption} and its DTO {@link ProductInputOptionDTO}.
  */
 @Mapper(componentModel = "spring", uses = { ProductMapper.class })
-public interface ProductInputOptionMapper extends EntityMapper<ProductInputOptionDTO, ProductInputOption> {}
+public interface ProductInputOptionMapper extends EntityMapper<ProductInputOptionDTO, ProductInputOption> {
+    @Mapping(target = "product", source = "productId")
+    ProductInputOption toEntity(ProductInputOptionDTO productInputOptionDTO);
+}

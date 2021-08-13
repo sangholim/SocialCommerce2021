@@ -13,4 +13,13 @@ public interface AuthorMapper extends EntityMapper<AuthorDTO, Author> {
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "id", source = "id")
     AuthorDTO toDtoId(Author author);
+
+    default Author fromId(final Long id) {
+        if (id == null) {
+            return null;
+        }
+        final Author author = new Author();
+        author.setId(id);
+        return author;
+    }
 }

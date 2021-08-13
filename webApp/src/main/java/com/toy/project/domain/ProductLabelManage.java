@@ -37,10 +37,6 @@ public class ProductLabelManage extends AbstractAuditingEntity implements Serial
     @Column(name = "activated")
     private Boolean activated;
 
-    @OneToMany(mappedBy = "productLabelManage")
-    @JsonIgnoreProperties(value = { "product", "productLabelManage" }, allowSetters = true)
-    private Set<ProductLabel> productLabels = new HashSet<>();
-
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
@@ -88,20 +84,6 @@ public class ProductLabelManage extends AbstractAuditingEntity implements Serial
 
     public void setActivated(Boolean activated) {
         this.activated = activated;
-    }
-
-    public Set<ProductLabel> getProductLabels() {
-        return this.productLabels;
-    }
-
-    public void setProductLabels(Set<ProductLabel> productLabels) {
-        if (this.productLabels != null) {
-            this.productLabels.forEach(i -> i.setProductLabelManage(null));
-        }
-        if (productLabels != null) {
-            productLabels.forEach(i -> i.setProductLabelManage(this));
-        }
-        this.productLabels = productLabels;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

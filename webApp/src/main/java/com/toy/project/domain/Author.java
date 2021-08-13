@@ -40,14 +40,6 @@ public class Author extends AbstractAuditingEntity implements Serializable {
     @Column(name = "activated")
     private Boolean activated;
 
-    @OneToMany(mappedBy = "author")
-    @JsonIgnoreProperties(value = { "products", "clazz", "author" }, allowSetters = true)
-    private Set<ProductClazzAuthor> productClazzAuthors = new HashSet<>();
-
-    @OneToMany(mappedBy = "author")
-    @JsonIgnoreProperties(value = { "productClazzAuthors", "clazzChapters", "author" }, allowSetters = true)
-    private Set<Clazz> clazzes = new HashSet<>();
-
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
@@ -103,34 +95,6 @@ public class Author extends AbstractAuditingEntity implements Serializable {
 
     public void setActivated(Boolean activated) {
         this.activated = activated;
-    }
-
-    public Set<ProductClazzAuthor> getProductClazzAuthors() {
-        return this.productClazzAuthors;
-    }
-
-    public void setProductClazzAuthors(Set<ProductClazzAuthor> productClazzAuthors) {
-        if (this.productClazzAuthors != null) {
-            this.productClazzAuthors.forEach(i -> i.setAuthor(null));
-        }
-        if (productClazzAuthors != null) {
-            productClazzAuthors.forEach(i -> i.setAuthor(this));
-        }
-        this.productClazzAuthors = productClazzAuthors;
-    }
-
-    public Set<Clazz> getClazzes() {
-        return this.clazzes;
-    }
-
-    public void setClazzes(Set<Clazz> clazzes) {
-        if (this.clazzes != null) {
-            this.clazzes.forEach(i -> i.setAuthor(null));
-        }
-        if (clazzes != null) {
-            clazzes.forEach(i -> i.setAuthor(this));
-        }
-        this.clazzes = clazzes;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

@@ -71,28 +71,6 @@ public class ProductClazzAuthor extends AbstractAuditingEntity implements Serial
     @Column(name = "activated")
     private Boolean activated;
 
-    @OneToMany(mappedBy = "productClazzAuthor")
-    @JsonIgnoreProperties(
-        value = {
-            "productDiscounts",
-            "productMappings",
-            "productOptions",
-            "productAddOptions",
-            "productInputOptions",
-            "productFaqs",
-            "productAnnounces",
-            "productAddImages",
-            "productLabels",
-            "productTemplates",
-            "productCategories",
-            "productNoticeManage",
-            "productClazzAuthor",
-            "productStore",
-        },
-        allowSetters = true
-    )
-    private Set<Product> products = new HashSet<>();
-
     @ManyToOne
     @JoinColumn(name = "clazz_id", insertable = false, updatable = false)
     @JsonIgnoreProperties(value = { "productClazzAuthors", "clazzChapters", "author" }, allowSetters = true)
@@ -190,20 +168,6 @@ public class ProductClazzAuthor extends AbstractAuditingEntity implements Serial
 
     public void setActivated(Boolean activated) {
         this.activated = activated;
-    }
-
-    public Set<Product> getProducts() {
-        return this.products;
-    }
-
-    public void setProducts(Set<Product> products) {
-        if (this.products != null) {
-            this.products.forEach(i -> i.setProductClazzAuthor(null));
-        }
-        if (products != null) {
-            products.forEach(i -> i.setProductClazzAuthor(this));
-        }
-        this.products = products;
     }
 
     public Clazz getClazz() {

@@ -160,6 +160,7 @@ public class ProductQueryService extends QueryService<Product> {
             if (criteria.getDescriptionFileUrl() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getDescriptionFileUrl(), Product_.descriptionFileUrl));
             }
+            /*
             if (criteria.getShippingReleaseType() != null) {
                 specification =
                     specification.and(buildStringSpecification(criteria.getShippingReleaseType(), Product_.shippingReleaseType));
@@ -211,6 +212,7 @@ public class ProductQueryService extends QueryService<Product> {
                 specification =
                     specification.and(buildStringSpecification(criteria.getExchangeShippingFileUrl(), Product_.exchangeShippingFileUrl));
             }
+            */
             if (criteria.getUseView() != null) {
                 specification = specification.and(buildSpecification(criteria.getUseView(), Product_.useView));
             }
