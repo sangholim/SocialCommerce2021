@@ -40,6 +40,7 @@ public class ProductQueryService extends QueryService<Product> {
 
     /**
      * Return a {@link List} of {@link ProductDTO} which matches the criteria from the database.
+     *
      * @param criteria The object which holds all the filters, which the entities should match.
      * @return the matching entities.
      */
@@ -52,8 +53,9 @@ public class ProductQueryService extends QueryService<Product> {
 
     /**
      * Return a {@link Page} of {@link ProductDTO} which matches the criteria from the database.
+     *
      * @param criteria The object which holds all the filters, which the entities should match.
-     * @param page The page, which should be returned.
+     * @param page     The page, which should be returned.
      * @return the matching entities.
      */
     @Transactional(readOnly = true)
@@ -65,6 +67,7 @@ public class ProductQueryService extends QueryService<Product> {
 
     /**
      * Return the number of matching entities in the database.
+     *
      * @param criteria The object which holds all the filters, which the entities should match.
      * @return the number of matching entities.
      */
@@ -77,6 +80,7 @@ public class ProductQueryService extends QueryService<Product> {
 
     /**
      * Function to convert {@link ProductCriteria} to a {@link Specification}
+     *
      * @param criteria The object which holds all the filters, which the entities should match.
      * @return the matching {@link Specification} of the entity.
      */
@@ -101,6 +105,7 @@ public class ProductQueryService extends QueryService<Product> {
             if (criteria.getUseClassOption() != null) {
                 specification = specification.and(buildSpecification(criteria.getUseClassOption(), Product_.useClassOption));
             }
+            /*
             if (criteria.getPrice() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getPrice(), Product_.price));
             }
@@ -122,6 +127,7 @@ public class ProductQueryService extends QueryService<Product> {
             if (criteria.getSellDateTo() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getSellDateTo(), Product_.sellDateTo));
             }
+             */
             if (criteria.getQuantity() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getQuantity(), Product_.quantity));
             }

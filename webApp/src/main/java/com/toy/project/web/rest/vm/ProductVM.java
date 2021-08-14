@@ -2,6 +2,7 @@ package com.toy.project.web.rest.vm;
 
 import com.toy.project.service.dto.*;
 import io.swagger.annotations.ApiModelProperty;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.util.CollectionUtils;
@@ -22,39 +23,45 @@ public class ProductVM extends ProductDTO {
     private MultipartFile exchangeShippingFile;
 
     @ApiModelProperty(value = "상품 선택 옵션 리스트")
-    private List<ProductOptionVM> productOptionList;
+    private List<ProductOptionVM> productOptionList = new ArrayList<>();
 
     @ApiModelProperty(value = "상품 카테고리 리스트")
-    private List<ProductCategoryDTO> productCategoryList;
+    private List<ProductCategoryDTO> productCategoryList = new ArrayList<>();
 
     @ApiModelProperty(value = "상품 추가 이미지 리스트")
-    private List<ProductAddImageVM> productAddImageList;
+    private List<ProductAddImageVM> productAddImageList = new ArrayList<>();
 
     @ApiModelProperty(value = "상품 즉시 할인")
-    private List<ProductDiscountDTO> productDiscountList;
+    private List<ProductDiscountDTO> productDiscountList = new ArrayList<>();
 
     @ApiModelProperty(value = "상품 직접 입력 옵션")
-    private List<ProductInputOptionDTO> productInputOptionList;
+    private List<ProductInputOptionDTO> productInputOptionList = new ArrayList<>();
 
     @ApiModelProperty(value = "상품 추가 옵션")
-    private List<ProductAddOptionDTO> productAddOptionList;
+    private List<ProductAddOptionDTO> productAddOptionList = new ArrayList<>();
 
     @ApiModelProperty(value = "상품 고시")
-    private List<ProductAnnounceDTO> productAnnounceList;
+    private List<ProductAnnounceDTO> productAnnounceList = new ArrayList<>();
 
     @ApiModelProperty(value = "상품 자주 묻는 질문")
-    private List<ProductFaqDTO> productFaqList;
+    private List<ProductFaqDTO> productFaqList = new ArrayList<>();
 
     @ApiModelProperty(value = "상품 템플릿")
-    private List<ProductTemplateDTO> productTemplateList;
+    private List<ProductTemplateDTO> productTemplateList = new ArrayList<>();
 
     @ApiModelProperty(value = "추천, 연관 상품 관리")
-    private List<ProductMappingDTO> productMappingList;
+    private List<ProductMappingDTO> productMappingList = new ArrayList<>();
 
     @ApiModelProperty(value = "상품 라벨")
-    private List<ProductLabelDTO> productLabelList;
+    private List<ProductLabelDTO> productLabelList = new ArrayList<>();
+
+    @ApiModelProperty(value = "상품 패키지 설명, 이미지 리스트 포함")
+    private List<PackageDescriptionDTO> packageDescriptionList = new ArrayList<>();
 
     public ProductDTO toProductDto() {
+        if (!CollectionUtils.isEmpty(packageDescriptionList)) {
+            super.setPackageDescriptions(packageDescriptionList);
+        }
         if (!CollectionUtils.isEmpty(productOptionList)) {
             super.setProductOptions(productOptionList.stream().map(ProductOptionDTO.class::cast).collect(Collectors.toList()));
         }
@@ -194,6 +201,14 @@ public class ProductVM extends ProductDTO {
         this.productLabelList = productLabelList;
     }
 
+    public List<PackageDescriptionDTO> getPackageDescriptionList() {
+        return packageDescriptionList;
+    }
+
+    public void setPackageDescriptionList(List<PackageDescriptionDTO> packageDescriptionList) {
+        this.packageDescriptionList = packageDescriptionList;
+    }
+
     @Override
     public String toString() {
         return (
@@ -228,6 +243,8 @@ public class ProductVM extends ProductDTO {
             productMappingList +
             ", productLabelList=" +
             productLabelList +
+            ", packageDescriptionList=" +
+            packageDescriptionList +
             '}'
         );
     }

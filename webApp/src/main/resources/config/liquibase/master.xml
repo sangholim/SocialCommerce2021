@@ -42,6 +42,8 @@
     <include file="config/liquibase/changelog/20210725074346_added_entity_ProductTemplate.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20210725074347_added_entity_ProductTemplateManage.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20210725074348_added_entity_Vendor.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210814031503_added_entity_PackageDescription.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210814031504_added_entity_PackageDescriptionImage.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20210530065727_added_entity_constraints_Product.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20210725074325_added_entity_constraints_Clazz.xml" relativeToChangelogFile="false"/>
@@ -61,6 +63,8 @@
     <include file="config/liquibase/changelog/20210725074343_added_entity_constraints_ProductOption.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20210725074345_added_entity_constraints_ProductStore.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20210725074346_added_entity_constraints_ProductTemplate.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210814031503_added_entity_constraints_PackageDescription.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210814031504_added_entity_constraints_PackageDescriptionImage.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
     <include file="config/liquibase/changelog/2021-08-06_changeLog.xml" relativeToChangelogFile="false"/>

@@ -1,6 +1,7 @@
 package com.toy.project.service.mapper;
 
 import com.toy.project.domain.*;
+import com.toy.project.domain.embedded.EmbeddedProductPrice;
 import com.toy.project.domain.embedded.EmbeddedShipment;
 import com.toy.project.service.dto.ProductDTO;
 import org.mapstruct.*;
@@ -25,6 +26,7 @@ import org.mapstruct.*;
         ProductLabelMapper.class,
         ProductTemplateMapper.class,
         ProductCategoryMapper.class,
+        PackageDescriptionMapper.class,
     }
 )
 public interface ProductMapper extends EntityMapper<ProductDTO, Product> {
@@ -42,6 +44,14 @@ public interface ProductMapper extends EntityMapper<ProductDTO, Product> {
     @Mapping(target = "exchangeShippingPrice", source = "embeddedShipment.exchangeShippingPrice")
     @Mapping(target = "exchangeShippingFileType", source = "embeddedShipment.exchangeShippingFileType")
     @Mapping(target = "exchangeShippingFileUrl", source = "embeddedShipment.exchangeShippingFileUrl")
+    // toEmbeddedProductPrice
+    @Mapping(target = "price", source = "embeddedProductPrice.price")
+    @Mapping(target = "useInstallment", source = "embeddedProductPrice.useInstallment")
+    @Mapping(target = "useDiscountInstant", source = "embeddedProductPrice.useDiscountInstant")
+    @Mapping(target = "installmentMonth", source = "embeddedProductPrice.installmentMonth")
+    @Mapping(target = "useSellDate", source = "embeddedProductPrice.useSellDate")
+    @Mapping(target = "sellDateFrom", source = "embeddedProductPrice.sellDateFrom")
+    @Mapping(target = "sellDateTo", source = "embeddedProductPrice.sellDateTo")
     ProductDTO toDto(Product entity);
 
     // 내장 객체 shipment
@@ -49,7 +59,7 @@ public interface ProductMapper extends EntityMapper<ProductDTO, Product> {
     @Mapping(target = "productNoticeManage", source = "productNoticeManageId")
     @Mapping(target = "productStoreId", source = "productStore.id")
     @Mapping(target = "embeddedShipment", source = ".", qualifiedByName = "toEmbeddedShipment")
-    // 내장 객체 shipment
+    @Mapping(target = "embeddedProductPrice", source = ".", qualifiedByName = "toEmbeddedProductPrice")
     Product toEntity(ProductDTO productDTO);
 
     @Named("id")
@@ -87,5 +97,21 @@ public interface ProductMapper extends EntityMapper<ProductDTO, Product> {
         embeddedShipment.setExchangeShippingFileUrl(productDTO.getExchangeShippingFileUrl());
 
         return embeddedShipment;
+    }
+
+    @Named("toEmbeddedProductPrice")
+    default EmbeddedProductPrice toEmbeddedProductPrice(final ProductDTO productDTO) {
+        if (productDTO == null) {
+            return null;
+        }
+        final EmbeddedProductPrice embeddedProductPrice = new EmbeddedProductPrice();
+        embeddedProductPrice.setPrice(productDTO.getPrice());
+        embeddedProductPrice.setInstallmentMonth(productDTO.getInstallmentMonth());
+        embeddedProductPrice.setSellDateFrom(productDTO.getSellDateFrom());
+        embeddedProductPrice.setSellDateTo(productDTO.getSellDateTo());
+        embeddedProductPrice.setUseDiscountInstant(productDTO.getUseDiscountInstant());
+        embeddedProductPrice.setUseSellDate(productDTO.getUseSellDate());
+        embeddedProductPrice.setUseInstallment(productDTO.getUseInstallment());
+        return embeddedProductPrice;
     }
 }

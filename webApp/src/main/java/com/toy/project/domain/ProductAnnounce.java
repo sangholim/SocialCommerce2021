@@ -50,6 +50,7 @@ public class ProductAnnounce extends AbstractAuditingEntity implements Serializa
             "productLabels",
             "productTemplates",
             "productCategories",
+            "packageDescriptions",
             "productNoticeManage",
             "productClazzAuthor",
             "productStore",

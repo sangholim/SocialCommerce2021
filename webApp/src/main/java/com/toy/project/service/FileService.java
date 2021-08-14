@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -28,7 +27,6 @@ public class FileService {
     // 파일 저장시, 파일경로, 리소스 필요
     public String saveProductFile(String dir, String name, MultipartFile multipartFile) {
         // basedir -> product -> 상품 고유번호(dir) -> 리소스들을 저장한다.
-
         String productFile = "";
         try {
             String productDir = BASE_PRODUCT_DIR + File.separator + dir;

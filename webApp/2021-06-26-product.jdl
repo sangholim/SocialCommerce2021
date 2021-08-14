@@ -50,6 +50,27 @@ entity Product {
     lastModifiedDate	Instant
 }
 
+entity PackageDescription {
+    subject String,
+    content String,
+    // productId 외래키
+    activated	Boolean,
+    createdBy	String maxlength(50),
+    createdDate	Instant,
+    lastModifiedBy	String maxlength(50),
+    lastModifiedDate	Instant
+}
+
+entity PackageDescriptionImage {
+    imageUrl String,
+    // packageDescriptionId 외래키
+    activated	Boolean,
+    createdBy	String maxlength(50),
+    createdDate	Instant,
+    lastModifiedBy	String maxlength(50),
+    lastModifiedDate	Instant
+}
+
 entity ProductDiscount {
     // productId Long,
     discountDevice	String maxlength(50),
@@ -65,6 +86,7 @@ entity ProductDiscount {
     lastModifiedBy	String maxlength(50),
     lastModifiedDate	Instant
 }
+
 entity ProductAddImage {
     imageUrl String,
     activated	Boolean,
@@ -423,6 +445,12 @@ entity ProductStore {
 
 // defining multiple OneToMany relationships with comments
 relationship OneToMany {
+
+    // 상품 - 상품 패키지 설명 (1:N)
+    Product{packageDescription} to PackageDescription
+    // 상품 패키지 설명  - 상품 패키지 설명 이미지(1:N)
+    PackageDescription{packageDescriptionImage} to PackageDescriptionImage
+
     // 상품 - 상품 할인 (1:N)
     Product{productDiscount} to ProductDiscount
     // 상품 - 상품 공지 관리(N:1)

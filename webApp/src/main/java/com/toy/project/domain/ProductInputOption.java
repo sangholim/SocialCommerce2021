@@ -43,6 +43,7 @@ public class ProductInputOption extends AbstractAuditingEntity implements Serial
             "productLabels",
             "productTemplates",
             "productCategories",
+            "packageDescriptions",
             "productNoticeManage",
             "productClazzAuthor",
             "productStore",

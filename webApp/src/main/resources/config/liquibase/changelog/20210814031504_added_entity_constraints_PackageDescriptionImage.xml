@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity PackageDescriptionImage.
+    -->
+    <changeSet id="20210814031504-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="package_description_id"
+                                 baseTableName="package_description_image"
+                                 constraintName="fk_package_description_image__package_description_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="package_description"/>
+    </changeSet>
+</databaseChangeLog>

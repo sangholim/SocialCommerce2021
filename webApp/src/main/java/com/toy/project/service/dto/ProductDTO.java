@@ -156,6 +156,9 @@ public class ProductDTO implements Serializable {
     @ApiModelProperty(value = "상품 라벨")
     private List<ProductLabelDTO> productLabels;
 
+    @ApiModelProperty(value = "상품 패키지 설명")
+    private List<PackageDescriptionDTO> packageDescriptions;
+
     public Long getId() {
         return id;
     }
@@ -668,6 +671,14 @@ public class ProductDTO implements Serializable {
         this.useProductMapping = useProductMapping;
     }
 
+    public List<PackageDescriptionDTO> getPackageDescriptions() {
+        return packageDescriptions;
+    }
+
+    public void setPackageDescriptions(List<PackageDescriptionDTO> packageDescriptions) {
+        this.packageDescriptions = packageDescriptions;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -837,6 +848,8 @@ public class ProductDTO implements Serializable {
             productMappings +
             ", productLabels=" +
             productLabels +
+            ", packageDescriptions=" +
+            packageDescriptions +
             '}'
         );
     }

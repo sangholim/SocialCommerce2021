@@ -11,6 +11,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.file.Files;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItem;
@@ -171,6 +173,27 @@ public class ProductApiTest {
         // 상품 설명 파일
         MultipartFile productDescription = getMultiPartFile(sampleImagePath);
         multiValueMap.set("descriptionFile", productDescription.getResource());
+        // 패키지 설명 파일
+        PackageDescriptionDTO packageDescription = new PackageDescriptionDTO();
+        packageDescription.setContent("패키지 설명 본문 1");
+        packageDescription.setSubject("패키지 설명 제목 1");
+        // 상세 이미지 1-1, 1-2
+        List<MultipartFile> fileList = new ArrayList<>();
+        fileList.add(getMultiPartFile(sampleImagePath));
+        fileList.add(getMultiPartFile(sampleImagePath));
+        packageDescription.setImageFileList(fileList);
+        // 패키지 설명 이미지들
+        PackageDescriptionAPITest.createPackageDescriptionParam(multiValueMap, 0, packageDescription);
+        packageDescription = new PackageDescriptionDTO();
+        packageDescription.setContent("패키지 설명 본문 2");
+        packageDescription.setSubject("패키지 설명 제목 2");
+        fileList = new ArrayList<>();
+        // 상세 이미지 2-1, 2-2
+        fileList.add(getMultiPartFile(sampleImagePath));
+        fileList.add(getMultiPartFile(sampleImagePath));
+        packageDescription.setImageFileList(fileList);
+        PackageDescriptionAPITest.createPackageDescriptionParam(multiValueMap, 1, packageDescription);
+
         // 상품 고시 사용 여부
         multiValueMap.set("useProductAnnounce", "true");
         ProductAnnounceDTO productAnnounce = new ProductAnnounceDTO();

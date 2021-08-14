@@ -59,6 +59,7 @@ public class ProductAddOption extends AbstractAuditingEntity implements Serializ
             "productLabels",
             "productTemplates",
             "productCategories",
+            "packageDescriptions",
             "productNoticeManage",
             "productClazzAuthor",
             "productStore",

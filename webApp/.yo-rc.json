@@ -69,8 +69,10 @@
       "ProductStore",
       "ProductTemplate",
       "ProductTemplateManage",
-      "Vendor"
+      "Vendor",
+      "PackageDescription",
+      "PackageDescriptionImage"
     ],
-    "lastLiquibaseTimestamp": 1627199028000
+    "lastLiquibaseTimestamp": 1628910904000
   }
 }

@@ -46,6 +46,7 @@ public class ProductTemplate extends AbstractAuditingEntity implements Serializa
             "productLabels",
             "productTemplates",
             "productCategories",
+            "packageDescriptions",
             "productNoticeManage",
             "productClazzAuthor",
             "productStore",

@@ -51,6 +51,7 @@ public class ProductMapping extends AbstractAuditingEntity implements Serializab
             "productLabels",
             "productTemplates",
             "productCategories",
+            "packageDescriptions",
             "productNoticeManage",
             "productClazzAuthor",
             "productStore",

@@ -1,6 +1,7 @@
 package com.toy.project.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.toy.project.domain.embedded.EmbeddedProductPrice;
 import com.toy.project.domain.embedded.EmbeddedShipment;
 import java.io.Serializable;
 import java.time.Instant;
@@ -42,26 +43,8 @@ public class Product extends AbstractAuditingEntity implements Serializable {
     @Column(name = "use_class_option")
     private Boolean useClassOption;
 
-    @Column(name = "price")
-    private Integer price;
-
-    @Column(name = "use_discount_instant")
-    private Boolean useDiscountInstant;
-
-    @Column(name = "use_installment")
-    private Boolean useInstallment;
-
-    @Column(name = "installment_month")
-    private Integer installmentMonth;
-
-    @Column(name = "use_sell_date")
-    private Boolean useSellDate;
-
-    @Column(name = "sell_date_from")
-    private Instant sellDateFrom;
-
-    @Column(name = "sell_date_to")
-    private Instant sellDateTo;
+    @Embedded
+    private EmbeddedProductPrice embeddedProductPrice;
 
     @Column(name = "quantity")
     private Integer quantity;
@@ -176,6 +159,10 @@ public class Product extends AbstractAuditingEntity implements Serializable {
     @JsonIgnoreProperties(value = { "product", "productCategoryManage" }, allowSetters = true)
     private Set<ProductCategory> productCategories = new HashSet<>();
 
+    @OneToMany(mappedBy = "product")
+    @JsonIgnoreProperties(value = { "product" }, allowSetters = true)
+    private Set<PackageDescription> packageDescriptions = new HashSet<>();
+
     @ManyToOne
     @JoinColumn(name = "product_notice_manage_id", updatable = false, insertable = false)
     @JsonIgnoreProperties(value = { "products" }, allowSetters = true)
@@ -230,38 +217,6 @@ public class Product extends AbstractAuditingEntity implements Serializable {
 
     public void setCode(String code) {
         this.code = code;
-    }
-
-    public Integer getPrice() {
-        return this.price;
-    }
-
-    public void setPrice(Integer price) {
-        this.price = price;
-    }
-
-    public Integer getInstallmentMonth() {
-        return this.installmentMonth;
-    }
-
-    public void setInstallmentMonth(Integer installmentMonth) {
-        this.installmentMonth = installmentMonth;
-    }
-
-    public Instant getSellDateFrom() {
-        return this.sellDateFrom;
-    }
-
-    public void setSellDateFrom(Instant sellDateFrom) {
-        this.sellDateFrom = sellDateFrom;
-    }
-
-    public Instant getSellDateTo() {
-        return this.sellDateTo;
-    }
-
-    public void setSellDateTo(Instant sellDateTo) {
-        this.sellDateTo = sellDateTo;
     }
 
     public Integer getQuantity() {
@@ -342,30 +297,6 @@ public class Product extends AbstractAuditingEntity implements Serializable {
 
     public void setUseClassOption(Boolean useClassOption) {
         this.useClassOption = useClassOption;
-    }
-
-    public Boolean getUseDiscountInstant() {
-        return useDiscountInstant;
-    }
-
-    public void setUseDiscountInstant(Boolean useDiscountInstant) {
-        this.useDiscountInstant = useDiscountInstant;
-    }
-
-    public Boolean getUseInstallment() {
-        return useInstallment;
-    }
-
-    public void setUseInstallment(Boolean useInstallment) {
-        this.useInstallment = useInstallment;
-    }
-
-    public Boolean getUseSellDate() {
-        return useSellDate;
-    }
-
-    public void setUseSellDate(Boolean useSellDate) {
-        this.useSellDate = useSellDate;
     }
 
     public Boolean getUseProductOption() {
@@ -666,6 +597,22 @@ public class Product extends AbstractAuditingEntity implements Serializable {
         this.productStoreId = productStoreId;
     }
 
+    public EmbeddedProductPrice getEmbeddedProductPrice() {
+        return embeddedProductPrice;
+    }
+
+    public void setEmbeddedProductPrice(EmbeddedProductPrice embeddedProductPrice) {
+        this.embeddedProductPrice = embeddedProductPrice;
+    }
+
+    public Set<PackageDescription> getPackageDescriptions() {
+        return packageDescriptions;
+    }
+
+    public void setPackageDescriptions(Set<PackageDescription> packageDescriptions) {
+        this.packageDescriptions = packageDescriptions;
+    }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -697,13 +644,7 @@ public class Product extends AbstractAuditingEntity implements Serializable {
             ", status='" + status + '\'' +
             ", code='" + code + '\'' +
             ", useClassOption=" + useClassOption +
-            ", price=" + price +
-            ", useDiscountInstant=" + useDiscountInstant +
-            ", useInstallment=" + useInstallment +
-            ", installmentMonth=" + installmentMonth +
-            ", useSellDate=" + useSellDate +
-            ", sellDateFrom=" + sellDateFrom +
-            ", sellDateTo=" + sellDateTo +
+            ", embeddedProductPrice=" + embeddedProductPrice +
             ", quantity=" + quantity +
             ", useProductOption=" + useProductOption +
             ", useProductInputOption=" + useProductInputOption +
@@ -742,6 +683,7 @@ public class Product extends AbstractAuditingEntity implements Serializable {
             ", productLabels=" + productLabels +
             ", productTemplates=" + productTemplates +
             ", productCategories=" + productCategories +
+            ", packageDescriptions=" + packageDescriptions +
             ", productNoticeManage=" + productNoticeManage +
             ", productClazzAuthor=" + productClazzAuthor +
             ", productStore=" + productStore +

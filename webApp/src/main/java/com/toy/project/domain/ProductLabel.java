@@ -55,6 +55,7 @@ public class ProductLabel extends AbstractAuditingEntity implements Serializable
             "productLabels",
             "productTemplates",
             "productCategories",
+            "packageDescriptions",
             "productNoticeManage",
             "productClazzAuthor",
             "productStore",

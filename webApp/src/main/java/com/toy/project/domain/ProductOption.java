@@ -81,6 +81,7 @@ public class ProductOption extends AbstractAuditingEntity implements Serializabl
             "productLabels",
             "productTemplates",
             "productCategories",
+            "packageDescriptions",
             "productNoticeManage",
             "productClazzAuthor",
             "productStore",
